@@ -1,5 +1,5 @@
-'use strict';
 
+'use strict';
 function showNav(){
   var first_view = document.querySelector('.b');
   var second_view = document.querySelector('.a');
