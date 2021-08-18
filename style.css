@@ -16,10 +16,6 @@
   font-family: 'Poiret One', cursive;
 }
 
-html, body{
-  height: 100%;
-}
-
 body{
   margin: 0px;
 }
@@ -95,17 +91,22 @@ body{
 }
 
 .fields{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   width: 100%;
   margin-left: 10px;
   border-radius: 5px;
-  padding: 10px;
+  padding: 30px 0 30px 0;
   background-color: #F8F9F9 ;
   box-shadow: -5px 5px 10px black;
 }
 
 .div-1{
-  display: inline-block;
-  width: 30%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
 }
 
 .div-1 div{
@@ -148,6 +149,37 @@ body{
   box-shadow: -5px 5px 10px black;
 }
 
-.div-2{
-  background-color: blue;
+.subfield{
+  position: relative;
+  width: 50%;
+  min-width: 350px;
+  height: 523px;
+  border: 1px solid black;
+}
+
+.div-1{
+  border: 1px solid red;
+}
+
+.generated-qr{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid red;
+  width: 50%;
+}
+
+.generated-qr img{
+  width: 100%;
+  border-radius: 5px;
+}
+
+.generated-qr button{
+  width: 100%;
+  height: 40px;
+  border: none;
+  margin-top: 10px;
+  background-color: #5dade2;
+  border-radius: 5px;
 }
