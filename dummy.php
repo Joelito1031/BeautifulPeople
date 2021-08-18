@@ -1,0 +1,2 @@
+<?php
+echo EXAMPLE_TMP_SERVERPATH; 

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>J³</title>
+    <link href="style.css" type="text/css" rel="stylesheet" >
+  </head>
+  <body>
+    <script src="./logic.js" type="text/javascript" defer></script>
+    <div class="main-container">
+      <div class="nav-container">
+        <div class="top-nav">
+          <span>Ormoc E-Transport</span>
+        </div>
+      </div>
+      <div class="body-container">
+        <div class="side-nav">
+           <button onclick="showNav()">
+             &#9776;
+           </button>
+           <div class="b">
+             <div class="child-a-1">
+             </div>
+           </div>
+           <div class="a">
+             <span>
+               Register Vehicle
+             </span>
+           </div>
+        </div>
+        <div class="fields">
+          <div>
+            <form method="POST" action="./process.php">
+              <div class="div-1">
+                <div>
+                  <label for="f_name">First name:</label>
+                  <input type="text" name="fname" id="f_name">
+                </div>
+                <div>
+                  <label for="m_name">Middle name:</label>
+                  <input type="text" name="mname" id="m_name">
+                </div>
+                <div>
+                  <label for="l_name">Last name:</label>
+                  <input type="text" name="lname" id="l_name">
+                </div>
+                <div>
+                  <label for="c_num">Contact number:</label>
+                  <input type="number" name="cnum" id="c_num">
+                </div>
+                <div>
+                  <label for="plate_no">Plate number:</label>
+                  <input type="text" name="plateno" id="plate_no" onkeyup="this.value = this.value.toUpperCase();">
+                </div>
+                <div>
+                  <label for="rt">Route:</label>
+                  <select name="route" id="rt">
+                    <option value="">Select route</option>
+                    <option value="albuera">Albuera</option>
+                    <option value="valencia">Valencia</option>
+                    <option value="bato">Bato</option>
+                    <option value="kananga">Kananga</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="cpcty">Capacity:</label>
+                  <input type="number" name="capacity" id="cpcty">
+                </div>
+                <div>
+                  <input id="submit-button" type="submit" value="Regiser Vehicle">
+                </div>
+              </div>
+              <div class="div-2">
+              </div>
+            </form>
+            <div>
+              <img src="" id="qrimage">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

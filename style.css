@@ -1,0 +1,153 @@
+@font-face {
+  font-family: 'Poiret One';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(./poiret_one/PoiretOne-Regular.ttf) format('woff2');
+  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116, U+0100-024F,
+  U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F,
+  U+A720-A7FF, U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+  U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+  U+FEFF, U+FFFD;
+}
+
+*{
+  box-sizing: border-box;
+  font-family: 'Poiret One', cursive;
+}
+
+html, body{
+  height: 100%;
+}
+
+body{
+  margin: 0px;
+}
+
+.main-container{
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.nav-container{
+  padding: 0px;
+  margin: 5px;
+}
+
+.body-container{
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  padding: 0px;
+  margin: 5px;
+}
+
+.top-nav{
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #F8F9F9 ;
+  box-shadow: -5px 5px 10px black;
+}
+
+.top-nav span{
+  font-size: 30px;
+  margin: 0;
+}
+
+.side-nav{
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #F8F9F9 ;
+  box-shadow: -5px 5px 10px black;
+}
+
+.side-nav button{
+  font-size: 30px;
+  border: none;
+  background-color: #F8F9F9 ;
+  margin-bottom: 5px;
+}
+
+.a{
+  font-size: 1.5rem;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f1c40f;
+  box-shadow: -5px 5px 10px black;
+  width: 200px;
+}
+
+.b{
+  display: none;
+  margin-right: 0px;
+  margin-left: 0px;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f1c40f;
+  box-shadow: -5px 5px 10px black;
+}
+
+.child-a-1{
+  height: 30px;
+  margin: 0px;
+}
+
+.fields{
+  width: 100%;
+  margin-left: 10px;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #F8F9F9 ;
+  box-shadow: -5px 5px 10px black;
+}
+
+.div-1{
+  display: inline-block;
+  width: 30%;
+}
+
+.div-1 div{
+  width: 100%;
+  height: 35px;
+  margin: 0px 0px 30px 0px;
+}
+
+.div-1 div input{
+  width: 100%;
+  height: 100%;
+  font-size: 1em;
+  border-radius: 5px;
+  border: none;
+  box-shadow: -5px 5px 10px inset;
+  outline: none;
+}
+
+
+.div-1 div input:focus{
+  box-shadow: -5px 5px 10px black;
+}
+
+.div-1 div select{
+  width: 100%;
+  height: 100%;
+  font-size: 1em;
+  border-radius: 5px;
+  border: none;
+  box-shadow: -5px 5px 10px inset;
+  outline: none;
+}
+
+#submit-button{
+  background-color: #f1c40f;
+  box-shadow: -5px 5px 10px black;
+}
+
+.div-1 div select:focus{
+  box-shadow: -5px 5px 10px black;
+}
+
+.div-2{
+  background-color: blue;
+}
