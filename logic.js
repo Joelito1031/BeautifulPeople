@@ -1,5 +1,5 @@
-
 'use strict';
+
 function showNav(){
   var first_view = document.querySelector('.b');
   var second_view = document.querySelector('.a');
@@ -15,8 +15,16 @@ function showNav(){
   }
 }
 
+function savePDF(){
+  var element = document.getElementById('for-print');
+  html2pdf(element, {
+    filename: parameter + '.pdf'
+  });
+}
+
 const urlString = window.location.search;
 const urlParams = new URLSearchParams(urlString);
 const parameter = urlParams.get('qr');
 
+document.getElementById('plateno').innerHTML = parameter;
 parameter == null ? document.getElementById('qrimage').src = './qrs/loading.gif' : document.getElementById('qrimage').src = './qrs/' + parameter + '.png';

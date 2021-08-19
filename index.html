@@ -6,7 +6,8 @@
     <link href="style.css" type="text/css" rel="stylesheet" >
   </head>
   <body>
-    <script src="./logic.js" type="text/javascript" defer></script>
+    <script type="text/javascript" src="html2pdf.bundle.min.js" defer></script>
+    <script type="text/javascript" src="./logic.js" defer></script>
     <div class="main-container">
       <div class="nav-container">
         <div class="top-nav">
@@ -90,16 +91,19 @@
                   </select>
                 </div>
                 <div>
-                  <input id="submit-button" type="submit" value="Regiser Vehicle">
+                  <input id="submit-button" type="submit" value="Register Vehicle">
                 </div>
               </div>
             </form>
           </div>
           <div class="subfield">
             <div class="generated-qr">
-              <img id="qrimage"src="">
+              <div id="for-print">
+                <img id="qrimage" src="">
+                <h3 id="plateno"></h3>
+              </div>
               <button>PRINT</button>
-              <button>SAVE</button>
+              <button onclick="savePDF()">SAVE AS PDF</button>
             </div>
           </div>
         </div>

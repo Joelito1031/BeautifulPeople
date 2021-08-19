@@ -18,7 +18,7 @@ if((isset($_POST['fname']) && !empty(trim($_POST['fname']))) && (isset($_POST['m
   $vehicles_file = fopen('./vehicles/vehicles.json', 'w');
   fwrite($vehicles_file, $data_json);
   fclose($vehicles_file);
-  QRcode::png($_POST['plateno'], './qrs/' . $_POST['plateno'] . '.png', QR_ECLEVEL_L, 4);
+  QRcode::png($_POST['plateno'], './qrs/' . $_POST['plateno'] . '.png', QR_ECLEVEL_L, 4, 10);
   ob_end_clean();
   header('Location: ./index.html?qr=' . $_POST['plateno']);
 }
