@@ -1,2 +1,2 @@
 # CapstoneWeb
-Undergraduate thesis.
+Undergraduate Thesis.
