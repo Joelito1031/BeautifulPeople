@@ -23,18 +23,27 @@ if((isset($_POST['fname']) && !empty(trim($_POST['fname']))) && (isset($_POST['m
 
     $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $select_query = "SELECT * FROM registered_vehicles WHERE PlateNo = '$plateno'";
+    $select_query = "SELECT COUNT(*) FROM registered_vehicles WHERE PlateNo = '$plateno'";
     $num_row = $connection->query($select_query);
     $row_count = $num_row->fetchColumn();
+    $count = (int) $row_count;
+    $operator = $_POST['fname'] . ' ' . $_POST['mname'] . ' ' . $_POST['lname'];
+    $contact = $_POST['cnum'];
+    $vehicle_capacity = array();
 
-    if($row_count > 0){
+    if($count > 0){
       echo "Vehicle already registered";
     }
     else{
-      $insert_query = "INSERT INTO registered_vehicles(PlateNo, Route, Capacity) VALUES('$plateno', '$route', '$capacity')";
+      ob_start();
+      for($count = 1; $count <= $capacity; $count++){
+        array_push($vehicle_capacity, '');
+      }
+      $full_capacity = json_encode($vehicle_capacity);
+
+      $insert_query = "INSERT INTO registered_vehicles(PlateNo, Route, Capacity, Operator, Contact) VALUES('$plateno', '$route', '$capacity', '$operator', '$contact')";
 
       $connection->exec($insert_query);
-      ob_start();
 
       $name = $_POST['fname'] . ' ' . $_POST['mname'] . ' ' . $_POST['lname'];
       $capacity = (int) $_POST['capacity'];
@@ -47,9 +56,12 @@ if((isset($_POST['fname']) && !empty(trim($_POST['fname']))) && (isset($_POST['m
 
       $data_json = json_encode($vehicles_data);
       $vehicles_file = fopen('./vehicles/vehicles.json', 'w');
+      $vehicle_name = fopen('./vehicles/vehicle_' . $plateno . '.json', 'w');
 
       fwrite($vehicles_file, $data_json);
+      fwrite($vehicle_name, $full_capacity);
       fclose($vehicles_file);
+      fclose($vehicle_capacity);
       QRcode::png($_POST['plateno'], './qrs/' . $_POST['plateno'] . '.png', QR_ECLEVEL_L, 4, 10);
       ob_end_clean();
       header('Location: ./index.html?qr=' . $_POST['plateno']);
