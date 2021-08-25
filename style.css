@@ -67,27 +67,49 @@ body{
 }
 
 .a{
-  font-size: 1.5rem;
-  padding: 10px;
+  width: 200px;
+}
+
+.a button{
   border-radius: 5px;
   background-color: #f1c40f;
+  height: 40px;
+  width: 100%;
+  font-size: 1.5em;
   box-shadow: -5px 5px 10px black;
-  width: 200px;
+  text-align: center;
+}
+
+.a button:hover{
+  cursor: pointer;
+}
+
+.a button:active{
+  box-shadow: -5px 5px 10px inset;
 }
 
 .b{
   display: none;
   margin-right: 0px;
   margin-left: 0px;
-  padding: 10px;
   border-radius: 5px;
   background-color: #f1c40f;
   box-shadow: -5px 5px 10px black;
 }
 
-.child-a-1{
+.b button{
+  position: relative;
+  width: 50px;
+  height: 50px;
+}
+
+.b button img{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
   height: 30px;
-  margin: 0px;
 }
 
 .fields{

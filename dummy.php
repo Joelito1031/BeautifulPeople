@@ -1,11 +1,22 @@
+
 <?php
 
-$vehicle_capacity = array();
-
-for($count = 1; $count <= 20; $count++){
-  array_push($vehicle_capacity, '');
+function callback($buffer)
+{
+  // replace all the apples with oranges
+  return (str_replace("apples", "oranges", $buffer));
 }
 
-print_r(json_encode($vehicle_capacity));
-// print_r(json_decode($data));
+ob_start('callback');
+
+?>
+<html>
+<body>
+<p>It's like comparing apples to oranges.</p>
+</body>
+</html>
+<?php
+
+ob_end_flush();
+
 ?>
