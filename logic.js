@@ -1,17 +1,35 @@
 'use strict';
 
-function showNav(){
-  var first_view = document.querySelector('.b');
-  var second_view = document.querySelector('.a');
-  var second_view_prop = window.getComputedStyle(second_view);
+let span = document.querySelector('.a');
+let span_value = getComputedStyle(span);
 
-  if(second_view_prop.display == 'block'){
-    second_view.style.display = 'none';
-    first_view.style.display = 'block';
+function checkSize(){
+  if(window.innerWidth <= '609'){
+    span.style.width = '50px';
+    document.getElementById('show-btn').style.display = 'none';
+    document.getElementById('ttl').style.display = 'none';
+    document.getElementById('ttl-pic').style.display = 'inline-block';
   }
   else{
-    second_view.style.display = 'block';
-    first_view.style.display = 'none';
+    span.style.width = '200px';
+    document.getElementById('show-btn').style.display = 'inline-block';
+    document.getElementById('ttl').style.display = 'inline';
+    document.getElementById('ttl-pic').style.display = 'none';
+  }
+}
+
+window.addEventListener('resize', checkSize);
+
+function showNav(){
+  if(span_value.width == '200px'){
+    span.style.width = '50px';
+    document.getElementById('ttl').style.display = 'none';
+    document.getElementById('ttl-pic').style.display = 'inline-block';
+  }
+  else{
+    span.style.width = '200px';
+    document.getElementById('ttl').style.display = 'inline';
+    document.getElementById('ttl-pic').style.display = 'none';
   }
 }
 
