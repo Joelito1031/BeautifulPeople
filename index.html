@@ -16,19 +16,25 @@
       </div>
       <div class="body-container">
         <div class="side-nav">
-           <button id="show-btn" onclick="showNav()">
+           <button class="show-btn" onclick="showNav()">
              &#9776;
            </button>
            <div class="a">
-             <button onclick="console.log('hello world')">
-               <span id="ttl">Register Vehicle</span>
-               <img id="ttl-pic" src="car.png">
+             <button onclick="showA()">
+               <span class="one-ttl">Register Vehicle</span>
+               <img class="ttl-pic-one" src="car.png">
+             </button>
+           </div>
+           <div class="b">
+             <button onclick="showB()">
+               <span class="two-ttl">Register Passenger</span>
+               <img class="ttl-pic-two" src="passengers.png">
              </button>
            </div>
         </div>
         <div class="fields">
-          <div class="subfield">
-            <form method="POST" action="./process.php">
+          <div class="subfield-1-1">
+            <form method="POST" action="./vehicle_process.php">
               <div class="div-1">
                 <div>
                   <label for="f_name">First name:</label>
@@ -88,21 +94,80 @@
                   </select>
                 </div>
                 <div>
-                  <input id="submit-button" type="submit" value="Register Vehicle">
+                  <input id="vehicle-submit-button" type="submit" value="Register Vehicle">
                 </div>
               </div>
             </form>
           </div>
-          <div class="subfield">
+
+
+
+
+          <div class="subfield-2-1">
+            <form method="POST" action="./passenger_process.php">
+              <div class="div-1">
+                <div>
+                  <label for="f_name">First name:</label>
+                  <input type="text" name="fname" id="f_name">
+                </div>
+                <div>
+                  <label for="m_name">Middle name:</label>
+                  <input type="text" name="mname" id="m_name">
+                </div>
+                <div>
+                  <label for="l_name">Last name:</label>
+                  <input type="text" name="lname" id="l_name">
+                </div>
+                <div>
+                  <label for="c_num">Contact number:</label>
+                  <input type="number" name="cnum" id="c_num">
+                </div>
+                <div>
+                  <label for="dt">Destination:</label>
+                  <select name="dest" id="dt">
+                    <option value="">Select destination</option>
+                    <option value="albuera">Albuera</option>
+                    <option value="valencia">Valencia</option>
+                    <option value="bato">Bato</option>
+                    <option value="kananga">Kananga</option>
+                  </select>
+                </div>
+                <div>
+                  <input id="passenger-submit-button" type="submit" value="Register Vehicle">
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+
+
+          <div class="subfield-1-2">
             <div class="generated-qr">
-              <div id="for-print">
-                <img id="qrimage" src="">
-                <h3 id="plateno"></h3>
+              <div id="vehicle-for-print">
+                <img id="vehicle-qrimage" src="">
+                <h3 id="vehicle-plateno"></h3>
               </div>
               <button>PRINT</button>
               <button onclick="savePDF()">SAVE AS PDF</button>
             </div>
           </div>
+
+
+
+          <div class="subfield-2-2">
+            <div class="generated-qr">
+              <div id="passenger-for-print">
+                <img id="passenger-qrimage" src="">
+                <h3 id="passenger-plateno"></h3>
+              </div>
+              <button>PRINT</button>
+              <button onclick="savePDF()">SAVE AS PDF</button>
+            </div>
+          </div>
+
+
+
         </div>
       </div>
     </div>

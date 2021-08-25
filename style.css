@@ -96,6 +96,36 @@ body{
   width: 30px;
 }
 
+.b{
+  width: 200px;
+  transition: width 0.5s;
+}
+
+.b button{
+  border-radius: 5px;
+  background-color: #f1c40f;
+  height: 50px;
+  width: 100%;
+  font-size: 1.5em;
+  box-shadow: -5px 5px 10px black;
+  text-align: center;
+}
+
+.b button:hover{
+  cursor: pointer;
+}
+
+.b button:active{
+  box-shadow: -5px 5px 10px inset;
+}
+
+.b button img{
+  display: none;
+  margin-top: 5px;
+  height: 30px;
+  width: 30px;
+}
+
 .fields{
   display: flex;
   flex-wrap: wrap;
@@ -146,7 +176,12 @@ body{
   outline: none;
 }
 
-#submit-button{
+#vehicle-submit-button{
+  background-color: #f1c40f;
+  box-shadow: -5px 5px 10px black;
+}
+
+#passenger-submit-button{
   background-color: #f1c40f;
   box-shadow: -5px 5px 10px black;
 }
@@ -155,17 +190,36 @@ body{
   box-shadow: -5px 5px 10px black;
 }
 
-.subfield{
+.subfield-1-1{
   position: relative;
   width: 50%;
   min-width: 350px;
   height: 523px;
-  /* border: 1px solid black; */
 }
 
-.div-1{
-  /* border: 1px solid red; */
+.subfield-1-2{
+  position: relative;
+  width: 50%;
+  min-width: 350px;
+  height: 523px;
 }
+
+.subfield-2-1{
+  display: none;
+  position: relative;
+  width: 50%;
+  min-width: 350px;
+  height: 523px;
+}
+
+.subfield-2-2{
+  display: none;
+  position: relative;
+  width: 50%;
+  min-width: 350px;
+  height: 523px;
+}
+
 
 .generated-qr{
   position: absolute;
@@ -186,7 +240,7 @@ body{
   box-shadow: -5px 5px 10px black;
 }
 
-#for-print{
+#vehicle-for-print{
   box-shadow: -5px 5px 10px black;
   border-radius: 10px;
   width: 272px;
@@ -195,7 +249,7 @@ body{
   background-image: url('./background.JPG');
 }
 
-#qrimage{
+#vehicle-qrimage{
   border-radius: 5px;
   position: absolute;
   top: 50%;
@@ -203,7 +257,31 @@ body{
   transform: translate(-50%, -50%);
 }
 
-#plateno{
+#vehicle-plateno{
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 60%;
+}
+
+#passenger-for-print{
+  box-shadow: -5px 5px 10px black;
+  border-radius: 10px;
+  width: 272px;
+  height: 334px;
+  position: relative;
+  background-image: url('./background.JPG');
+}
+
+#passenger-qrimage{
+  border-radius: 5px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#passenger-plateno{
   position: absolute;
   width: 100%;
   text-align: center;
