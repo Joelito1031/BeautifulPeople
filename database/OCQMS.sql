@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Aug 20, 2021 at 12:16 PM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 8.0.5
+-- Host: 127.0.0.1
+-- Generation Time: Aug 26, 2021 at 09:08 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `OCQMS`
+-- Database: `ocqms`
 --
 
 -- --------------------------------------------------------
@@ -30,7 +31,9 @@ SET time_zone = "+00:00";
 CREATE TABLE `registered_vehicles` (
   `PlateNo` varchar(10) NOT NULL,
   `Route` varchar(30) NOT NULL,
-  `Capacity` int(11) NOT NULL
+  `Capacity` int(11) NOT NULL,
+  `Operator` varchar(100) NOT NULL,
+  `Contact` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
