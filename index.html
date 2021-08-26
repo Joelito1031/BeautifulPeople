@@ -27,7 +27,7 @@
            </div>
            <div class="b">
              <button onclick="showB()">
-               <span class="two-ttl">Register Passenger</span>
+               <span class="two-ttl">Passenger QR</span>
                <img class="ttl-pic-two" src="passengers.png">
              </button>
            </div>
@@ -104,23 +104,23 @@
 
 
           <div class="subfield-2-1">
-            <form method="POST" action="./passenger_process.php">
+            <form>
               <div class="div-1">
                 <div>
                   <label for="f_name">First name:</label>
-                  <input type="text" name="fname" id="f_name">
+                  <input type="text" name="fname" id="fi_name">
                 </div>
                 <div>
                   <label for="m_name">Middle name:</label>
-                  <input type="text" name="mname" id="m_name">
+                  <input type="text" name="mname" id="mi_name">
                 </div>
                 <div>
                   <label for="l_name">Last name:</label>
-                  <input type="text" name="lname" id="l_name">
+                  <input type="text" name="lname" id="la_name">
                 </div>
                 <div>
                   <label for="c_num">Contact number:</label>
-                  <input type="number" name="cnum" id="c_num">
+                  <input type="number" name="cnum" id="co_num">
                 </div>
                 <div>
                   <label for="dt">Destination:</label>
@@ -133,7 +133,7 @@
                   </select>
                 </div>
                 <div>
-                  <input id="passenger-submit-button" type="submit" value="Register Vehicle">
+                  <input id="passenger-submit-button" type="button" value="Register Vehicle" onclick="passengerQr()">
                 </div>
               </div>
             </form>
@@ -149,7 +149,7 @@
                 <h3 id="vehicle-plateno"></h3>
               </div>
               <button>PRINT</button>
-              <button onclick="savePDF()">SAVE AS PDF</button>
+              <button onclick="saveVehiclePDF()">SAVE AS PDF</button>
             </div>
           </div>
 
@@ -158,11 +158,13 @@
           <div class="subfield-2-2">
             <div class="generated-qr">
               <div id="passenger-for-print">
-                <img id="passenger-qrimage" src="">
-                <h3 id="passenger-plateno"></h3>
+                <div id="passenger-qrimage">
+                  <img id="p-qrimage" src="./qrs/loading.gif">
+                  <h3 id="passenger-destination"></h3>
+                </div>
               </div>
               <button>PRINT</button>
-              <button onclick="savePDF()">SAVE AS PDF</button>
+              <button onclick="savePassengerPDF()">SAVE AS PDF</button>
             </div>
           </div>
 
