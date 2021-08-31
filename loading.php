@@ -19,9 +19,6 @@ foreach($vehicles as $vehicle){
           break;
       }
       else{
-        $listing_file = fopen('./queuing/' . $destination . '.json');
-        fwrite($listing_file, $name);
-        fclose($listing_file);
         $status = 'Vehicle is full';
       }
     }
@@ -36,7 +33,6 @@ foreach($vehicles as $vehicle){
 
 if($availability){
  $vehicles_to_json = json_encode($vehicles);
- $queuing_list = fopen();
  $altered_vehicle_list = fopen('./vehicles/vehicles.json', 'w');
 
  fwrite($altered_vehicle_list, $vehicles_to_json);
@@ -62,5 +58,25 @@ if($availability){
  echo json_encode($puv);
 }
 else{
- echo json_encode($status);
+  $list = file_get_contents('./queuing/' . $destination . '.json');
+  $list_array = json_decode($list);
+  $list_user = true;
+
+  foreach($list_array as $passenger){
+    if($passenger === $name){
+      $status = 'Already included in waiting list';
+      $list_user = false;
+      break;
+    }
+  }
+
+  if($list_user){
+    array_push($list_array, $name);
+    $list_string = json_encode($list_array);
+    $list_file = fopen('./queuing/' . $destination . '.json', 'w');
+    fwrite($list_file, $list_string);
+    fclose($list_file);
+  }
+
+  echo json_encode($status);
 }

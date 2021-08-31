@@ -57,14 +57,17 @@ if((isset($_POST['fname']) && !empty(trim($_POST['fname']))) && (isset($_POST['m
       $data_json = json_encode($vehicles_data);
       $vehicles_file = fopen('./vehicles/vehicles.json', 'w');
       $vehicle_name = fopen('./vehicles/' . $route . '_' . $plateno . '.json', 'w');
-      $queuing_list = fopen('./queuing/' . $route . '.json', 'w');
+
+      if(!file_exists('./queuing/' . $route . '.json')){
+        $queuing_list = fopen('./queuing/' . $route . '.json', 'w');
+        fwrite($queuing_list, '[]');
+        fclose($queuing_list);
+      }
 
       fwrite($vehicles_file, $data_json);
       fwrite($vehicle_name, $full_capacity);
-      fwrite($queuing_list, '[]');
       fclose($vehicles_file);
       fclose($vehicle_name);
-      fclose($queuing_list);
       QRcode::png(json_encode($vehicle_info), './qrs/' . $_POST['plateno'] . '.png', QR_ECLEVEL_L, 4, 10);
       header('Location: ./index.html?qr=' . $_POST['plateno']);
       echo "Vehicle registered";
