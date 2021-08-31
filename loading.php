@@ -5,6 +5,7 @@ $request_obj = json_decode($request);
 $vehicle_list = file_get_contents('./vehicles/vehicles.json');
 $vehicles = json_decode($vehicle_list);
 $destination = $request_obj->destination;  // ---->> YOU STOP HERE AND LINE 44. REMEMBER 1 CORINTHIANS 10:31
+$name = $request_obj->name;
 $availability = false;
 
 foreach($vehicles as $vehicle){
@@ -18,6 +19,9 @@ foreach($vehicles as $vehicle){
           break;
       }
       else{
+        $listing_file = fopen('./queuing/' . $destination . '.json');
+        fwrite($listing_file, $name);
+        fclose($listing_file);
         $status = 'Vehicle is full';
       }
     }
@@ -32,6 +36,7 @@ foreach($vehicles as $vehicle){
 
 if($availability){
  $vehicles_to_json = json_encode($vehicles);
+ $queuing_list = fopen();
  $altered_vehicle_list = fopen('./vehicles/vehicles.json', 'w');
 
  fwrite($altered_vehicle_list, $vehicles_to_json);
@@ -43,7 +48,7 @@ if($availability){
 
  while($count <= sizeof($passengers)){
    if($passengers[$count] == ""){
-     $passengers[$count] = $request_obj->name;
+     $passengers[$count] = $name;
      break;
    }
    $count = $count + 1;
