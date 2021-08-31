@@ -29,6 +29,7 @@ if((isset($_POST['fname']) && !empty(trim($_POST['fname']))) && (isset($_POST['m
     $count = (int) $row_count;
     $operator = $_POST['fname'] . ' ' . $_POST['mname'] . ' ' . $_POST['lname'];
     $contact = $_POST['cnum'];
+    $vehicle_info = array("type" => "vehicle", "plateno" => $plateno);
     $vehicle_capacity = array();
 
     if($count > 0){
@@ -61,7 +62,7 @@ if((isset($_POST['fname']) && !empty(trim($_POST['fname']))) && (isset($_POST['m
       fwrite($vehicle_name, $full_capacity);
       fclose($vehicles_file);
       fclose($vehicle_name);
-      QRcode::png($_POST['plateno'], './qrs/' . $_POST['plateno'] . '.png', QR_ECLEVEL_L, 4, 10);
+      QRcode::png(json_encode($vehicle_info), './qrs/' . $_POST['plateno'] . '.png', QR_ECLEVEL_L, 4, 10);
       header('Location: ./index.html?qr=' . $_POST['plateno']);
       echo "Vehicle registered";
     }

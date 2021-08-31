@@ -2,18 +2,14 @@
 
 $request = file_get_contents('php://input');
 $request_obj = json_decode($request);
-
 $vehicle_list = file_get_contents('./vehicles/vehicles.json');
 $vehicles = json_decode($vehicle_list);
 $destination = $request_obj->destination;  // ---->> YOU STOP HERE AND LINE 44. REMEMBER 1 CORINTHIANS 10:31
 $availability = false;
-$status = "Vehicle not available.";
-$puv = "";
 
-
-foreach ($vehicles as $vehicle){
-  if($vehicle->route == $destination){
-    if($vehicle->queuing){
+foreach($vehicles as $vehicle){
+  if($vehicle->route === $destination){
+    if($vehicle->queuing === true){
       if($vehicle->passengers < $vehicle->capacity){
           $vehicle->passengers = $vehicle->passengers + 1;
           $availability = true;
@@ -22,9 +18,14 @@ foreach ($vehicles as $vehicle){
           break;
       }
       else{
-        $status = "Vehicle is full.";
-        continue;
+        $status = 'Vehicle is full';
       }
+    }
+    elseif($vehicle->queuing === false){
+      $status = 'No vehicle queuing on that destination';
+    }
+    else{
+      $status = 'Invalid QR Code';
     }
   }
 }

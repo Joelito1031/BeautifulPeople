@@ -1,15 +1,28 @@
-<p>Resize the browser window to fire the <code>resize</code> event.</p>
-<p>Window height: <span id="height"></span></p>
-<p>Window width: <span id="width"></span></p>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h3 id="ayde"></h3>
+    <script type="text/javascript">
+      let data = '{"type":"passenger","name":"joelito"}';
+      let info = JSON.parse(data);
 
-<script>
-  const heightOutput = document.querySelector('#height');
-const widthOutput = document.querySelector('#width');
+      if(info.type === undefined){
+        console.log('heheh');
+      }
+      else if(info.type === 'passenger'){
+        console.log('hahaha');
+      }
 
-function reportWindowSize() {
-  heightOutput.textContent = window.innerHeight;
-  widthOutput.textContent = window.innerWidth;
-}
-
-window.addEventListener('resize', reportWindowSize);
-  </script>
+      // if(info.type === 'vehicle'){
+      //   console.log('vehicle');
+      // }
+      // else if(info.type === null){
+      //   console.log('not recognized');
+      // }
+    </script>
+  </body>
+</html>
