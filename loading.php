@@ -37,7 +37,7 @@ if($availability){
   $passenger_waiting = json_decode($waiting_list);
   $count = 0;
 
-  while($count <= sizeof($passenger_waiting)){
+  while($count < sizeof($passenger_waiting)){
     if($passenger_waiting[$count] === $name){
       array_splice($passenger_waiting, $count, 1, null);
       break;
@@ -59,7 +59,7 @@ if($availability){
   $passengers =  json_decode($passenger_list, true);
   $count = 0;
 
-  while($count <= sizeof($passengers)){
+  while($count < sizeof($passengers)){
     if($passengers[$count] === $name){
       $status = 'Passenger already loaded';
       break;
