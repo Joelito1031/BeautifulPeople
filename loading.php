@@ -15,6 +15,7 @@ foreach($vehicles as $vehicle){
           $vehicle->passengers = $vehicle->passengers + 1;
           $availability = true;
           $puv = $vehicle->vehicle;
+          $status = $puv;
           $route = $vehicle->route;
           break;
       }
@@ -32,30 +33,49 @@ foreach($vehicles as $vehicle){
 }
 
 if($availability){
- $vehicles_to_json = json_encode($vehicles);
- $altered_vehicle_list = fopen('./vehicles/vehicles.json', 'w');
+  $waiting_list = file_get_contents('./queuing/' .$destination . '.json');
+  $passenger_waiting = json_decode($waiting_list);
+  $count = 0;
 
- fwrite($altered_vehicle_list, $vehicles_to_json);
- fclose($altered_vehicle_list);
+  while($count <= sizeof($passenger_waiting)){
+    if($passenger_waiting[$count] === $name){
+      array_splice($passenger_waiting, $count, 1, null);
+      break;
+    }
+    $count += 1;
+  }
 
- $passenger_list = file_get_contents('./vehicles/' . $route . '_' . $puv . '.json');
- $passengers =  json_decode($passenger_list, true);
- $count = 0;
+  $waiting_to_json = json_encode($passenger_waiting);
+  $vehicles_to_json = json_encode($vehicles);
+  $altered_vehicle_list = fopen('./vehicles/vehicles.json', 'w');
+  $altered_waiting_list = fopen('./queuing/' . $destination . '.json', 'w');
 
- while($count <= sizeof($passengers)){
-   if($passengers[$count] == ""){
-     $passengers[$count] = $name;
-     break;
-   }
-   $count = $count + 1;
- }
+  fwrite($altered_vehicle_list, $vehicles_to_json);
+  fwrite($altered_waiting_list, $waiting_to_json);
+  fclose($altered_vehicle_list);
+  fclose($altered_waiting_list);
 
- $passengers_to_json = json_encode($passengers);
- $altered_passenger_list = fopen('./vehicles/' . $route . '_' . $puv . '.json', 'w');
+  $passenger_list = file_get_contents('./vehicles/' . $route . '_' . $puv . '.json');
+  $passengers =  json_decode($passenger_list, true);
+  $count = 0;
 
- fwrite($altered_passenger_list, $passengers_to_json);
- fclose($altered_passenger_list);
- echo json_encode($puv);
+  while($count <= sizeof($passengers)){
+    if($passengers[$count] === $name){
+      $status = 'Passenger already loaded';
+      break;
+    }
+    elseif($passengers[$count] === ""){
+      $passengers[$count] = $name;
+      break;
+    }
+    $count += 1;
+  }
+
+  $passengers_to_json = json_encode($passengers);
+  $altered_passenger_list = fopen('./vehicles/' . $route . '_' . $puv . '.json', 'w');
+
+  fwrite($altered_passenger_list, $passengers_to_json);
+  fclose($altered_passenger_list);
 }
 else{
   $list = file_get_contents('./queuing/' . $destination . '.json');
@@ -77,6 +97,6 @@ else{
     fwrite($list_file, $list_string);
     fclose($list_file);
   }
-
-  echo json_encode($status);
 }
+
+echo json_encode($status);
