@@ -5,20 +5,16 @@
 <?php
 
 $name = array('joelito', 'quiapo', 'caorte');
+$myname = 'Joelito';
 $count = 0;
 
-function one($name){
-  echo '<h1>' . $name . '</h1>';
+function one(){
+  echo '<h1>' . $GLOBALS['name'][0] . '</h1>';
 }
 
-function two($name, $count){
-  one($name[$count]);
-}
 
-while($count < sizeof($name)){
-  two($name, $count);
-  $count += 1;
-}
+
+one();
 ?>
 
 </body>

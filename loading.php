@@ -30,18 +30,18 @@ function checkList($destination, $name){
   }
 }
 
-function infoSaving($passengers, $vehicle, $vehicles, $name, $count, $destination){
-  $passengers[$count] = $name;
+function infoSaving($vehicle){
+  $GLOBALS['passengers'][$GLOBALS['count']] = $GLOBALS['name'];
   $vehicle->passengers = $vehicle->passengers + 1;
   $puv = $vehicle->vehicle;
   $route = $vehicle->route;
 
-  checkList($destination, $name);
+  checkList($GLOBALS['destination'], $GLOBALS['name']);
 
-  $passengers_to_json = json_encode($passengers);
+  $passengers_to_json = json_encode($GLOBALS['passengers']);
   $altered_passenger_list = fopen('./vehicles/' . $route . '_' . $puv . '.json', 'w');
   $altered_vehicle_list = fopen('./vehicles/vehicles.json', 'w');
-  $vehicles_to_json = json_encode($vehicles);
+  $vehicles_to_json = json_encode($GLOBALS['vehicles']);
 
   fwrite($altered_passenger_list, $passengers_to_json);
   fwrite($altered_vehicle_list, $vehicles_to_json);
@@ -66,7 +66,7 @@ foreach($vehicles as $vehicle){
             break;
           }
           elseif($passengers[$count] === ""){
-            $status = infoSaving($passengers, $vehicle, $vehicles, $name, $count, $destination);
+            $status = infoSaving($vehicle, $passengers);
             break;
           }
           $count += 1;
