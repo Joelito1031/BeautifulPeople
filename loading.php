@@ -2,12 +2,13 @@
 
 $request = file_get_contents('php://input');
 $request_obj = json_decode($request);
-$vehicle_list = file_get_contents('./vehicles/vehicles.json');
+$vehicle_list = file_get_contents('./vehicles/queuing_vehicles.json');
 $vehicles = json_decode($vehicle_list);
 $destination = $request_obj->destination;  // ---->> YOU STOP HERE AND LINE 44. REMEMBER 1 CORINTHIANS 10:31
 $name = $request_obj->name;
 $travel = false;
 $availability = false;
+$loaded = false;
 $count = 0;
 
 function checkList($destination, $name){
@@ -31,20 +32,28 @@ function checkList($destination, $name){
 }
 
 function infoSaving($vehicle){
-  $GLOBALS['passengers'][$GLOBALS['count']] = $GLOBALS['name'];
+  $GLOBALS['vehicle_passenger'][$GLOBALS['count']] = $GLOBALS['name'];
   $vehicle->passengers = $vehicle->passengers + 1;
   $puv = $vehicle->vehicle;
   $route = $vehicle->route;
 
   checkList($GLOBALS['destination'], $GLOBALS['name']);
 
-  $passengers_to_json = json_encode($GLOBALS['passengers']);
+  $loaded_passenger = file_get_contents('./vehicles/loaded_passengers.json');
+  $decoded_loaded_passenger = json_decode($loaded_passenger);
+  array_push($decoded_loaded_passenger, array('vehicle' => $puv, 'name' => $GLOBALS['name']));
+  $altered_loaded_passenger = json_encode($decoded_loaded_passenger);
+
+  $loaded_passenger_list = fopen('./vehicles/loaded_passengers.json', 'w');
   $altered_passenger_list = fopen('./vehicles/' . $route . '_' . $puv . '.json', 'w');
-  $altered_vehicle_list = fopen('./vehicles/vehicles.json', 'w');
+  $altered_vehicle_list = fopen('./vehicles/queuing_vehicles.json', 'w');
+  $passengers_to_json = json_encode($GLOBALS['vehicle_passenger']);
   $vehicles_to_json = json_encode($GLOBALS['vehicles']);
 
+  fwrite($loaded_passenger_list, $altered_loaded_passenger);
   fwrite($altered_passenger_list, $passengers_to_json);
   fwrite($altered_vehicle_list, $vehicles_to_json);
+  fclose($loaded_passenger_list);
   fclose($altered_passenger_list);
   fclose($altered_vehicle_list);
 
@@ -54,31 +63,42 @@ function infoSaving($vehicle){
 foreach($vehicles as $vehicle){
   if($vehicle->route === $destination){
     $travel = true;
-    if($vehicle->queuing === true){
-      if($vehicle->passengers < $vehicle->capacity){
+    if($vehicle->passengers < $vehicle->capacity){
 
-        $passenger_list = file_get_contents('./vehicles/' . $vehicle->route . '_' . $vehicle->vehicle . '.json');
-        $passengers =  json_decode($passenger_list);
+      $dest = $vehicle->route;
+      $plate = $vehicle->vehicle;
+      $puv_info = $vehicle;
+      $passenger_list = file_get_contents('./vehicles/loaded_passengers.json');
+      $passengers =  json_decode($passenger_list);
 
-        while($count < sizeof($passengers)){
-          if($passengers[$count] === $name){
-            $status = 'Passenger already loaded';
-            break;
-          }
-          elseif($passengers[$count] === ""){
-            $status = infoSaving($vehicle, $passengers);
-            break;
-          }
-          $count += 1;
+      while($count < sizeof($passengers)){
+        if($passengers[$count]->name === $name){
+          $status = 'Passenger already loaded on ' . $passengers[$count]->vehicle;
+          $loaded = true;
+          break;
         }
-        $availability = true;
-        break;
+        $count += 1;
       }
+      $availability = true;
+      break;
     }
   }
 }
 
-if(!$travel){
+if(!$loaded){
+  $count = 0;
+  $vehicle_passenger_list = file_get_contents('./vehicles/' . $dest . '_' . $plate . '.json');
+  $vehicle_passenger = json_decode($vehicle_passenger_list);
+
+  while($count < sizeof($vehicle_passenger)){
+    if($vehicle_passenger[$count] === ''){
+      $status = infoSaving($puv_info);
+      break;
+    }
+    $count += 1;
+  }
+}
+elseif(!$travel){
   $status = 'No vehicle with that destination';
 }
 elseif(!$availability){

@@ -1,21 +1,21 @@
-<!DOCTYPE html>
-<html>
-<body>
-
 <?php
 
-$name = array('joelito', 'quiapo', 'caorte');
-$myname = 'Joelito';
-$count = 0;
+$data = array();
 
-function one(){
-  echo '<h1>' . $GLOBALS['name'][0] . '</h1>';
-}
+$datum = json_encode($data);
+
+print_r($datum);
+
+$file = fopen('file.json', 'w');
+
+fwrite($file, $datum);
+
+fclose($file);
+
+$contents = file_get_contents('./file.json');
+
+$dta = json_decode($contents);
 
 
 
-one();
 ?>
-
-</body>
-</html>
