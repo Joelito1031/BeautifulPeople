@@ -1,15 +1,16 @@
 <?php
 include('./phpqrcode/qrlib.php');
 
-function infoCrypt($string_text){
-  if(in_array('aes-128-gcm', openssl_get_cipher_methods())){
-    $ivlen = openssl_cipher_iv_length('aes-128-gcm');
-    $iv = openssl_random_pseudo_bytes($ivlen);
-    $ciphered = openssl_encrypt($string_text, 'aes-128-gcm', 'j_cube', $options = 0, $iv, $tag);
-    $deciphered = openssl_decrypt($ciphered, 'aes-128-gcm', 'j_cube', $options = 0, $iv, $tag);
-    echo $deciphered;
-    return $ciphered;
-  }
+function infoCrypt($plaintext){
+  $key = "udWH+XfEbKB44oqM";
+  
+  $ivlen = openssl_cipher_iv_length($cipher="AES-128-CBC");
+  $iv = openssl_random_pseudo_bytes($ivlen);
+  $ciphertext_raw = openssl_encrypt($plaintext, $cipher, $key, $options=OPENSSL_RAW_DATA, $iv);
+  $hmac = hash_hmac('sha256', $ciphertext_raw, $key, $as_binary=true);
+  $ciphertext = base64_encode( $iv.$hmac.$ciphertext_raw );
+
+  return $ciphertext;
 }
 
 if((isset($_POST['fname']) && !empty(trim($_POST['fname']))) && (isset($_POST['mname']) && !empty(trim($_POST['mname'])))
@@ -76,7 +77,7 @@ if((isset($_POST['fname']) && !empty(trim($_POST['fname']))) && (isset($_POST['m
       fwrite($vehicle_name, $full_capacity);
       fclose($vehicles_file);
       fclose($vehicle_name);
-      QRcode::png(infoCrypt(json_encode($vehicle_info)), './qrs/' . $_POST['plateno'] . '.png', QR_ECLEVEL_L, 4, 10);
+      QRcode::png(infoCrypt(json_encode($vehicle_info)), './qrs/' . $_POST['plateno'] . '.png', QR_ECLEVEL_L, 4);
       header('Location: ./index.html?qr=' . $_POST['plateno']);
       echo "Vehicle registered";
     }

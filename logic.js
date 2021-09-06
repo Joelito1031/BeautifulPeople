@@ -94,5 +94,10 @@ const urlString = window.location.search;
 const urlParams = new URLSearchParams(urlString);
 const parameter = urlParams.get('qr');
 
-document.getElementById('vehicle-plateno').innerHTML = parameter;
-parameter == null ? document.getElementById('vehicle-qrimage').src = './qrs/loading.gif' : document.getElementById('vehicle-qrimage').src = './qrs/' + parameter + '.png';
+if(parameter == null){
+  document.getElementById('vehicle-plateno').innerHTML = 'QR';
+  document.getElementById('vehicle-qrimage').src = './qrs/loading.gif';
+}else{
+  document.getElementById('vehicle-qrimage').src = './qrs/' + parameter + '.png';
+  document.getElementById('vehicle-plateno').innerHTML = parameter;
+}

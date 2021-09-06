@@ -252,16 +252,22 @@ body{
 #vehicle-qrimage{
   border-radius: 5px;
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -30%);
 }
 
 #vehicle-plateno{
   position: absolute;
-  width: 100%;
+  border-radius: 5px;
+  width: 50%;
   text-align: center;
-  top: 64%;
+  top: 80%;
+  left: 50%;
+  padding: 3px;
+  transform: translateX(-50%);
+  background-color: white;
+  margin: 0px;
 }
 
 #passenger-for-print{
@@ -276,18 +282,20 @@ body{
 #passenger-qrimage{
   border-radius: 5px;
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 164px;
-  height: 164px;
+  transform: translate(-50%, -30%);
   background-color: white;
-  text-align: center;
 }
 
 #passenger-destination{
   position: absolute;
-  width: 100%;
+  width: 50%;
   text-align: center;
-  top: 68%;
+  background-color: white;
+  padding: 3px;
+  top: 75%;
+  left: 50%;
+  border-radius: 5px;
+  transform: translateX(-50%);
 }
