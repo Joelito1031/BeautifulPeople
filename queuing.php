@@ -2,10 +2,10 @@
 
 $request = file_get_contents('php://input');
 $request_obj = json_decode($request);
-$vehicle_list = file_get_contents('./vehicles/vehicles.json');
-$vehicles = json_decode($vehicle_list);
+$queue_vehicle_list = file_get_contents('./vehicles/vehicles.json');
+$queue_vehicles = json_decode($vehicle_list);
 
-foreach($vehicles as $vehicle){
+foreach($queue_vehicles as $vehicle){
   if($vehicle->vehicle === $request_obj->plateno){
     if($vehicle->queuing === false){
       $vehicle->queuing = true;
@@ -14,7 +14,7 @@ foreach($vehicles as $vehicle){
       $queuing_info = array("vehicle" => $vehicle->vehicle, "route" => $vehicle->route, "capacity" => $vehicle->capacity, "passengers" => 0);
       array_push($queuing_list, $queuing_info);
       $queuing_list_to_json = json_encode($queuing_list);
-      $vehicles_to_json = json_encode($vehicles);
+      $vehicles_to_json = json_encode($queue_vehicles);
       $altered_queuing_list = fopen('./vehicles/queuing_vehicles.json', 'w');
       $altered_vehicle_list = fopen('./vehicles/vehicles.json', 'w');
 
