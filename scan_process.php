@@ -1,17 +1,4 @@
 <?php
-//Database variables
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "ocqms";
-$halt_operation = false;
-
-try{
-  $connection = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
-  $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}catch(PDOException $e){
-  $halt_operation = true;
-}
 
 //This function is for decrypting data.
 function decryptor($cipheredtext){
@@ -29,10 +16,135 @@ function decryptor($cipheredtext){
   }
 }
 
+//Database variables
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "ocqms";
+$halt_operation = false;
+
+try{
+
+  $connection = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+  $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+}catch(PDOException $e){
+
+  $halt_operation = true;
+
+}
+
+if($halt_operation){
+
+  $status = "The operation cannot proceed"
+
+}
+else{
+
+  $data = json_decode(file_get_contents('php://input'));
+  $request_obj = json_decode(decryptor($data->data));
+
+  if($request_obj->type === "passenger"){
+
+    $loaded_passenger_query = $connection->prepare("SELECT COUNT(*) as COUNT, Vehicle, Passenger FROM loaded_passengers WHERE Passenger  = '$request_obj->name'");
+    $loaded_passenger_query->execute();
+    $result = $loaded_passenger_query->fetchall();
+
+    if((int) $result[0]['COUNT'] > 0){
+
+      $loaded = true;
+      $status = "Passenger already loaded on " . $result[0]['Vehicle'];
+
+    }
+    else{
+
+      if(is_writable('./vehicles/queuing_vehicles.json')){
+
+        $queuing_vehicles = json_decode(file_get_contents('./vehicles/queuing_vehicles.json'));
+
+        foreach($queuing_vehicles as $vehicle){
+
+          if($vehicle->route === $request_obj->destination){
+
+              $available = true; //Status: Vehicle available but full.
+
+              if($vehicle->passengers < $vehicle->capacity){
+
+                $vehicle->passengers += 1;
+
+                $queuing_vehicles_file = fopen('./vehicles/queuing_vehicles.json', 'w');
+                fwrite($queuing_vehicles_file, json_encode($queuing_vehicles));
+                fclose($queuing_vehicles_file);
+
+                if(is_writable("./vehicles/" . $vehicle->route . "_" . $vehicle->vehicle . ".json")){
+
+                  $vehicle_pass_list = fopen("./vehicles/" . $vehicle->route . "_" . $vehicle->vehicle . ".json");
+
+
+                }
+                else{
+
+                  $status = "The operation cannot proceed";
+                  break;
+
+                }
+
+              }
+
+          }
+
+        }
+
+      }
+      else{
+        $status = "The operation cannot proceed";
+      }
+
+      $waiting_passenger_query = $connection->prepare("SELECT COUNT(*) as COUNT, Destination, Passenger FROM waiting_passengers WHERE Destination = '$request_obj->destination' AND Passenger = '$request_obj->name'");
+      $waiting_passenger_query->execute();
+      $result = $waiting_passenger_query->fetchall();
+
+      if((int) $result[0]['COUNT'] > 0){
+
+        $delete_passenger = $connectio->prepare("DELETE FROM waiting_passengers WHERE Passenger = '$request_obj->name'");
+        $delete_passenger->execute();
+
+        if($delete_passenger->rowCount() > 0){
+
+           //Put code here.
+
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//Database variables
+
+
+
+
 // $request = file_get_contents('php://input');
-$request =  file_get_contents('php://input');
-$data = json_decode($request);
-$decrypted_string = decryptor($data->data);
+$data = json_decode(file_get_contents('php://input'));
+
 $request_obj = json_decode($decrypted_string);
 $type = $request_obj->type;
 
