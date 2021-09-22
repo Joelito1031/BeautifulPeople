@@ -67,12 +67,6 @@ if((isset($_POST['fname']) && !empty(trim($_POST['fname']))) && (isset($_POST['m
       $vehicles_file = fopen('./vehicles/vehicles.json', 'w');
       $vehicle_name = fopen('./vehicles/' . $route . '_' . $plateno . '.json', 'w');
 
-      if(!file_exists('./queuing/' . $route . '.json')){
-        $queuing_list = fopen('./queuing/' . $route . '.json', 'w');
-        fwrite($queuing_list, '[]');
-        fclose($queuing_list);
-      }
-
       fwrite($vehicles_file, $data_json);
       fwrite($vehicle_name, $full_capacity);
       fclose($vehicles_file);

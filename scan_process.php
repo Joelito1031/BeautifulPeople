@@ -16,6 +16,31 @@ function decryptor($cipheredtext){
   }
 }
 
+function checkList($destination, $passenger){
+  $waiting_passenger_query = $GLOBALS['connection']->prepare("SELECT COUNT(*) as COUNT, Destination, Passenger FROM waiting_passengers WHERE Destination = '$destination' AND Passenger = '$passenger'");
+  $waiting_passenger_query->execute();
+  $result = $waiting_passenger_query->fetchall();
+
+  if((int) $result[0]['COUNT'] > 0){
+    $delete_passenger = $GLOBALS['connection']->prepare("DELETE FROM waiting_passengers WHERE Destination = '$destination' AND Passenger = '$passenger'");
+    $delete_passenger->execute();
+    $rowCount = $delete_passenger->rowCount();
+
+    if($rowCount > 0){
+      return true;
+    }
+    elseif($rowCount == 0) {
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+  else{
+    return true;
+  }
+}
+
 //Database variables
 $servername = "localhost";
 $username = "root";
@@ -36,7 +61,7 @@ try{
 
 if($halt_operation){
 
-  $status = "The operation cannot proceed"
+  $status = "The operation cannot proceed";
 
 }
 else{
@@ -53,241 +78,104 @@ else{
     if((int) $result[0]['COUNT'] > 0){
 
       $loaded = true;
-      $status = "Passenger already loaded on " . $result[0]['Vehicle'];
+      $status = "Onboard " . $result[0]['Vehicle'];
 
     }
     else{
+      $registered = false;
+      $availability = false;
+      $notfull = false;
 
-      if(is_writable('./vehicles/queuing_vehicles.json')){
+      if(is_writable('./vehicles/vehicles.json')){
+        $vehicle_list = json_decode(file_get_contents('./vehicles/vehicles.json'));
 
-        $queuing_vehicles = json_decode(file_get_contents('./vehicles/queuing_vehicles.json'));
+        foreach($vehicle_list as $registered_vehicle){
+          if($registered_vehicle->route === $request_obj->destination){
+            $registered = true;
+            if(is_writable('./vehicles/queuing_vehicles.json')){
+              $queuing_vehicles = json_decode(file_get_contents('./vehicles/queuing_vehicles.json'));
 
-        foreach($queuing_vehicles as $vehicle){
+              foreach($queuing_vehicles as $vehicle){
+                if($vehicle->route === $request_obj->destination){
+                    $availability = true; //Status: Vehicle available but full.
 
-          if($vehicle->route === $request_obj->destination){
+                    if($vehicle->passengers < $vehicle->capacity){
+                      $notfull = true;
+                      $state = checkList($request_obj->destination, $request_obj->name);
+                      if($state || !$state){
+                        $vehicle->passengers += 1;
+                        $queuing_vehicles_file = fopen('./vehicles/queuing_vehicles.json', 'w');
 
-              $available = true; //Status: Vehicle available but full.
+                        fwrite($queuing_vehicles_file, json_encode($queuing_vehicles));
+                        fclose($queuing_vehicles_file);
 
-              if($vehicle->passengers < $vehicle->capacity){
+                        if(is_writable("./vehicles/" . $vehicle->route . "_" . $vehicle->vehicle . ".json")){
+                          $count = 0;
+                          $passenger_name_list = json_decode(file_get_contents("./vehicles/" . $vehicle->route . "_" . $vehicle->vehicle . ".json"));
 
-                $vehicle->passengers += 1;
+                          while($count < sizeof($passenger_name_list)){
+                            if($passenger_name_list[$count]){
+                              $passenger_name_list[$count] = $request_obj->name;
+                            }
+                            $count += 1;
+                          }
 
-                $queuing_vehicles_file = fopen('./vehicles/queuing_vehicles.json', 'w');
-                fwrite($queuing_vehicles_file, json_encode($queuing_vehicles));
-                fclose($queuing_vehicles_file);
+                          $passenger_name_list_file = fopen("./vehicles/" . $vehicle->route . "_" . $vehicle->vehicle . ".json", "w");
+                          fwrite($passenger_name_list_file, json_encode($passenger_name_list));
+                          fclose($passenger_name_list_file);
 
-                if(is_writable("./vehicles/" . $vehicle->route . "_" . $vehicle->vehicle . ".json")){
-
-                  $vehicle_pass_list = fopen("./vehicles/" . $vehicle->route . "_" . $vehicle->vehicle . ".json");
-
-
+                          $insert_passenger_query = "INSERT INTO loaded_passengers (Vehicle, Passenger) VALUES ('$vehicle->vehicle', '$request_obj->name')";
+                          $connection->exec($insert_passenger_query);
+                          $status = $vehicle->vehicle;
+                          break;
+                        }
+                      }
+                    }
                 }
-                else{
-
-                  $status = "The operation cannot proceed";
-                  break;
-
-                }
-
               }
-
-          }
-
-        }
-
-      }
-      else{
-        $status = "The operation cannot proceed";
-      }
-
-      $waiting_passenger_query = $connection->prepare("SELECT COUNT(*) as COUNT, Destination, Passenger FROM waiting_passengers WHERE Destination = '$request_obj->destination' AND Passenger = '$request_obj->name'");
-      $waiting_passenger_query->execute();
-      $result = $waiting_passenger_query->fetchall();
-
-      if((int) $result[0]['COUNT'] > 0){
-
-        $delete_passenger = $connectio->prepare("DELETE FROM waiting_passengers WHERE Passenger = '$request_obj->name'");
-        $delete_passenger->execute();
-
-        if($delete_passenger->rowCount() > 0){
-
-           //Put code here.
-
-        }
-
-      }
-
-    }
-
-  }
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Database variables
-
-
-
-
-// $request = file_get_contents('php://input');
-$data = json_decode(file_get_contents('php://input'));
-
-$request_obj = json_decode($decrypted_string);
-$type = $request_obj->type;
-
-$vehicle_list = file_get_contents('./vehicles/queuing_vehicles.json');
-$vehicles = json_decode($vehicle_list);
-$travel = false;
-$availability = false;
-$loaded = false;
-$count = 0;
-
-//This function is to check whether the passenger is already loaded.
-function checkList($destination, $name){
-  $waiting_list = file_get_contents('./queuing/' .$destination . '.json');
-  $passenger_waiting = json_decode($waiting_list);
-
-  if(sizeof($passenger_waiting) > 0){
-    $count = 0;
-    while($count < sizeof($passenger_waiting)){  //This here needs to be checked.
-      if($passenger_waiting[$count] === $name){
-        array_splice($passenger_waiting, $count, 1, null);
-        $waiting_to_json = json_encode($passenger_waiting);
-        $altered_waiting_list = fopen('./queuing/' . $destination . '.json', 'w');
-        fwrite($altered_waiting_list, $waiting_to_json);
-        fclose($altered_waiting_list);
-        break;
-      }
-      $count += 1;
-    }
-  }
-}
-
-//This function is to save the passenger.
-function infoSaving($vehicle){
-  $GLOBALS['vehicle_passenger'][$GLOBALS['count']] = $GLOBALS['name'];
-  $vehicle->passengers = $vehicle->passengers + 1;
-  $puv = $vehicle->vehicle;
-  $route = $vehicle->route;
-  $name = $GLOBALS['name'];
-
-  checkList($GLOBALS['destination'], $name);
-
-  $altered_passenger_list = fopen('./vehicles/' . $route . '_' . $puv . '.json', 'w');
-  $altered_vehicle_list = fopen('./vehicles/queuing_vehicles.json', 'w');
-  $passengers_to_json = json_encode($GLOBALS['vehicle_passenger']);
-  $vehicles_to_json = json_encode($GLOBALS['vehicles']);
-
-  $insert_query = "INSERT INTO loaded_passengers(Vehicle, Passenger) VALUES('$puv', '$name')";
-  $GLOBALS['connection']->exec($insert_query);
-
-  fwrite($altered_passenger_list, $passengers_to_json);
-  fwrite($altered_vehicle_list, $vehicles_to_json);
-  fclose($altered_passenger_list);
-  fclose($altered_vehicle_list);
-
-  return $puv;
-}
-
-if($halt_operation){
-  $status = "Operation cannot proceed";
-}
-else{
-  if($type === "passenger"){
-
-    $status = "passenger";
-    $destination = $request_obj->destination;
-    $name = $request_obj->name;
-
-    if(sizeof($vehicles) > 0){
-      foreach($vehicles as $vehicle){
-        if($vehicle->route === $destination){
-          $travel = true;
-          if($vehicle->passengers < $vehicle->capacity){
-
-            $dest = $vehicle->route;
-            $plate = $vehicle->vehicle;
-            $puv_info = $vehicle;
-            // $passenger_list = file_get_contents('./vehicles/' . $vehicle->route . '_' . $vehicle->vehicle . ".json");
-            // $passengers =  json_decode($passenger_list);
-            $select_query = "SELECT COUNT(*) FROM loaded_passengers WHERE Passenger = '$name'";
-            $num_row = $connection->query($select_query);
-            $count_row = (int) $num_row->fetchColumn();
-
-            if($count_row > 0){
-              $status = 'Passenger already boarded';
-              $loaded = true;
             }
-            $availability = true;
-            break;
-          }
-        }
-      }
-
-      if(!$travel){
-        $status = 'No queuing PUV with that destination';
-      }
-      elseif(!$availability){
-        $list = file_get_contents('./queuing/' . $destination . '.json');
-        $list_array = json_decode($list);
-        $list_user = true;
-
-        if(sizeof($list_array) > 0){
-          foreach($list_array as $passenger){
-            if($passenger === $name){
-              $status = 'Already included in waiting list';
-              $list_user = false;
-              break;
+            else{
+              $status = "The operation cannot proceed";
             }
           }
         }
-
-        if($list_user){
-          array_push($list_array, $name);
-          $list_string = json_encode($list_array);
-          $list_file = fopen('./queuing/' . $destination . '.json', 'w');
-          fwrite($list_file, $list_string);
-          fclose($list_file);
-          $status = 'Passenger is in waiting list'; //Vehicle might be not queuing or full.
+        if(!$registered){
+          $status = "Vehicle is not registered";
         }
-      }
-      elseif(!$loaded){
-        $count = 0;
-        $vehicle_passenger_list = file_get_contents('./vehicles/' . $dest . '_' . $plate . '.json');
-        $vehicle_passenger = json_decode($vehicle_passenger_list);
+        elseif(!$availability){
+          $waiting_passenger_query = $GLOBALS['connection']->prepare("SELECT COUNT(*) as COUNT, Destination, Passenger FROM waiting_passengers WHERE Destination = '$destination' AND Passenger = '$passenger'");
+          $waiting_passenger_query->execute();
+          $result = $waiting_passenger_query->fetchall();
 
-        while($count < sizeof($vehicle_passenger)){
-          if($vehicle_passenger[$count] === ''){
-            $status = infoSaving($puv_info);
-            break;
+          if((int) $result[0]['COUNT'] > 0){
+            $status = "Already on waiting list"
           }
-          $count += 1;
+          else{
+            $insert_passenger_query = "INSERT INTO waiting_passengers (Destination, Passenger) VALUES ('$request_obj->destination', '$request_obj->name')";
+            $connection->exec($insert_passenger_query);
+            $status = "Passenger added to waiting list";
+          }
+        }
+        elseif (!$notfull) {
+          $waiting_passenger_query = $GLOBALS['connection']->prepare("SELECT COUNT(*) as COUNT, Destination, Passenger FROM waiting_passengers WHERE Destination = '$destination' AND Passenger = '$passenger'");
+          $waiting_passenger_query->execute();
+          $result = $waiting_passenger_query->fetchall();
+
+          if((int) $result[0]['COUNT'] > 0){
+            $status = "Already on waiting list"
+          }
+          else{
+            $insert_passenger_query = "INSERT INTO waiting_passengers (Destination, Passenger) VALUES ('$request_obj->destination', '$request_obj->name')";
+            $connection->exec($insert_passenger_query);
+            $status = "Passenger added to waiting list";
+          }
         }
       }
-    }
-    else{
-      $status = "No vehicle queuing";
     }
   }
+  elseif($request_obj->type === "vehicle"){
 
-  elseif($type === "vehicle"){
-
-
-    $queue_vehicle_list = file_get_contents('./vehicles/vehicles.json');
-    $queue_vehicles = json_decode($queue_vehicle_list);
+    $queue_vehicles = json_decode(file_get_contents('./vehicles/vehicles.json'));
     $registered = false;
 
     foreach($queue_vehicles as $vehicle){
@@ -295,17 +183,14 @@ else{
         $registered = true;
         if($vehicle->queuing === false){
           $vehicle->queuing = true;
-          $queuing_vehicles = file_get_contents('./vehicles/queuing_vehicles.json');
-          $queuing_list = json_decode($queuing_vehicles);
+          $queuing_list = json_decode(file_get_contents('./vehicles/queuing_vehicles.json'));
           $queuing_info = array("vehicle" => $vehicle->vehicle, "route" => $vehicle->route, "capacity" => $vehicle->capacity, "passengers" => 0);
           array_push($queuing_list, $queuing_info);
-          $queuing_list_to_json = json_encode($queuing_list);
-          $vehicles_to_json = json_encode($queue_vehicles);
           $altered_queuing_list = fopen('./vehicles/queuing_vehicles.json', 'w');
           $altered_vehicle_list = fopen('./vehicles/vehicles.json', 'w');
 
-          fwrite($altered_queuing_list, $queuing_list_to_json);
-          fwrite($altered_vehicle_list, $vehicles_to_json);
+          fwrite($altered_queuing_list, json_encode($queuing_list));
+          fwrite($altered_vehicle_list, json_encode($queue_vehicles));
           fclose($altered_queuing_list);
           fclose($altered_vehicle_list);
 
@@ -322,7 +207,6 @@ else{
     if(!$registered){
       $status = "Vehicle is not registered";
     }
-
   }
 }
 
