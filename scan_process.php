@@ -114,8 +114,9 @@ else{
                           $passenger_name_list = json_decode(file_get_contents("./vehicles/" . $vehicle->route . "_" . $vehicle->vehicle . ".json"));
 
                           while($count < sizeof($passenger_name_list)){
-                            if($passenger_name_list[$count]){
+                            if($passenger_name_list[$count] === ""){
                               $passenger_name_list[$count] = $request_obj->name;
+                              break;
                             }
                             $count += 1;
                           }
