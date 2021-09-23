@@ -148,7 +148,7 @@ else{
           $result = $waiting_passenger_query->fetchall();
 
           if((int) $result[0]['COUNT'] > 0){
-            $status = "Already on waiting list"
+            $status = "Already on waiting list";
           }
           else{
             $insert_passenger_query = "INSERT INTO waiting_passengers (Destination, Passenger) VALUES ('$request_obj->destination', '$request_obj->name')";
@@ -162,7 +162,7 @@ else{
           $result = $waiting_passenger_query->fetchall();
 
           if((int) $result[0]['COUNT'] > 0){
-            $status = "Already on waiting list"
+            $status = "Already on waiting list";
           }
           else{
             $insert_passenger_query = "INSERT INTO waiting_passengers (Destination, Passenger) VALUES ('$request_obj->destination', '$request_obj->name')";

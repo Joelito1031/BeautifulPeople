@@ -1,5 +1,26 @@
 <?php
 
+
+//Database variables
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "ocqms";
+$halt_operation = false;
+
+try{
+
+  $connection = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
+  $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+}catch(PDOException $e){
+
+  $halt_operation = true;
+
+}
+
+
+
 $request = file_get_contents('php://input');
 $data = json_decode($request);
 $vehicles = file_get_contents('./vehicles/vehicles.json');
