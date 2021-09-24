@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 26, 2021 at 09:08 AM
+-- Generation Time: Sep 24, 2021 at 12:49 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -25,6 +25,17 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `loaded_passengers`
+--
+
+CREATE TABLE `loaded_passengers` (
+  `Vehicle` varchar(40) NOT NULL,
+  `Passenger` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `registered_vehicles`
 --
 
@@ -34,6 +45,17 @@ CREATE TABLE `registered_vehicles` (
   `Capacity` int(11) NOT NULL,
   `Operator` varchar(100) NOT NULL,
   `Contact` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `waiting_passengers`
+--
+
+CREATE TABLE `waiting_passengers` (
+  `Destination` varchar(50) NOT NULL,
+  `Passenger` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --

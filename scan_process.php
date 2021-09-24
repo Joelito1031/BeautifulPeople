@@ -144,7 +144,7 @@ else{
           $status = "Vehicle is not registered";
         }
         elseif(!$availability){
-          $waiting_passenger_query = $GLOBALS['connection']->prepare("SELECT COUNT(*) as COUNT, Destination, Passenger FROM waiting_passengers WHERE Destination = '$destination' AND Passenger = '$passenger'");
+          $waiting_passenger_query = $GLOBALS['connection']->prepare("SELECT COUNT(*) as COUNT, Destination, Passenger FROM waiting_passengers WHERE Destination = '$request_obj->destination' AND Passenger = '$request_obj->name'");
           $waiting_passenger_query->execute();
           $result = $waiting_passenger_query->fetchall();
 
@@ -158,7 +158,7 @@ else{
           }
         }
         elseif (!$notfull) {
-          $waiting_passenger_query = $GLOBALS['connection']->prepare("SELECT COUNT(*) as COUNT, Destination, Passenger FROM waiting_passengers WHERE Destination = '$destination' AND Passenger = '$passenger'");
+          $waiting_passenger_query = $GLOBALS['connection']->prepare("SELECT COUNT(*) as COUNT, Destination, Passenger FROM waiting_passengers WHERE Destination = '$request_obj->destination' AND Passenger = '$request_obj->name'");
           $waiting_passenger_query->execute();
           $result = $waiting_passenger_query->fetchall();
 
