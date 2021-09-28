@@ -126,6 +126,41 @@ body{
   width: 30px;
 }
 
+.a{
+  width: 200px;
+  transition: width 0.5s;
+}
+
+.c button{
+  border-radius: 5px;
+  background-color: #f1c40f;
+  height: 50px;
+  width: 100%;
+  font-size: 1.5em;
+  box-shadow: -5px 5px 10px black;
+  text-align: center;
+}
+
+.c button:hover{
+  cursor: pointer;
+}
+
+.c button:active{
+  box-shadow: -5px 5px 10px inset;
+}
+
+.c button img{
+  display: none;
+  margin-top: 5px;
+  height: 30px;
+  width: 30px;
+}
+
+.c{
+  width: 200px;
+  transition: width 0.5s;
+}
+
 .fields{
   display: flex;
   flex-wrap: wrap;
@@ -186,6 +221,16 @@ body{
   box-shadow: -5px 5px 10px black;
 }
 
+#dispatcher-submit-button{
+  background-color: #f1c40f;
+  box-shadow: -5px 5px 10px black;
+}
+
+#pin-button{
+  background-color: #5dade2;
+  box-shadow: -5px 5px 10px black;
+}
+
 .div-1 div select:focus{
   box-shadow: -5px 5px 10px black;
 }
@@ -218,6 +263,22 @@ body{
   width: 50%;
   min-width: 350px;
   height: 523px;
+}
+
+.subfield-3-1{
+  display: none;
+  position: relative;
+  width: 50%;
+  min-width: 350px;
+  height: 523px;
+}
+
+.subfield-3-2{
+  display: none;
+  position: relative;
+  width: 50%;
+  padding: 5%;
+  overflow-y: auto;
 }
 
 
@@ -298,4 +359,19 @@ body{
   left: 50%;
   border-radius: 5px;
   transform: translateX(-50%);
+}
+
+.dispatchers-table{
+  width: 100%;
+}
+
+th {
+  font-weight: bold;
+}
+
+td, th{
+  background-color: green;
+  height: 30px;
+  text-align: center;
+  border-radius: 5px;
 }

@@ -72,7 +72,7 @@ if((isset($_POST['fname']) && !empty(trim($_POST['fname']))) && (isset($_POST['m
       fclose($vehicles_file);
       fclose($vehicle_name);
       QRcode::png(infoCrypt(json_encode($vehicle_info)), './qrs/' . $_POST['plateno'] . '.png', QR_ECLEVEL_L, 4);
-      header('Location: ./index.html?qr=' . $_POST['plateno']);
+      header('Location: ./index.php?qr=' . $_POST['plateno']);
       echo "Vehicle registered";
     }
   }catch(PDOException $e){

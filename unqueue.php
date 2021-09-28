@@ -26,7 +26,7 @@ else{
 
   $delete_passenger_query = $connection->prepare("DELETE FROM loaded_passengers WHERE Vehicle = '$data->data'");
   $delete_passenger_query->execute();
-  if($delete_passenger_query->rowCount() > 0){
+  if($delete_passenger_query->rowCount() > 0 || $delete_passenger_query->rowCount() == 0){
     $vehicles_list = json_decode(file_get_contents('./vehicles/vehicles.json'));
     $queuing_vehicles_list = json_decode(file_get_contents('./vehicles/queuing_vehicles.json'));
     $count_1 = 0;

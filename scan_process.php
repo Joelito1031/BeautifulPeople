@@ -67,7 +67,12 @@ if($halt_operation){
 else{
 
   $data = json_decode(file_get_contents('php://input'));
-  $request_obj = json_decode(decryptor($data->data));
+  if($data->state === "plain"){
+    $request_obj = json_decode($data->data);
+  }
+  elseif($data->state === "encrypted"){
+    $request_obj = json_decode(decryptor($data->data));
+  }
 
   if($request_obj->type === "passenger"){
 
