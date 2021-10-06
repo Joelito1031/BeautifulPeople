@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 24, 2021 at 12:49 PM
+-- Generation Time: Oct 06, 2021 at 05:19 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.2
 
@@ -21,6 +21,19 @@ SET time_zone = "+00:00";
 --
 -- Database: `ocqms`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `dispatchers`
+--
+
+CREATE TABLE `dispatchers` (
+  `Name` varchar(100) NOT NULL,
+  `OnDuty` tinyint(1) NOT NULL,
+  `PIN` varchar(10) NOT NULL,
+  `Contact` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 

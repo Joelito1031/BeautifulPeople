@@ -139,6 +139,7 @@ else{
                     }
                 }
               }
+              break;
             }
             else{
               $status = "The operation cannot proceed";
