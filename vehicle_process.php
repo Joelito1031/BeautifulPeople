@@ -21,7 +21,7 @@ if((isset($_POST['fname']) && !empty(trim($_POST['fname']))) && (isset($_POST['m
   $server = 'localhost';
   $username = 'root';
   $password = '';
-  $dbname = 'OCQMS';
+  $dbname = 'ocqms';
   $plateno = $_POST['plateno'];
   $route = $_POST['route'];
   $capacity = (int)$_POST['capacity'];

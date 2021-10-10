@@ -1,6 +1,6 @@
 'use strict';
 
-var ws = new WebSocket('ws://192.168.1.6:8082');
+var ws = new WebSocket('ws://192.168.1.31:8082');
 
 let a_one = document.querySelector('.subfield-1-1');
 let a_two = document.querySelector('.subfield-1-2');
