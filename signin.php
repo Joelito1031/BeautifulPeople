@@ -28,17 +28,115 @@
                   <label for="conf-pass">Confirm Password</label>
                 </div>
                 <div id="password-notset">
-                  <input name="conf" type="password" class="cred" id="conf-pass">
+                  <input name="conf" type="password" class="cred" id="conf_pass">
                 </div>
                 <input class="submit-button" id="admin-signin" type="submit" value="Sign in">
             </div>
+            <?php
+            if(isset($_POST['uname']) && isset($_POST['pass']) && isset($_POST['conf'])){
+              if(!empty(trim($_POST['uname'])) && !empty(trim($_POST['pass'])) && empty(trim($_POST['conf']))){
+                if(strlen($_POST['uname']) > 50 || strlen($_POST['pass']) > 50){
+                  echo "<div id='exceedField' class='warning'><div class='sub-cont'><div>Username or Password exceeds 50 characters.</div><div><button type='button' onclick='hideExceedField()'><img src='./images/xbox.png'></button></div></div></div>";
+                }
+                else{
+                  $server = 'localhost';
+                  $username = 'root';
+                  $password = '';
+                  $dbname = 'ocqms';
+                  $uname = $_POST['uname'];
+                  $pass = $_POST['pass'];
+
+                  try{
+                    $san_uname = filter_var($_POST['uname'], FILTER_SANITIZE_STRING);
+                    $san_pass = filter_var($_POST['uname'], FILTER_SANITIZE_STRING);
+                    $connection = new PDO("mysql:host=$server;dbname=$dbname", $username, $password);
+                    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                    $select_query = $connection->prepare("SELECT COUNT(*) as count FROM admin WHERE Uname='$san_uname' AND Password='$san_pass'");
+                    $select_query->execute();
+                    $result = $select_query->fetch(PDO::FETCH_ASSOC);
+
+                    if($result){
+                      if($uname === 'admin' && $pass === 'admin'){
+                        if($result['count'] > 0){
+                          header('Location: http://localhost/CapstoneWeb/signin.php?set=set');
+                        }
+                      }elseif($result['count'] > 0){
+                          //Go to dashboard
+                      }
+                      else{
+                        //Unkown username or password
+                      }
+                    }
+                  }catch(PDOException $e){
+                    echo "<div id='eRror' class='warning'><div class='sub-cont'><div>Something went wrong signing in</div><div><button type='button' onclick='hideeRror()'><img src='./images/xbox.png'></button></div></div></div>";
+                  }
+                }
+              }
+              elseif(!empty(trim($_POST['uname'])) && !empty(trim($_POST['pass'])) && !empty(trim($_POST['conf']))){
+                if(!empty(trim($_POST['q_one'])) && !empty(trim($_POST['q_two'])) && !empty(trim($_POST['q_three'])) && !empty(trim($_POST['q_four'])) && !empty(trim($_POST['q_five']))){
+                  if(strlen($_POST['uname']) > 50 || strlen($_POST['pass']) > 50){
+                    echo "<div id='exceedField' class='warning'><div class='sub-cont'><div>Username or Password exceeds 50 characters.</div><div><button type='button' onclick='hideExceedField()'><img src='./images/xbox.png'></button></div></div></div>";
+                  }
+                  else{
+                    $server = 'localhost';
+                    $username = 'root';
+                    $password = '';
+                    $dbname = 'ocqms';
+                    $uname = sha1($_POST['uname']);
+                    $pass = sha1($_POST['pass']);
+                    try{
+                      $connection = new PDO("mysql:host=$server;dbname=$dbname", $username, $password);
+                      $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                      $update_query = $connection->prepare("UPDATE admin SET Uname='$uname', Password='$pass' WHERE Uname='admin' AND Password='admin'");
+                      $update_query->execute();
+                      if($update_query->rowCount() > 0){
+                        $answer_one = sha1(strtolower($_POST['q_one']));
+                        $answer_two = sha1(strtolower($_POST['q_two']));
+                        $answer_three = sha1(strtolower($_POST['q_three']));
+                        $answer_four = sha1(strtolower($_POST['q_four']));
+                        $answer_five = sha1(strtolower($_POST['q_five']));
+                        $connection->beginTransaction();
+                        $connection->exec("UPDATE questions SET Answer='$answer_one' WHERE Question='What is your favorite color?'");
+                        $connection->exec("UPDATE questions SET Answer='$answer_two' WHERE Question='What is your mother\'s maiden name?'");
+                        $connection->exec("UPDATE questions SET Answer='$answer_three' WHERE Question='What elementary school did you attend?'");
+                        $connection->exec("UPDATE questions SET Answer='$answer_four' WHERE Question='When you were young, what did you want to be when you grew up?'");
+                        $connection->exec("UPDATE questions SET Answer='$answer_five' WHERE Question='What is the name of the town where you were born?'");
+                        $connection->commit();
+                      }
+                    }catch(PDOException $e){
+                      //connection->rollback here!!!!!
+                      echo $e;
+                    }
+                  }
+                }
+                else{
+                  echo "<div class='warning' id='warn-missing-field'>";
+                  echo "<div class='sub-cont'>";
+                  echo "<div>Please write your answers to all the questions.</div>";
+                  echo "<div><button type='button'onclick='hideMissingField()'>";
+                  echo "<img src='./images/xbox.png'>";
+                  echo "</button></div>";
+                  echo "</div></div>";
+                }
+              }
+              else{
+                echo "<div class='warning' id='warn-missing-field'>";
+                echo "<div class='sub-cont'>";
+                echo "<div>Please fill all the field.</div>";
+                echo "<div><button type='button'onclick='hideMissingField()'>";
+                echo "<img src='./images/xbox.png'>";
+                echo "</button></div>";
+                echo "</div></div>";
+              }
+            }
+            ?>
             <div id="admin-not-set" class='warning'>
               <div class='sub-cont'>
-                <div>
+                <div id='sign-up-warning'>
                   Sign up for first use.
                 </div>
                 <div>
-                  <button>
+                  <button type="button" onclick="hideSignUpWarning()">
                     <img src='./images/xbox.png'>
                   </button>
                 </div>
@@ -50,92 +148,84 @@
           <div class="questions-sub-container">
             <div class="questions-container">
               <div>
+                <h4>Security questions</h4>
+                <p>In case you forget your password</p>
+              </div>
+              <div>
                 <label for="q-1">What is your favorite color?</label>
               </div>
               <div>
-                <input class="answers" type="text" id="q-1">
+                <input name="q_one" class="answers" type="text" id="q-1">
               </div>
               <div>
                 <label for="q-2">What is your mother's maiden name?</label>
               </div>
               <div>
-                <input class="answers" type="text" id="q-2">
+                <input name="q_two" class="answers" type="text" id="q-2">
               </div>
               <div>
                 <label for="q-3">What elementary school did you attend?</label>
               </div>
               <div>
-                <input class="answers" type="text" id="q-3">
+                <input name="q_three" class="answers" type="text" id="q-3">
               </div>
               <div>
                 <label for="q-4">When you were young, what did you want to be when you grew up?</label>
               </div>
               <div>
-                <input class="answers" type="text" id="q-4">
+                <input name="q_four" class="answers" type="text" id="q-4">
               </div>
               <div>
                 <label for="q-5">What is the name of the town where you were born?</label>
               </div>
               <div>
-                <input class="answers" type="text" id="q-5">
+                <input name="q_five" class="answers" type="text" id="q-5">
               </div>
-              <input class="submit-button" id="admin-signup" type="submit" value="Sign in">
+              <input class="submit-button" id="admin-signup" type="submit" value="Sign up">
             </div>
           </div>
         </div>
       </form>
-      <div class="warning-container">
-        <?php
-        if(isset($_POST['uname']) && isset($_POST['pass'])){
-          if(!empty(trim($_POST['uname'])) && !empty(trim($_POST['pass']))){
-            if(strlen($_POST['uname']) > 50 || strlen($_POST['pass']) > 50){
-              echo "<div class='warning'><div class='sub-cont'><div>Username or Password exceeds 50 characters.</div><div><button><img src='./images/xbox.png'></button></div></div></div>";
-            }
-            else{
-              $server = 'localhost';
-              $username = 'root';
-              $password = '';
-              $dbname = 'ocqms';
-              $uname = $_POST['uname'];
-              $pass = $_POST['pass'];
-
-              try{
-                $connection = new PDO("mysql:host=$server;dbname=$dbname", $username, $password);
-                $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $select_query = "SELECT COUNT(*) FROM admin WHERE Uname='$uname' AND Password='$pass'";
-                $num_row = $connection->query($select_query);
-                $row_count = $num_row->fetchColumn();
-                $count = (int) $row_count;
-
-                if($uname === 'admin' && $pass === 'admin'){
-                  if($count > 0){
-                    header('Location: http://localhost/CapstoneWeb/signin.php?set=set');
-                  }
-                }
-                elseif($count > 0){
-
-                }
-              }catch(PDOException $e){
-                echo 'Error:' . ' ' . $e->getMessage();
-              }
-            }
-          }
-          else{
-            echo "<div class='warning' id='warn-missing-field'>";
-            echo "<div class='sub-cont'>";
-            echo "<div>Please fill all the field.</div>";
-            echo "<div><button onclick='hideMissingField()'>";
-            echo "<img src='./images/xbox.png'>";
-            echo "</button></div>";
-            echo "</div></div>";
-          }
-        }
-        ?>
-      </div>
     </div>
     <script type="text/javascript" defer>
+
+      const showQuestions = () => {
+        let uname = document.getElementById('u_name');
+        let pass = document.getElementById('pass_word');
+        let conf = document.getElementById('conf_pass');
+
+        if(uname.value.trim() === '' || pass.value === '' || conf.value === ''){
+          document.getElementById('sign-up-warning').innerHTML = 'Please fill all the fields.';
+          document.getElementById('admin-not-set').style.display = 'block';
+        }
+        else if(!/^[a-zA-Z]+$/.test(uname.value)){
+          document.getElementById('sign-up-warning').innerHTML = 'Only alphabets are allowed in username.';
+          document.getElementById('admin-not-set').style.display = 'block';
+        }
+        else if(pass.value != conf.value){
+          document.getElementById('sign-up-warning').innerHTML = 'Password did not match.';
+          document.getElementById('admin-not-set').style.display = 'block';
+        }
+        else{
+          document.querySelector('.signin-main-container').style.display = 'none';
+          document.querySelector('.questions-main-container').style.display = 'block';
+        }
+      }
+
       const hideMissingField = () => {
-        document.getElementById('warn-missing-field').style.display='none';
+        document.getElementById('warn-missing-field').style.display = 'none';
+      }
+
+      const hideSignUpWarning = () => {
+        document.getElementById('admin-not-set').style.display = 'none';
+      }
+
+      const hideExceedField = () => {
+        document.getElementById('exceedField').style.display = 'none';
+      }
+
+      const hideeRror = () => {
+        document.getElementById('eRror').style.display = 'none';
       }
 
       const urlString = window.location.search;
@@ -147,9 +237,14 @@
         document.getElementById("password-notset").style.display = 'none';
       }
       else if(parameter === 'set'){
+        let admin_button = document.getElementById("admin-signin");
         document.getElementById("label-notset").style.display = 'block';
         document.getElementById("password-notset").style.display = 'block';
-        document.getElementById("s-b").value = 'Sign up';
+        admin_button.value = 'Next';
+        admin_button.type = 'button';
+        admin_button.addEventListener('click', function(){
+          showQuestions();
+        })
         document.querySelector("a").style.display = 'none';
         document.getElementById("admin-not-set").style.display = 'block';
       }

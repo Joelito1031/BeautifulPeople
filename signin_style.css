@@ -11,16 +11,6 @@ html, body{
 
 .main-container{
   position: relative;
-  height: 100%;
-}
-
-.warning-container{
-  position: absolute;
-  width: 294px;
-  height: 200px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 0;
 }
 
 .signin-main-container{
@@ -106,6 +96,7 @@ a{
 .warning > .sub-cont > div > button{
   border: none;
   background-color: #F9E79F;
+  outline: none;
 }
 
 .warning > .sub-cont > div > button > img{
@@ -129,6 +120,7 @@ a{
 
 .questions-main-container{
   display: none;
+  top: 40px;
   position: absolute;
   left: 50%;
   width: 450px;
@@ -148,6 +140,7 @@ a{
   transform: translateY(-50%);
   border: 1px solid #ABB2B9;
   border-radius: 5px;
+  background-color: #FFF6D4;
 }
 
 .questions-container > div{
