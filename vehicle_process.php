@@ -21,7 +21,7 @@ if((isset($_POST['fname']) && !empty(trim($_POST['fname']))) && (isset($_POST['m
   $server = 'localhost';
   $username = 'root';
   $password = '';
-  $dbname = 'OCQMS';
+  $dbname = 'ocqms';
   $plateno = $_POST['plateno'];
   $route = $_POST['route'];
   $capacity = (int)$_POST['capacity'];
@@ -56,7 +56,7 @@ if((isset($_POST['fname']) && !empty(trim($_POST['fname']))) && (isset($_POST['m
       $name = $_POST['fname'] . ' ' . $_POST['mname'] . ' ' . $_POST['lname'];
       $capacity = (int) $_POST['capacity'];
       $data = array("vehicle" => $_POST['plateno'], "operator" => $_POST['fname'] . " " . $_POST['mname'] . " " . $_POST['lname'],
-              "contact_num" => $_POST['cnum'], "route" => $_POST['route'], "capacity" => $capacity, "queuing" => false);
+              "contact_num" => $_POST['cnum'], "route" => $_POST['route'], "capacity" => $capacity, "queuing" => false, "returning" => false);
       $loading_check = array();
       $vehicles_json = file_get_contents('./vehicles/vehicles.json');
       $vehicles_data = json_decode($vehicles_json, true);

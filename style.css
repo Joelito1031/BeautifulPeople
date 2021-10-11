@@ -69,6 +69,7 @@ body{
 .a{
   width: 200px;
   transition: width 0.5s;
+  font-size: 12px;
 }
 
 .a button{
@@ -99,6 +100,7 @@ body{
 .b{
   width: 200px;
   transition: width 0.5s;
+  font-size: 12px;
 }
 
 .b button{
@@ -159,6 +161,69 @@ body{
 .c{
   width: 200px;
   transition: width 0.5s;
+  font-size: 12px;
+}
+
+.d button{
+  border-radius: 5px;
+  background-color: #f1c40f;
+  height: 50px;
+  width: 100%;
+  font-size: 1.5em;
+  box-shadow: -5px 5px 10px black;
+  text-align: center;
+}
+
+.d button:hover{
+  cursor: pointer;
+}
+
+.d button:active{
+  box-shadow: -5px 5px 10px inset;
+}
+
+.d button img{
+  display: none;
+  margin-top: 5px;
+  height: 30px;
+  width: 30px;
+}
+
+.d{
+  width: 200px;
+  transition: width 0.5s;
+  font-size: 12px;
+}
+
+.e button{
+  border-radius: 5px;
+  background-color: #f1c40f;
+  height: 50px;
+  width: 100%;
+  font-size: 1.5em;
+  box-shadow: -5px 5px 10px black;
+  text-align: center;
+}
+
+.e button:hover{
+  cursor: pointer;
+}
+
+.e button:active{
+  box-shadow: -5px 5px 10px inset;
+}
+
+.e button img{
+  display: none;
+  margin-top: 5px;
+  height: 30px;
+  width: 30px;
+}
+
+.e{
+  width: 200px;
+  transition: width 0.5s;
+  font-size: 12px;
 }
 
 .fields{
@@ -281,6 +346,25 @@ body{
   overflow-y: auto;
 }
 
+.subfield-4-1{
+  display: none;
+  position: relative;
+  width: 50%;
+  min-width: 350px;
+  height: 523px;
+}
+
+.subfield-5-1{
+  display: none;
+  width: 75%;
+  height: 100%;
+  min-width: 350px;
+  height: 523px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  overflow-y: auto;
+}
 
 .generated-qr{
   position: absolute;
@@ -374,4 +458,52 @@ td, th{
   height: 30px;
   text-align: center;
   border-radius: 5px;
+}
+
+.main-div{
+  border: 1px solid #ABB2B9;
+  height: 208px;
+  width: 208px;
+  border-radius: 5px;
+  background-color: #f1c40f;
+  margin: 10px;
+}
+
+.dest-div{
+  border-bottom: 1px solid #ABB2B9;
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+  font-weight: bold;
+  background-color: #27AE60;
+}
+
+.waiting-div{
+  padding: 10px;
+  font-size: 104px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #f1c40f;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.reload{
+  border: 1px solid #ABB2B9;
+  height: 208px;
+  width: 208px;
+  border-radius: 5px;
+  background-color: #f1c40f;
+  margin: 10px;
+}
+
+.reload > button{
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: #f1c40f;
+}
+
+.reload > button:active{
+  outline: 3px solid #AEB6BF;
 }

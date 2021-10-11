@@ -37,6 +37,18 @@
                 <img class="ttl-pic-three" src="./dispatcher.png">
              </button>
            </div>
+           <div class="d">
+             <button onclick="showD()">
+               <span class="four-ttl">Returning Vehicles</span>
+                <img class="ttl-pic-four" src="./returning.png">
+             </button>
+           </div>
+           <div class="e">
+             <button onclick="showE()">
+               <span class="five-ttl">Waiting Passengers</span>
+                <img class="ttl-pic-five" src="./queuing.png">
+             </button>
+           </div>
         </div>
         <div class="fields">
           <div class="subfield-1-1">
@@ -221,6 +233,27 @@
               </table>
             </div>
 
+            <div class="subfield-4-1">
+              <table class="dispatchers-table">
+                <tr>
+                  <th>Vehicle</th>
+                  <th>Operator</th>
+                  <th>Route</th>
+                  <th>Contact #</th>
+                  <th>Returning</th>
+                </tr>
+                <?php require './returning_vehicle_list.php' ?>
+              </table>
+            </div>
+
+            <div class="subfield-5-1">
+              <?php require './passenger_list.php' ?>
+              <div class="reload">
+                <button type="button" onclick="reloadPassengerList()">
+                  <image src="./reload.png">
+                </button>
+              </div>
+            </div>
 
         </div>
       </div>
