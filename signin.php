@@ -47,8 +47,8 @@
                   $pass = $_POST['pass'];
 
                   try{
-                    $san_uname = filter_var($_POST['uname'], FILTER_SANITIZE_STRING);
-                    $san_pass = filter_var($_POST['uname'], FILTER_SANITIZE_STRING);
+                    $san_uname = sha1(filter_var($_POST['uname'], FILTER_SANITIZE_STRING));
+                    $san_pass = sha1(filter_var($_POST['pass'], FILTER_SANITIZE_STRING));
                     $connection = new PDO("mysql:host=$server;dbname=$dbname", $username, $password);
                     $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                     $select_query = $connection->prepare("SELECT COUNT(*) as count FROM admin WHERE Uname='$san_uname' AND Password='$san_pass'");
@@ -60,11 +60,12 @@
                         if($result['count'] > 0){
                           header('Location: http://localhost/CapstoneWeb/signin.php?set=set');
                         }
-                      }elseif($result['count'] > 0){
-                          //Go to dashboard
+                      }
+                      elseif($result['count'] > 0){
+                          echo "signed in";
                       }
                       else{
-                        //Unkown username or password
+                        echo "<div id='loginError' class='warning'><div class='sub-cont'><div>Wrong username or password</div><div><button type='button' onclick='hideLoginError()'><img src='./images/xbox.png'></button></div></div></div>";
                       }
                     }
                   }catch(PDOException $e){
@@ -82,12 +83,14 @@
                     $username = 'root';
                     $password = '';
                     $dbname = 'ocqms';
-                    $uname = sha1($_POST['uname']);
-                    $pass = sha1($_POST['pass']);
+                    $uname = sha1(filter_var($_POST['uname'], FILTER_SANITIZE_STRING));
+                    $pass = sha1(filter_var($_POST['pass'], FILTER_SANITIZE_STRING));
+                    $user_name = sha1('admin');
+                    $pass_word = sha1('admin');
                     try{
                       $connection = new PDO("mysql:host=$server;dbname=$dbname", $username, $password);
                       $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                      $update_query = $connection->prepare("UPDATE admin SET Uname='$uname', Password='$pass' WHERE Uname='admin' AND Password='admin'");
+                      $update_query = $connection->prepare("UPDATE admin SET Uname='$uname', Password='$pass' WHERE Uname='$user_name' AND Password='$pass_word'");
                       $update_query->execute();
                       if($update_query->rowCount() > 0){
                         $answer_one = sha1(strtolower($_POST['q_one']));
@@ -226,6 +229,10 @@
 
       const hideeRror = () => {
         document.getElementById('eRror').style.display = 'none';
+      }
+
+      const hideLoginError = () => {
+        document.getElementById('loginError').style.display = 'none';
       }
 
       const urlString = window.location.search;
