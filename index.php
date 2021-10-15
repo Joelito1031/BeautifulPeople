@@ -80,7 +80,7 @@
                     <option value="">Select route</option>
                     <option value="albuera">Ormoc - Albuera</option>
                     <option value="puertobello">Ormoc - Puertobello</option>
-                    <option value="bato">Ormoce - Sabang-Bao</option>
+                    <option value="sabangbao">Ormoc - Sabang-Bao</option>
                     <option value="valencia">Ormoc - Valencia</option>
                   </select>
                 </div>
@@ -146,7 +146,7 @@
                     <option value="">Select destination</option>
                     <option value="albuera">Albuera</option>
                     <option value="valencia">Valencia</option>
-                    <option value="bato">Bato</option>
+                    <option value="sabangbao">Sabang-Bao</option>
                     <option value="kananga">Kananga</option>
                   </select>
                 </div>
