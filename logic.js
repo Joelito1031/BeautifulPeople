@@ -182,6 +182,7 @@ const dispatcher_name = urlParams.get('name');
 const dispatcher_duty = urlParams.get('duty');
 const vehicle_return = urlParams.get('returnConfig');
 const reload_passenger_list = urlParams.get('reload');
+const registering_statust = urlParams.get('registering_status');
 
 if(parameter == null){
   document.getElementById('vehicle-plateno').innerHTML = 'QR';
