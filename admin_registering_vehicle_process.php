@@ -41,7 +41,7 @@ if((isset($_POST['fname']) && !empty(trim($_POST['fname']))) && (isset($_POST['m
     $vehicle_capacity = array();
 
     if($count > 0){
-      echo "Vehicle already registered";
+      header('Location: ./admin.php?registering_status=registered');
     }
     else{
       for($count = 1; $count <= $capacity; $count++){
@@ -73,10 +73,9 @@ if((isset($_POST['fname']) && !empty(trim($_POST['fname']))) && (isset($_POST['m
       fclose($vehicle_name);
       QRcode::png(infoCrypt(json_encode($vehicle_info)), './qrs/' . $_POST['plateno'] . '.png', QR_ECLEVEL_L, 4);
       header('Location: ./admin.php?qr=' . $_POST['plateno']);
-      echo "Vehicle registered";
     }
   }catch(PDOException $e){
-    echo 'Error:' . ' ' . $e->getMessage();
+    header('Location: ./admin.php?registering_status=error');
   }
   $connection = null;
 }

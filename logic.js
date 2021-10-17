@@ -2,6 +2,27 @@
 
 var ws = new WebSocket('ws://192.168.1.31:8082');
 
+function unqueueConfirmation(puv){
+  if(confirm("Are you sure you want to unqueue " + puv + "?")){
+    window.location.replace('./admin_unqueue_vehicle.php?vehicle=' + puv);
+  }
+}
+
+function loadQueuingVehicles(){
+  const xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function(){
+    if(this.readyState == 4 && this.status == 200){
+      document.querySelector('.subfield-6-1').innerHTML = this.responseText;
+    }
+  };
+  xhttp.open("POST", "./admin_queuing_vehicles_list.php", true);
+  xhttp.send();
+}
+
+setInterval(loadQueuingVehicles, 1500);
+
+
+
 let a_one = document.querySelector('.subfield-1-1');
 let a_two = document.querySelector('.subfield-1-2');
 let b_one = document.querySelector('.subfield-2-1');
@@ -10,16 +31,19 @@ let c_one = document.querySelector('.subfield-3-1');
 let c_two = document.querySelector('.subfield-3-2');
 let d_one = document.querySelector('.subfield-4-1');
 let e_one = document.querySelector('.subfield-5-1');
+let f_one = document.querySelector('.subfield-6-1');
 let span_a = document.querySelector('.a');
 let span_b = document.querySelector('.b');
 let span_c = document.querySelector('.c');
 let span_d = document.querySelector('.d');
 let span_e = document.querySelector('.e');
+let span_f = document.querySelector('.f');
 let span_value_a = getComputedStyle(span_a);
 let span_value_b = getComputedStyle(span_b);
 let span_value_c = getComputedStyle(span_c);
 let span_value_d = getComputedStyle(span_d);
 let span_value_e = getComputedStyle(span_e);
+let span_value_f = getComputedStyle(span_f);
 var parameter_passenger = null;
 
 function checkSize(){
@@ -29,17 +53,20 @@ function checkSize(){
     span_c.style.width = '50px';
     span_d.style.width = '50px';
     span_e.style.width = '50px';
+    span_f.style.width = '50px';
     document.querySelector('.show-btn').style.display = 'none';
     document.querySelector('.one-ttl').style.display = 'none';
     document.querySelector('.two-ttl').style.display = 'none';
     document.querySelector('.three-ttl').style.display = 'none';
     document.querySelector('.four-ttl').style.display = 'none';
     document.querySelector('.five-ttl').style.display = 'none';
+    document.querySelector('.six-ttl').style.display = 'none';
     document.querySelector('.ttl-pic-one').style.display = 'inline-block';
     document.querySelector('.ttl-pic-two').style.display = 'inline-block';
     document.querySelector('.ttl-pic-three').style.display = 'inline-block';
     document.querySelector('.ttl-pic-four').style.display = 'inline-block';
     document.querySelector('.ttl-pic-five').style.display = 'inline-block';
+    document.querySelector('.ttl-pic-six').style.display = 'inline-block';
   }
   else{
     document.querySelector('.show-btn').style.display = 'inline-block';
@@ -55,16 +82,19 @@ function showNav(){
     span_c.style.width = '50px';
     span_d.style.width = '50px';
     span_e.style.width = '50px';
+    span_f.style.width = '50px';
     document.querySelector('.one-ttl').style.display = 'none';
     document.querySelector('.two-ttl').style.display = 'none';
     document.querySelector('.three-ttl').style.display = 'none';
     document.querySelector('.four-ttl').style.display = 'none';
     document.querySelector('.five-ttl').style.display = 'none';
+    document.querySelector('.six-ttl').style.display = 'none';
     document.querySelector('.ttl-pic-one').style.display = 'inline-block';
     document.querySelector('.ttl-pic-two').style.display = 'inline-block';
     document.querySelector('.ttl-pic-three').style.display = 'inline-block';
     document.querySelector('.ttl-pic-four').style.display = 'inline-block';
     document.querySelector('.ttl-pic-five').style.display = 'inline-block';
+    document.querySelector('.ttl-pic-six').style.display = 'inline-block';
   }
   else{
     span_a.style.width = '200px';
@@ -72,16 +102,19 @@ function showNav(){
     span_c.style.width = '200px';
     span_d.style.width = '200px';
     span_e.style.width = '200px';
+    span_f.style.width = '200px';
     document.querySelector('.one-ttl').style.display = 'inline';
     document.querySelector('.two-ttl').style.display = 'inline';
     document.querySelector('.three-ttl').style.display = 'inline';
     document.querySelector('.four-ttl').style.display = 'inline';
     document.querySelector('.five-ttl').style.display = 'inline';
+    document.querySelector('.six-ttl').style.display = 'inline';
     document.querySelector('.ttl-pic-one').style.display = 'none';
     document.querySelector('.ttl-pic-two').style.display = 'none';
     document.querySelector('.ttl-pic-three').style.display = 'none';
     document.querySelector('.ttl-pic-four').style.display = 'none';
     document.querySelector('.ttl-pic-five').style.display = 'none';
+    document.querySelector('.ttl-pic-six').style.display = 'none';
   }
 }
 
@@ -110,6 +143,8 @@ function showA(){
   c_two.style.display = 'none';
   d_one.style.display = 'none';
   e_one.style.display = 'none';
+  f_one.style.display = 'none';
+  window.history.replaceState({info: "Clear reload"}, "Admin | Dashboard", "./admin.php");
 }
 
 function showB(){
@@ -121,6 +156,8 @@ function showB(){
   c_two.style.display = 'none';
   d_one.style.display = 'none';
   e_one.style.display = 'none';
+  f_one.style.display = 'none';
+  window.history.replaceState({info: "Clear reload"}, "Admin | Dashboard", "./admin.php");
 }
 
 function showC(){
@@ -132,6 +169,8 @@ function showC(){
   a_two.style.display = 'none';
   d_one.style.display = 'none';
   e_one.style.display = 'none';
+  f_one.style.display = 'none';
+  window.history.replaceState({info: "Clear reload"}, "Admin | Dashboard", "./admin.php");
 }
 
 function showD(){
@@ -143,6 +182,8 @@ function showD(){
   a_one.style.display = 'none';  //Needs to be changed.
   a_two.style.display = 'none';
   e_one.style.display = 'none';
+  f_one.style.display = 'none';
+  window.history.replaceState({info: "Clear reload"}, "Admin | Dashboard", "./admin.php");
 }
 
 function showE(){
@@ -154,6 +195,21 @@ function showE(){
   a_one.style.display = 'none';  //Needs to be changed.
   a_two.style.display = 'none';
   e_one.style.display = 'flex';
+  f_one.style.display = 'none';
+  window.history.replaceState({info: "Clear reload"}, "Admin | Dashboard", "./admin.php");
+}
+
+function showF(){
+  d_one.style.display = 'none';
+  c_one.style.display = 'none';
+  c_two.style.display = 'none';
+  b_one.style.display = 'none';
+  b_two.style.display = 'none';
+  a_one.style.display = 'none';  //Needs to be changed.
+  a_two.style.display = 'none';
+  e_one.style.display = 'none';
+  f_one.style.display = 'block';
+  window.history.replaceState({info: "Clear reload"}, "Admin | Dashboard", "./admin.php");
 }
 
 function pinGenerator(){
@@ -174,6 +230,19 @@ function savePassengerPDF(){
   });
 }
 
+function warnings(color, message){
+  document.getElementById('admin-dash-warning').style.display = 'block';
+  document.getElementById('admin-dash-warning').style.backgroundColor = color;
+  document.getElementById('terminate-warning-button').style.backgroundColor = color;
+  document.getElementById('warning-message').innerHTML = message;
+  document.getElementById('warning-message').style.color = 'white';
+  document.getElementById('warning-message').style.fontWeight = 'bold';
+}
+
+function closeWarning(){
+  document.getElementById('admin-dash-warning').style.display = 'none';
+}
+
 const urlString = window.location.search;
 const urlParams = new URLSearchParams(urlString);
 const parameter = urlParams.get('qr');
@@ -182,7 +251,8 @@ const dispatcher_name = urlParams.get('name');
 const dispatcher_duty = urlParams.get('duty');
 const vehicle_return = urlParams.get('returnConfig');
 const reload_passenger_list = urlParams.get('reload');
-const registering_statust = urlParams.get('registering_status');
+const registering_status = urlParams.get('registering_status');
+const unqueue_vehicle_status = urlParams.get('unqueue_vehicle_status');
 
 if(parameter == null){
   document.getElementById('vehicle-plateno').innerHTML = 'QR';
@@ -198,6 +268,41 @@ if(vehicle_return == 'true'){
 
 if(reload_passenger_list == 'passengerReload'){
   showE();
+}
+
+if(registering_status == 'field_incomplete'){
+  warnings('#F7DC6F', 'Please fill all the fields');
+}
+else if(registering_status == 'error'){
+  warnings('#E74C3C', 'Something went wrong');
+}
+else if(registering_status == 'registered'){
+  warnings('#F7DC6F', 'Vehicle already registered');
+}
+else if(registering_status == 'dispatcher_registered'){
+  warnings('#82E0AA', 'Successfully registered dispatcher');
+  showC();
+}
+else if(registering_status == 'dispatcher_error_registering'){
+  warnings('#E74C3C', 'Something went wrong');
+  showC();
+}
+else if(registering_status == 'missing_dispatcher_field'){
+  warnings('#F7DC6F', 'Please fill all the fields');
+  showC();
+}
+else if(registering_status == 'dispatcher_already_registered'){
+  warnings('#F7DC6F', 'Dispatcher already registered');
+  showC();
+}
+
+if(unqueue_vehicle_status == 'success'){
+  warnings('#82E0AA', 'Vehicle successfully unqueued');
+  showF();
+}
+else if(unqueue_vehicle_status == 'halted'){
+  warnings('#E74C3C', 'Something went wrong');
+  showF();
 }
 
 ws.onopen = (e) => {

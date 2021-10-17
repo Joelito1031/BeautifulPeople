@@ -1,6 +1,6 @@
 <?php
 
-include('./phpqrcode/qrlib.php');
+include('../phpqrcode/qrlib.php');
 
 $data = json_decode(file_get_contents("php://input"));
 

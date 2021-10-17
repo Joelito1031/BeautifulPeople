@@ -91,14 +91,14 @@ else{
       $availability = false;
       $notfull = false;
 
-      if(is_writable('./vehicles/vehicles.json')){
-        $vehicle_list = json_decode(file_get_contents('./vehicles/vehicles.json'));
+      if(is_writable('../vehicles/vehicles.json')){
+        $vehicle_list = json_decode(file_get_contents('../vehicles/vehicles.json'));
 
         foreach($vehicle_list as $registered_vehicle){
           if($registered_vehicle->route === $request_obj->destination){
             $registered = true;
-            if(is_writable('./vehicles/queuing_vehicles.json')){
-              $queuing_vehicles = json_decode(file_get_contents('./vehicles/queuing_vehicles.json'));
+            if(is_writable('../vehicles/queuing_vehicles.json')){
+              $queuing_vehicles = json_decode(file_get_contents('../vehicles/queuing_vehicles.json'));
 
               foreach($queuing_vehicles as $vehicle){
                 if($vehicle->route === $request_obj->destination){
@@ -109,14 +109,14 @@ else{
                       $state = checkList($request_obj->destination, $request_obj->name);
                       if($state || !$state){
                         $vehicle->passengers += 1;
-                        $queuing_vehicles_file = fopen('./vehicles/queuing_vehicles.json', 'w');
+                        $queuing_vehicles_file = fopen('../vehicles/queuing_vehicles.json', 'w');
 
                         fwrite($queuing_vehicles_file, json_encode($queuing_vehicles));
                         fclose($queuing_vehicles_file);
 
-                        if(is_writable("./vehicles/" . $vehicle->route . "_" . $vehicle->vehicle . ".json")){
+                        if(is_writable("../vehicles/" . $vehicle->route . "_" . $vehicle->vehicle . ".json")){
                           $count = 0;
-                          $passenger_name_list = json_decode(file_get_contents("./vehicles/" . $vehicle->route . "_" . $vehicle->vehicle . ".json"));
+                          $passenger_name_list = json_decode(file_get_contents("../vehicles/" . $vehicle->route . "_" . $vehicle->vehicle . ".json"));
 
                           while($count < sizeof($passenger_name_list)){
                             if($passenger_name_list[$count] === ""){
@@ -126,7 +126,7 @@ else{
                             $count += 1;
                           }
 
-                          $passenger_name_list_file = fopen("./vehicles/" . $vehicle->route . "_" . $vehicle->vehicle . ".json", "w");
+                          $passenger_name_list_file = fopen("../vehicles/" . $vehicle->route . "_" . $vehicle->vehicle . ".json", "w");
                           fwrite($passenger_name_list_file, json_encode($passenger_name_list));
                           fclose($passenger_name_list_file);
 
@@ -182,7 +182,7 @@ else{
   }
   elseif($request_obj->type === "vehicle"){
 
-    $queue_vehicles = json_decode(file_get_contents('./vehicles/vehicles.json'));
+    $queue_vehicles = json_decode(file_get_contents('../vehicles/vehicles.json'));
     $registered = false;
 
     foreach($queue_vehicles as $vehicle){
@@ -190,11 +190,11 @@ else{
         $registered = true;
         if($vehicle->queuing === false){
           $vehicle->queuing = true;
-          $queuing_list = json_decode(file_get_contents('./vehicles/queuing_vehicles.json'));
+          $queuing_list = json_decode(file_get_contents('../vehicles/queuing_vehicles.json'));
           $queuing_info = array("vehicle" => $vehicle->vehicle, "route" => $vehicle->route, "capacity" => $vehicle->capacity, "passengers" => 0);
           array_push($queuing_list, $queuing_info);
-          $altered_queuing_list = fopen('./vehicles/queuing_vehicles.json', 'w');
-          $altered_vehicle_list = fopen('./vehicles/vehicles.json', 'w');
+          $altered_queuing_list = fopen('../vehicles/queuing_vehicles.json', 'w');
+          $altered_vehicle_list = fopen('../vehicles/vehicles.json', 'w');
 
           fwrite($altered_queuing_list, json_encode($queuing_list));
           fwrite($altered_vehicle_list, json_encode($queue_vehicles));

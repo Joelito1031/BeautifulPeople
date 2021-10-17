@@ -1,7 +1,7 @@
 <?php
 
 $data = json_decode(file_get_contents('php://input'));
-$vehicles = json_decode(file_get_contents('./vehicles/vehicles.json'));
+$vehicles = json_decode(file_get_contents('../vehicles/vehicles.json'));
 $returning_vehicles = [];
 
 foreach($vehicles as $vehicle){

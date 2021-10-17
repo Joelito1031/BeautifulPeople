@@ -1,7 +1,7 @@
 <?php
 
 $data = json_decode(file_get_contents('php://input'));
-$queuing_vehicles = json_decode(file_get_contents('./vehicles/queuing_vehicles.json'));
+$queuing_vehicles = json_decode(file_get_contents('../vehicles/queuing_vehicles.json'));
 $vehicle_queuing = array();
 
 foreach ($queuing_vehicles as $vehicle) {

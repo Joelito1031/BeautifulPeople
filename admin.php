@@ -27,13 +27,13 @@
            </div>
            <div class="b">
              <button onclick="showB()">
-               <span class="two-ttl">Passenger QR</span>
+               <span class="two-ttl">Generate Passenger QR</span>
                <img class="ttl-pic-two" src="./images/passengers.png">
              </button>
            </div>
            <div class="c">
              <button onclick="showC()">
-               <span class="three-ttl">Dispatchers</span>
+               <span class="three-ttl">Register Dispatchers</span>
                 <img class="ttl-pic-three" src="./images/dispatcher.png">
              </button>
            </div>
@@ -49,16 +49,22 @@
                 <img class="ttl-pic-five" src="./images/queuing.png">
              </button>
            </div>
+           <div class="f">
+             <button onclick="showF()">
+               <span class="six-ttl">Queuing Vehicles</span>
+                <img class="ttl-pic-six" src="./images/vehicle.png">
+             </button>
+           </div>
         </div>
         <div class="fields">
           <div class="dash-warning">
-            <div id="admin-not-set" class='warning-dashboard'>
+            <div id="admin-dash-warning" class='warning-dashboard'>
             <div class='sub-cont-dashboard'>
-              <div>
+              <div id="warning-message">
                 Sign up for first use.
               </div>
               <div>
-                <button>
+                <button id='terminate-warning-button' onclick="closeWarning()">
                   <img src='./images/xbox.png'>
                 </button>
               </div>
@@ -262,9 +268,12 @@
               <?php require './passenger_list.php' ?>
               <div class="reload">
                 <button type="button" onclick="reloadPassengerList()">
-                  <image src="./reload.png">
+                  <image src="./images/reload.png">
                 </button>
               </div>
+            </div>
+
+            <div class="subfield-6-1">
             </div>
 
         </div>

@@ -13,7 +13,8 @@
 
 *{
   box-sizing: border-box;
-  font-family: arial;
+  font-family: 'Poiret One', cursive;
+  font-size: 13;
 }
 
 body{
@@ -226,6 +227,37 @@ body{
   font-size: 12px;
 }
 
+.f button{
+  border-radius: 5px;
+  background-color: #f1c40f;
+  height: 50px;
+  width: 100%;
+  font-size: 1.5em;
+  box-shadow: -5px 5px 10px black;
+  text-align: center;
+}
+
+.f button:hover{
+  cursor: pointer;
+}
+
+.f button:active{
+  box-shadow: -5px 5px 10px inset;
+}
+
+.f button img{
+  display: none;
+  margin-top: 5px;
+  height: 30px;
+  width: 30px;
+}
+
+.f{
+  width: 200px;
+  transition: width 0.5s;
+  font-size: 12px;
+}
+
 .fields{
   display: flex;
   flex-wrap: wrap;
@@ -342,6 +374,7 @@ body{
   display: none;
   position: relative;
   width: 50%;
+  height: 523px;
   padding: 5%;
   overflow-y: auto;
 }
@@ -352,6 +385,7 @@ body{
   width: 50%;
   min-width: 350px;
   height: 523px;
+  overflow-y: auto;
 }
 
 .subfield-5-1{
@@ -363,6 +397,15 @@ body{
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
+  overflow-y: auto;
+}
+
+.subfield-6-1{
+  display: none;
+  position: relative;
+  width: 50%;
+  min-width: 350px;
+  height: 523px;
   overflow-y: auto;
 }
 
@@ -507,50 +550,20 @@ td, th{
 .reload > button:active{
   outline: 3px solid #AEB6BF;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*WARNINGS*/
 
 .warning-dashboard{
+  display: none;
   border-radius: 4px;
-  width: 290px;
+  width: 270px;
   padding: 10px;
   border: 1px solid #ABB2B9;
-  background-color: #F9E79F;
   font-weight: lighter;
+  font-size: 14px;
 }
 
 .warning-dashboard > .sub-cont-dashboard > div > button{
   border: none;
-  background-color: #F9E79F;
 }
 
 .warning-dashboard > .sub-cont-dashboard > div > button > img{
@@ -569,4 +582,31 @@ td, th{
   justify-content: center;
   width: 100%;
   margin-bottom: 20px;
+  height: 47px;
+  position: relative;
+}
+
+.queuing-vehicle-container{
+  border: 1px solid #85929E;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.queuing-vehicle-container > div{
+  display: inline-block;
+}
+
+.queuing-vehicle-container > div > button{
+  border: none;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  background-color: #FFF;
+}
+
+.queuing-vehicle-container > div > button > img {
+  width: 16px;
+  height: 16px;
 }
