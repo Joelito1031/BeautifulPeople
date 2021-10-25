@@ -1,58 +1,81 @@
+<?php
+session_start();
+if(isset($_SESSION['loggedin'])){
+  if(!$_SESSION['loggedin']){
+    header('Location: ../');
+  }
+}
+else{
+  header('Location: ../');
+}
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>J³</title>
+    <title>Admin | Dashboard</title>
     <link href="style.css" type="text/css" rel="stylesheet" >
   </head>
   <body>
     <script type="text/javascript" src="html2pdf.bundle.min.js" defer></script>
     <script type="text/javascript" src="./logic.js" defer></script>
-    <div class="main-container">
-      <div class="nav-container">
-        <div class="top-nav">
-          <span>Ormoc E-Transport</span>
-        </div>
+    <div class="nav-container">
+      <div class="top-nav">
+        <span>Ormoc Terminal | Admin Page</span>
       </div>
+    </div>
+    <div class="main-container">
       <div class="body-container">
         <div class="side-nav">
            <button class="show-btn" onclick="showNav()">
              &#9776;
            </button>
            <div class="a">
-             <button onclick="showA()">
+             <button class="btns-1" onclick="showA()">
                <span class="one-ttl">Register Vehicle</span>
                <img class="ttl-pic-one" src="./images/car.png">
              </button>
            </div>
            <div class="b">
-             <button onclick="showB()">
+             <button class="btns-2" onclick="showB()">
                <span class="two-ttl">Generate Passenger QR</span>
                <img class="ttl-pic-two" src="./images/passengers.png">
              </button>
            </div>
            <div class="c">
-             <button onclick="showC()">
+             <button class="btns-3" onclick="showC()">
                <span class="three-ttl">Register Dispatchers</span>
                 <img class="ttl-pic-three" src="./images/dispatcher.png">
              </button>
            </div>
            <div class="d">
-             <button onclick="showD()">
+             <button class="btns-4" onclick="showD()">
                <span class="four-ttl">Returning Vehicles</span>
                 <img class="ttl-pic-four" src="./images/returning.png">
              </button>
            </div>
            <div class="e">
-             <button onclick="showE()">
+             <button class="btns-5" onclick="showE()">
                <span class="five-ttl">Waiting Passengers</span>
                 <img class="ttl-pic-five" src="./images/queuing.png">
              </button>
            </div>
            <div class="f">
-             <button onclick="showF()">
+             <button class="btns-6" onclick="showF()">
                <span class="six-ttl">Queuing Vehicles</span>
                 <img class="ttl-pic-six" src="./images/vehicle.png">
+             </button>
+           </div>
+           <div class="g">
+             <button class="btns-7" onclick="showG()">
+               <span class="seven-ttl">Logs</span>
+                <img class="ttl-pic-seven" src="./images/logs.png">
+             </button>
+           </div>
+           <div class="h">
+             <button class="btns-8" onclick="exit()">
+               <span class="eight-ttl">Log-out</span>
+                <img class="ttl-pic-eight" src="./images/logout.png">
              </button>
            </div>
         </div>
@@ -61,7 +84,6 @@
             <div id="admin-dash-warning" class='warning-dashboard'>
             <div class='sub-cont-dashboard'>
               <div id="warning-message">
-                Sign up for first use.
               </div>
               <div>
                 <button id='terminate-warning-button' onclick="closeWarning()">
@@ -72,30 +94,24 @@
           </div>
           </div>
           <div class="subfield-1-1">
-            <form method="POST" action="./admin_registering_vehicle_process.php">
+            <form id="form">
               <div class="div-1">
                 <div>
-                  <label for="f_name">First name:</label>
-                  <input type="text" name="fname" id="f_name">
+                  <input type="text" name="fname" id="f_name" placeholder="First name" maxlength="40">
                 </div>
                 <div>
-                  <label for="m_name">Middle name:</label>
-                  <input type="text" name="mname" id="m_name">
+                  <input type="text" name="mname" id="m_name" placeholder="Middle name" maxlength="40">
                 </div>
                 <div>
-                  <label for="l_name">Last name:</label>
-                  <input type="text" name="lname" id="l_name">
+                  <input type="text" name="lname" id="l_name" placeholder="Last name" maxlength="40">
                 </div>
                 <div>
-                  <label for="c_num">Contact number:</label>
-                  <input type="number" name="cnum" id="c_num">
+                  <input type="tel" name="cnum" id="c_num" placeholder="Contact #" pattern="[0-9]{11}">
                 </div>
                 <div>
-                  <label for="plate_no">Plate number:</label>
-                  <input type="text" name="plateno" id="plate_no" onkeyup="this.value = this.value.toUpperCase();">
+                  <input type="text" name="plateno" id="plate_no" placeholder="Plate #" pattern="[A-Z]{3}-[0-9]{3}" onkeyup="this.value = this.value.toUpperCase();">
                 </div>
                 <div>
-                  <label for="rt">Route:</label>
                   <select name="route" id="rt">
                     <option value="">Select route</option>
                     <option value="albuera">Ormoc - Albuera</option>
@@ -105,9 +121,8 @@
                   </select>
                 </div>
                 <div>
-                  <label for="cpcty">Capacity:</label>
                   <select name="capacity" id="cpcty">
-                    <option value="0">Enter PUV capacity</option>
+                    <option value="">Enter PUV capacity</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -132,36 +147,27 @@
                   </select>
                 </div>
                 <div>
-                  <input id="vehicle-submit-button" type="submit" value="Register Vehicle">
+                  <input id="vehicle-submit-button" type="button" value="Register Vehicle" onclick="registerVehicle()">
                 </div>
               </div>
             </form>
           </div>
-
-
-
-
           <div class="subfield-2-1">
             <form>
               <div class="div-1">
                 <div>
-                  <label for="fi_name">First name:</label>
-                  <input type="text" name="fname" id="fi_name">
+                  <input type="text" name="fname" id="fi_name" placeholder="First name">
                 </div>
                 <div>
-                  <label for="mi_name">Middle name:</label>
-                  <input type="text" name="mname" id="mi_name">
+                  <input type="text" name="mname" id="mi_name" placeholder="Middle name">
                 </div>
                 <div>
-                  <label for="la_name">Last name:</label>
-                  <input type="text" name="lname" id="la_name">
+                  <input type="text" name="lname" id="la_name" placeholder="Last name">
                 </div>
                 <div>
-                  <label for="co_num">Contact number:</label>
-                  <input type="number" name="cnum" id="co_num">
+                  <input type="tel" name="cnum" id="co_num" placeholder="Contact #">
                 </div>
                 <div>
-                  <label for="dt">Destination:</label>
                   <select name="dest" id="dt">
                     <option value="">Select destination</option>
                     <option value="albuera">Albuera</option>
@@ -176,106 +182,102 @@
               </div>
             </form>
           </div>
-
-
-
-
           <div class="subfield-1-2">
             <div class="generated-qr">
               <div id="vehicle-for-print">
-                <img id="vehicle-qrimage" src="">
-                <h3 id="vehicle-plateno"></h3>
+                <img id="vehicle-qrimage" src="./images/loading.gif">
+                <h3 id="vehicle-plateno">QR</h3>
               </div>
               <button onclick="saveVehiclePDF()">SAVE</button>
             </div>
           </div>
-
-
-
             <div class="subfield-2-2">
               <div class="generated-qr">
                 <div id="passenger-for-print">
                   <div id="passenger-qrimage">
-                    <img id="p-qrimage" src="./qrs/loading.gif">
+                    <img id="p-qrimage" src="./images/loading.gif">
                   </div>
                   <h3 id="passenger-destination">QR</h3>
                 </div>
                 <button onclick="savePassengerPDF()">SAVE</button>
               </div>
             </div>
-
             <div class="subfield-3-1">
-              <form action="./dispatcher_process.php" method="POST">
+              <form>
                 <div class="div-1">
                   <div>
-                    <label for="dis_f_name">First name:</label>
-                    <input type="text" name="dis_fname" id="dis_f_name">
+                    <input type="text" name="dis_fname" id="dis_f_name" placeholder="First name" maxlength="40">
                   </div>
                   <div>
-                    <label for="dis_m_name">Middle name:</label>
-                    <input type="text" name="dis_mname" id="dis_m_name">
+                    <input type="text" name="dis_mname" id="dis_m_name" placeholder="Middle name" maxlength="40">
                   </div>
                   <div>
-                    <label for="dis_l_name">Last name:</label>
-                    <input type="text" name="dis_lname" id="dis_l_name">
+                    <input type="text" name="dis_lname" id="dis_l_name" placeholder="Last name" maxlength="40">
                   </div>
                   <div>
-                    <label for="dis_c_num">Contact number:</label>
-                    <input type="number" name="dis_cnum" id="dis_c_num">
+                    <input type="tel" maxlength="11" name="dis_cnum" id="dis_c_num" placeholder="Contact #" pattern="[0-9]{11}">
                   </div>
                   <div>
-                    <input id="pin-button" type="button" value="Generate 4 digit PIN" onclick="pinGenerator()">
+                    <input id="pin-button" type="button" value="Generate 4 digit PIN" placeholder="PIN" onclick="pinGenerator()">
                   </div>
                   <div class="pin">
-                    <label for="gen-pin">PIN:</label>
-                    <input id="gen-pin" type="text" placeholder="Generated PIN" name="dis_pin" maxlength="4">
+                    <input id="gen-pin" type="num" maxlength="4" placeholder="Generated PIN" name="dis_pin" pattern="[0-9]{4}">
                   </div>
                   <div>
-                    <input id="dispatcher-submit-button" type="submit" value="Register Dispatcher">
+                    <input id="dispatcher-submit-button" type="button" value="Register Dispatcher" onclick="registerDispatcher()">
                   </div>
                 </div>
               </form>
             </div>
-
             <div class="subfield-3-2">
               <table class="dispatchers-table">
-                <tr>
-                  <th>Name</th>
-                  <th>Contact</th>
-                  <th>PIN</th>
-                  <th>Duty</th>
-                </tr>
-                <?php
-                  require 'dispatchers_list.php';
-                ?>
               </table>
             </div>
-
+            <div class="subfield-4-2">
+              <select id="searched-returning">
+                <option value="">All</option>
+                <option value="valencia">Valencia</option>
+                <option value="puertobello">Puertobello</option>
+                <option value="sabangbao">Sabang-Bao</option>
+                <option value="albuera">Albuera</option>
+              </select>
+            </div>
             <div class="subfield-4-1">
-              <table class="dispatchers-table">
-                <tr>
-                  <th>Vehicle</th>
-                  <th>Operator</th>
-                  <th>Route</th>
-                  <th>Contact #</th>
-                  <th>Returning</th>
-                </tr>
-                <?php require './returning_vehicle_list.php' ?>
-              </table>
-            </div>
-
-            <div class="subfield-5-1">
-              <?php require './passenger_list.php' ?>
-              <div class="reload">
-                <button type="button" onclick="reloadPassengerList()">
-                  <image src="./images/reload.png">
-                </button>
+              <div class="subfield-4-1-sub">
               </div>
             </div>
-
-            <div class="subfield-6-1">
+            <div class="subfield-5-1">
             </div>
-
+            <div class="subfield-6-2">
+              <select id="searched-destination">
+                <option value="">All</option>
+                <option value="valencia">Valencia</option>
+                <option value="puertobello">Puertobello</option>
+                <option value="sabangbao">Sabang-Bao</option>
+                <option value="albuera">Albuera</option>
+              </select>
+            </div>
+            <div class="subfield-6-1">
+              <div class="subfield-6-1-sub">
+              </div>
+            </div>
+            <div class="subfield-7-2">
+              <select id="sort-option" onchange="retrieveLogs(this.value)">
+                <option value="latest">Latest</option>
+                <option value="oldest">Oldest</option>
+                <option value="moreoptions">Time</option>
+              </select>
+              <div id="moreoptions">
+                <label for="start-date">From:</label>
+                <input type="date" id="start-date">
+                <label for="end-date">To:</label>
+                <input type="date" id="end-date">
+              </div>
+            </div>
+            <div class="subfield-7-1">
+              <div class="subfield-7-1-sub">
+              </div>
+            </div>
         </div>
       </div>
     </div>

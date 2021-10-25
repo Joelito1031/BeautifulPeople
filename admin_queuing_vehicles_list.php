@@ -1,22 +1,53 @@
 <?php
+session_start();
+if(isset($_SESSION['loggedin'])){
+  if(!$_SESSION['loggedin']){
+    header('Location: ./');
+  }
+}
+else{
+  header('Location: ./');
+}
+  $data = '';
+  if(isset($_POST['data'])){
+    $data = $_POST['data'];
+  }
   $queuing_vehicles = json_decode(file_get_contents('./vehicles/queuing_vehicles.json'));
+  echo "<table class='queuing-vehicle-table'>";
+  echo "<tr class='rvt'>";
+  echo "<th>Vehicle</th>";
+  echo "<th>Route</th>";
+  echo "<th>Passengers</th>";
+  echo "<th>Unqueue</th>";
+  echo "</tr>";
   if(sizeof($queuing_vehicles) > 0){
-    foreach($queuing_vehicles as $vehicle){
-      $puv = '"' . $vehicle->vehicle . '"';
-      echo "<div class='queuing-vehicle-container'>";
-      echo "<div>" . $vehicle->vehicle .   "</div>";
-      echo "<div>" . strtoupper($vehicle->route) . "</div>";
-      echo "<div>" . $vehicle->passengers . "/" . $vehicle->capacity . "</div>";
-      echo "<div>";
-      echo "<button type='button' onclick='unqueueConfirmation(" . $puv . ")'><img src='./images/admin_unqueue.png'></button>";
-      echo "</div></div>";
+    if($data != ''){
+      foreach($queuing_vehicles as $vehicle){
+        if($vehicle->route == $data){
+          $puv = '"' . $vehicle->vehicle . '"';
+          echo "<tr>";
+          echo "<td>" . $vehicle->vehicle .   "</td>";
+          echo "<td>" . strtoupper($vehicle->route) . "</td>";
+          echo "<td>" . $vehicle->passengers . "/" . $vehicle->capacity . "</td>";
+          echo "<td><button type='button' style='width: 20px; height: 20px; padding: 0; border: none; border-radius: 50px; margin-top: 3px;' onclick='unqueueVehicle(" . $puv . ")'><img style='width: 20px; height; 20px' src='./images/xbox.png'></button></td>";
+          echo "</tr>";
+        }
+      }
+    }
+    else{
+      foreach($queuing_vehicles as $vehicle){
+        $puv = '"' . $vehicle->vehicle . '"';
+        echo "<tr>";
+        echo "<td>" . $vehicle->vehicle .   "</td>";
+        echo "<td>" . strtoupper($vehicle->route) . "</td>";
+        echo "<td>" . $vehicle->passengers . "/" . $vehicle->capacity . "</td>";
+        echo "<td><button type='button' style='width: 20px; height: 20px; padding: 0; border: none; border-radius: 50px; margin-top: 3px;' onclick='unqueueVehicle(" . $puv . ")'><img style='width: 20px; height; 20px' src='./images/xbox.png'></button></td>";
+        echo "</tr>";
+      }
     }
   }
-  else {
-    echo "<div>";
-    echo "<div style='width: 100%; height: 100% position: relative'>";
-    echo "<span style='position: absolute; top: 30%; left: 50%; transform: translate(-50%, -30%)'>No queuing vehicles</span>";
-    echo "</div>";
-    echo "</div>";
+  else{
+    echo "<tr><td colspan='4'>No queuing vehicles</td></tr>";
   }
+  echo "</table>";
 ?>

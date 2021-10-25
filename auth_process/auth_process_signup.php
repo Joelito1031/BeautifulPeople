@@ -21,16 +21,16 @@ if(isset($_POST['uname']) && isset($_POST['password']) && isset($_POST['first_an
               $store_credentials->bindParam(':pass', $default_password);
               $store_credentials->execute();
               if($store_credentials->rowCount() > 0){
-                $first_answer = sha1(strtolower(trim($_POST['first_answer'])));
-                $second_answer = sha1(strtolower(trim($_POST['second_answer'])));
-                $third_answer = sha1(strtolower(trim($_POST['third_answer'])));
-                $fourth_answer = sha1(strtolower(trim($_POST['fourth_answer'])));
-                $fifth_answer = sha1(strtolower(trim($_POST['fifth_answer'])));
-                $question_one = $connection->prepare("UPDATE questions SET Answer = :answer_one WHERE Question = 'What is your favorite color?'");
-                $question_two = $connection->prepare("UPDATE questions SET Answer = :answer_two WHERE Question = 'What is your mother\'s maiden name?'");
-                $question_three = $connection->prepare("UPDATE questions SET Answer = :answer_three WHERE Question = 'What elementary school did you attend?'");
-                $question_four = $connection->prepare("UPDATE questions SET Answer = :answer_four WHERE Question = 'When you were young, what did you want to be when you grew up?'");
-                $question_five = $connection->prepare("UPDATE questions SET Answer = :answer_five WHERE Question = 'What is the name of the town where you were born?'");
+                $first_answer = sha1(strtolower(preg_replace('/\s+/', '', $_POST['first_answer'])));
+                $second_answer = sha1(strtolower(preg_replace('/\s+/', '', $_POST['second_answer'])));
+                $third_answer = sha1(strtolower(preg_replace('/\s+/', '', $_POST['third_answer'])));
+                $fourth_answer = sha1(strtolower(preg_replace('/\s+/', '', $_POST['fourth_answer'])));
+                $fifth_answer = sha1(strtolower(preg_replace('/\s+/', '', $_POST['fifth_answer'])));
+                $question_one = $connection->prepare("UPDATE questions SET Answer = :answer_one WHERE QuestionId = 1");
+                $question_two = $connection->prepare("UPDATE questions SET Answer = :answer_two WHERE QuestionId = 2");
+                $question_three = $connection->prepare("UPDATE questions SET Answer = :answer_three WHERE QuestionId = 3");
+                $question_four = $connection->prepare("UPDATE questions SET Answer = :answer_four WHERE QuestionId = 4");
+                $question_five = $connection->prepare("UPDATE questions SET Answer = :answer_five WHERE QuestionId = 5");
                 $question_one->bindParam(':answer_one', $first_answer);
                 $question_two->bindParam(':answer_two', $second_answer);
                 $question_three->bindParam(':answer_three', $third_answer);

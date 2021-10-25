@@ -1,20 +1,6 @@
-@font-face {
-  font-family: 'Poiret One';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url(./poiret_one/PoiretOne-Regular.ttf) format('woff2');
-  unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116, U+0100-024F,
-  U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F,
-  U+A720-A7FF, U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-  U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
-  U+FEFF, U+FFFD;
-}
-
 *{
   box-sizing: border-box;
-  font-family: 'Poiret One', cursive;
-  font-size: 13;
+  font-family: arial;
 }
 
 body{
@@ -28,42 +14,35 @@ body{
   align-items: stretch;
 }
 
-.nav-container{
-  padding: 0px;
-  margin: 5px;
-}
-
 .body-container{
   display: flex;
   align-items: stretch;
   height: 100%;
-  padding: 0px;
-  margin: 5px;
 }
 
 .top-nav{
-  padding: 10px;
-  border-radius: 10px;
-  background-color: #F8F9F9 ;
-  box-shadow: -5px 5px 10px black;
+  padding: 20px 5px 20px 5px;
+  background-color: #2471A3;
+  box-shadow: 5px 5px 10px black;
 }
 
 .top-nav span{
-  font-size: 30px;
+  font-weight: lighter;
+  font-size: 20px;
+  color: #ABB2B9;
   margin: 0;
 }
 
 .side-nav{
-  border-radius: 5px;
   padding: 10px;
-  background-color: #F8F9F9;
-  box-shadow: -5px 5px 10px black;
+  background-color: #F2F3F4;
+  border-right: 1px solid #ABB2B9;
 }
 
 .side-nav button{
-  font-size: 30px;
+  font-size: 25px;
   border: none;
-  background-color: #F8F9F9 ;
+  background-color: #F2F3F4;
   margin-bottom: 5px;
 }
 
@@ -75,21 +54,21 @@ body{
 
 .a button{
   border-radius: 5px;
-  background-color: #f1c40f;
-  height: 50px;
+  height: 40px;
   width: 100%;
-  font-size: 1.5em;
-  box-shadow: -5px 5px 10px black;
+  font-size: 16px;
   text-align: center;
+  border: 1px solid #ABB2B9;
+  outline: none;
 }
 
 .a button:hover{
   cursor: pointer;
+  text-decoration: underline;
+  outline: 3px solid #F9E79F;
+  color: #ABB2B9;
 }
 
-.a button:active{
-  box-shadow: -5px 5px 10px inset;
-}
 
 .a button img{
   display: none;
@@ -106,20 +85,19 @@ body{
 
 .b button{
   border-radius: 5px;
-  background-color: #f1c40f;
-  height: 50px;
+  border: 1px solid #ABB2B9;
+  height: 40px;
   width: 100%;
-  font-size: 1.5em;
-  box-shadow: -5px 5px 10px black;
+  font-size: 16px;
   text-align: center;
+  outline: none;
 }
 
 .b button:hover{
   cursor: pointer;
-}
-
-.b button:active{
-  box-shadow: -5px 5px 10px inset;
+  text-decoration: underline;
+  outline: 3px solid #F9E79F;
+  color: #ABB2B9;
 }
 
 .b button img{
@@ -136,20 +114,19 @@ body{
 
 .c button{
   border-radius: 5px;
-  background-color: #f1c40f;
-  height: 50px;
+  border: 1px solid #ABB2B9;
+  height: 40px;
   width: 100%;
-  font-size: 1.5em;
-  box-shadow: -5px 5px 10px black;
+  font-size: 16px;
   text-align: center;
+  outline: none;
 }
 
 .c button:hover{
   cursor: pointer;
-}
-
-.c button:active{
-  box-shadow: -5px 5px 10px inset;
+  text-decoration: underline;
+  outline: 3px solid #F9E79F;
+  color: #ABB2B9;
 }
 
 .c button img{
@@ -167,20 +144,19 @@ body{
 
 .d button{
   border-radius: 5px;
-  background-color: #f1c40f;
-  height: 50px;
+  height: 40px;
+  border: 1px solid #ABB2B9;
   width: 100%;
-  font-size: 1.5em;
-  box-shadow: -5px 5px 10px black;
+  font-size: 16px;
   text-align: center;
+  outline: none;
 }
 
 .d button:hover{
   cursor: pointer;
-}
-
-.d button:active{
-  box-shadow: -5px 5px 10px inset;
+  text-decoration: underline;
+  outline: 3px solid #F9E79F;
+  color: #ABB2B9;
 }
 
 .d button img{
@@ -198,20 +174,19 @@ body{
 
 .e button{
   border-radius: 5px;
-  background-color: #f1c40f;
-  height: 50px;
+  height: 40px;
+  border: 1px solid #ABB2B9;
   width: 100%;
-  font-size: 1.5em;
-  box-shadow: -5px 5px 10px black;
+  font-size: 16px;
   text-align: center;
+  outline: none;
 }
 
 .e button:hover{
   cursor: pointer;
-}
-
-.e button:active{
-  box-shadow: -5px 5px 10px inset;
+  text-decoration: underline;
+  outline: 3px solid #F9E79F;
+  color: #ABB2B9;
 }
 
 .e button img{
@@ -229,20 +204,19 @@ body{
 
 .f button{
   border-radius: 5px;
-  background-color: #f1c40f;
-  height: 50px;
+  border: 1px solid #ABB2B9;
+  height: 40px;
   width: 100%;
-  font-size: 1.5em;
-  box-shadow: -5px 5px 10px black;
+  font-size: 16px;
   text-align: center;
+  outline: none;
 }
 
 .f button:hover{
   cursor: pointer;
-}
-
-.f button:active{
-  box-shadow: -5px 5px 10px inset;
+  text-decoration: underline;
+  outline: 3px solid #F9E79F;
+  color: #ABB2B9;
 }
 
 .f button img{
@@ -258,16 +232,73 @@ body{
   font-size: 12px;
 }
 
+.g button{
+  border-radius: 5px;
+  border: 1px solid #ABB2B9;
+  height: 40px;
+  width: 100%;
+  font-size: 16px;
+  text-align: center;
+  outline: none;
+}
+
+.g button:hover{
+  cursor: pointer;
+  text-decoration: underline;
+  outline: 3px solid #F9E79F;
+  color: #ABB2B9;
+}
+
+.g button img{
+  display: none;
+  margin-top: 5px;
+  height: 30px;
+  width: 30px;
+}
+
+.g{
+  width: 200px;
+  transition: width 0.5s;
+  font-size: 12px;
+}
+
+.h button{
+  border-radius: 5px;
+  border: 1px solid #ABB2B9;
+  height: 40px;
+  width: 100%;
+  font-size: 16px;
+  text-align: center;
+  outline: none;
+}
+
+.h button:hover{
+  cursor: pointer;
+  text-decoration: underline;
+  outline: 3px solid #F9E79F;
+  color: #ABB2B9;
+}
+
+.h button img{
+  display: none;
+  margin-top: 5px;
+  height: 30px;
+  width: 30px;
+}
+
+.h{
+  width: 200px;
+  transition: width 0.5s;
+  font-size: 12px;
+}
+
 .fields{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
-  margin-left: 10px;
-  border-radius: 5px;
   padding: 10px 0 30px 0;
-  background-color: #F8F9F9 ;
-  box-shadow: -5px 5px 10px black;
+  background-color: #F7F9F9;
 }
 
 .div-1{
@@ -280,42 +311,40 @@ body{
 .div-1 div{
   width: 100%;
   height: 35px;
-  margin: 0px 0px 30px 0px;
+  margin: 0px 0px 20px 0px;
 }
 
-.div-1 div input{
+.div-1 > div > input{
+  padding: 0 10px 0 10px;
   width: 100%;
-  height: 100%;
-  font-size: 1em;
-  border-radius: 5px;
-  border: none;
-  box-shadow: -5px 5px 10px inset;
+  height: 32px;
+  border: 1px solid #ABB2B9;
+  border-radius: 4px;
   outline: none;
 }
 
 
-.div-1 div input:focus{
-  box-shadow: -5px 5px 10px black;
+.div-1 > div > input:focus{
+  outline: 3px solid #F9E79F;
+  border-color: #F1C40F;
 }
 
-.div-1 div select{
+.div-1 > div > select{
+  padding: 0 10px 0 10px;
   width: 100%;
-  height: 100%;
-  font-size: 1em;
-  border-radius: 5px;
-  border: none;
-  box-shadow: -5px 5px 10px inset;
+  height: 32px;
+  border: 1px solid #ABB2B9;
+  border-radius: 4px;
   outline: none;
 }
 
 #vehicle-submit-button{
-  background-color: #f1c40f;
-  box-shadow: -5px 5px 10px black;
+  background-color: #F1C40F;
 }
 
 #passenger-submit-button{
   background-color: #f1c40f;
-  box-shadow: -5px 5px 10px black;
+
 }
 
 #dispatcher-submit-button{
@@ -325,11 +354,6 @@ body{
 
 #pin-button{
   background-color: #5dade2;
-  box-shadow: -5px 5px 10px black;
-}
-
-.div-1 div select:focus{
-  box-shadow: -5px 5px 10px black;
 }
 
 .subfield-1-1{
@@ -337,6 +361,7 @@ body{
   width: 50%;
   min-width: 350px;
   height: 523px;
+  padding: 10px;
 }
 
 .subfield-1-2{
@@ -344,6 +369,7 @@ body{
   width: 50%;
   min-width: 350px;
   height: 523px;
+  padding: 10px;
 }
 
 .subfield-2-1{
@@ -365,7 +391,7 @@ body{
 .subfield-3-1{
   display: none;
   position: relative;
-  width: 50%;
+  width: 40%;
   min-width: 350px;
   height: 523px;
 }
@@ -373,19 +399,96 @@ body{
 .subfield-3-2{
   display: none;
   position: relative;
-  width: 50%;
+  width: 60%;
   height: 523px;
-  padding: 5%;
+  padding: 0 10px 0 10px;
   overflow-y: auto;
+}
+
+.dispatchers-table{
+  width: 100%;
+}
+
+table{
+  border-collapse: collapse;
+}
+
+th:nth-child(odd){
+  background-color: #2471A3;
+  color: white;
+}
+
+th{
+  background-color: #f1c40f;
+  padding: 7px 0 7px 0;
+}
+
+td{
+  text-align: center;
+}
+
+tr{
+  background-color: #EAEDED;
+}
+
+tr:nth-child(odd){
+  background-color: #D6EAF8;
+}
+
+.rvt{
+  position: sticky;
+  top: 0;
+  left: 0;
 }
 
 .subfield-4-1{
   display: none;
   position: relative;
-  width: 50%;
+  width: 80%;
   min-width: 350px;
   height: 523px;
+}
+
+.subfield-4-1-sub{
+  width: 100%;
+  height: 400px;
+  position: absolute;
   overflow-y: auto;
+  border: 1px solid #ABB2B9;
+  border-radius: 3px;
+}
+
+.subfield-4-2{
+  display: none;
+  position: relative;
+  width: 50%;
+  min-width: 350px;
+  height: 100px;
+}
+
+#searched-returning{
+  padding: 0 10px 0 10px;
+  width: 280px;
+  height: 32px;
+  border-radius: 4px;
+  outline: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #ABB2B9;
+}
+
+.returning-vehicle-table{
+  width: 100%;
+}
+
+.queuing-vehicle-table{
+  width: 100%;
+}
+
+.logs-table{
+  width: 100%;
 }
 
 .subfield-5-1{
@@ -403,33 +506,90 @@ body{
 .subfield-6-1{
   display: none;
   position: relative;
-  width: 50%;
+  width: 80%;
   min-width: 350px;
   height: 523px;
   overflow-y: auto;
 }
 
-.generated-qr{
+.subfield-6-1-sub{
+  width: 100%;
+  height: 400px;
+  position: absolute;
+  overflow-y: auto;
+  border: 1px solid #ABB2B9;
+  border-radius: 3px;
+}
+
+.subfield-6-2{
+  display: none;
+  position: relative;
+  width: 50%;
+  min-width: 350px;
+  height: 100px;
+}
+
+#searched-destination{
+  padding: 0 10px 0 10px;
+  width: 280px;
+  height: 32px;
+  border-radius: 4px;
+  outline: none;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  /* border: 1px solid red; */
+  border: 1px solid #ABB2B9;
+}
+
+.subfield-7-1{
+  display: none;
+  position: relative;
+  width: 80%;
+  min-width: 350px;
+  height: 523px;
+  overflow-y: auto;
+}
+
+.subfield-7-1-sub{
+  width: 100%;
+  height: 400px;
+  position: absolute;
+  overflow-y: auto;
+  border: 1px solid #ABB2B9;
+  border-radius: 3px;
+}
+
+.subfield-7-2{
+  display: none;
+  position: relative;
+  width: 50%;
+  min-width: 350px;
+  height: 100px;
+}
+
+.generated-qr{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   width: 274px;
 }
 
-.generated-qr button{
+.generated-qr > button{
   width: 100%;
-  height: 40px;
-  border: none;
+  height: 32px;
+  border: 1px solid #ABB2B9;
   margin-top: 10px;
   background-color: #5dade2;
   border-radius: 5px;
-  box-shadow: -5px 5px 10px black;
+  outline: none;
+}
+
+.generated-qr > button:active{
+  outline: 3px solid #F9E79F;
 }
 
 #vehicle-for-print{
-  box-shadow: -5px 5px 10px black;
   border-radius: 10px;
   width: 272px;
   height: 334px;
@@ -459,7 +619,6 @@ body{
 }
 
 #passenger-for-print{
-  box-shadow: -5px 5px 10px black;
   border-radius: 10px;
   width: 272px;
   height: 334px;
@@ -486,21 +645,6 @@ body{
   left: 50%;
   border-radius: 5px;
   transform: translateX(-50%);
-}
-
-.dispatchers-table{
-  width: 100%;
-}
-
-th {
-  font-weight: bold;
-}
-
-td, th{
-  background-color: green;
-  height: 30px;
-  text-align: center;
-  border-radius: 5px;
 }
 
 .main-div{
@@ -540,16 +684,6 @@ td, th{
   margin: 10px;
 }
 
-.reload > button{
-  width: 100%;
-  height: 100%;
-  border: none;
-  background-color: #f1c40f;
-}
-
-.reload > button:active{
-  outline: 3px solid #AEB6BF;
-}
 /*WARNINGS*/
 
 .warning-dashboard{
@@ -609,4 +743,36 @@ td, th{
 .queuing-vehicle-container > div > button > img {
   width: 16px;
   height: 16px;
+}
+
+#sort-option{
+  padding: 0 10px 0 10px;
+  width: 280px;
+  height: 32px;
+  border-radius: 4px;
+  outline: none;
+  position: absolute;
+  border: 1px solid #ABB2B9;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#moreoptions{
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  width: 371px;
+}
+
+#moreoptions > input{
+  border-radius: 3px;
+  outline: none;
+  border: 1px solid #ABB2B9;
+}
+
+#moreoptions > input:focus{
+  outline: 3px solid #F9E79F;
+  border-color: #F1C40F;
 }

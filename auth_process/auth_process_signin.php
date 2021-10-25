@@ -1,4 +1,5 @@
 <?php
+  session_start();
   if(isset($_POST['uname']) && isset($_POST['pass'])){
     if(!empty(trim($_POST['uname'])) && !empty(trim($_POST['pass']))){
       require '../db_connection.php';
@@ -14,6 +15,10 @@
           $connection = null;
           echo "default";
         }
+        else{
+          $connection = null;
+          echo "notfound";
+        }
       }
       else{
         $username = sha1(trim($_POST['uname']));
@@ -24,9 +29,11 @@
         $verified_admin = $verify_admin->fetchColumn();
         if($verified_admin > 0){
           $connection = null;
-          //go to dashboard
+          $_SESSION['loggedin'] = true;
+          echo 'login';
         }
         else{
+          $connection = null;
           echo "notfound";
         }
       }

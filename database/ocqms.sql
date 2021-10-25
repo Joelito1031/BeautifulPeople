@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 16, 2021 at 10:13 AM
+-- Generation Time: Oct 25, 2021 at 05:23 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.5
 
@@ -66,24 +66,41 @@ CREATE TABLE `loaded_passengers` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `logs`
+--
+
+CREATE TABLE `logs` (
+  `LogId` int(11) NOT NULL,
+  `Directory` varchar(80) NOT NULL,
+  `Vehicle` varchar(20) NOT NULL,
+  `Passengers` varchar(20) NOT NULL,
+  `LogTime` time DEFAULT NULL,
+  `Route` varchar(50) NOT NULL,
+  `LogDate` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `questions`
 --
 
 CREATE TABLE `questions` (
-  `Question` varchar(150) NOT NULL,
-  `Answer` varchar(100) DEFAULT NULL
+  `QuestionId` int(11) NOT NULL,
+  `Question` varchar(100) NOT NULL,
+  `Answer` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `questions`
 --
 
-INSERT INTO `questions` (`Question`, `Answer`) VALUES
-('What is your favorite color?', '78988010b890ce6f4d2136481f392787ec6d6106'),
-('What is your mother\'s maiden name?', '030c8062aedaa48ff6a9aec41870ea6996c88cde'),
-('What elementary school did you attend?', '0bc076eefbe270fd589098a1af8661881e93a342'),
-('When you were young, what did you want to be when you grew up?', 'cfd5acd586398229e9229ee327a0c2bf6a379658'),
-('What is the name of the town where you were born?', 'd926ad62e0099098a04df51eefbee30dd6f8f941');
+INSERT INTO `questions` (`QuestionId`, `Question`, `Answer`) VALUES
+(1, 'What is your favorite color?', ''),
+(2, 'What is your mothers maiden name?', ''),
+(3, 'What elementary school did you attend?', ''),
+(4, 'When you were young, what did you want to be when you grew up?', ''),
+(5, 'What is the name of the town where you were born?', '');
 
 -- --------------------------------------------------------
 
@@ -115,10 +132,38 @@ CREATE TABLE `waiting_passengers` (
 --
 
 --
+-- Indexes for table `logs`
+--
+ALTER TABLE `logs`
+  ADD PRIMARY KEY (`LogId`);
+
+--
+-- Indexes for table `questions`
+--
+ALTER TABLE `questions`
+  ADD PRIMARY KEY (`QuestionId`);
+
+--
 -- Indexes for table `registered_vehicles`
 --
 ALTER TABLE `registered_vehicles`
   ADD PRIMARY KEY (`PlateNo`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `logs`
+--
+ALTER TABLE `logs`
+  MODIFY `LogId` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `QuestionId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

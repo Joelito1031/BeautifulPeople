@@ -18,6 +18,10 @@ const signin = () => {
         document.getElementById('info-message').innerHTML = 'Connection error';
         document.getElementById('admin-signin').value = 'Sign in';
       }
+      else if(this.responseText == 'login'){
+        window.location.replace('./ormocterminal');
+      }
+      console.log(this.responseText);
     }
   }
   signInProcess.open("POST", "./auth_process/auth_process_signin.php", true);

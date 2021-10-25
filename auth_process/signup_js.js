@@ -62,6 +62,17 @@ const signup = () => {
           document.getElementById('signup-question-info').style.display = 'block';
           document.getElementById('info-question-message').innerHTML = 'Admin is already set';
         }
+        else if(this.responseText == "success"){
+          window.location.replace('./');
+        }
+        else if(this.responseText == "reset"){
+          document.getElementById('signup-question-info').style.display = 'block';
+          document.getElementById('info-question-message').innerHTML = 'Something went wrong';
+        }
+        else if(this.responseText == "severe"){
+          document.getElementById('signup-question-info').style.display = 'block';
+          document.getElementById('info-question-message').innerHTML = 'Something severe happened';
+        }
         console.log(this.responseText);
       }
     }
