@@ -1,6 +1,6 @@
 'use strict';
 
-var ws = new WebSocket('ws://192.168.1.31:8082');
+var ws = new WebSocket('ws://192.168.1.21:8082');
 
 function warnings(color, message){
   document.getElementById('admin-dash-warning').style.display = 'block';

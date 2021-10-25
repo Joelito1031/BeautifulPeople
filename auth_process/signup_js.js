@@ -10,11 +10,11 @@ const next = () => {
     document.getElementById('signup-info').style.display = 'block';
     document.getElementById('info-message').innerHTML = 'Password is required';
   }
-  else if(f_pass.trim() != s_pass.trim()){
+  else if(f_pass != s_pass){
     document.getElementById('signup-info').style.display = 'block';
     document.getElementById('info-message').innerHTML = 'Password did not match';
   }
-  else if((f_pass.trim() == s_pass.trim()) && (f_pass.trim().length < 8 && s_pass.trim().length < 8)){
+  else if((f_pass == s_pass) && (f_pass.length < 8 && s_pass.length < 8)){
     document.getElementById('signup-info').style.display = 'block';
     document.getElementById('info-message').innerHTML = 'Password is less than eight characters';
   }
@@ -90,5 +90,25 @@ const closeInfo = () => {
   }
   else if(document.getElementById('signup-question-info').style.display == 'block'){
     document.getElementById('signup-question-info').style.display = 'none';
+  }
+}
+
+function showPassSignUp(){
+  let pass = document.getElementById('pass_word');
+  if(pass.type == 'password'){
+    pass.type = 'text';
+  }
+  else{
+    pass.type = 'password';
+  }
+}
+
+function showPassConfSignUp(){
+  let pass_conf = document.getElementById('conf_pass');
+  if(pass_conf.type == 'password'){
+    pass_conf.type = 'text';
+  }
+  else{
+    pass_conf.type = 'password';
   }
 }

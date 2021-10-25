@@ -27,10 +27,11 @@ if(isset($_SESSION['loggedin'])){
                 </div>
                 <div>
                   <label for="pass_word">Password</label>
-                  <a href="#">Forgot Password?</a>
+                  <a href="./reset">Forgot Password?</a>
                 </div>
                 <div>
                   <input name="pass" type="password" class="cred" id="pass_word">
+                  <button onclick="showPassSignIn()"><img src="./images/show.png"></button>
                 </div>
                 <input class="submit-button" id="admin-signin" type="button" value="Sign in" onclick="signin()">
             </div>
@@ -39,7 +40,7 @@ if(isset($_SESSION['loggedin'])){
                 <div id='info-message'>
                 </div>
                 <div class="close-btn-cont">
-                  <button class="close-btn" type="button">
+                  <button class="close-btn" type="button" onclick="closeInfo()">
                     <img src='./images/xbox.png'>
                   </button>
                 </div>
