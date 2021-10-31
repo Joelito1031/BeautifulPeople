@@ -259,6 +259,7 @@ setInterval(function(){
 }, 1500);
 
 
+let x_one = document.querySelector('.subfield-0-1');
 let a_one = document.querySelector('.subfield-1-1');
 let a_two = document.querySelector('.subfield-1-2');
 let b_one = document.querySelector('.subfield-2-1');
@@ -272,6 +273,14 @@ let f_one = document.querySelector('.subfield-6-1');
 let f_two = document.querySelector('.subfield-6-2');
 let g_one = document.querySelector('.subfield-7-1');
 let g_two = document.querySelector('.subfield-7-2');
+let subt1 = document.querySelector('.sub-text-1');
+let subt2 = document.querySelector('.sub-text-2');
+let subt3 = document.querySelector('.sub-text-3');
+let subt4 = document.querySelector('.sub-text-4');
+let subt5 = document.querySelector('.sub-text-5');
+let subt6 = document.querySelector('.sub-text-6');
+let subt7 = document.querySelector('.sub-text-7');
+let subt8 = document.querySelector('.sub-text-8');
 let span_a = document.querySelector('.a');
 let span_b = document.querySelector('.b');
 let span_c = document.querySelector('.c');
@@ -407,7 +416,48 @@ function passengerQr(){
   }
 }
 
+function showXA(){
+  subt1.style.display = 'flex';
+  subt2.style.display = 'none';
+  subt3.style.display = 'none';
+  subt4.style.display = 'none';
+  subt5.style.display = 'none';
+  subt6.style.display = 'none';
+  subt7.style.display = 'none';
+  subt8.style.display = 'none';
+  x_one.style.display = 'flex';
+  a_one.style.display = 'none';
+  a_two.style.display = 'none';
+  b_one.style.display = 'none';  //Needs to be changed.
+  b_two.style.display = 'none';
+  c_one.style.display = 'none';
+  c_two.style.display = 'none';
+  d_one.style.display = 'none';
+  d_two.style.display = 'none';
+  e_one.style.display = 'none';
+  f_one.style.display = 'none';
+  f_two.style.display = 'none';
+  g_one.style.display = 'none';
+  g_two.style.display = 'none';
+  btns_1.style.border = '2px solid #f1c40f';
+  btns_2.style.border = '1px solid #ABB2B9';
+  btns_3.style.border = '1px solid #ABB2B9';
+  btns_4.style.border = '1px solid #ABB2B9';
+  btns_5.style.border = '1px solid #ABB2B9';
+  btns_6.style.border = '1px solid #ABB2B9';
+  btns_7.style.border = '1px solid #ABB2B9';
+}
+
 function showA(){
+  subt1.style.display = 'none';
+  subt2.style.display = 'flex';
+  subt3.style.display = 'none';
+  subt4.style.display = 'none';
+  subt5.style.display = 'none';
+  subt6.style.display = 'none';
+  subt7.style.display = 'none';
+  subt8.style.display = 'none';
+  x_one.style.display = 'none';
   a_one.style.display = 'block';
   a_two.style.display = 'block';
   b_one.style.display = 'none';  //Needs to be changed.
@@ -431,6 +481,15 @@ function showA(){
 }
 
 function showB(){
+  subt1.style.display = 'none';
+  subt2.style.display = 'none';
+  subt3.style.display = 'flex';
+  subt4.style.display = 'none';
+  subt5.style.display = 'none';
+  subt6.style.display = 'none';
+  subt7.style.display = 'none';
+  subt8.style.display = 'none';
+  x_one.style.display = 'none';
   b_one.style.display = 'block';
   b_two.style.display = 'block';
   a_one.style.display = 'none';  //Needs to be changed.
@@ -454,7 +513,16 @@ function showB(){
 }
 
 function showC(){
-  c_one.style.display = 'block';
+  subt1.style.display = 'none';
+  subt2.style.display = 'none';
+  subt3.style.display = 'none';
+  subt4.style.display = 'flex';
+  subt5.style.display = 'none';
+  subt6.style.display = 'none';
+  subt7.style.display = 'none';
+  subt8.style.display = 'none';
+  x_one.style.display = 'none';
+  c_one.style.display = 'flex';
   c_two.style.display = 'block';
   b_one.style.display = 'none';
   b_two.style.display = 'none';
@@ -477,8 +545,17 @@ function showC(){
 }
 
 function showD(){
-  d_one.style.display = 'block';
-  d_two.style.display = 'block';
+  subt1.style.display = 'none';
+  subt2.style.display = 'none';
+  subt3.style.display = 'none';
+  subt4.style.display = 'none';
+  subt5.style.display = 'flex';
+  subt6.style.display = 'none';
+  subt7.style.display = 'none';
+  subt8.style.display = 'none';
+  x_one.style.display = 'none';
+  d_one.style.display = 'flex';
+  d_two.style.display = 'flex';
   c_one.style.display = 'none';
   c_two.style.display = 'none';
   b_one.style.display = 'none';
@@ -500,6 +577,15 @@ function showD(){
 }
 
 function showE(){
+  subt1.style.display = 'none';
+  subt2.style.display = 'none';
+  subt3.style.display = 'none';
+  subt4.style.display = 'none';
+  subt5.style.display = 'none';
+  subt6.style.display = 'flex';
+  subt7.style.display = 'none';
+  subt8.style.display = 'none';
+  x_one.style.display = 'none';
   d_one.style.display = 'none';
   d_two.style.display = 'none';
   c_one.style.display = 'none';
@@ -523,6 +609,15 @@ function showE(){
 }
 
 function showF(){
+  subt1.style.display = 'none';
+  subt2.style.display = 'none';
+  subt3.style.display = 'none';
+  subt4.style.display = 'none';
+  subt5.style.display = 'none';
+  subt6.style.display = 'none';
+  subt7.style.display = 'flex';
+  subt8.style.display = 'none';
+  x_one.style.display = 'none';
   d_one.style.display = 'none';
   d_two.style.display = 'none';
   c_one.style.display = 'none';
@@ -532,8 +627,8 @@ function showF(){
   a_one.style.display = 'none';  //Needs to be changed.
   a_two.style.display = 'none';
   e_one.style.display = 'none';
-  f_one.style.display = 'block';
-  f_two.style.display = 'block';
+  f_one.style.display = 'flex';
+  f_two.style.display = 'flex';
   g_one.style.display = 'none';
   g_two.style.display = 'none';
   btns_1.style.border = '1px solid #ABB2B9';
@@ -546,6 +641,15 @@ function showF(){
 }
 
 function showG(){
+  subt1.style.display = 'none';
+  subt2.style.display = 'none';
+  subt3.style.display = 'none';
+  subt4.style.display = 'none';
+  subt5.style.display = 'none';
+  subt6.style.display = 'none';
+  subt7.style.display = 'none';
+  subt8.style.display = 'flex';
+  x_one.style.display = 'none';
   d_one.style.display = 'none';
   d_two.style.display = 'none';
   c_one.style.display = 'none';
@@ -557,8 +661,8 @@ function showG(){
   e_one.style.display = 'none';
   f_one.style.display = 'none';
   f_two.style.display = 'none';
-  g_one.style.display = 'block';
-  g_two.style.display = 'block';
+  g_one.style.display = 'flex';
+  g_two.style.display = 'flex';
   btns_1.style.border = '1px solid #ABB2B9';
   btns_2.style.border = '1px solid #ABB2B9';
   btns_3.style.border = '1px solid #ABB2B9';
