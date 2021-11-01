@@ -2,13 +2,71 @@
 
 var ws = new WebSocket('ws://192.168.1.21:8082');
 
-function warnings(color, message){
-  document.getElementById('admin-dash-warning').style.display = 'block';
-  document.getElementById('admin-dash-warning').style.backgroundColor = color;
-  document.getElementById('terminate-warning-button').style.backgroundColor = color;
-  document.getElementById('warning-message').innerHTML = message;
-  document.getElementById('warning-message').style.color = 'white';
-  document.getElementById('warning-message').style.fontWeight = 'bold';
+// Main warnings Function
+// function warnings(color, message){
+//   document.getElementById('admin-dash-warning').style.display = 'block';
+//   document.getElementById('admin-dash-warning').style.backgroundColor = color;
+//   document.getElementById('terminate-warning-button').style.backgroundColor = color;
+//   document.getElementById('warning-message').innerHTML = message;
+//   document.getElementById('warning-message').style.color = 'white';
+//   document.getElementById('warning-message').style.fontWeight = 'bold';
+// }
+
+// Warning x Alerts
+function warningsSuccess(message){
+  var Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+  });
+
+  Toast.fire({
+    icon: 'success',
+    title: message
+  })
+}
+
+function warningsRegistered(message){
+  var Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+  });
+
+  Toast.fire({
+    icon: 'info',
+    title: message
+  })
+}
+
+function warningsError(message){
+  var Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+  });
+
+  Toast.fire({
+    icon: 'error',
+    title: message
+  })
+}
+
+function warningsIncomplete(message){
+  var Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+  });
+
+  Toast.fire({
+    icon: 'warning',
+    title: message
+  })
 }
 
 function closeWarning(){
@@ -27,13 +85,13 @@ function unqueueVehicle(data){
     unqueuePUV.onreadystatechange = function(){
       if(this.readyState == 4 && this.status == 200){
         if(this.responseText == "success"){
-          warnings('#82E0AA', 'Vehicle is successfully unqueued');
+          warningsSuccess('Vehicle is successfully unqueued');
         }
         else if(this.responseText == "error"){
-          warnings('#E74C3C', 'Something went wrong');
+          warningsError('Something went wrong');
         }
         else{
-          warnings('#E74C3C', 'Something went wrong');
+          warningsError('Something went wrong');
         }
         console.log(this.responseText);
       }
@@ -118,18 +176,19 @@ function registerVehicle(){
     registerPUV.onreadystatechange = function(){
       if(this.readyState == 4 && this.status == 200){
         if(this.responseText == "registered"){
-          warnings('#F7DC6F', 'Vehicle already registered');
+          // warnings('#F7DC6F', 'Vehicle already registered');
+          warningsRegistered('Vehicle Already Registered!');
         }
         else if(this.responseText == "error"){
-          warnings('#E74C3C', 'Something went wrong');
+          warningsError('Something went wrong');
         }
         else if(this.responseText == "incomplete"){
-          warnings('#F7DC6F', 'Please fill all the fields');
+          warningsIncomplete('Please fill all the fields');
         }
         else if(this.responseText == plate_no){
           document.getElementById('vehicle-qrimage').src = '../qrs/' + this.responseText + '.png'; //used
           document.getElementById('vehicle-plateno').innerHTML = this.responseText;
-          warnings('#82E0AA', 'Vehicle successfully registered');
+          warningsSuccess('Vehicle successfully registered');
           let f_name = document.getElementById('f_name').value = '';
           let m_name = document.getElementById('m_name').value = '';
           let l_name = document.getElementById('l_name').value = '';
@@ -139,7 +198,7 @@ function registerVehicle(){
           let cpcty = document.getElementById('cpcty').value = '';
         }
         else{
-          warnings('#E74C3C', 'Something went wrong');
+          warningsError('Something went wrong');
         }
       }
     };
@@ -147,7 +206,7 @@ function registerVehicle(){
     registerPUV.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     registerPUV.send("fname=" + f_name + "&mname=" + m_name + "&lname=" + l_name + "&cnum=" + c_num + "&plateno=" + plate_no + "&route=" + rt + "&capacity=" + cpcty);
   }else{
-    warnings('#F7DC6F', 'Invalid input');
+    warningsIncomplete('Invalid input');
   }
 }
 
@@ -177,10 +236,10 @@ function registerDispatcher(){
     registerDispatch.onreadystatechange = function(){
       if(this.readyState == 4 && this.status == 200){
         if(this.responseText == "registered"){
-          warnings('#F7DC6F', 'Dispatcher already registered');
+          warningsRegistered('Dispatcher already registered');
         }
         else if(this.responseText == "success"){
-          warnings('#82E0AA', 'Dispatcher successfully registered');
+          warningsSuccess('Dispatcher successfully registered');
           document.getElementById('dis_f_name').value = "";
           document.getElementById('dis_m_name').value = "";
           document.getElementById('dis_l_name').value = "";
@@ -189,13 +248,13 @@ function registerDispatcher(){
           retrieveRegisteredDispatcher();
         }
         else if(this.responseText == "error"){
-          warnings('#E74C3C', 'Something went wrong');
+          warningsError('Something went wrong');
         }
         else if(this.responseText == "incomplete"){
-          warnings('#F7DC6F', 'Please fill all the fields');
+          warningsIncomplete('Please fill all the fields');
         }
         else{
-          warnings('#E74C3C', 'Something went wrong');
+          warningsError('Something went wrong');
         }
       }
     };
@@ -203,7 +262,7 @@ function registerDispatcher(){
     registerDispatch.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     registerDispatch.send("dis_fname=" + dis_fname + "&dis_mname=" + dis_mname + "&dis_lname=" + dis_lname + "&dis_cnum=" + dis_cnum + "&dis_pin=" + dis_pin);
   }else{
-    warnings('#F7DC6F', 'Invalid input');
+    warningsIncomplete('Invalid input');
   }
 }
 
@@ -412,7 +471,7 @@ function passengerQr(){
     document.getElementById('passenger-destination').innerHTML = dst.toUpperCase();
   }
   else{
-      warnings('#F7DC6F', 'Please fill all the fields');
+      warningsIncomplete('Please fill all the fields');
   }
 }
 
@@ -458,8 +517,8 @@ function showA(){
   subt7.style.display = 'none';
   subt8.style.display = 'none';
   x_one.style.display = 'none';
-  a_one.style.display = 'block';
-  a_two.style.display = 'block';
+  a_one.style.display = 'flex';
+  a_two.style.display = 'flex';
   b_one.style.display = 'none';  //Needs to be changed.
   b_two.style.display = 'none';
   c_one.style.display = 'none';
@@ -490,8 +549,8 @@ function showB(){
   subt7.style.display = 'none';
   subt8.style.display = 'none';
   x_one.style.display = 'none';
-  b_one.style.display = 'block';
-  b_two.style.display = 'block';
+  b_one.style.display = 'flex';
+  b_two.style.display = 'flex';
   a_one.style.display = 'none';  //Needs to be changed.
   a_two.style.display = 'none';
   c_one.style.display = 'none';
@@ -523,7 +582,7 @@ function showC(){
   subt8.style.display = 'none';
   x_one.style.display = 'none';
   c_one.style.display = 'flex';
-  c_two.style.display = 'block';
+  c_two.style.display = 'flex';
   b_one.style.display = 'none';
   b_two.style.display = 'none';
   a_one.style.display = 'none';  //Needs to be changed.
@@ -627,6 +686,8 @@ function showF(){
   a_one.style.display = 'none';  //Needs to be changed.
   a_two.style.display = 'none';
   e_one.style.display = 'none';
+  // f_one.setAttribute('style', 'display: flex !important');
+  // f_two.setAttribute('style', 'display: flex !important');
   f_one.style.display = 'flex';
   f_two.style.display = 'flex';
   g_one.style.display = 'none';
@@ -780,10 +841,10 @@ function dutyChange(data){
         ws.send(data);
       }
       else if(this.responseText == "error"){
-        warnings('#E74C3C', 'Something went wrong');
+        warningsError('Something went wrong');
       }
       else{
-        warnings('#E74C3C', 'Something went wrong');
+        warningsError('Something went wrong');
       }
     }
   }
@@ -797,13 +858,13 @@ function vehicleStatus(data){
   changeVehicleStatus.onreadystatechange = function(){
     if(this.readyState == 4 && this.status == 200){
       if(this.responseText == "success-on"){
-        warnings('#82E0AA', 'Vehicle set to return');
+        warningsSuccess('Vehicle set to return');
       }
       else if(this.responseText == "success-off"){
-        warnings('#82E0AA', 'Vehicle set to not return');
+        warningsIncomplete('Vehicle set to not return');
       }
       else{
-        warnings('#E74C3C', 'Something went wrong');
+        warningsError('Something went wrong');
       }
     }
   }
@@ -822,10 +883,10 @@ function deleteDispatcher(data){
           ws.send(data);
         }
         else if(this.responseText == "error"){
-          warnings('#E74C3C', 'Something went wrong');
+          warningsError('Something went wrong');
         }
         else{
-          warnings('#E74C3C', 'Something went wrong');
+          warningsError('Something went wrong');
         }
         console.log(this.responseText);
       }
@@ -842,13 +903,13 @@ function fullyRemoveVehicle(data){
     vehicleToRemove.onreadystatechange = function(){
       if(this.readyState == 4 && this.status == 200){
         if(this.responseText == "success"){
-          warnings('#82E0AA', 'Vehicle was removed successfully');
+          warningsSuccess('Vehicle was removed successfully');
         }
         else if(this.responseText == "error"){
-          warnings('#F7DC6F', 'Something went wrong');
+          warningsError('Something went wrong');
         }
         else{
-          warnings('#F7DC6F', 'Something went wrong');
+          warningsError('Something went wrong');
         }
       }
     }

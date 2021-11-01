@@ -1,6 +1,6 @@
 * {
   box-sizing: border-box;
-  font-family: arial;
+  font-family: "Roboto", sans-serif;
 }
 
 body {
@@ -403,7 +403,7 @@ body {
 
 .subfield-1-2 {
   display: none;
-  position: sticky;
+  position: relative;
   /* width: 50%; */
   /* min-width: 350px; */
   /* height: 100px; */
@@ -413,33 +413,22 @@ body {
 .subfield-2-1 {
   display: none;
   position: relative;
-  width: 50%;
-  min-width: 350px;
-  height: 523px;
 }
 
 .subfield-2-2 {
   display: none;
   position: relative;
-  width: 50%;
-  min-width: 350px;
-  height: 523px;
 }
 
 .subfield-3-1 {
   display: none;
   position: relative;
-  width: 40%;
-  min-width: 350px;
-  height: 523px;
 }
 
 .subfield-3-2 {
   display: none;
   position: relative;
-  width: 60%;
-  height: 523px;
-  padding: 0 10px 0 10px;
+  width: 100%;
   overflow-y: auto;
 }
 
@@ -457,8 +446,8 @@ th:nth-child(odd) {
 }
 
 th {
-  background-color: #f1c40f;
-  padding: 7px 0 7px 0;
+  background-color: #9edbff;
+  padding: 7px 0px 7px 15px;
 }
 
 td {
@@ -482,15 +471,15 @@ tr:nth-child(odd) {
 .subfield-4-1 {
   display: none;
   position: relative;
-  width: 80%;
-  min-width: 350px;
-  height: 523px;
+  width: 100%;
+  /* min-width: 350px; */
+  /* height: 523px; */
 }
 
 .subfield-4-1-sub {
   width: 100%;
-  height: 400px;
-  position: absolute;
+  /* height: 400px; */
+  position: relative;
   overflow-y: auto;
   border: 1px solid #abb2b9;
   border-radius: 3px;
@@ -500,8 +489,8 @@ tr:nth-child(odd) {
   display: none;
   position: relative;
   width: 50%;
-  min-width: 350px;
-  height: 100px;
+  /* min-width: 350px; */
+  height: 75px;
 }
 
 #searched-returning {
@@ -544,16 +533,16 @@ tr:nth-child(odd) {
 .subfield-6-1 {
   display: none;
   position: relative;
-  width: 80%;
-  min-width: 350px;
-  height: 523px;
+  width: 100%;
+  /* min-width: 350px; */
+  /* height: 523px; */
   overflow-y: auto;
 }
 
 .subfield-6-1-sub {
   width: 100%;
-  height: 400px;
-  position: absolute;
+  /* height: 400px; */
+  position: relative;
   overflow-y: auto;
   border: 1px solid #abb2b9;
   border-radius: 3px;
@@ -563,17 +552,17 @@ tr:nth-child(odd) {
   display: none;
   position: relative;
   width: 50%;
-  min-width: 350px;
-  height: 100px;
+  /* min-width: 350px; */
+  /* height: 100px; */
 }
 
 #searched-destination {
   padding: 0 10px 0 10px;
-  width: 280px;
+  width: 300px;
   height: 32px;
   border-radius: 4px;
   outline: none;
-  position: absolute;
+  position: relative;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -583,27 +572,28 @@ tr:nth-child(odd) {
 .subfield-7-1 {
   display: none;
   position: relative;
-  width: 80%;
-  min-width: 350px;
-  height: 523px;
+  width: 100%;
+  /* min-width: 350px; */
+  /* height: 523px; */
   overflow-y: auto;
 }
 
 .subfield-7-1-sub {
   width: 100%;
-  height: 400px;
-  position: absolute;
+  /* height: 400px; */
+  position: relative;
   overflow-y: auto;
   border: 1px solid #abb2b9;
   border-radius: 3px;
 }
 
 .subfield-7-2 {
+  /* justify-content: center; */
   display: none;
   position: relative;
-  width: 50%;
-  min-width: 350px;
-  height: 100px;
+  width: 100%;
+  /* min-width: 500px; */
+  /* height: 170px; */
 }
 
 .generated-qr {
@@ -797,11 +787,11 @@ tr:nth-child(odd) {
 }
 
 #moreoptions {
-  position: absolute;
-  top: 60%;
+  position: relative;
+  top: 105%;
   left: 50%;
   transform: translate(-50%, -60%);
-  width: 371px;
+  width: 500px;
 }
 
 #moreoptions > input {
