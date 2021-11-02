@@ -118,14 +118,14 @@ else{
                   </a>
                 </li>
                 <li class="nav-header" style="color: white;">QR CODE</li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                   <a href="#" onclick="showB()" class="nav-link">
                     <i class="nav-icon fas fa-qrcode"></i>
                     <p class="cfont-size">
                       Register Passenger QR
                     </p>
                   </a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                   <a href="#" onclick="showA()" class="nav-link">
                     <i class="nav-icon fas fa-truck"></i>
