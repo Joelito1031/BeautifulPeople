@@ -13,7 +13,7 @@ else{
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Admin | Dashboard</title>
+    <title>Q R M O C | Administrator</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link href="style.css" type="text/css" rel="stylesheet" >
     <link href="dist/css/adminlte.min.css" type="text/css" rel="stylesheet" >
@@ -23,7 +23,7 @@ else{
     <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="plugins/sweetalert2/sweetalert2.min.css">
-
+    <link rel="icon" href="images/logoQrmoc.png">
     <style>
      .cfont-size {
        font-size: 14.6px;
@@ -45,7 +45,7 @@ else{
 
       <!-- Preloader -->
       <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__wobble" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60">
+        <img class="animation__wobble" src="images/logoQrmoc.png" alt="Q R M O C" height="150" width="150">
       </div>
 
       <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -55,10 +55,7 @@ else{
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-          <a href="index3.html" class="nav-link">Home</a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">Contact</a>
+          <a href="" class="nav-link">Home</a>
         </li>
       </ul>
 
@@ -68,38 +65,21 @@ else{
         <!-- Notifications Dropdown Menu -->
         <li class="nav-item dropdown">
           <a class="nav-link" data-toggle="dropdown" href="#">
-            Logout
-            <i class="far fa-logout"></i>
+            Settings
+            <i class="fas fa-cog"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <span class="dropdown-item dropdown-header">15 Notifications</span>
+            <span class="dropdown-item dropdown-header">Settings</span>
             <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <i class="fas fa-envelope mr-2"></i> 4 new messages
-              <span class="float-right text-muted text-sm">3 mins</span>
+            <a href="#" onclick="exit()" class="dropdown-item">
+              <i class="fas fa-sign-out-alt mr-2"></i> LOGOUT
+              <span class="float-right text-muted text-sm"></span>
             </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <i class="fas fa-users mr-2"></i> 8 friend requests
-              <span class="float-right text-muted text-sm">12 hours</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item">
-              <i class="fas fa-file mr-2"></i> 3 new reports
-              <span class="float-right text-muted text-sm">2 days</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
           </div>
         </li>
         <li class="nav-item">
           <a class="nav-link" data-widget="fullscreen" href="#" role="button">
             <i class="fas fa-expand-arrows-alt"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-            <i class="fas fa-th-large"></i>
           </a>
         </li>
       </ul>
@@ -109,8 +89,8 @@ else{
       <!-- Main Sidebar Container -->
       <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="#" class="brand-link">
-          <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <a href="" class="brand-link">
+          <img src="images/logoQrmoc.png" alt="Q R M O C" class="brand-image img-circle elevation-3" style="opacity: .8">
           <span class="brand-text font-weight-light">Q r m o c</span>
         </a>
 
@@ -118,13 +98,13 @@ else{
         <div class="sidebar ">
           <!-- Sidebar user panel (optional) -->
           <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-              <div class="image">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
-              </div>
-              <div class="info">
-                <a href="#" class="d-block">Administrator</a>
-              </div>
+            <div class="image">
+              <img src="images/adminUserProfile.png" class="img-circle elevation-2" alt="User Image">
             </div>
+            <div class="info">
+              <a href="" class="d-block">Administrator</a>
+            </div>
+          </div>
 
           <!-- Sidebar Menu -->
           <nav class="mt-2">
@@ -285,14 +265,14 @@ else{
                 <!-- small box -->
                 <div class="small-box bg-info">
                   <div class="inner">
-                    <h3>150</h3>
+                    <h3>&ensp;</h3>
 
-                    <p>New Orders</p>
+                    <p>Register PUV</p>
                   </div>
                   <div class="icon">
-                    <i class="ion ion-bag"></i>
+                    <i class="ion ion-android-car"></i>
                   </div>
-                  <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="#" onclick="showA()" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
               <!-- ./col -->
@@ -300,14 +280,14 @@ else{
                 <!-- small box -->
                 <div class="small-box bg-success">
                   <div class="inner">
-                    <h3>53<sup style="font-size: 20px">%</sup></h3>
+                    <h3>&ensp;</h3>
 
-                    <p>Bounce Rate</p>
+                    <p>Queueing PUVs</p>
                   </div>
                   <div class="icon">
                     <i class="ion ion-stats-bars"></i>
                   </div>
-                  <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="#" onclick="showF()" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
               <!-- ./col -->
@@ -315,14 +295,14 @@ else{
                 <!-- small box -->
                 <div class="small-box bg-warning">
                   <div class="inner">
-                    <h3>44</h3>
+                    <h3>&ensp;</h3>
 
-                    <p>User Registrations</p>
+                    <p>Dispatcher Registration</p>
                   </div>
                   <div class="icon">
                     <i class="ion ion-person-add"></i>
                   </div>
-                  <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="#" onclick="showC()" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
               <!-- ./col -->
@@ -330,12 +310,12 @@ else{
                 <!-- small box -->
                 <div class="small-box bg-danger">
                   <div class="inner">
-                    <h3>65</h3>
+                    <h3>&ensp;</h3>
 
-                    <p>Unique Visitors</p>
+                    <p>Manage Dispatcher</p>
                   </div>
                   <div class="icon">
-                    <i class="ion ion-pie-graph"></i>
+                    <i class="ion ion-person-stalker"></i>
                   </div>
                   <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
@@ -343,22 +323,11 @@ else{
               <!-- ./col -->
             </div>
             <!-- /.row -->
+
+            
+
             <!-- Main row -->
             <div class="row">
-              <div class="dash-warning">
-                <div id="admin-dash-warning" class='warning-dashboard'>
-                  <div class='sub-cont-dashboard'>
-                    <div id="warning-message">
-                    </div>
-                    <div>
-                      <button id='terminate-warning-button' onclick="closeWarning()">
-                        <img src='./images/xbox.png'>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
               <div class="col-12 container-fluid subfield-7-2">
                 <div class="card container-fluid card-danger card-outline">
                   <div class="card-body">
@@ -511,7 +480,7 @@ else{
                               <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-phone"></i> &ensp;+63</span>
                               </div>
-                              <input type="tel" class="form-control" name="cnum" id="c_num" placeholder="Contact #" pattern="[0-9]{11}">
+                              <input type="tel" class="form-control" name="cnum" id="c_num" placeholder="Contact #" pattern="[0-9]{10}">
                             </div>
                         </div>
                     </div><!-- /.card-body -->
@@ -551,7 +520,7 @@ else{
                               <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-phone"></i> &ensp;+63</span>
                               </div>
-                              <input type="tel" class="form-control" name="cnum" id="co_num" placeholder="Contact #" pattern="[0-9]{11}">
+                              <input type="tel" class="form-control" name="cnum" id="co_num" placeholder="Contact #" pattern="[0-9]{10}">
                             </div>
                         </div>
                         <div class="form-group">
@@ -676,7 +645,7 @@ else{
                               <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-phone"></i> &ensp;+63</span>
                               </div>
-                              <input type="tel" class="form-control" maxlength="11" name="dis_cnum" id="dis_c_num" placeholder="Contact #" pattern="[0-9]{11}">
+                              <input type="tel" class="form-control" maxlength="11" name="dis_cnum" id="dis_c_num" placeholder="Contact #" pattern="[0-9]{10}">
                             </div>
                         </div>
                         <div class="form-group">
@@ -684,7 +653,7 @@ else{
                         </div>
                         <div class="form-group">
                             <label for="pin">Generated PIN</label>
-                            <input type="text" class="form-control" id="gen-pin" type="num" maxlength="4" placeholder="PIN" name="dis_pin" pattern="[0-9]{4}">
+                            <input type="text" class="form-control" id="gen-pin" type="num" maxlength="4" placeholder="PIN" name="dis_pin" pattern="[0-9]{4}" disabled>
                         </div>
                     </div><!-- /.card-body -->
                     <div class="card-footer">

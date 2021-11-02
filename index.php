@@ -10,7 +10,7 @@ if(isset($_SESSION['loggedin'])){
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Ormoc Terminal Admin | Sign in</title>
+    <title>Q R M O C Admin | Sign in</title>
     <link rel="stylesheet" href="signin_style.css" type="text/css">
     <script type="text/javascript" src="./auth_process/signin_js.js" defer></script>
   </head>
@@ -23,17 +23,17 @@ if(isset($_SESSION['loggedin'])){
                   <label for="u_name">Username</label>
                 </div>
                 <div>
-                  <input name="uname" type="text" class="cred" id="u_name">
+                  <input name="uname" type="text" class="cred" id="u_name" tabindex="1">
                 </div>
                 <div>
                   <label for="pass_word">Password</label>
-                  <a href="./reset">Forgot Password?</a>
                 </div>
                 <div>
-                  <input name="pass" type="password" class="cred" id="pass_word">
-                  <button onclick="showPassSignIn()"><img src="./images/show.png"></button>
+                  <input name="pass" type="password" class="cred" id="pass_word" tabindex="2">
+                  <button onclick="showPassSignIn()" tabindex="-1"><img src="./images/show.png"></button>
                 </div>
-                <input class="submit-button" id="admin-signin" type="button" value="Sign in" onclick="signin()">
+                <input class="submit-button" id="admin-signin" type="button" value="Sign in" onclick="signin()" tabindex="3">
+                <a href="./reset">Forgot Password?</a>
             </div>
             <div id="signin-info" class='info'>
               <div class='info-sub-cont'>

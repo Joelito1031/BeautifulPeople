@@ -522,14 +522,17 @@ tr:nth-child(odd) {
   display: none;
   width: 75%;
   height: 100%;
-  min-width: 350px;
-  height: 523px;
+  /* min-width: 350px; */
+  height: 400px;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
   overflow-y: auto;
 }
 
+.subfield-5-1-1 {
+  display: none;
+}
 .subfield-6-1 {
   display: none;
   position: relative;
