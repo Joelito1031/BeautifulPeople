@@ -2,6 +2,46 @@
 
 var ws = new WebSocket('ws://192.168.1.21:8082');
 
+let a_one = document.querySelector('.subfield-1-1');
+let a_two = document.querySelector('.subfield-1-2');
+let b_one = document.querySelector('.subfield-2-1');
+let b_two = document.querySelector('.subfield-2-2');
+let c_one = document.querySelector('.subfield-3-1');
+let c_two = document.querySelector('.subfield-3-2');
+let d_one = document.querySelector('.subfield-4-1');
+let d_two = document.querySelector('.subfield-4-2');
+let e_one = document.querySelector('.subfield-5-1');
+let f_one = document.querySelector('.subfield-6-1');
+let f_two = document.querySelector('.subfield-6-2');
+let g_one = document.querySelector('.subfield-7-1');
+let g_two = document.querySelector('.subfield-7-2');
+let span_a = document.querySelector('.a');
+let span_b = document.querySelector('.b');
+let span_c = document.querySelector('.c');
+let span_d = document.querySelector('.d');
+let span_e = document.querySelector('.e');
+let span_f = document.querySelector('.f');
+let span_g = document.querySelector('.g');
+let span_h = document.querySelector('.h');
+let span_value_a = getComputedStyle(span_a);
+let span_value_b = getComputedStyle(span_b);
+let span_value_c = getComputedStyle(span_c);
+let span_value_d = getComputedStyle(span_d);
+let span_value_e = getComputedStyle(span_e);
+let span_value_f = getComputedStyle(span_f);
+let span_value_g = getComputedStyle(span_g);
+let span_value_h = getComputedStyle(span_h);
+let btns_1 = document.querySelector('.btns-1');
+let btns_2 = document.querySelector('.btns-2');
+let btns_3 = document.querySelector('.btns-3');
+let btns_4 = document.querySelector('.btns-4');
+let btns_5 = document.querySelector('.btns-5');
+let btns_6 = document.querySelector('.btns-6');
+let btns_7 = document.querySelector('.btns-7');
+let btns_8 = document.querySelector('.btns-8');
+var parameter_passenger = null;
+var parameter = null;
+
 function warnings(color, message){
   document.getElementById('admin-dash-warning').style.display = 'block';
   document.getElementById('admin-dash-warning').style.backgroundColor = color;
@@ -114,9 +154,11 @@ function registerVehicle(){
     let plate_no = document.getElementById('plate_no').value;
     let rt = document.getElementById('rt').value;
     let cpcty = document.getElementById('cpcty').value;
+    parameter = plate_no + '_' + rt;
     const registerPUV = new XMLHttpRequest();
     registerPUV.onreadystatechange = function(){
       if(this.readyState == 4 && this.status == 200){
+        console.log(parameter);
         if(this.responseText == "registered"){
           warnings('#F7DC6F', 'Vehicle already registered');
         }
@@ -127,6 +169,7 @@ function registerVehicle(){
           warnings('#F7DC6F', 'Please fill all the fields');
         }
         else if(this.responseText == plate_no){
+          console.log(this.responseText);
           document.getElementById('vehicle-qrimage').src = '../qrs/' + this.responseText + '.png'; //used
           document.getElementById('vehicle-plateno').innerHTML = this.responseText;
           warnings('#82E0AA', 'Vehicle successfully registered');
@@ -257,46 +300,6 @@ setInterval(function(){
   loadWaitingPassengers();
   retrieveLogs();
 }, 1500);
-
-
-let a_one = document.querySelector('.subfield-1-1');
-let a_two = document.querySelector('.subfield-1-2');
-let b_one = document.querySelector('.subfield-2-1');
-let b_two = document.querySelector('.subfield-2-2');
-let c_one = document.querySelector('.subfield-3-1');
-let c_two = document.querySelector('.subfield-3-2');
-let d_one = document.querySelector('.subfield-4-1');
-let d_two = document.querySelector('.subfield-4-2');
-let e_one = document.querySelector('.subfield-5-1');
-let f_one = document.querySelector('.subfield-6-1');
-let f_two = document.querySelector('.subfield-6-2');
-let g_one = document.querySelector('.subfield-7-1');
-let g_two = document.querySelector('.subfield-7-2');
-let span_a = document.querySelector('.a');
-let span_b = document.querySelector('.b');
-let span_c = document.querySelector('.c');
-let span_d = document.querySelector('.d');
-let span_e = document.querySelector('.e');
-let span_f = document.querySelector('.f');
-let span_g = document.querySelector('.g');
-let span_h = document.querySelector('.h');
-let span_value_a = getComputedStyle(span_a);
-let span_value_b = getComputedStyle(span_b);
-let span_value_c = getComputedStyle(span_c);
-let span_value_d = getComputedStyle(span_d);
-let span_value_e = getComputedStyle(span_e);
-let span_value_f = getComputedStyle(span_f);
-let span_value_g = getComputedStyle(span_g);
-let span_value_h = getComputedStyle(span_h);
-let btns_1 = document.querySelector('.btns-1');
-let btns_2 = document.querySelector('.btns-2');
-let btns_3 = document.querySelector('.btns-3');
-let btns_4 = document.querySelector('.btns-4');
-let btns_5 = document.querySelector('.btns-5');
-let btns_6 = document.querySelector('.btns-6');
-let btns_7 = document.querySelector('.btns-7');
-let btns_8 = document.querySelector('.btns-8');
-var parameter_passenger = null;
 
 function checkSize(){
   if(window.innerWidth <= '609'){

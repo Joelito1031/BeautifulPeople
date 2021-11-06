@@ -30,8 +30,9 @@ else{
     $count = 0;
     $current_passenger_list = json_decode(file_get_contents('../vehicles/' . $data->file));
     foreach($current_passenger_list as $passenger){
-      if($passenger === $data->passenger){
-        $current_passenger_list[$count] = "";
+      if($passenger->Name == $data->passenger){
+        $current_passenger_list[$count]->Name = "";
+        $current_passenger_list[$count]->Companion = "";
         $current_passenger_file = fopen('../vehicles/' . $data->file, 'w');
         fwrite($current_passenger_file, json_encode($current_passenger_list));
         fclose($current_passenger_file);

@@ -106,10 +106,10 @@ else{
                   <input type="text" name="lname" id="l_name" placeholder="Last name" maxlength="40">
                 </div>
                 <div>
-                  <input type="tel" name="cnum" id="c_num" placeholder="Contact #" pattern="[0-9]{11}">
+                  <input type="tel" name="cnum" id="c_num" maxlength="11" placeholder="Contact #" pattern="[0-9]{11}">
                 </div>
                 <div>
-                  <input type="text" name="plateno" id="plate_no" placeholder="Plate #" pattern="[A-Z]{3}-[0-9]{3}" onkeyup="this.value = this.value.toUpperCase();">
+                  <input type="text" name="plateno" maxlength="7" id="plate_no" placeholder="Plate #" pattern="[A-Z]{3}-[0-9]{3}" onkeyup="this.value = this.value.toUpperCase();">
                 </div>
                 <div>
                   <select name="route" id="rt">

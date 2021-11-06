@@ -45,7 +45,7 @@ if((isset($_POST['fname']) && !empty(trim($_POST['fname']))) && (isset($_POST['m
   }
   else{
     for($count = 1; $count <= $capacity; $count++){
-      array_push($vehicle_capacity, '');
+      array_push($vehicle_capacity, array("Name" => "", "Companion" => ""));
     }
     $full_capacity = json_encode($vehicle_capacity);
     $register_vehicle = $connection->prepare("INSERT INTO registered_vehicles(PlateNo, Route, Capacity, Operator, Contact) VALUES(:plateno, :route, :capacity, :operator, :contact)");
