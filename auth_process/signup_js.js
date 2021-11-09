@@ -73,6 +73,10 @@ const signup = () => {
           document.getElementById('signup-question-info').style.display = 'block';
           document.getElementById('info-question-message').innerHTML = 'Something severe happened';
         }
+        else{
+          document.getElementById('signup-question-info').style.display = 'block';
+          document.getElementById('info-question-message').innerHTML = 'Something went wrong';
+        }
         console.log(this.responseText);
       }
     }

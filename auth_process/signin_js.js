@@ -1,7 +1,7 @@
 const signin = () => {
   let uname = document.getElementById('u_name').value;
   let pass = document.getElementById('pass_word').value;
-  if(uname.trim() == '' && pass.trim() == ''){
+  if(uname.trim() == '' || pass.trim() == ''){
     document.getElementById('signin-info').style.display = 'block';
     document.getElementById('info-message').innerHTML = 'Please fill all the fields';
   }else{
@@ -10,7 +10,7 @@ const signin = () => {
     signInProcess.onreadystatechange = function () {
       if(this.readyState == 4 && this.status == 200) {
         if(this.responseText == "default"){
-          window.location.replace('./signup.html');
+          window.location.replace('./signup');
         }
         else if(this.responseText == "notfound"){
           document.getElementById('signin-info').style.display = 'block';
@@ -23,7 +23,12 @@ const signin = () => {
           document.getElementById('admin-signin').value = 'Sign in';
         }
         else if(this.responseText == 'login'){
-          window.location.replace('./ormocterminal');
+          window.location.replace('./ormocterminal/dashboard');
+        }
+        else{
+          document.getElementById('signin-info').style.display = 'block';
+          document.getElementById('info-message').innerHTML = 'Something went wrong';
+          document.getElementById('admin-signin').value = 'Sign in';
         }
         console.log(this.responseText);
       }

@@ -15,7 +15,7 @@ const validate = () => {
     compareAnswer.onreadystatechange = function(){
       if(this.readyState == 4 && this.status == 200){
         if(this.responseText == 'success'){
-          window.location.replace('../passwordreset');
+          window.location.replace('./passwordreset');
         }else if(this.responseText == 'notset'){
           questionInfo.style.display = 'block';
           questionMessageInfo.innerHTML = 'Default has not change';
@@ -25,10 +25,13 @@ const validate = () => {
         }else if(this.responseText == 'error'){
           questionInfo.style.display = 'block';
           questionMessageInfo.innerHTML = 'Please answer all the questions';
+        }else{
+          questionInfo.style.display = 'block';
+          questionMessageInfo.innerHTML = 'Something went wrong';
         }
       }
     }
-    compareAnswer.open('POST', '../auth_process/auth_process_reset.php', true);
+    compareAnswer.open('POST', './auth_process/auth_process_reset.php', true);
     compareAnswer.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     compareAnswer.send('qone=' + qOne + '&qtwo=' + qTwo + '&qthree=' + qThree + '&qfour=' + qFour + '&qfive=' + qFive);
   }

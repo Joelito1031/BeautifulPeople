@@ -10,10 +10,11 @@ else{
 }
 require 'db_connection.php';
 $dispatcher_name = $_POST['data'];
-$delete_dispatcher = $connection->prepare("DELETE FROM dispatchers WHERE Name = :dispatcher");
-$delete_dispatcher->bindParam(':dispatcher', $dispatcher_name);
 try{
+  $delete_dispatcher = $connection->prepare("DELETE FROM dispatchers WHERE Name = :dispatcher");
+  $delete_dispatcher->bindParam(':dispatcher', $dispatcher_name);
   $delete_dispatcher->execute();
+  $connection = null;
   echo "success";
 }catch(Exception $e){
   echo "error";

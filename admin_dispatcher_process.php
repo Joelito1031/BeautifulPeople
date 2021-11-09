@@ -23,11 +23,11 @@ if((isset($_POST['dis_fname']) && !empty(trim($_POST['dis_fname']))) && (isset($
        echo "registered";
      }
      else{
-       $register_dispatcher = $connection->prepare("INSERT INTO dispatchers(Name, OnDuty, PIN, Contact) VALUES(:name, TRUE, :pin, :contact)");
-       $register_dispatcher->bindParam(':name', $name);
-       $register_dispatcher->bindParam(':pin', $pin);
-       $register_dispatcher->bindParam(':contact', $contact);
        try{
+         $register_dispatcher = $connection->prepare("INSERT INTO dispatchers(Name, OnDuty, PIN, Contact) VALUES(:name, TRUE, :pin, :contact)");
+         $register_dispatcher->bindParam(':name', $name);
+         $register_dispatcher->bindParam(':pin', $pin);
+         $register_dispatcher->bindParam(':contact', $contact);
          $register_dispatcher->execute();
          $connection = null;
          echo "success";

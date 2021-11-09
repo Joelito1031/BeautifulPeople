@@ -48,13 +48,13 @@ if((isset($_POST['fname']) && !empty(trim($_POST['fname']))) && (isset($_POST['m
       array_push($vehicle_capacity, '');
     }
     $full_capacity = json_encode($vehicle_capacity);
-    $register_vehicle = $connection->prepare("INSERT INTO registered_vehicles(PlateNo, Route, Capacity, Operator, Contact) VALUES(:plateno, :route, :capacity, :operator, :contact)");
-    $register_vehicle->bindParam(':plateno', $plateno);
-    $register_vehicle->bindParam(':route', $route);
-    $register_vehicle->bindParam(':capacity', $capacity);
-    $register_vehicle->bindParam(':operator', $operator);
-    $register_vehicle->bindParam(':contact', $contact);
     try{
+      $register_vehicle = $connection->prepare("INSERT INTO registered_vehicles(PlateNo, Route, Capacity, Operator, Contact) VALUES(:plateno, :route, :capacity, :operator, :contact)");
+      $register_vehicle->bindParam(':plateno', $plateno);
+      $register_vehicle->bindParam(':route', $route);
+      $register_vehicle->bindParam(':capacity', $capacity);
+      $register_vehicle->bindParam(':operator', $operator);
+      $register_vehicle->bindParam(':contact', $contact);
       $register_vehicle->execute();
       $name = $_POST['fname'] . ' ' . $_POST['mname'] . ' ' . $_POST['lname'];
       $data = array("vehicle" => $_POST['plateno'], "operator" => $_POST['fname'] . " " . $_POST['mname'] . " " . $_POST['lname'],

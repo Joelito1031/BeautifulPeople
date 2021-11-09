@@ -1,7 +1,7 @@
 <?php
 $server = 'localhost';
-$username = 'root';
-$password = '';
+$username = 'jcube';
+$password = '94z&Vk9A4X5K';
 $dbname = 'ocqms';
 
 try{

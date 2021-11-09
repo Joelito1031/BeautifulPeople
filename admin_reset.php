@@ -1,10 +1,23 @@
+<?php
+session_start();
+if(isset($_SESSION['reset'])){
+  unset($_SESSION['reset']);
+}
+if(isset($_SESSION['loggedin'])){
+  if($_SESSION['loggedin']){
+    header('Location: ./ormocterminal');
+  }
+}else{
+  require "./auth_process/auth_reset_check.php";
+}
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title>Ormoc Terminal Admin | Password Reset</title>
     <link rel="stylesheet" href="./reset_style.css" type="text/css">
-    <script type="text/javascript" src="../auth_process/reset_js.js" defer></script>
+    <script type="text/javascript" src="./auth_process/reset_js.js" defer></script>
   </head>
   <body>
     <div class="main-container">
@@ -52,7 +65,7 @@
                 </div>
                 <div class="close-btn-cont">
                   <button class="close-btn" type="button" onclick="closeInfo()">
-                    <img src='../images/xbox.png'>
+                    <img src='./images/xbox.png'>
                   </button>
                 </div>
               </div>

@@ -1,3 +1,15 @@
+<?php
+session_start();
+if(isset($_SESSION['loggedin'])){
+  if($_SESSION['loggedin']){
+    header("Location: ./ormocterminal");
+  }
+}else{
+  if(!$_SESSION['default']){
+    header("Location: ./signin");
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>

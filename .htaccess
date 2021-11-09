@@ -1,1 +1,14 @@
 php_value display_errors on
+RewriteEngine on
+RewriteRule ^signin$ /CapstoneWeb/admin_signin.php [NC]
+RewriteRule ^signup$ /CapstoneWeb/admin_signup.php [NC]
+RewriteRule ^reset$ /CapstoneWeb/admin_reset.php [NC]
+RewriteRule ^passwordreset$ /CapstoneWeb/admin_passwordreset.php [NC]
+RewriteRule ^ormocterminal/$ /CapstoneWeb/ormocterminal/admin.php [NC]
+RewriteRule ^ormocterminal/dashboard$ /CapstoneWeb/ormocterminal/admin.php [NC]
+RewriteRule ^ormocterminal/registerpuv$ /CapstoneWeb/ormocterminal/register_puv.php [NC]
+RewriteRule ^ormocterminal/queuingpuv$ /CapstoneWeb/ormocterminal/queuing_puv.php [NC]
+RewriteRule ^ormocterminal/waitingpassengers$ /CapstoneWeb/ormocterminal/waiting_passengers.php [NC]
+RewriteRule ^ormocterminal/returningpuv$ /CapstoneWeb/ormocterminal/returning_puv.php [NC]
+RewriteRule ^ormocterminal/registerdispatcher$ /CapstoneWeb/ormocterminal/register_dispatcher.php [NC]
+RewriteRule ^ormocterminal/logs$ /CapstoneWeb/ormocterminal/vehicle_logs.php [NC]

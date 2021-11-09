@@ -18,7 +18,7 @@ const changePassword = () => {
     changePass.onreadystatechange = function(){
       if(this.readyState == 4 && this.status == 200){
         if(this.responseText == 'success'){
-          window.location.replace('../');
+          window.location.replace('./signin');
         }else if(this.responseText == 'fail'){
           document.getElementById('reset-info').style.display = 'block';
           document.getElementById('info-message').innerHTML = 'Unable to reset password';
@@ -28,10 +28,13 @@ const changePassword = () => {
         }else if(this.responseText == 'restricted'){
           document.getElementById('reset-info').style.display = 'block';
           document.getElementById('info-message').innerHTML = 'Not that fast!';
+        }else{
+          document.getElementById('reset-info').style.display = 'block';
+          document.getElementById('info-message').innerHTML = 'Something went wrong';
         }
       }
     }
-    changePass.open("POST", "../auth_process/auth_process_passwordreset.php", true);
+    changePass.open("POST", "./auth_process/auth_process_passwordreset.php", true);
     changePass.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     changePass.send('password=' + f_pass);
   }
