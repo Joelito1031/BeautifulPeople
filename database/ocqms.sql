@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Oct 25, 2021 at 05:37 PM
+-- Generation Time: Nov 11, 2021 at 08:25 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.5
 
@@ -83,6 +83,18 @@ CREATE TABLE `logs` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ormoc_commuters`
+--
+
+CREATE TABLE `ormoc_commuters` (
+  `QR` varchar(100) NOT NULL,
+  `Name` varchar(150) NOT NULL,
+  `Contact` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `questions`
 --
 
@@ -97,11 +109,11 @@ CREATE TABLE `questions` (
 --
 
 INSERT INTO `questions` (`QuestionId`, `Question`, `Answer`) VALUES
-(1, 'What is your favorite color?', ''),
-(2, 'What is your mothers maiden name?', ''),
-(3, 'What elementary school did you attend?', ''),
-(4, 'When you were young, what did you want to be when you grew up?', ''),
-(5, 'What is the name of the town where you were born?', '');
+(1, 'What is your favorite color?', '466bc8cef3e71de796ec483e212724a2c2044c68'),
+(2, 'What is your mothers maiden name?', '466bc8cef3e71de796ec483e212724a2c2044c68'),
+(3, 'What elementary school did you attend?', '466bc8cef3e71de796ec483e212724a2c2044c68'),
+(4, 'When you were young, what did you want to be when you grew up?', '466bc8cef3e71de796ec483e212724a2c2044c68'),
+(5, 'What is the name of the town where you were born?', '466bc8cef3e71de796ec483e212724a2c2044c68');
 
 -- --------------------------------------------------------
 
@@ -143,6 +155,12 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `logs`
   ADD PRIMARY KEY (`LogId`);
+
+--
+-- Indexes for table `ormoc_commuters`
+--
+ALTER TABLE `ormoc_commuters`
+  ADD PRIMARY KEY (`QR`);
 
 --
 -- Indexes for table `questions`
