@@ -12,3 +12,5 @@ RewriteRule ^ormocterminal/waitingpassengers$ /CapstoneWeb/ormocterminal/waiting
 RewriteRule ^ormocterminal/returningpuv$ /CapstoneWeb/ormocterminal/returning_puv.php [NC]
 RewriteRule ^ormocterminal/registerdispatcher$ /CapstoneWeb/ormocterminal/register_dispatcher.php [NC]
 RewriteRule ^ormocterminal/logs$ /CapstoneWeb/ormocterminal/vehicle_logs.php [NC]
+RewriteRule ^ormocterminal/dispatcherprofile$ /CapstoneWeb/ormocterminal/dispatcher_profile.php [NC]
+RewriteRule ^ormocterminal/vehicleprofile$ /CapstoneWeb/ormocterminal/vehicle_profile.php [NC]

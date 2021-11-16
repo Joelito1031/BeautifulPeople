@@ -338,6 +338,7 @@ body {
 
 #vehicle-submit-button {
   background-color: #f1c40f;
+  box-shadow: -5px 5px 10px black;
 }
 
 #passenger-submit-button {
@@ -436,6 +437,22 @@ body {
   width: 100%;
 }
 
+.puvs-table{
+  width: 100%;
+}
+
+.dispatchers-table-headers{
+  position: sticky;
+  top: 0;
+}
+
+.dispatchers-table-container{
+  max-height: 550px;
+  border: 2px solid #ced4da;
+  overflow-y: auto;
+  position: relative;
+}
+
 table {
   border-collapse: collapse;
 }
@@ -443,11 +460,16 @@ table {
 th:nth-child(odd) {
   background-color: #2471a3;
   color: white;
+  text-align: center;
+}
+
+th:nth-child(even){
+  text-align: center;
 }
 
 th {
   background-color: #9edbff;
-  padding: 7px 0px 7px 15px;
+  padding: 7px 15px 7px 15px;
 }
 
 td {
@@ -807,4 +829,87 @@ tr:nth-child(odd) {
 #moreoptions > input:focus {
   outline: 3px solid #f9e79f;
   border-color: #f1c40f;
+}
+
+.authenticate-edit{
+  height: 310px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.admin-profile{
+  width: 130px;
+  border-radius: 50%;
+}
+
+.admin-profile > img {
+  border-radius: 50%;
+  height: 130px;
+  border: 2px solid #9edbff;
+  width: 100%;
+}
+
+#admin-auth-password{
+  background-color: #9edbff;
+}
+
+.password-input{
+  position: relative;
+}
+
+.enter-button{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 5px;
+}
+
+.enter-button > button{
+  background-color: #9edbff;
+  border: none;
+  width: 30px;
+  height: 30px;
+}
+
+.dispatcher-prof-container{
+  position: relative;
+  width: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #ced4da;
+}
+
+.dispatcher-prof-container > div > img{
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.back-element{
+  height: 32px;
+  position: absolute;
+  top: 88px;
+  display: none;
+}
+
+.front-word{
+  position: absolute;
+  text-align: center;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: black;
+  color: white;
+  padding: 8px;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  opacity: 0.7;
+}
+
+.front-word:hover{
+  cursor: pointer;
 }

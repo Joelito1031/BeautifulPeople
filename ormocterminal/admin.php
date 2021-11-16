@@ -200,7 +200,7 @@ else{
                   </a>
                   <ul class="nav nav-treeview">
                     <li class="nav-item">
-                      <a href="#" class="nav-link">
+                      <a href="./dispatcherprofile" class="nav-link">
                       <!-- <i class="far fa-circle nav-icon"></i> -->
                       <i class="nav-icon" data-feather="user"></i>
                         <p class="cfont-size">
@@ -209,7 +209,7 @@ else{
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="#" class="nav-link">
+                      <a href="./vehicleprofile" class="nav-link">
                         <!-- <i class="far fa-circle nav-icon"></i> -->
                         <i class="nav-icon" data-feather="truck"></i>
                         <p class="cfont-size">

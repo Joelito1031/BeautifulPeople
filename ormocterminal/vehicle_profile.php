@@ -14,6 +14,8 @@ else{
   <head>
     <meta charset="utf-8">
     <title>Q R M O C | Administrator</title>
+    <script src="./plugins/js-simple-loader-main/loader.js"></script>
+    <link rel="stylesheet" href="./plugins/js-simple-loader-main/loader.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link href="style.css" type="text/css" rel="stylesheet" >
     <link href="dist/css/adminlte.min.css" type="text/css" rel="stylesheet" >
@@ -210,7 +212,6 @@ else{
                     </li>
                     <li class="nav-item">
                       <a href="./vehicleprofile" class="nav-link">
-                        <!-- <i class="far fa-circle nav-icon"></i> -->
                         <i class="nav-icon" data-feather="truck"></i>
                         <p class="cfont-size">
                           Vehicle Profile
@@ -231,7 +232,7 @@ else{
               <div class="container-fluid">
                 <div class="row mb-2">
                   <div class="col-sm-6">
-                    <h1 class="m-0 sub-text-2">Queueing PUVs</h1>
+                    <h1 class="m-0 sub-text-2">Manage PUVs</h1>
                   </div><!-- /.col -->
                   <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -242,30 +243,111 @@ else{
                 </div><!-- /.row -->
               </div><!-- /.container-fluid -->
             </div>
-            <div class="row">
-              <div class="col-12 container-fluid subfield-6-2">
-                <div class="card container-fluid card-danger card-outline">
-                  <div class="card-body">
-                      <select id="searched-destination" class="form-control">
-                        <option value="">All</option>
-                        <option value="valencia">Valencia</option>
-                        <option value="puertobello">Puertobello</option>
-                        <option value="sabangbao">Sabang-Bao</option>
-                        <option value="albuera">Albuera</option>
-                      </select>
-                  </div>
-                </div> <!-- /.card -->
-              </div> <!-- /.content-fluid x subfield-6-2 -->
 
-              <div class="col-12 container-fluid subfield-6-1">
-                <div class="card container-fluid card-danger card-outline">
-                  <div class="card-body">
-                    <div id="example2_wrapper" class="subfield-6-1-sub dataTables_wrapper dt-bootstrap4">
+            <div class="modal fade" id="popupEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle" style="color: #5DADE2"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="form-group">
+                        <span data-toggle="edit-dispatcher-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                        <label for="f_name">First name</label>
+                        <input type="text" class="form-control" id="dis_f_name" placeholder="First name" maxlength="40" onfocusout="this.value = makeItCorrect(this.value)">
+                    </div>
+                    <div class="form-group">
+                        <span data-toggle="edit-dispatcher-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                        <label for="middle_name">Middle name</label>
+                        <input type="text" class="form-control" id="dis_m_name" placeholder="Middle name" maxlength="40" onfocusout="this.value = makeItCorrect(this.value)">
+                    </div>
+                    <div class="form-group">
+                        <span data-toggle="edit-dispatcher-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                        <label for="last_name">Last name</label>
+                        <input type="text" class="form-control" id="dis_l_name" placeholder="Last name" maxlength="40" onfocusout="this.value = makeItCorrect(this.value)">
+                    </div>
+                    <div class="form-group">
+                        <span data-toggle="edit-dispatcher-tooltip" title="Choose a suffix, choose None if dispatcher has no suffix." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                        <label for="suffix">Suffix</label>
+                        <select id="suffix" class="form-control">
+                          <option selected value="">None</option>
+                          <option value="Jr">Jr</option>
+                          <option value="Sr">Sr</option>
+                          <option value="I">I</option>
+                          <option value="II">II</option>
+                          <option value="III">III</option>
+                          <option value="IV">IV</option>
+                          <option value="V">V</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                      <span data-toggle="edit-dispatcher-tooltip" title="Just append the last 10 digits of mobile number." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                      <label for="contact_number">Mobile number</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text"><i class="fas fa-phone"></i> &ensp;+63</span>
+                        </div>
+                        <input type="tel" class="form-control" maxlength="10" id="dis_c_num" placeholder="Contact #" pattern="[0-9]{10}">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <button class="btn btn-block btn-primary font-weight-bold" id="pin-button" onclick="pinGenerator()">GENERATE PIN</button>
+                    </div>
+                    <div class="form-group">
+                      <span data-toggle="edit-dispatcher-tooltip" title="The displayed PIN is the old PIN. Press the generate PIN button above to generate a new PIN." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                      <label for="pin">Generated PIN</label>
+                      <input class="form-control" id="gen-pin" type="num" maxlength="4" placeholder="PIN" name="dis_pin" pattern="[0-9]{4}" disabled>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                      <div>
+                        <span data-toggle="edit-dispatcher-tooltip" title="Profile picture is optional, you can leave it empty and the dispatcher will have the default profile picture." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                        <label>Profile picture <span style="color: red">(Optional)</span></label>
+                      </div>
+                      <div class="dispatcher-prof-container">
+                        <div>
+                          <img id="actual-pic" src="./images/adminUserProfile.png">
+                          <div class="front-word" onclick="openFile()" title="Upload profile picture">
+                            <span class="fas fa-pencil-alt"></span>
+                          </div>
+                          <div class="back-element">
+                            <input id="profile-pic" type="file" accept="image/*">
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <!-- /.card-body -->
-                </div> <!-- /.card -->
-              </div> <!-- /.content-fluid x subfield-6-1 -->
+                  <div class="modal-footer">
+                    <button id="save-button" type="button" class="btn btn-primary" onclick="saveEditedData(this.value)">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 container-fluid">
+                <div class="card container-fluid card-danger card-outline">
+                  <div class="card-header">
+                      <h3 class="card-title">Public Utility Vehicles</h3>
+                      <div class="card-tools">
+                          <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                          </button>
+                      </div>
+                  </div>
+                  <div class="card-body ">
+                    <div class="form-inline col-4">
+                      <input id="search-input" class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search PUV plate number" aria-label="Search" onkeyup="searchVehicle(this.value)" maxlength="7">
+                      <i id="search-ico" class="fas fa-search" aria-hidden="true"></i>
+                      <i id="loading-ico" class="fas fa-spinner fa-spin" aria-hidden="true" style="display: none;"></i>
+                    </div>
+                    <div class="puvs-table">
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -284,12 +366,12 @@ else{
 
     <!-- Custom JS -->
     <script type="text/javascript" src="html2pdf.bundle.min.js" ></script>
-    <script type="text/javascript" src="./queuing_puv_logic.js" ></script>
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script type="text/javascript" src="./vehicle_profile_logic.js" ></script>
     <script>
       $.widget.bridge('uibutton', $.ui.button)
     </script>

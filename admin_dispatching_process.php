@@ -11,17 +11,17 @@ else{
 require './db_connection.php';
 try{
   $data = $_POST["data"];
-  $select_dispatcher_query = $connection->prepare("SELECT OnDuty FROM dispatchers WHERE Name = :name");
-  $select_dispatcher_query->bindParam(":name", $data);
+  $select_dispatcher_query = $connection->prepare("SELECT OnDuty FROM dispatchers WHERE ID = :id");
+  $select_dispatcher_query->bindParam(":id", $data);
   $select_dispatcher_query->execute();
   $result = $select_dispatcher_query->fetchColumn();
   if($result == 1){
-    $update_dispatcher_query = $connection->prepare("UPDATE dispatchers SET OnDuty = FALSE WHERE Name = :name");
-    $update_dispatcher_query->bindParam(":name", $data);
+    $update_dispatcher_query = $connection->prepare("UPDATE dispatchers SET OnDuty = FALSE WHERE ID = :id");
+    $update_dispatcher_query->bindParam(":id", $data);
     $duty = "false";
   }else{
-    $update_dispatcher_query = $connection->prepare("UPDATE dispatchers SET OnDuty = TRUE WHERE Name = :name");
-    $update_dispatcher_query->bindParam(":name", $data);
+    $update_dispatcher_query = $connection->prepare("UPDATE dispatchers SET OnDuty = TRUE WHERE ID = :id");
+    $update_dispatcher_query->bindParam(":id", $data);
     $duty = "true";
   }
   $update_dispatcher_query->execute();

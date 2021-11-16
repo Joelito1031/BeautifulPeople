@@ -29,6 +29,7 @@
           $verified_admin = $verify_admin->fetchColumn();
           if($verified_admin > 0){
             $_SESSION['loggedin'] = true;
+            $_SESSION['username'] = $_POST['uname'];
             echo 'login';
           }
           else{

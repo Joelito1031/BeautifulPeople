@@ -14,6 +14,8 @@ else{
   <head>
     <meta charset="utf-8">
     <title>Q R M O C | Administrator</title>
+    <script src="./plugins/js-simple-loader-main/loader.js"></script>
+    <link rel="stylesheet" href="./plugins/js-simple-loader-main/loader.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link href="style.css" type="text/css" rel="stylesheet" >
     <link href="dist/css/adminlte.min.css" type="text/css" rel="stylesheet" >
@@ -200,7 +202,7 @@ else{
                   </a>
                   <ul class="nav nav-treeview">
                     <li class="nav-item">
-                      <a href="#" class="nav-link">
+                      <a href="./dispatcherprofile" class="nav-link">
                       <!-- <i class="far fa-circle nav-icon"></i> -->
                       <i class="nav-icon" data-feather="user"></i>
                         <p class="cfont-size">
@@ -209,8 +211,7 @@ else{
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="#" class="nav-link">
-                        <!-- <i class="far fa-circle nav-icon"></i> -->
+                      <a href="./vehicleprofile" class="nav-link">
                         <i class="nav-icon" data-feather="truck"></i>
                         <p class="cfont-size">
                           Vehicle Profile
@@ -257,68 +258,66 @@ else{
                     <!-- /.card-header -->
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="plate_number">Plate Number</label>
-                            <input type="text" class="form-control" name="plateno" id="plate_no" placeholder="Plate #" pattern="[A-Z]{3}-[0-9]{3}" onkeyup="this.value = this.value.toUpperCase();">
+                          <span data-toggle="puv-tooltip" title="Use the right format e.g. PUV-123." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                          <label for="plate_number">Plate Number</label>
+                          <input type="text" class="form-control" name="plateno" maxlength="7" id="plate_no" placeholder="Plate #" pattern="[A-Z]{3}-[0-9]{3}" onkeyup="this.value = this.value.toUpperCase();">
                         </div>
                         <div class="form-group">
-                            <label for="route">Route</label>
-                            <select name="route" id="rt" class="form-control">
-                              <option value="">Select route</option>
-                              <option value="albuera">Ormoc - Albuera</option>
-                              <option value="puertobello">Ormoc - Puertobello</option>
-                              <option value="sabangbao">Ormoc - Sabang-Bao</option>
-                              <option value="valencia">Ormoc - Valencia</option>
-                            </select>
+                          <span data-toggle="puv-tooltip" title="Choose the proper route of the PUV." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                          <label for="route">Route</label>
+                          <select name="route" id="rt" class="form-control">
+                            <option value="">Select route</option>
+                            <option value="albuera">Ormoc - Albuera</option>
+                            <option value="puertobello">Ormoc - Puertobello</option>
+                            <option value="sabangbao">Ormoc - Sabang-Bao</option>
+                            <option value="valencia">Ormoc - Valencia</option>
+                          </select>
                         </div>
                         <div class="form-group">
-                            <label for="puv">PUV</label>
-                            <select name="capacity" id="cpcty" class="form-control">
-                              <option value="">Enter PUV capacity</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                              <option value="7">7</option>
-                              <option value="8">8</option>
-                              <option value="9">9</option>
-                              <option value="10">10</option>
-                              <option value="11">11</option>
-                              <option value="12">12</option>
-                              <option value="13">13</option>
-                              <option value="14">14</option>
-                              <option value="15">15</option>
-                              <option value="16">16</option>
-                              <option value="17">17</option>
-                              <option value="18">18</option>
-                              <option value="19">19</option>
-                              <option value="20">20</option>
-                              <option value="21">21</option>
-                            </select>
+                          <span data-toggle="puv-tooltip" title="Enter the right PUV capacity (allowed input is 1 to 2 digits only, not exceeding the value of 50)" class="fas fa-info-circle" style="color: #9edbff;"></span>
+                          <label for="puv">PUV</label>
+                          <input type="number" max="50" id="cpcty" class="form-control" placeholder="Enter PUV capacity" pattern="[0-9]{10}">
                         </div>
                         <br>
                         <label><sup>Operator's Information</sup></label>
                         <div class="form-group">
-                            <label for="first_name">First Name</label>
-                            <input type="text" class="form-control" name="fname" id="f_name" placeholder="First name" maxlength="40">
+                          <span data-toggle="puv-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                          <label for="first_name">First Name</label>
+                          <input type="text" class="form-control" name="fname" id="f_name" placeholder="First name" maxlength="40" onkeyup="this.value = makeItCorrect(this.value)">
                         </div>
                         <div class="form-group">
-                            <label for="middle_name">Middle Name</label>
-                            <input type="text" class="form-control" name="mname" id="m_name" placeholder="Middle name" maxlength="40">
+                          <span data-toggle="puv-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                          <label for="middle_name">Middle Name</label>
+                          <input type="text" class="form-control" name="mname" id="m_name" placeholder="Middle name" maxlength="40" onkeyup="this.value = makeItCorrect(this.value)">
                         </div>
                         <div class="form-group">
-                            <label for="last_name">Last Name</label>
-                            <input type="text" class="form-control" name="lname" id="l_name" placeholder="Last name" maxlength="40">
+                          <span data-toggle="puv-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                          <label for="last_name">Last Name</label>
+                          <input type="text" class="form-control" name="lname" id="l_name" placeholder="Last name" maxlength="40" onkeyup="this.value = makeItCorrect(this.value)">
                         </div>
                         <div class="form-group">
-                            <label for="contact_number">Contact Number</label>
-                            <div class="input-group">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-phone"></i> &ensp;+63</span>
-                              </div>
-                              <input type="tel" class="form-control" name="cnum" id="c_num" placeholder="Contact #" pattern="[0-9]{10}">
+                            <span data-toggle="puv-tooltip" title="Choose a suffix, choose None if operator has no suffix." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                            <label for="suffix">Suffix</label>
+                            <select id="suffix" class="form-control">
+                              <option selected value="">None</option>
+                              <option value="Jr">Jr</option>
+                              <option value="Sr">Sr</option>
+                              <option value="I">I</option>
+                              <option value="II">II</option>
+                              <option value="III">III</option>
+                              <option value="IV">IV</option>
+                              <option value="V">V</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                          <span data-toggle="puv-tooltip" title="Just append the last 10 digits of mobile number." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                          <label for="contact_number">Mobile Number</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fas fa-phone"></i> &ensp;+63</span>
                             </div>
+                            <input type="tel" class="form-control" name="cnum" id="c_num" placeholder="Contact #" maxlength="10" pattern="[0-9]{10}">
+                          </div>
                         </div>
                     </div><!-- /.card-body -->
                     <div class="card-footer">
@@ -331,7 +330,7 @@ else{
                 <div class="container-fluid subfield-1-2">
                   <div class="card container-fluid card-danger card-outline">
                     <div class="card-header">
-                        <h3 class="card-title">PUV QR Code</h3>
+                        <div class="card-title"><span data-toggle="puv-tooltip" title="Download the generated QR code by pressing the SAVE button below." class="fas fa-question-circle" style="color: #9edbff;"></span>  PUV QR Code</div>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse">
                             <i class="fas fa-minus"></i>
@@ -345,7 +344,7 @@ else{
                                 <img id="vehicle-qrimage" src="./images/loading.gif">
                                 <h4 id="vehicle-plateno">QR</h4>
                               </div>
-                              <button class="font-weight-bold" onclick="saveVehiclePDF()">SAVE</button>
+                              <button class="font-weight-bold" onclick="saveVehiclePDF()" style="box-shadow: -5px 5px 10px black;">SAVE</button>
                           </div>
                         </div>
                     </div>
@@ -370,12 +369,17 @@ else{
 
     <!-- Custom JS -->
     <script type="text/javascript" src="html2pdf.bundle.min.js" ></script>
-    <script type="text/javascript" src="./register_puv_logic.js" ></script>
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script type="text/javascript" src="./register_puv_logic.js" ></script>
+    <script>
+    $(function () {
+      $('[data-toggle="puv-tooltip"]').tooltip()
+    })
+    </script>
     <script>
       $.widget.bridge('uibutton', $.ui.button)
     </script>

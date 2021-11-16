@@ -11,33 +11,47 @@ else{
 if((isset($_POST['dis_fname']) && !empty(trim($_POST['dis_fname']))) && (isset($_POST['dis_mname']) && !empty(trim($_POST['dis_mname'])))
    && (isset($_POST['dis_lname']) && !empty(trim($_POST['dis_lname']))) && (isset($_POST['dis_cnum']) && !empty(trim($_POST['dis_cnum'])))
    && (isset($_POST['dis_pin']) && !empty(trim($_POST['dis_pin'])))) {
-     $name = trim($_POST['dis_fname']) . " " . trim($_POST['dis_mname']) . " " . trim($_POST['dis_lname']);
-     $contact = $_POST['dis_cnum'];
-     $pin = $_POST['dis_pin'];
-     require './db_connection.php';
-     $verify_dispatcher = $connection->prepare("SELECT COUNT(*) FROM dispatchers WHERE Name = :name");
-     $verify_dispatcher->bindParam(':name', $name);
-     $verify_dispatcher->execute();
-     $count = $verify_dispatcher->fetchColumn();
-     if($count > 0){
-       echo "registered";
-     }
-     else{
-       try{
-         $register_dispatcher = $connection->prepare("INSERT INTO dispatchers(Name, OnDuty, PIN, Contact) VALUES(:name, TRUE, :pin, :contact)");
-         $register_dispatcher->bindParam(':name', $name);
-         $register_dispatcher->bindParam(':pin', $pin);
-         $register_dispatcher->bindParam(':contact', $contact);
-         $register_dispatcher->execute();
-         $connection = null;
-         echo "success";
-       }catch(Exception $e){
-         $connection = null;
-         echo "error";
+     try{
+       require './db_connection.php';
+       $fname = $_POST['dis_fname'];
+       $mname = $_POST['dis_mname'];
+       $lname = $_POST['dis_lname'];
+       $suffix = $_POST['dis_suffix'];
+       $verify_dispatcher = $connection->prepare("SELECT * FROM dispatchers WHERE FirstName = :fname AND MiddleName = :mname AND LastName = :lname AND Suffix = :suffix");
+       $verify_dispatcher->bindParam(':fname', $fname);
+       $verify_dispatcher->bindParam(':mname', $mname);
+       $verify_dispatcher->bindParam(':lname', $lname);
+       $verify_dispatcher->bindParam(':suffix', $suffix);
+       $verify_dispatcher->execute();
+       $count = $verify_dispatcher->fetchColumn();
+       if($count > 0){
+        echo "registered";
+       }else{
+         $pin = $_POST['dis_pin'];
+         $check_pin = $connection->prepare("SELECT PIN FROM dispatchers WHERE PIN = :pin");
+         $check_pin->bindParam(":pin", $pin);
+         $check_pin->execute();
+         $count = $check_pin->fetchColumn();
+         if($count > 0){
+           echo "pinexist";
+         }else{
+           $contact = $_POST['dis_cnum'];
+           $register_dispatcher = $connection->prepare("INSERT INTO dispatchers(FirstName, MiddleName, LastName, Suffix, OnDuty, PIN, Contact) VALUES(:fname, :mname, :lname, :suffix, TRUE, :pin, :contact)");
+           $register_dispatcher->bindParam(':fname', $fname);
+           $register_dispatcher->bindParam(':mname', $mname);
+           $register_dispatcher->bindParam(':lname', $lname);
+           $register_dispatcher->bindParam(':suffix', $suffix);
+           $register_dispatcher->bindParam(':pin', $pin);
+           $register_dispatcher->bindParam(':contact', $contact);
+           $register_dispatcher->execute();
+           echo "success";
+         }
        }
+     }catch(Exception $e){
+       echo "error";
      }
 }else{
   echo "incomplete";
 }
-
+$connection = null;
 ?>

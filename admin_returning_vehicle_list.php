@@ -20,7 +20,6 @@ echo "<th>Operator</th>";
 echo "<th>Route</th>";
 echo "<th>Contact #</th>";
 echo "<th>Returning</th>";
-echo "<th>Remove</th>";
 echo "</tr>";
 if(sizeof($vehicles) > 0){
   if($data != ''){
@@ -48,9 +47,6 @@ if(sizeof($vehicles) > 0){
           echo "<button class='duty-buttton' style='background-color: #2c3e50; height: 20px; width: 20px; border-radius: 50px; border: none; margin-bottom: 5px;' onclick='vehicleStatus(" . $vh . ")'></button>";
         }
         echo "</td>";
-        echo "<td>";
-        echo "<button type='button' onclick='fullyRemoveVehicle(" . $vh . ")' style='width: 20px; height: 20px; padding: 0; border: none; border-radius: 50px; margin-top: 3px;'><img src='./images/xbox.png' style='width: 20px; height; 20px'></button>";
-        echo "</td>";
         echo "</tr>";
       }
     }
@@ -77,9 +73,6 @@ if(sizeof($vehicles) > 0){
         $vh = '"' . $vehicle->vehicle . '"';
         echo "<button class='duty-buttton' style='background-color: #2c3e50; height: 20px; width: 20px; border-radius: 50px; border: none; margin-bottom: 5px;' onclick='vehicleStatus(" . $vh . ")'></button>";
       }
-      echo "</td>";
-      echo "<td>";
-      echo "<button type='button' onclick='fullyRemoveVehicle(" . $vh . ")' style='width: 20px; height: 20px; padding: 0; border: none; border-radius: 50px; margin-top: 3px;'><img src='./images/xbox.png' style='width: 20px; height; 20px'></button>";
       echo "</td>";
       echo "</tr>";
     }

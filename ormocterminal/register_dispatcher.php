@@ -14,6 +14,8 @@ else{
   <head>
     <meta charset="utf-8">
     <title>Q R M O C | Administrator</title>
+    <script src="./plugins/js-simple-loader-main/loader.js"></script>
+    <link rel="stylesheet" href="./plugins/js-simple-loader-main/loader.css" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link href="style.css" type="text/css" rel="stylesheet" >
     <link href="dist/css/adminlte.min.css" type="text/css" rel="stylesheet" >
@@ -38,9 +40,9 @@ else{
       overflow-x: hidden;
      }
   </style>
-
   </head>
   <body class="hold-transition sidebar-mini layout-fixed">
+
     <div class="wrapper">
 
       <!-- Preloader -->
@@ -200,7 +202,7 @@ else{
                   </a>
                   <ul class="nav nav-treeview">
                     <li class="nav-item">
-                      <a href="#" class="nav-link">
+                      <a href="./dispatcherprofile" class="nav-link">
                       <!-- <i class="far fa-circle nav-icon"></i> -->
                       <i class="nav-icon" data-feather="user"></i>
                         <p class="cfont-size">
@@ -209,8 +211,7 @@ else{
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a href="#" class="nav-link">
-                        <!-- <i class="far fa-circle nav-icon"></i> -->
+                      <a href="./vehicleprofile" class="nav-link">
                         <i class="nav-icon" data-feather="truck"></i>
                         <p class="cfont-size">
                           Vehicle Profile
@@ -256,32 +257,68 @@ else{
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="f_name">First Name</label>
-                            <input type="text" class="form-control" name="dis_fname" id="dis_f_name" placeholder="First name" maxlength="40">
+                            <span data-toggle="dispatcher-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                            <label for="f_name">First name</label>
+                            <input type="text" class="form-control" id="dis_f_name" placeholder="First name" maxlength="40" onkeyup="this.value = makeItCorrect(this.value)">
                         </div>
                         <div class="form-group">
-                            <label for="middle_name">Middle Name</label>
-                            <input type="text" class="form-control" name="dis_mname" id="dis_m_name" placeholder="Middle name" maxlength="40">
+                            <span data-toggle="dispatcher-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                            <label for="middle_name">Middle name</label>
+                            <input type="text" class="form-control" id="dis_m_name" placeholder="Middle name" maxlength="40" onkeyup="this.value = makeItCorrect(this.value)">
                         </div>
                         <div class="form-group">
-                            <label for="last_name">Last Name</label>
-                            <input type="text" class="form-control" name="dis_lname" id="dis_l_name" placeholder="Last name" maxlength="40">
+                            <span data-toggle="dispatcher-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                            <label for="last_name">Last name</label>
+                            <input type="text" class="form-control" id="dis_l_name" placeholder="Last name" maxlength="40" onkeyup="this.value = makeItCorrect(this.value)">
                         </div>
                         <div class="form-group">
-                            <label for="contact_number">Contact Number</label>
-                            <div class="input-group">
-                              <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-phone"></i> &ensp;+63</span>
-                              </div>
-                              <input type="tel" class="form-control" maxlength="11" name="dis_cnum" id="dis_c_num" placeholder="Contact #" pattern="[0-9]{10}">
+                            <span data-toggle="dispatcher-tooltip" title="Choose a suffix, choose None if dispatcher has no suffix." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                            <label for="suffix">Suffix</label>
+                            <select id="suffix" class="form-control">
+                              <option selected value="">None</option>
+                              <option value="Jr">Jr</option>
+                              <option value="Sr">Sr</option>
+                              <option value="I">I</option>
+                              <option value="II">II</option>
+                              <option value="III">III</option>
+                              <option value="IV">IV</option>
+                              <option value="V">V</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                          <span data-toggle="dispatcher-tooltip" title="Just append the last 10 digits of mobile number." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                          <label for="contact_number">Mobile number</label>
+                          <div class="input-group">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text"><i class="fas fa-phone"></i> &ensp;+63</span>
                             </div>
+                            <input type="tel" class="form-control" maxlength="10" id="dis_c_num" placeholder="Contact #" pattern="[0-9]{10}">
+                          </div>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-block btn-primary font-weight-bold" id="pin-button" onclick="pinGenerator()">GENERATE PIN</button>
+                          <button class="btn btn-block btn-primary font-weight-bold" id="pin-button" onclick="pinGenerator()">GENERATE PIN</button>
                         </div>
                         <div class="form-group">
-                            <label for="pin">Generated PIN</label>
-                            <input type="text" class="form-control" id="gen-pin" type="num" maxlength="4" placeholder="PIN" name="dis_pin" pattern="[0-9]{4}" disabled>
+                          <span data-toggle="dispatcher-tooltip" title="Press the generate PIN button above to generate a PIN." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                          <label for="pin">Generated PIN</label>
+                          <input class="form-control" id="gen-pin" type="num" maxlength="4" placeholder="PIN" name="dis_pin" pattern="[0-9]{4}" disabled>
+                        </div>
+                        <div style="display: flex; flex-direction: column; align-items: center;">
+                          <div>
+                            <span data-toggle="dispatcher-tooltip" title="Profile picture is optional, you can leave it empty and the dispatcher will have the default profile picture." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                            <label>Profile picture <span style="color: red">(Optional)</span></label>
+                          </div>
+                          <div class="dispatcher-prof-container">
+                            <div>
+                              <img id="actual-pic" src="./images/adminUserProfile.png">
+                              <div class="front-word" onclick="openFile()" title="Upload profile picture">
+                                <span class="fas fa-pencil-alt"></span>
+                              </div>
+                              <div class="back-element">
+                                <input id="profile-pic" type="file" accept="image/*">
+                              </div>
+                            </div>
+                          </div>
                         </div>
                     </div><!-- /.card-body -->
                     <div class="card-footer">
@@ -294,16 +331,18 @@ else{
                 <div class="content-fluid subfield-3-2">
                    <div class="card container-fluid card-danger card-outline">
                      <div class="card-header">
-                         <h3 class="card-title">Dispatchers</h3>
-                         <div class="card-tools">
-                             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                             <i class="fas fa-minus"></i>
-                             </button>
-                         </div>
+                       <div class="card-title"><span data-toggle="dispatcher-tooltip" title="By pressing the duty buttons, you can set the status of the dispatchers from on duty to off duty and vice versa. (Yellow=onduty, Black=offduty)" class="fas fa-question-circle" style="color: #9edbff;"></span>  Dispatchers</div>
+                       <div class="card-tools">
+                          <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                          </button>
+                        </div>
                      </div>
                      <div class="card-body">
-                       <table class="dispatchers-table">
-                       </table>
+                       <div class="dispatchers-table-container">
+                         <table class="dispatchers-table">
+                         </table>
+                       </div>
                      </div>
                    </div>
                 </div>
@@ -326,12 +365,17 @@ else{
 
     <!-- Custom JS -->
     <script type="text/javascript" src="html2pdf.bundle.min.js" ></script>
-    <script type="text/javascript" src="./register_dispatcher_logic.js" ></script>
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+      <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script type="text/javascript" src="./register_dispatcher_logic.js" ></script>
+    <script>
+    $(function () {
+      $('[data-toggle="dispatcher-tooltip"]').tooltip()
+    })
+    </script>
     <script>
       $.widget.bridge('uibutton', $.ui.button)
     </script>
