@@ -12,16 +12,16 @@ $data = "";
 require './db_connection.php';
 if(isset($_POST['data'])){
   if($_POST['data'] == 'latest'){
-    $retrieve_logs = $connection->prepare("SELECT Directory, Vehicle, Passengers, Route, LogDate, LogTime FROM logs ORDER BY LogId ASC");
+    $retrieve_logs = $connection->prepare("SELECT LogId, Directory, Vehicle, Passengers, Route, LogDate, LogTime FROM logs ORDER BY LogId ASC");
   }elseif($_POST['data'] == 'oldest'){
-    $retrieve_logs = $connection->prepare("SELECT Directory, Vehicle, Passengers, Route, LogDate, LogTime FROM logs ORDER BY LogId DESC");
+    $retrieve_logs = $connection->prepare("SELECT LogId, Directory, Vehicle, Passengers, Route, LogDate, LogTime FROM logs ORDER BY LogId DESC");
   }
 }elseif(isset($_POST['startdate']) && isset($_POST['enddate'])){
   $start_date = $_POST['startdate'];
   $end_date = $_POST['enddate'];
-  $retrieve_logs = $connection->prepare("SELECT Directory, Vehicle, Passengers, Route, LogDate, LogTime FROM logs WHERE LogDate BETWEEN '$start_date' AND '$end_date'");
+  $retrieve_logs = $connection->prepare("SELECT LogId, Directory, Vehicle, Passengers, Route, LogDate, LogTime FROM logs WHERE LogDate BETWEEN '$start_date' AND '$end_date'");
 }else{
-  $retrieve_logs = $connection->prepare("SELECT Directory, Vehicle, Passengers, Route, LogDate, LogTime FROM logs");
+  $retrieve_logs = $connection->prepare("SELECT LogId, Directory, Vehicle, Passengers, Route, LogDate, LogTime FROM logs");
 }
 try{
   $retrieve_logs->execute();
@@ -30,9 +30,9 @@ try{
     foreach($logs as $log){
       echo "<div id='vehicle-logs-container'>";
       echo "<div>";
-      echo "<div class='card-header' id='v-l'>";
+      echo "<div class='card-header' id='" . $log['LogId'] . "'>";
       echo "<h5 class='mb-0'>";
-      echo "<button style='width: 100%;' class='btn btn-link collapsed' data-toggle='collapse' data-target='#logsContent' aria-expanded='true' aria-controls='collapseOne'>";
+      echo "<button style='width: 100%;' class='btn btn-link collapsed' data-toggle='collapse' data-target='#" . $log['Vehicle'] . "' aria-expanded='true' aria-controls='collapseOne'>";
       echo "<div style='display: flex; align-items: center; justify-content: space-between; width: 100%;'>";
       echo "<div style='display: flex;'>";
       echo "<i class='fas fa-file' style='font-size: 35px;'></i>";
@@ -43,7 +43,7 @@ try{
       echo "</button>";
       echo "</h5>";
       echo "</div>";
-      echo "<div id='logsContent' style='text-align: center;' class='collapse' aria-labelledby='v-l' data-parent='#vehicle-logs-container'>";
+      echo "<div id='" . $log['Vehicle'] . "' style='text-align: center;' class='collapse' aria-labelledby='" . $log['LogId'] . "' data-parent='#vehicle-logs-container'>";
       echo "<div display='flex' style='margin: 10px 0 10px 0'><button class='btn btn-primary' onclick='saveLogPDF()'>SAVE AS PDF</button></div>";
       echo "<div id='areatoprint' class='card-body'>";
       echo "<div style='text-align: center'>";
