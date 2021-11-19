@@ -43,188 +43,7 @@ else{
 
   </head>
   <body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
-
-      <!-- Preloader -->
-      <div class="preloader flex-column justify-content-center align-items-center">
-        <img class="animation__wobble" src="images/logoQrmoc.png" alt="Q R M O C" height="150" width="150">
-      </div>
-
-      <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-      <!-- Left navbar links -->
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="./dashboard" class="nav-link">Home</a>
-        </li>
-      </ul>
-
-      <!-- Right navbar links -->
-      <ul class="navbar-nav ml-auto">
-
-        <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown">
-          <a class="nav-link" data-toggle="dropdown" href="#">
-            Settings
-            <i class="fas fa-cog"></i>
-          </a>
-          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-            <span class="dropdown-item dropdown-header">Settings</span>
-            <div class="dropdown-divider"></div>
-            <a href="#" onclick="exit()" class="dropdown-item">
-              <i class="fas fa-sign-out-alt mr-2"></i> LOGOUT
-              <span class="float-right text-muted text-sm"></span>
-            </a>
-          </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-            <i class="fas fa-expand-arrows-alt"></i>
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <!-- /.navbar -->
-
-      <!-- Main Sidebar Container -->
-      <aside class="main-sidebar sidebar-dark-primary elevation-4">
-        <!-- Brand Logo -->
-        <a href="" class="brand-link">
-          <img src="images/logoQrmoc.png" alt="Q R M O C" class="brand-image img-circle elevation-3" style="opacity: .8">
-          <span class="brand-text font-weight-light">Q r m o c</span>
-        </a>
-
-        <!-- Sidebar -->
-        <div class="sidebar ">
-          <!-- Sidebar user panel (optional) -->
-          <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-            <div class="image">
-              <img src="images/adminUserProfile.png" class="img-circle elevation-2" alt="User Image">
-            </div>
-            <div class="info">
-              <a href="./dashboard" class="d-block">Administrator</a>
-            </div>
-          </div>
-
-          <!-- Sidebar Menu -->
-          <nav class="mt-2">
-              <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-item">
-                  <a href="./dashboard" class="nav-link">
-                    <i class="nav-icon fas fa-home"></i>
-                    <p class="cfont-size">
-                      Dashboard
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-header" style="color: white;">QR CODE</li>
-                <!-- <li class="nav-item">
-                  <a href="#" onclick="showB()" class="nav-link">
-                    <i class="nav-icon fas fa-qrcode"></i>
-                    <p class="cfont-size">
-                      Register Passenger QR
-                    </p>
-                  </a>
-                </li> -->
-                <li class="nav-item">
-                  <a href="./registerpuv" class="nav-link">
-                    <i class="nav-icon fas fa-truck"></i>
-                    <p class="cfont-size">
-                      Generate PUV QR
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-header" style="color: white;">TERMINAL</li>
-                <li class="nav-item">
-                  <a href="./queuingpuv" class="nav-link">
-                    <i class="nav-icon fas fa-swatchbook"></i>
-                    <p class="cfont-size font-weight-normal">
-                      Queueing PUVs
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="./waitingpassengers" class="nav-link">
-                    <i class="nav-icon" data-feather="clock"></i>
-                    <p class="cfont-size font-weight-normal">
-                      Waiting Passengers
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="./returningpuv" class="nav-link">
-                    <i class="nav-icon" data-feather="corner-down-left"></i>
-                    <p class="cfont-size font-weight-normal">
-                      Returning PUVs
-                    </p>
-                  </a>
-                </li>
-
-                <li class="nav-header" style="color: white;">DISPATCHER</li>
-                <li class="nav-item">
-                  <a href="./registerdispatcher" class="nav-link">
-                    <i class="nav-icon fas fa-user-plus"></i>
-                    <p class="cfont-size">
-                      Add & Manage Account
-                    </p>
-                  </a>
-                </li>
-
-                <li class="nav-header" style="color: white;">REPORTS</li>
-
-                <li class="nav-item">
-                  <a href="./logs" class="nav-link">
-                    <i class="nav-icon fas fa-clipboard-list"></i>
-                    <p class="cfont-size">
-                      Logs
-                    </p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-stream"></i>
-                    <p class="cfont-size">
-                      History
-                    </p>
-                  </a>
-                </li>
-
-                <li class="nav-header" style="color: white;">PROFILES</li>
-                <li class="nav-item menu-open">
-                  <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p class="cfont-size">
-                      Profiles
-                      <i class="right fas fa-angle-left"></i>
-                    </p>
-                  </a>
-                  <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                      <a href="./dispatcherprofile" class="nav-link">
-                      <!-- <i class="far fa-circle nav-icon"></i> -->
-                      <i class="nav-icon" data-feather="user"></i>
-                        <p class="cfont-size">
-                          Dispatcher Profile
-                        </p>
-                      </a>
-                    </li>
-                    <li class="nav-item">
-                      <a href="./vehicleprofile" class="nav-link">
-                        <i class="nav-icon" data-feather="truck"></i>
-                        <p class="cfont-size">
-                          Vehicle Profile
-                        </p>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </aside>
+    <?php require "sidebar.html"; ?>
       <section class="content">
         <div class="container-fluid">
           <div class="content-wrapper">
@@ -255,22 +74,39 @@ else{
                   </div>
                   <div class="modal-body">
                     <div class="form-group">
-                        <span data-toggle="edit-dispatcher-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
-                        <label for="f_name">First name</label>
-                        <input type="text" class="form-control" id="dis_f_name" placeholder="First name" maxlength="40" onfocusout="this.value = makeItCorrect(this.value)">
+                      <span data-toggle="puv-tooltip" title="Choose the proper route of the PUV." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                      <label for="route">Route</label>
+                      <select name="route" id="rt" class="form-control">
+                        <option value="">Select route</option>
+                        <option value="albuera">Ormoc - Albuera</option>
+                        <option value="puertobello">Ormoc - Puertobello</option>
+                        <option value="sabangbao">Ormoc - Sabang-Bao</option>
+                        <option value="valencia">Ormoc - Valencia</option>
+                      </select>
                     </div>
                     <div class="form-group">
-                        <span data-toggle="edit-dispatcher-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
-                        <label for="middle_name">Middle name</label>
-                        <input type="text" class="form-control" id="dis_m_name" placeholder="Middle name" maxlength="40" onfocusout="this.value = makeItCorrect(this.value)">
+                      <span data-toggle="puv-tooltip" title="Enter the right PUV capacity (allowed input is 1 to 2 digits only, not exceeding the value of 50)" class="fas fa-info-circle" style="color: #9edbff;"></span>
+                      <label for="puv">PUV Capacity</label>
+                      <input type="number" max="50" id="cpcty" class="form-control" placeholder="Enter PUV capacity" pattern="[0-9]{10}">
+                    </div>
+                    <label><sup>Operator's Information</sup></label>
+                    <div class="form-group">
+                      <span data-toggle="puv-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                      <label for="first_name">First Name</label>
+                      <input type="text" class="form-control" name="fname" id="f_name" placeholder="First name" maxlength="40" onfocusout="this.value = makeItCorrect(this.value)">
                     </div>
                     <div class="form-group">
-                        <span data-toggle="edit-dispatcher-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
-                        <label for="last_name">Last name</label>
-                        <input type="text" class="form-control" id="dis_l_name" placeholder="Last name" maxlength="40" onfocusout="this.value = makeItCorrect(this.value)">
+                      <span data-toggle="puv-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                      <label for="middle_name">Middle Name</label>
+                      <input type="text" class="form-control" name="mname" id="m_name" placeholder="Middle name" maxlength="40" onfocusout="this.value = makeItCorrect(this.value)">
                     </div>
                     <div class="form-group">
-                        <span data-toggle="edit-dispatcher-tooltip" title="Choose a suffix, choose None if dispatcher has no suffix." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                      <span data-toggle="puv-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                      <label for="last_name">Last Name</label>
+                      <input type="text" class="form-control" name="lname" id="l_name" placeholder="Last name" maxlength="40" onfocusout="this.value = makeItCorrect(this.value)">
+                    </div>
+                    <div class="form-group">
+                        <span data-toggle="puv-tooltip" title="Choose a suffix, choose None if operator has no suffix." class="fas fa-info-circle" style="color: #9edbff;"></span>
                         <label for="suffix">Suffix</label>
                         <select id="suffix" class="form-control">
                           <option selected value="">None</option>
@@ -284,38 +120,13 @@ else{
                         </select>
                     </div>
                     <div class="form-group">
-                      <span data-toggle="edit-dispatcher-tooltip" title="Just append the last 10 digits of mobile number." class="fas fa-info-circle" style="color: #9edbff;"></span>
-                      <label for="contact_number">Mobile number</label>
+                      <span data-toggle="puv-tooltip" title="Just append the last 10 digits of mobile number." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                      <label for="contact_number">Mobile Number</label>
                       <div class="input-group">
                         <div class="input-group-prepend">
                           <span class="input-group-text"><i class="fas fa-phone"></i> &ensp;+63</span>
                         </div>
-                        <input type="tel" class="form-control" maxlength="10" id="dis_c_num" placeholder="Contact #" pattern="[0-9]{10}">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <button class="btn btn-block btn-primary font-weight-bold" id="pin-button" onclick="pinGenerator()">GENERATE PIN</button>
-                    </div>
-                    <div class="form-group">
-                      <span data-toggle="edit-dispatcher-tooltip" title="The displayed PIN is the old PIN. Press the generate PIN button above to generate a new PIN." class="fas fa-info-circle" style="color: #9edbff;"></span>
-                      <label for="pin">Generated PIN</label>
-                      <input class="form-control" id="gen-pin" type="num" maxlength="4" placeholder="PIN" name="dis_pin" pattern="[0-9]{4}" disabled>
-                    </div>
-                    <div style="display: flex; flex-direction: column; align-items: center;">
-                      <div>
-                        <span data-toggle="edit-dispatcher-tooltip" title="Profile picture is optional, you can leave it empty and the dispatcher will have the default profile picture." class="fas fa-info-circle" style="color: #9edbff;"></span>
-                        <label>Profile picture <span style="color: red">(Optional)</span></label>
-                      </div>
-                      <div class="dispatcher-prof-container">
-                        <div>
-                          <img id="actual-pic" src="./images/adminUserProfile.png">
-                          <div class="front-word" onclick="openFile()" title="Upload profile picture">
-                            <span class="fas fa-pencil-alt"></span>
-                          </div>
-                          <div class="back-element">
-                            <input id="profile-pic" type="file" accept="image/*">
-                          </div>
-                        </div>
+                        <input type="tel" class="form-control" name="cnum" id="c_num" placeholder="Contact #" maxlength="10" pattern="[0-9]{10}">
                       </div>
                     </div>
                   </div>
@@ -337,8 +148,8 @@ else{
                           </button>
                       </div>
                   </div>
-                  <div class="card-body ">
-                    <div class="form-inline col-4">
+                  <div class="card-body">
+                    <div class="form-inline" style="width: 400px;">
                       <input id="search-input" class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search PUV plate number" aria-label="Search" onkeyup="searchVehicle(this.value)" maxlength="7">
                       <i id="search-ico" class="fas fa-search" aria-hidden="true"></i>
                       <i id="loading-ico" class="fas fa-spinner fa-spin" aria-hidden="true" style="display: none;"></i>
@@ -372,6 +183,11 @@ else{
     <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script type="text/javascript" src="./vehicle_profile_logic.js" ></script>
+    <script>
+    $(function () {
+      $('[data-toggle="puv-tooltip"]').tooltip()
+    })
+    </script>
     <script>
       $.widget.bridge('uibutton', $.ui.button)
     </script>

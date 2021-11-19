@@ -8,7 +8,8 @@ function dutyChangeError(message){
 
   Toast.fire({
     icon: 'error',
-    title: message
+    title: message,
+    background: '#EC7063'
   })
 }
 
@@ -22,7 +23,8 @@ function dutyChangeSuccess(message){
 
   Toast.fire({
     icon: 'success',
-    title: message
+    title: message,
+    background: '#9edbff'
   })
 }
 
@@ -241,4 +243,8 @@ const makeItCorrect = (value) => {
     const finalValue = input.charAt(0).toUpperCase() + input.slice(1);
     return finalValue;
   }
+}
+
+function exit(){
+  window.location.replace('../admin_out.php');
 }

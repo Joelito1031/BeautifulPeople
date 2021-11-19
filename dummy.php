@@ -1,10 +1,6 @@
 <?php
 
-  require "./db_connection.php";
-  $id = "5";
-  $retrieve_old_file = $connection->prepare("SELECT FirstName, Profile FROM dispatchers WHERE ID = :id");
-  $retrieve_old_file->bindParam(":id", $id);
-  $retrieve_old_file->execute();
-  $name = $retrieve_old_file->fetchColumn();
-  print_r($name);
+            $puv_passenger_info = json_decode(file_get_contents("./vehicles/albuera_HVM-222.json"));
+            array_push($puv_passenger_info, array("queuetime" => "123", "leavetime" => "123"));
+            print_r(json_encode($puv_passenger_info));
 ?>

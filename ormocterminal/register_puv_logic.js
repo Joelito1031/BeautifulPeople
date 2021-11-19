@@ -46,12 +46,12 @@ function registerVehicle(){
         Loader.close();
         popupWarning('An invalid input was detected, please recheck all the fields');
       }else{
-        let suffix = document.getElementById('suffix').value; 
+        let suffix = document.getElementById('suffix').value;
         let c_num = document.getElementById('c_num').value;
         let plate_no = document.getElementById('plate_no').value;
         let rt = document.getElementById('rt').value;
         let cpcty = document.getElementById('cpcty').value;
-        if(cpcty > 50){
+        if(cpcty > 50 || cpcty < 0){
           Loader.close();
           popupWarning('Capacity exceeds the limitations');
         }else{
@@ -89,7 +89,7 @@ function registerVehicle(){
           };
           registerPUV.open("POST", "../admin_registering_vehicle_process.php", true);
           registerPUV.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          registerPUV.send("fname=" + f_name + "&mname=" + m_name + "&lname=" + l_name + "&suffix=" + suffix + "&cnum=" + c_num + "&plateno=" + plate_no + "&route=" + rt + "&capacity=" + cpcty);
+          registerPUV.send("fname=" + f_name.trim() + "&mname=" + m_name.trim() + "&lname=" + l_name.trim() + "&suffix=" + suffix + "&cnum=0" + c_num + "&plateno=" + plate_no + "&route=" + rt + "&capacity=" + cpcty);
         }
       }
     }
@@ -113,4 +113,8 @@ const makeItCorrect = (value) => {
     const finalValue = input.charAt(0).toUpperCase() + input.slice(1);
     return finalValue;
   }
+}
+
+function exit(){
+  window.location.replace('../admin_out.php');
 }

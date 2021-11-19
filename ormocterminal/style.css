@@ -7,6 +7,23 @@ body {
   margin: 0px;
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5DADE2;
+}
+
 .main-container {
   display: flex;
   height: 100%;
@@ -433,12 +450,22 @@ body {
   overflow-y: auto;
 }
 
-.dispatchers-table {
+.dispatchers-table-profile{
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 10px;
+}
+
+.dispatchers-table{
   width: 100%;
 }
 
 .puvs-table{
   width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 10px;
 }
 
 .dispatchers-table-headers{
@@ -474,6 +501,7 @@ th {
 
 td {
   text-align: center;
+  padding: 7px 15px 7px 15px;
 }
 
 tr {
@@ -500,7 +528,7 @@ tr:nth-child(odd) {
 
 .subfield-4-1-sub {
   width: 100%;
-  /* height: 400px; */
+  max-height: 310px;
   position: relative;
   overflow-y: auto;
   border: 1px solid #abb2b9;
@@ -566,7 +594,7 @@ tr:nth-child(odd) {
 
 .subfield-6-1-sub {
   width: 100%;
-  /* height: 400px; */
+  max-height: 295px;
   position: relative;
   overflow-y: auto;
   border: 1px solid #abb2b9;
@@ -605,10 +633,10 @@ tr:nth-child(odd) {
 
 .subfield-7-1-sub {
   width: 100%;
-  /* height: 400px; */
+  max-height: 400px;
   position: relative;
   overflow-y: auto;
-  border: 1px solid #abb2b9;
+  /* border: 1px solid #abb2b9; */
   border-radius: 3px;
 }
 
@@ -912,4 +940,9 @@ tr:nth-child(odd) {
 
 .front-word:hover{
   cursor: pointer;
+}
+
+#vehicle-logs-container{
+  border: 1px solid #abb2b9;
+  border-radius: 5px;
 }

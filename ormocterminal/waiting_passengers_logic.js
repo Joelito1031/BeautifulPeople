@@ -12,3 +12,7 @@ function loadWaitingPassengers(){
 setInterval(function(){
   loadWaitingPassengers();
 }, 1500);
+
+function exit(){
+  window.location.replace('../admin_out.php');
+}

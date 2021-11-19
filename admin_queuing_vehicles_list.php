@@ -18,31 +18,49 @@ else{
   echo "<th>Vehicle</th>";
   echo "<th>Route</th>";
   echo "<th>Passengers</th>";
-  echo "<th>Unqueue</th>";
+  echo "<th>Dequeue</th>";
   echo "</tr>";
   if(sizeof($queuing_vehicles) > 0){
     if($data != ''){
       foreach($queuing_vehicles as $vehicle){
         if($vehicle->route == $data){
           $puv = '"' . $vehicle->vehicle . '"';
-          echo "<tr>";
-          echo "<td>" . $vehicle->vehicle .   "</td>";
-          echo "<td>" . strtoupper($vehicle->route) . "</td>";
-          echo "<td>" . $vehicle->passengers . "/" . $vehicle->capacity . "</td>";
-          echo "<td><button type='button' style='width: 20px; height: 20px; padding: 0; border: none; border-radius: 50px; margin-top: 3px;' onclick='unqueueVehicle(" . $puv . ")'><img style='width: 20px; height; 20px' src='./images/xbox.png'></button></td>";
-          echo "</tr>";
+          if($vehicle->passengers == $vehicle->capacity){
+            echo "<tr style='background-color: #CD6155; border-top: 1px solid #808B96; color: white'>";
+            echo "<td>" . $vehicle->vehicle .   "</td>";
+            echo "<td>" . strtoupper($vehicle->route) . "</td>";
+            echo "<td>" . $vehicle->passengers . "/" . $vehicle->capacity . "</td>";
+            echo "<td><button class='fas fa-sign-out-alt' type='button' style='background-color: #F4D03F; width: 30px; height: 20px; padding: 0; border: none; border-radius: 3px; margin-top: 3px;' onclick='unqueueVehicle(" . $puv . ")'></button></td>";
+            echo "</tr>";
+          }else{
+            echo "<tr style='background-color: #2ECC71; border-top: 1px solid #808B96; color: white'>";
+            echo "<td>" . $vehicle->vehicle .   "</td>";
+            echo "<td>" . strtoupper($vehicle->route) . "</td>";
+            echo "<td>" . $vehicle->passengers . "/" . $vehicle->capacity . "</td>";
+            echo "<td><button class='fas fa-sign-out-alt' type='button' style='background-color: #F4D03F; width: 30px; height: 20px; padding: 0; border: none; border-radius: 3px; margin-top: 3px;' onclick='unqueueVehicle(" . $puv . ")'></button></td>";
+            echo "</tr>";
+          }
         }
       }
     }
     else{
       foreach($queuing_vehicles as $vehicle){
         $puv = '"' . $vehicle->vehicle . '"';
-        echo "<tr>";
-        echo "<td>" . $vehicle->vehicle .   "</td>";
-        echo "<td>" . strtoupper($vehicle->route) . "</td>";
-        echo "<td>" . $vehicle->passengers . "/" . $vehicle->capacity . "</td>";
-        echo "<td><button type='button' style='width: 20px; height: 20px; padding: 0; border: none; border-radius: 50px; margin-top: 3px;' onclick='unqueueVehicle(" . $puv . ")'><img style='width: 20px; height; 20px' src='./images/xbox.png'></button></td>";
-        echo "</tr>";
+        if($vehicle->passengers == $vehicle->capacity){
+          echo "<tr style='background-color: #CD6155; border-top: 1px solid #808B96; color: white'>";
+          echo "<td>" . $vehicle->vehicle .   "</td>";
+          echo "<td>" . strtoupper($vehicle->route) . "</td>";
+          echo "<td>" . $vehicle->passengers . "/" . $vehicle->capacity . "</td>";
+          echo "<td><button class='fas fa-sign-out-alt' type='button' style='background-color: #F4D03F; width: 30px; height: 20px; padding: 0; border: none; border-radius: 3px; margin-top: 3px;' onclick='unqueueVehicle(" . $puv . ")'></button></td>";
+          echo "</tr>";
+        }else{
+          echo "<tr style='background-color: #2ECC71; border-top: 1px solid #808B96; color: white'>";
+          echo "<td>" . $vehicle->vehicle .   "</td>";
+          echo "<td>" . strtoupper($vehicle->route) . "</td>";
+          echo "<td>" . $vehicle->passengers . "/" . $vehicle->capacity . "</td>";
+          echo "<td><button class='fas fa-sign-out-alt' type='button' style='background-color: #F4D03F; width: 30px; height: 20px; padding: 0; border: none; border-radius: 3px; margin-top: 3px;' onclick='unqueueVehicle(" . $puv . ")'></button></td>";
+          echo "</tr>";
+        }
       }
     }
   }

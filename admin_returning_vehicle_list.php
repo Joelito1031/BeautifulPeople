@@ -41,10 +41,10 @@ if(sizeof($vehicles) > 0){
         echo "<td>";
         if($vehicle->returning){
           $vh = '"' . $vehicle->vehicle . '"';
-          echo "<button class='duty-buttton' style='background-color: #f1c40f; height: 20px; width: 20px; border-radius: 50px; border: none; margin-bottom: 5px;' onclick='vehicleStatus(" . $vh . ")'></button>";
+          echo "<button style='box-shadow: -2px 2px 5px black; background-color: #f1c40f; height: 20px; width: 20px; border-radius: 50px; border: none; margin-bottom: 5px;' onclick='vehicleStatus(" . $vh . ")'></button>";
         }else{
           $vh = '"' . $vehicle->vehicle . '"';
-          echo "<button class='duty-buttton' style='background-color: #2c3e50; height: 20px; width: 20px; border-radius: 50px; border: none; margin-bottom: 5px;' onclick='vehicleStatus(" . $vh . ")'></button>";
+          echo "<button style='box-shadow: -2px 2px 5px black; background-color: #2c3e50; height: 20px; width: 20px; border-radius: 50px; border: none; margin-bottom: 5px;' onclick='vehicleStatus(" . $vh . ")'></button>";
         }
         echo "</td>";
         echo "</tr>";
@@ -68,10 +68,10 @@ if(sizeof($vehicles) > 0){
       echo "<td>";
       if($vehicle->returning){
         $vh = '"' . $vehicle->vehicle . '"';
-        echo "<button class='duty-buttton' style='background-color: #f1c40f; height: 20px; width: 20px; border-radius: 50px; border: none; margin-bottom: 5px;' onclick='vehicleStatus(" . $vh . ")'></button>";
+        echo "<button class='duty-buttton' style='box-shadow: -2px 2px 5px black; background-color: #f1c40f; height: 20px; width: 20px; border-radius: 50px; border: none; margin-bottom: 5px;' onclick='vehicleStatus(" . $vh . ")'></button>";
       }else{
         $vh = '"' . $vehicle->vehicle . '"';
-        echo "<button class='duty-buttton' style='background-color: #2c3e50; height: 20px; width: 20px; border-radius: 50px; border: none; margin-bottom: 5px;' onclick='vehicleStatus(" . $vh . ")'></button>";
+        echo "<button class='duty-buttton' style='box-shadow: -2px 2px 5px black; background-color: #2c3e50; height: 20px; width: 20px; border-radius: 50px; border: none; margin-bottom: 5px;' onclick='vehicleStatus(" . $vh . ")'></button>";
       }
       echo "</td>";
       echo "</tr>";
@@ -79,7 +79,7 @@ if(sizeof($vehicles) > 0){
   }
 }
 else{
-  echo "<tr><td colspan='6'>No queuing vehicles</td></tr>";
+  echo "<tr><td colspan='6'>No registered vehicles</td></tr>";
 }
 
 echo "</table>";

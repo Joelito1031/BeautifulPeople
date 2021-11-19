@@ -11,7 +11,11 @@ else{
 require './db_connection.php';
 
 try{
-  $retrieve_dispatcher_list = $connection->prepare("SELECT * FROM dispatchers ORDER BY FirstName");
+  $search = "%" . $_POST['search'] . "%";
+  $retrieve_dispatcher_list = $connection->prepare("SELECT * FROM dispatchers WHERE FirstName LIKE :fname OR MiddleName LIKE :mname OR LastName LIKE :lname");
+  $retrieve_dispatcher_list->bindParam(":fname", $search);
+  $retrieve_dispatcher_list->bindParam(":mname", $search);
+  $retrieve_dispatcher_list->bindParam(":lname", $search);
   $retrieve_dispatcher_list->execute();
   $dispatchers = $retrieve_dispatcher_list->fetchAll();
   if($retrieve_dispatcher_list->rowCount() > 0){
@@ -25,7 +29,7 @@ try{
       $profile = '"' . $dispatcher['Profile'] . '"';
       $pin = '"' . $dispatcher['PIN'] . '"';
       $name = '"' . $dispatcher['FirstName'] . " " . $dispatcher['MiddleName'] . " " . $dispatcher['LastName'] . " " . $dispatcher['Suffix'] . '"';
-      echo "<div class='container p-3 border' style='display: flex; border-radius: 5px; margin-bottom: 5px;'>";
+      echo "<div class='row container p-3 my-3 border' style='border-radius: 5px'>";
       echo "<div class='dispatcher-prof-container'>";
       echo "<div>";
       if($dispatcher['Profile'] == ''){
@@ -50,9 +54,11 @@ try{
       echo "</div>";
     }
   }else{
-    echo "<div class='container p-3 my-3 border' style='text-align: center'>No registered dispatchers</div>";
+    echo "<div class='container p-3 my-3 border' style='text-align: center'>Nothing was found in your search.</div>";
   }
   $connection = null;
 }catch(Exception $e){
   echo "<div class='container p-3 my-3 border' style='text-align: center'>Something went wrong</div>";
 }
+
+?>

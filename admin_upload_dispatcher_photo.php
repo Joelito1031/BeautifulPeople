@@ -1,4 +1,13 @@
 <?php
+session_start();
+if(isset($_SESSION['loggedin'])){
+  if(!$_SESSION['loggedin']){
+    header('Location: ./');
+  }
+}
+else{
+  header('Location: ./');
+}
 try{
   $profile_dir = "./dispatcher_profile/";
   $profile_pic = $profile_dir . basename($_FILES["profile-pic"]["name"]);

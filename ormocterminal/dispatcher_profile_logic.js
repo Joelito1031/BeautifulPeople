@@ -34,7 +34,7 @@ function retrieveRegisteredDispatcher(){
   retrieveDispatcher.onreadystatechange = function(){
     if(this.readyState == 4 && this.status == 200){
       Loader.close();
-      document.querySelector('.dispatchers-table').innerHTML = this.responseText;
+      document.querySelector('.dispatchers-table-profile').innerHTML = this.responseText;
     }else{
       Loader.open();
     }
@@ -58,13 +58,12 @@ function deleteDispatcher(data, name){
           Loader.close();
           if(this.responseText == "success"){
             retrieveRegisteredDispatcher();
-            Swal.fire('Dispatcher successfully removed', '', 'success')
-            ws.send(data);
-          }
-          else if(this.responseText == "error"){
+            Swal.fire('Dispatcher successfully removed', '', 'success');
+          }else if(this.responseText == "error"){
             popupError('Something went wrong');
-          }
-          else{
+          }else if(this.responseText == "notallowed"){
+            popupInfo('Dispatcher is on duty, deletion is restricted');
+          }else{
             popupError('Something went wrong');
           }
           console.log(this.responseText);
@@ -159,7 +158,6 @@ const saveEditedData = (value) => {
     if(pinState != genPin.value){
       changepin = 'true';
     }
-    console.log(changepin);
     let dis_fname = document.getElementById('dis_f_name').value;
     let dis_mname = document.getElementById('dis_m_name').value;
     let dis_lname = document.getElementById('dis_l_name').value;
@@ -198,10 +196,13 @@ const saveEditedData = (value) => {
             }else if(this.responseText == "incomplete"){
               Loader.close();
               popupWarning('Please fill all the fields');
+            }else if(this.responseText == "notallowed"){
+              popupInfo("Cannot edit a passenger that is on duty");
             }else{
               Loader.close();
               popupError('Something went wrong');
             }
+            console.log(this.responseText);
             $('#popupEdit').modal('hide')
           }else{
             Loader.close();
@@ -251,13 +252,47 @@ const uploadThePhoto = (dispatcherId, dispatcherName) => {
           popupError("Something went wrong, dispatcher information is saved with default profile picture");
         }
         retrieveRegisteredDispatcher();
-        $('#popupEdit').modal('hide')
+        $('#popupEdit').modal('hide');
       }else{
-        $('#popupEdit').modal('hide')
+        $('#popupEdit').modal('hide');
         Loader.close();
         popupError("Failed to upload the photo");
       }
     };
     uploadPhoto.send(formData);
   }
+}
+
+function searchDispatcher(value){
+  Loader.open();
+  if(document.getElementById('search-input').value == ''){
+    document.getElementById('search-ico').style.display = "inline";
+    document.getElementById('loading-ico').style.display = "none";
+    retrieveRegisteredDispatcher()
+  }else{
+    const retrieveDispatcher= new XMLHttpRequest();
+    retrieveDispatcher.onreadystatechange = function(){
+      if(this.readyState == 4 && this.status == 200){
+        Loader.close();
+        if(this.responseText != ""){
+          document.getElementById('search-ico').style.display = "inline";
+          document.getElementById('loading-ico').style.display = "none";
+          document.querySelector('.dispatchers-table-profile').innerHTML = this.responseText;
+        }else{
+          document.getElementById('search-ico').style.display = "none";
+          document.getElementById('loading-ico').style.display = "inline";
+        }
+      }else{
+        document.getElementById('search-ico').style.display = "inline";
+        document.getElementById('loading-ico').style.display = "none";
+      }
+    }
+    retrieveDispatcher.open("POST", "../admin_search_dispatcher_profile.php", true);
+    retrieveDispatcher.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    retrieveDispatcher.send("search=" + value);
+  }
+}
+
+function exit(){
+  window.location.replace('../admin_out.php');
 }

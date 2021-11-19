@@ -21,7 +21,6 @@ function retrieveLogs(){
     logs.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     logs.send("data=" + data);
   }else if(data == 'moreoptions'){
-    document.getElementById('moreoptions').style.display = "block";
     let startDate = document.getElementById('start-date').value;
     let endDate = document.getElementById('end-date').value;
     if(startDate != '' && endDate != ''){
@@ -38,6 +37,15 @@ function retrieveLogs(){
   }
 }
 
-setInterval(function(){
-  retrieveLogs();
-}, 1500);
+retrieveLogs();
+
+function saveLogPDF(){
+  let areaToPrint = document.getElementById('areatoprint');
+  html2pdf(areaToPrint, {
+    filename: document.getElementById('vh-name').innerHTML + "_" + document.getElementById('dt-created').innerHTML + '.pdf'
+  });
+}
+
+function exit(){
+  window.location.replace('../admin_out.php');
+}

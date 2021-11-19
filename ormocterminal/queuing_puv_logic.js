@@ -1,3 +1,31 @@
+function popupInfo(message){
+  swal.fire({
+    icon: 'info',
+    text: message
+  });
+}
+
+function popupSuccess(message){
+  swal.fire({
+    icon: 'success',
+    text: message
+  });
+}
+
+function popupError(message){
+  swal.fire({
+    icon: 'error',
+    text: message
+  });
+}
+
+function popupWarning(message){
+  swal.fire({
+    icon: 'warning',
+    text: message
+  });
+}
+
 function loadQueuingVehicles(){
   if(document.getElementById('searched-destination').value != ''){
     let searchedDestination = document.getElementById('searched-destination').value;
@@ -23,28 +51,40 @@ function loadQueuingVehicles(){
 }
 
 function unqueueVehicle(data){
-  if(confirm("Are you sure you want to unqueue " + data + "?")){
-    const unqueuePUV = new XMLHttpRequest();
-    unqueuePUV.onreadystatechange = function(){
-      if(this.readyState == 4 && this.status == 200){
-        if(this.responseText == "success"){
-          warningsSuccess('Vehicle is successfully unqueued');
+  Swal.fire({
+  title: 'Are you sure you want to remove ' + data + ' in queuing list?',
+  showCancelButton: true,
+  confirmButtonText: 'Dequeue',
+  }).then((result) => {
+    if(result.isConfirmed){
+      const unqueuePUV = new XMLHttpRequest();
+      unqueuePUV.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+          if(this.responseText == "success"){
+            popupSuccess('Vehicle is successfully unqueued');
+          }
+          else if(this.responseText == "error"){
+            popupError('Something went wrong');
+          }
+          else{
+            popupError('Something went wrong');
+          }
+          console.log(this.responseText);
         }
-        else if(this.responseText == "error"){
-          warningsError('Something went wrong');
-        }
-        else{
-          warningsError('Something went wrong');
-        }
-        console.log(this.responseText);
-      }
-    };
-    unqueuePUV.open("POST", "../admin_unqueue_vehicle.php", true);
-    unqueuePUV.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    unqueuePUV.send("data=" + data);
-  }
+      };
+      unqueuePUV.open("POST", "../admin_unqueue_vehicle.php", true);
+      unqueuePUV.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      unqueuePUV.send("data=" + data);
+    }else if (result.isDenied){
+      Swal.fire('Nothing has been done.', '', 'info');
+    }
+  })
 }
 
 setInterval(function(){
   loadQueuingVehicles();
 }, 1500);
+
+function exit(){
+  window.location.replace('../admin_out.php');
+}

@@ -36,7 +36,7 @@ if((isset($_POST['dis_fname']) && !empty(trim($_POST['dis_fname']))) && (isset($
            echo "pinexist";
          }else{
            $contact = $_POST['dis_cnum'];
-           $register_dispatcher = $connection->prepare("INSERT INTO dispatchers(FirstName, MiddleName, LastName, Suffix, OnDuty, PIN, Contact) VALUES(:fname, :mname, :lname, :suffix, TRUE, :pin, :contact)");
+           $register_dispatcher = $connection->prepare("INSERT INTO dispatchers(FirstName, MiddleName, LastName, Suffix, OnDuty, PIN, Contact) VALUES(:fname, :mname, :lname, :suffix, FALSE, :pin, :contact)");
            $register_dispatcher->bindParam(':fname', $fname);
            $register_dispatcher->bindParam(':mname', $mname);
            $register_dispatcher->bindParam(':lname', $lname);

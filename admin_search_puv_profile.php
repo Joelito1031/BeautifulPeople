@@ -8,13 +8,15 @@ if(isset($_SESSION['loggedin'])){
 else{
   header('Location: ./');
 }
-$data = "";
-if(isset($_POST['data'])){
-  $data = $_POST['data'];
-}
 try{
+  $data = "";
+  if(isset($_POST['data'])){
+    $data = $_POST['data'];
+  }
   require './db_connection.php';
-  $retrieve_registered_puv = $connection->prepare("SELECT * FROM  registered_vehicles");
+  $plateno = "%" . $_POST['search'] . "%";
+  $retrieve_registered_puv = $connection->prepare("SELECT * FROM registered_vehicles WHERE PlateNo LIKE :plateno");
+  $retrieve_registered_puv->bindParam(":plateno", $plateno);
   $retrieve_registered_puv->execute();
   $puvs = $retrieve_registered_puv->fetchAll();
   if($retrieve_registered_puv->rowCount() > 0){
@@ -27,8 +29,8 @@ try{
       $route = '"' . $puv['Route'] . '"';
       $plateno = '"' . $puv['PlateNo'] . '"';
       $tel = '"' . $puv['Contact'] . '"';
-      echo "<div class='container p-3 border' style='border-radius: 5px; margin-bottom: 5px;'>";
-      echo "<div style='font-size: 2em; font-weight: bold; color: #007bff;'>" . $puv['PlateNo'] . "</div>";
+      echo "<div class='container p-3 my-3 border' style='border-radius: 5px'>";
+      echo "<div style='font-size: 2em; font-weight: bold; color: #007bff;'>$puv[PlateNo]</div>";
       echo "<div style='font-size: 13px; font-weight: bold;'>";
       echo "<span style='font-style: italic'>Destination: </span>" . strtoupper($puv['Route']) . "<br>";
       echo "<span style='font-style: italic'>Operator: </span>" . $puv['FirstName'] . " " . $puv['MiddleName'] . " " . $puv['LastName'] . " " . $puv['Suffix'] . "<br>";
@@ -42,9 +44,9 @@ try{
       echo "</div>";
     }
   }else{
-    echo "<div class='container p-3 my-3 border' style='border-radius: 5px; text-align: center'>No registered PUV.</div>";
+    echo "<div class='container p-3 my-3 border' style='text-align: center'>Nothing was found in your search.</div>";
   }
 }catch(Exception $e){
-  echo "<div class='container p-3 my-3 border' style='border-radius: 5px; text-align: center'>Something went wrong.</div>";
+  echo "<div class='container p-3 my-3 border' style='text-align: center'>Something went wrong</div>";
 }
 ?>

@@ -1,32 +1,22 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "ocqms";
-$halt_operation = false;
+require './db_connection.php';
 try{
-  $connection = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
-  $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}catch(PDOException $e){
-  $halt_operation = true;
-}
-if($halt_operation){
-  $status = "HALTED";
-}
-else{
   $data = json_decode(file_get_contents('php://input'));
-  $select_query = $connection->prepare("SELECT COUNT(*) AS count, OnDuty FROM dispatchers WHERE Name = '$data->name' AND PIN = '$data->pin'");
+  $select_query = $connection->prepare("SELECT OnDuty FROM dispatchers WHERE PIN = :pin");
+  $select_query->bindParam(":pin", $data->pin);
   $select_query->execute();
-  $data_result = $select_query->fetchall();
-  if($data_result[0]['count'] > 0){
-    $status = "REGISTERED";
-    if($data_result[0]['OnDuty'] == 1){
-      $status = "ONDUTY";
+  $data_result = $select_query->fetchColumn();
+  if($data_result > 0){
+    $status = "registered";
+    if($data_result == 1){
+      $status = "onduty";
     }
   }
   else{
-    $status = "UNREGISTERED";
+    $status = "unregistered";
   }
+}catch(Exception $e){
+  $status = "error";
 }
 echo json_encode($status);
 ?>

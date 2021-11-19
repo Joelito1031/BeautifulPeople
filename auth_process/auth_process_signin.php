@@ -36,11 +36,10 @@
             echo "notfound";
           }
         }
-        $connection = null;
       }catch(Exception $e){
         echo "error";
-        $connection = null;
       }
     }
   }
+  $connection = null;
 ?>

@@ -1,4 +1,13 @@
 <?php
+session_start();
+if(isset($_SESSION['loggedin'])){
+  if(!$_SESSION['loggedin']){
+    header('Location: ./');
+  }
+}
+else{
+  header('Location: ./');
+}
 try{
   require "./db_connection.php";
   $proceed = true;

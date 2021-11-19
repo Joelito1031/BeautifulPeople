@@ -1,32 +1,4 @@
-function warningsSuccess(message){
-  var Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000
-  });
-
-  Toast.fire({
-    icon: 'success',
-    title: message
-  })
-}
-
-function warningsRegistered(message){
-  var Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000
-  });
-
-  Toast.fire({
-    icon: 'info',
-    title: message
-  })
-}
-
-function warningsError(message){
+function returningSetError(message){
   var Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -36,11 +8,12 @@ function warningsError(message){
 
   Toast.fire({
     icon: 'error',
-    title: message
+    title: message,
+    background: '#EC7063'
   })
 }
 
-function warningsIncomplete(message){
+function returningSetSuccess(message){
   var Toast = Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -49,9 +22,38 @@ function warningsIncomplete(message){
   });
 
   Toast.fire({
-    icon: 'warning',
-    title: message
+    icon: 'success',
+    title: message,
+    background: '#9edbff'
   })
+}
+
+function popupInfo(message){
+  swal.fire({
+    icon: 'info',
+    text: message
+  });
+}
+
+function popupSuccess(message){
+  swal.fire({
+    icon: 'success',
+    text: message
+  });
+}
+
+function popupError(message){
+  swal.fire({
+    icon: 'error',
+    text: message
+  });
+}
+
+function popupWarning(message){
+  swal.fire({
+    icon: 'warning',
+    text: message
+  });
 }
 
 function loadReturningVehicles(){
@@ -83,13 +85,13 @@ function vehicleStatus(data){
   changeVehicleStatus.onreadystatechange = function(){
     if(this.readyState == 4 && this.status == 200){
       if(this.responseText == "success-on"){
-        warningsSuccess('Vehicle set to return');
+        returningSetSuccess('Vehicle set to return');
       }
       else if(this.responseText == "success-off"){
-        warningsIncomplete('Vehicle set to not return');
+        returningSetSuccess('Vehicle set to not return');
       }
       else{
-        warningsError('Something went wrong');
+        returningSetError('Something went wrong');
       }
     }
   }
@@ -98,28 +100,10 @@ function vehicleStatus(data){
   changeVehicleStatus.send("data=" + data);
 }
 
-function fullyRemoveVehicle(data){
-  if(confirm("Are you sure you want to remove " + data)){
-    const vehicleToRemove = new XMLHttpRequest();
-    vehicleToRemove.onreadystatechange = function(){
-      if(this.readyState == 4 && this.status == 200){
-        if(this.responseText == "success"){
-          warningsSuccess('Vehicle was removed successfully');
-        }
-        else if(this.responseText == "error"){
-          warningsError('Something went wrong');
-        }
-        else{
-          warningsError('Something went wrong');
-        }
-      }
-    }
-    vehicleToRemove.open("POST", "../admin_drop_vehicle.php", true);
-    vehicleToRemove.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    vehicleToRemove.send("data=" + data);
-  }
-}
-
 setInterval(function(){
   loadReturningVehicles();
 }, 1500);
+
+function exit(){
+  window.location.replace('../admin_out.php');
+}
