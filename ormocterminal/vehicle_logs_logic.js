@@ -39,10 +39,10 @@ function retrieveLogs(){
 
 retrieveLogs();
 
-function saveLogPDF(){
-  let areaToPrint = document.getElementById('areatoprint');
+function saveLogPDF(vhname, vhlogdate, doc){
+  let areaToPrint = document.getElementById(doc);
   html2pdf(areaToPrint, {
-    filename: document.getElementById('vh-name').innerHTML + "_" + document.getElementById('dt-created').innerHTML + '.pdf'
+    filename: document.getElementById(vhname).innerHTML + "_" + document.getElementById(vhlogdate).innerHTML + '.pdf'
   });
 }
 

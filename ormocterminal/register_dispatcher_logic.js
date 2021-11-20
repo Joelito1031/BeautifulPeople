@@ -92,6 +92,7 @@ function registerDispatcher(){
         let dis_cnum = document.getElementById('dis_c_num').value;
         let dis_pin = document.getElementById('gen-pin').value;
         let dis_suffix = document.getElementById('suffix').value;
+        let address = document.getElementById('address').value;
         const registerDispatch = new XMLHttpRequest();
         registerDispatch.onreadystatechange = function(){
           if(this.readyState == 4 && this.status == 200){
@@ -106,6 +107,7 @@ function registerDispatcher(){
               document.getElementById('dis_c_num').value = "";
               document.getElementById('gen-pin').value = "";
               document.getElementById('suffix').value = "";
+              document.getElementById('address').value = "";
               choosenFile.value = "";
             }else if(this.responseText == "pinexist"){
               Loader.close();
@@ -124,7 +126,7 @@ function registerDispatcher(){
         }
         registerDispatch.open("POST", "../admin_dispatcher_process.php", true);
         registerDispatch.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        registerDispatch.send("dis_fname=" + dis_fname.trim() + "&dis_mname=" + dis_mname.trim() + "&dis_lname=" + dis_lname.trim() + "&dis_suffix=" + dis_suffix + "&dis_cnum=" + "0" + dis_cnum + "&dis_pin=" + dis_pin);
+        registerDispatch.send("dis_fname=" + dis_fname.trim() + "&dis_mname=" + dis_mname.trim() + "&dis_lname=" + dis_lname.trim() + "&dis_suffix=" + dis_suffix + "&dis_cnum=" + "0" + dis_cnum + "&dis_pin=" + dis_pin + "&address=" + address);
       }
     }
   }else{
@@ -152,14 +154,14 @@ const uploadThePhoto = (fname, mname, lname, suffix) => {
       if(uploadPhoto.status == 200){
         Loader.close();
         if(this.responseText == 'notapic'){
-          popupInfo("Image is not acceptable, passenger information is saved with default profile picture");
+          popupInfo("Image is not acceptable, dispatcher information is saved with default profile picture");
           retrieveRegisteredDispatcher();
         }else if(this.responseText == 'fileexist'){
-          popupInfo("Image already exist, passenger information is saved with default profile picture");
+          popupInfo("Image already exist, dispatcher information is saved with default profile picture");
           retrieveRegisteredDispatcher();
         }else if(this.responseText == 'sizelimit'){
           retrieveRegisteredDispatcher();
-          popupInfo("Image exceed size limit, passenger information is saved with default profile picture");
+          popupInfo("Image exceed size limit, dispatcher information is saved with default profile picture");
         }else if(this.responseText == 'upload'){
           popupSuccess("Dispatcher successfully registered");
           document.getElementById('actual-pic').src = "./images/adminUserProfile.png";
@@ -247,4 +249,9 @@ const makeItCorrect = (value) => {
 
 function exit(){
   window.location.replace('../admin_out.php');
+}
+
+function resetImage(){
+  document.getElementById('actual-pic').src = './images/adminUserProfile.png';
+  choosenFile.value = '';
 }

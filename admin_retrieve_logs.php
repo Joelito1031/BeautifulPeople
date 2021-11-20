@@ -12,43 +12,58 @@ $data = "";
 require './db_connection.php';
 if(isset($_POST['data'])){
   if($_POST['data'] == 'latest'){
-    $retrieve_logs = $connection->prepare("SELECT LogId, Directory, Vehicle, Passengers, Route, LogDate, LogTime FROM logs ORDER BY LogId ASC");
+    $retrieve_logs = $connection->prepare("SELECT logs.LogId, logs.Directory, logs.Vehicle, logs.Passengers, logs.Route, logs.LogDate, logs.LogTime,
+                                           registered_vehicles.FirstName, registered_vehicles.MiddleName, registered_vehicles.LastName, registered_vehicles.Suffix
+                                           FROM logs INNER JOIN registered_vehicles ON logs.Vehicle = registered_vehicles.PlateNo ORDER BY LogId DESC");
   }elseif($_POST['data'] == 'oldest'){
-    $retrieve_logs = $connection->prepare("SELECT LogId, Directory, Vehicle, Passengers, Route, LogDate, LogTime FROM logs ORDER BY LogId DESC");
+    $retrieve_logs = $connection->prepare("SELECT logs.LogId, logs.Directory, logs.Vehicle, logs.Passengers, logs.Route, logs.LogDate, logs.LogTime,
+                                           registered_vehicles.FirstName, registered_vehicles.MiddleName, registered_vehicles.LastName, registered_vehicles.Suffix
+                                           FROM logs INNER JOIN registered_vehicles ON logs.Vehicle = registered_vehicles.PlateNo ORDER BY LogId ASC");
   }
 }elseif(isset($_POST['startdate']) && isset($_POST['enddate'])){
   $start_date = $_POST['startdate'];
   $end_date = $_POST['enddate'];
-  $retrieve_logs = $connection->prepare("SELECT LogId, Directory, Vehicle, Passengers, Route, LogDate, LogTime FROM logs WHERE LogDate BETWEEN '$start_date' AND '$end_date'");
+  $retrieve_logs = $connection->prepare("SELECT logs.LogId, logs.Directory, logs.Vehicle, logs.Passengers, logs.Route, logs.LogDate, logs.LogTime,
+                                         registered_vehicles.FirstName, registered_vehicles.MiddleName, registered_vehicles.LastName, registered_vehicles.Suffix
+                                         FROM logs INNER JOIN registered_vehicles ON logs.Vehicle = registered_vehicles.PlateNo WHERE logs.LogDate BETWEEN :startdate AND :endate");
+  $retrieve_logs->bindParam(":startdate", $start_date);
+  $retrieve_logs->bindParam(":endate", $end_date);
 }else{
-  $retrieve_logs = $connection->prepare("SELECT LogId, Directory, Vehicle, Passengers, Route, LogDate, LogTime FROM logs");
+  $retrieve_logs = $connection->prepare("SELECT logs.LogId, logs.Directory, logs.Vehicle, logs.Passengers, logs.Route, logs.LogDate, logs.LogTime,
+                                         registered_vehicles.FirstName, registered_vehicles.MiddleName, registered_vehicles.LastName, registered_vehicles.Suffix
+                                         FROM logs INNER JOIN registered_vehicles ON logs.Vehicle = registered_vehicles.PlateNo");
 }
 try{
   $retrieve_logs->execute();
   $logs = $retrieve_logs->fetchAll();
   if(sizeof($logs) > 0){
     foreach($logs as $log){
-      echo "<div id='vehicle-logs-container'>";
+      echo "<div id='vehicle-logs-container' style='margin-bottom: 3px;'>";
       echo "<div>";
       echo "<div class='card-header' id='" . $log['LogId'] . "'>";
       echo "<h5 class='mb-0'>";
-      echo "<button style='width: 100%;' class='btn btn-link collapsed' data-toggle='collapse' data-target='#" . $log['Vehicle'] . "' aria-expanded='true' aria-controls='collapseOne'>";
+      echo "<button style='width: 100%;' class='btn btn-link collapsed' data-toggle='collapse' data-target='#" . $log['Vehicle'] . "_" . $log['LogId'] . "' aria-expanded='true' aria-controls='collapseOne'>";
       echo "<div style='display: flex; align-items: center; justify-content: space-between; width: 100%;'>";
-      echo "<div style='display: flex;'>";
+      echo "<div style='display: flex; align-items: center;'>";
+      echo "<div style='padding-right: 5px'><i class='fas fa-chevron-right'></i></div>";
       echo "<i class='fas fa-file' style='font-size: 35px;'></i>";
-      echo "<div style='width: 100px; padding: 5px;' id='vh-name'>" . $log['Vehicle'] . "</div>";
+      echo "<div style='width: 100px; padding: 5px;' id='" . $log['Route'] . "_" . $log['LogId'] . "'>" . $log['Vehicle'] . "</div>";
       echo "</div>";
-      echo "<div id='dt-created'>" . $log['LogDate'] . "_" . $log['LogTime'] . "</div>";
+      echo "<div id='" . $log['LogId'] . "_" . $log['LogId'] . "'>" . $log['LogDate'] . "_" . $log['LogTime'] . "</div>";
       echo "</div>";
       echo "</button>";
       echo "</h5>";
       echo "</div>";
-      echo "<div id='" . $log['Vehicle'] . "' style='text-align: center;' class='collapse' aria-labelledby='" . $log['LogId'] . "' data-parent='#vehicle-logs-container'>";
-      echo "<div display='flex' style='margin: 10px 0 10px 0'><button class='btn btn-primary' onclick='saveLogPDF()'>SAVE AS PDF</button></div>";
-      echo "<div id='areatoprint' class='card-body'>";
+      echo "<div id='" . $log['Vehicle'] . "_" . $log['LogId'] . "' style='text-align: center;' class='collapse' aria-labelledby='" . $log['LogId'] . "' data-parent='#vehicle-logs-container'>";
+      $vehicle_name = '"' . $log['Route'] . "_" . $log['LogId'] . '"';
+      $vh_timestamp = '"' . $log['LogId'] . "_" . $log['LogId'] . '"';
+      $area_to_print = '"' . basename($log['Directory']) . '"';
+      echo "<div display='flex' style='margin: 10px 0 10px 0'><button class='btn btn-primary' onclick='saveLogPDF(" . $vehicle_name . "," . $vh_timestamp . "," . $area_to_print . ")'>SAVE AS PDF</button></div>";
+      echo "<div id='" . basename($log['Directory']) . "' class='card-body'>";
       echo "<div style='text-align: center'>";
-      echo "<img style='width: 50px; height: 50px;' src='./images/logoQrmoc.png'>";
-      echo "<div style='font-size: 14px; font-family: Times New Roman; padding: 5px 0 3px 0; font-weight: bold'>Authentic Log of " . $log['Vehicle'] . "</div>";
+      echo "<img style='width: 100px; height: 100px;' src='./images/logoQrmoc.png'>";
+      echo "<div style='font-size: 14px; font-family: Times New Roman; padding: 5px 0 3px 0; font-weight: bold'>";
+      echo "Authentic Log of " . $log['Vehicle'] . " Operated by " . $log['FirstName'] . " " . $log['MiddleName'] . " " . $log['LastName'] . " " . $log['Suffix'] . " going to " . strtoupper($log['Route']) . "</div>";
       echo "<div style='font-size: 14px; font-family: Times New Roman; padding: 2px 0 20px 0; font-weight: bold'>Generated by Q R M O C - Queuing Passenger Assistance System</div>";
       echo "</div>";
       $log_content = json_decode(file_get_contents($log['Directory']));
@@ -83,7 +98,10 @@ try{
         }
       }
       echo "</table>";
-      echo "<div style='padding: 5px 0 0 0; display: flex; justify-content: space-between;'><div style='font-family: Times New Roman; font-size: 14px'>Number of Passengers: " . $log['Passengers'] . "</div><div style='font-family: Times New Roman; font-size: 14px'>Made possible by J<sup>3</sup></div></div>";
+      echo "<div style='padding: 5px 0 0 0; display: flex; justify-content: space-between;'>";
+      echo "<div style='font-family: Times New Roman; font-size: 14px'>Number of Passengers: " . $log['Passengers'] . "</div>";
+      echo "<div style='font-family: Times New Roman; font-size: 14px'>Made possible by J<sup>3</sup></div>";
+      echo "</div>";
       echo "</div>";
       echo "</div>";
       echo "</div>";

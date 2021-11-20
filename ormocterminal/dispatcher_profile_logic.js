@@ -1,4 +1,5 @@
 let pinState = '';
+let profileState = '';
 
 function popupInfo(message){
   swal.fire({
@@ -85,7 +86,7 @@ retrieveRegisteredDispatcher();
 
 const choosenFile = document.getElementById('profile-pic');
 
-const editDispatcher = (id, fname, mname, lname, suffix, contact, profile, pin) => {
+const editDispatcher = (id, fname, mname, lname, suffix, contact, profile, pin, address) => {
   const name = fname + " " + mname + " " + lname + " " + suffix;
   document.getElementById('modalTitle').innerHTML = name;
   document.getElementById('dis_f_name').value = fname;
@@ -93,6 +94,8 @@ const editDispatcher = (id, fname, mname, lname, suffix, contact, profile, pin) 
   document.getElementById('dis_l_name').value = lname;
   document.getElementById('suffix').value = suffix;
   document.getElementById('dis_c_num').value = contact.slice(1);
+  document.getElementById('address').value = address;
+  profileState = profile;
   if(profile == ''){
     document.getElementById('actual-pic').src = "../dispatcher_profile/adminUserProfile.png";
   }else{
@@ -174,6 +177,7 @@ const saveEditedData = (value) => {
         let dis_cnum = document.getElementById('dis_c_num').value;
         let dis_pin = document.getElementById('gen-pin').value;
         let dis_suffix = document.getElementById('suffix').value;
+        let address = document.getElementById('address').value;
         let name = dis_fname.trim() + dis_mname.trim() + dis_lname.trim() + dis_suffix.trim();
         const registerDispatch = new XMLHttpRequest();
         registerDispatch.onreadystatechange = function(){
@@ -197,7 +201,7 @@ const saveEditedData = (value) => {
               Loader.close();
               popupWarning('Please fill all the fields');
             }else if(this.responseText == "notallowed"){
-              popupInfo("Cannot edit a passenger that is on duty");
+              popupInfo("Cannot edit a dispatcher that is on duty");
             }else{
               Loader.close();
               popupError('Something went wrong');
@@ -212,7 +216,7 @@ const saveEditedData = (value) => {
         }
         registerDispatch.open("POST", "../admin_register_edited_dispatcher.php", true);
         registerDispatch.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        registerDispatch.send("dis_fname=" + dis_fname.trim() + "&dis_mname=" + dis_mname.trim() + "&dis_lname=" + dis_lname.trim() + "&dis_suffix=" + dis_suffix + "&dis_cnum=" + "0" + dis_cnum + "&dis_pin=" + dis_pin + "&id=" + value + "&changepin=" + changepin);
+        registerDispatch.send("dis_fname=" + dis_fname.trim() + "&dis_mname=" + dis_mname.trim() + "&dis_lname=" + dis_lname.trim() + "&dis_suffix=" + dis_suffix + "&dis_cnum=" + "0" + dis_cnum + "&dis_pin=" + dis_pin + "&id=" + value + "&changepin=" + changepin + "&address=" + address);
       }
     }
   }else{
@@ -224,7 +228,7 @@ const saveEditedData = (value) => {
 const uploadThePhoto = (dispatcherId, dispatcherName) => {
   if(choosenFile.value == ''){
     Loader.close();
-    popupSuccess("Dispatcher successfully registered with default profile picture");
+    popupSuccess("Changes are successfully saved");
     retrieveRegisteredDispatcher();
   }else{
     const formData = new FormData();
@@ -245,16 +249,18 @@ const uploadThePhoto = (dispatcherId, dispatcherName) => {
           popupInfo("Image exceed size limit, dispatcher information is saved with default profile picture");
         }else if(this.responseText == 'upload'){
           choosenFile.value = '';
-          popupSuccess("Dispatcher successfully registered");
+          popupSuccess("Dispatcher successfully edited");
         }else if(this.responseText == 'error'){
           popupError("Something went wrong, dispatcher information is saved with default profile picture");
+        }else if(this.responseText == 'notallowed'){
+          popupInfo("All is well except the photo");
         }else{
           popupError("Something went wrong, dispatcher information is saved with default profile picture");
         }
+        choosenFile.value = "";
         retrieveRegisteredDispatcher();
-        $('#popupEdit').modal('hide');
+        console.log(this.responseText);
       }else{
-        $('#popupEdit').modal('hide');
         Loader.close();
         popupError("Failed to upload the photo");
       }
@@ -264,7 +270,6 @@ const uploadThePhoto = (dispatcherId, dispatcherName) => {
 }
 
 function searchDispatcher(value){
-  Loader.open();
   if(document.getElementById('search-input').value == ''){
     document.getElementById('search-ico').style.display = "inline";
     document.getElementById('loading-ico').style.display = "none";
@@ -273,7 +278,6 @@ function searchDispatcher(value){
     const retrieveDispatcher= new XMLHttpRequest();
     retrieveDispatcher.onreadystatechange = function(){
       if(this.readyState == 4 && this.status == 200){
-        Loader.close();
         if(this.responseText != ""){
           document.getElementById('search-ico').style.display = "inline";
           document.getElementById('loading-ico').style.display = "none";

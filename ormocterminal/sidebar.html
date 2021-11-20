@@ -50,10 +50,7 @@
       <img src="images/logoQrmoc.png" alt="Q R M O C" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Q r m o c</span>
     </a>
-
-    <!-- Sidebar -->
     <div class="sidebar ">
-      <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img src="images/adminUserProfile.png" class="img-circle elevation-2" alt="User Image">
@@ -62,8 +59,6 @@
           <a href="./dashboard" class="d-block">Administrator</a>
         </div>
       </div>
-
-      <!-- Sidebar Menu -->
       <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
@@ -74,15 +69,16 @@
                 </p>
               </a>
             </li>
-            <li class="nav-header">QR CODE</li>
-            <!-- <li class="nav-item">
-              <a href="#" onclick="showB()" class="nav-link">
-                <i class="nav-icon fas fa-qrcode"></i>
+            <li class="nav-header">DISPATCHER</li>
+            <li class="nav-item">
+              <a href="./registerdispatcher" class="nav-link">
+                <i class="nav-icon fas fa-user-plus"></i>
                 <p class="cfont-size">
-                  Register Passenger QR
+                  Add & Change Status
                 </p>
               </a>
-            </li> -->
+            </li>
+            <li class="nav-header">QR CODE</li>
             <li class="nav-item">
               <a href="./registerpuv" class="nav-link">
                 <i class="nav-icon fas fa-truck"></i>
@@ -116,41 +112,18 @@
                 </p>
               </a>
             </li>
-
-            <li class="nav-header">DISPATCHER</li>
-            <li class="nav-item">
-              <a href="./registerdispatcher" class="nav-link">
-                <i class="nav-icon fas fa-user-plus"></i>
-                <p class="cfont-size">
-                  Add & Change Status
-                </p>
-              </a>
-            </li>
-
-            <li class="nav-header">REPORTS</li>
-
-            <li class="nav-item">
-              <a href="./logs" class="nav-link">
-                <i class="nav-icon fas fa-clipboard-list"></i>
-                <p class="cfont-size">
-                  Logs
-                </p>
-              </a>
-            </li>
-
             <li class="nav-header">PROFILES</li>
             <li class="nav-item menu-open">
               <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p class="cfont-size">
-                  Profiles
+                  Manage Profiles
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="./dispatcherprofile" class="nav-link">
-                  <!-- <i class="far fa-circle nav-icon"></i> -->
                   <i class="nav-icon" data-feather="user"></i>
                     <p class="cfont-size">
                       Dispatcher Profile
@@ -166,6 +139,15 @@
                   </a>
                 </li>
               </ul>
+            </li>
+            <li class="nav-header">REPORT</li>
+            <li class="nav-item">
+              <a href="./logs" class="nav-link">
+                <i class="nav-icon fas fa-clipboard-list"></i>
+                <p class="cfont-size">
+                  Vehicle Passenger Logs
+                </p>
+              </a>
             </li>
           </ul>
         </nav>

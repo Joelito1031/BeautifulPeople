@@ -28,6 +28,8 @@ function popupWarning(message){
   });
 }
 
+const choosenFile = document.getElementById('profile-pic');
+
 function registerVehicle(){
   let contactNumber = document.getElementById('c_num');
   let plateNumber = document.getElementById('plate_no');
@@ -36,18 +38,25 @@ function registerVehicle(){
     let f_name = document.getElementById('f_name').value;
     let m_name = document.getElementById('m_name').value;
     let l_name = document.getElementById('l_name').value;
+    let df_name = document.getElementById('df_name').value;
+    let dm_name = document.getElementById('dm_name').value;
+    let dl_name = document.getElementById('dl_name').value;
     let invalid_str = /\d/;
-    if(invalid_str.test(f_name) || invalid_str.test(m_name) || invalid_str.test(l_name)){
+    if(invalid_str.test(f_name) || invalid_str.test(m_name) || invalid_str.test(l_name) || invalid_str.test(df_name) || invalid_str.test(dm_name) || invalid_str.test(dl_name)){
       Loader.close();
-      popupWarning('An invalid input was detected, please recheck all the fields');
+      popupWarning('Numbers are not allowed in names');
     }else{
       let invalid_char = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
-      if(invalid_char.test(f_name) || invalid_char.test(m_name) || invalid_char.test(l_name)){
+      if(invalid_char.test(f_name) || invalid_char.test(m_name) || invalid_char.test(l_name) || invalid_char.test(df_name) || invalid_char.test(dm_name) || invalid_char.test(dl_name)){
         Loader.close();
-        popupWarning('An invalid input was detected, please recheck all the fields');
+        popupWarning('Special characters are not allowed in names');
       }else{
         let suffix = document.getElementById('suffix').value;
+        let dsuffix = document.getElementById('dsuffix').value;
         let c_num = document.getElementById('c_num').value;
+        let dc_num = document.getElementById('dc_num').value;
+        let address = document.getElementById('address').value;
+        let daddress = document.getElementById('daddress').value;
         let plate_no = document.getElementById('plate_no').value;
         let rt = document.getElementById('rt').value;
         let cpcty = document.getElementById('cpcty').value;
@@ -70,16 +79,22 @@ function registerVehicle(){
                 popupWarning('Please fill all the fields');
               }
               else if(this.responseText == plate_no){
+                uploadThePhoto(plate_no);
                 document.getElementById('vehicle-qrimage').src = '../qrs/' + this.responseText + '.png'; //used
                 document.getElementById('vehicle-plateno').innerHTML = this.responseText;
-                popupSuccess('Vehicle successfully registered');
-                let f_name = document.getElementById('f_name').value = '';
-                let m_name = document.getElementById('m_name').value = '';
-                let l_name = document.getElementById('l_name').value = '';
-                let c_num = document.getElementById('c_num').value = '';
-                let plate_no = document.getElementById('plate_no').value = '';
-                let rt = document.getElementById('rt').value = '';
-                let cpcty = document.getElementById('cpcty').value = '';
+                document.getElementById('f_name').value = '';
+                document.getElementById('m_name').value = '';
+                document.getElementById('l_name').value = '';
+                document.getElementById('c_num').value = '';
+                document.getElementById('address').value = '';
+                document.getElementById('f_name').value = '';
+                document.getElementById('dm_name').value = '';
+                document.getElementById('dl_name').value = '';
+                document.getElementById('dc_num').value = '';
+                document.getElementById('daddress').value = '';
+                document.getElementById('plate_no').value = '';
+                document.getElementById('rt').value = '';
+                document.getElementById('cpcty').value = '';
               }
               else{
                 popupError('Something went wrong');
@@ -89,14 +104,58 @@ function registerVehicle(){
           };
           registerPUV.open("POST", "../admin_registering_vehicle_process.php", true);
           registerPUV.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          registerPUV.send("fname=" + f_name.trim() + "&mname=" + m_name.trim() + "&lname=" + l_name.trim() + "&suffix=" + suffix + "&cnum=0" + c_num + "&plateno=" + plate_no + "&route=" + rt + "&capacity=" + cpcty);
+          registerPUV.send("fname=" + f_name.trim() + "&mname=" + m_name.trim() + "&lname=" + l_name.trim() + "&suffix=" + suffix + "&cnum=0"
+                            + c_num + "&plateno=" + plate_no + "&route=" + rt + "&capacity=" + cpcty + "&address=" + address + "&dfname=" + df_name.trim()
+                            + "&dmname=" + dm_name.trim() + "&dlname=" + dl_name.trim() + "&dsuffix=" + dsuffix + "&dcnum=0" + dc_num + "&daddress=" + daddress);
         }
       }
     }
   }else{
-    popupWarning('Invalid input');
+    Loader.close();
+    popupWarning('Invalid input, please recheck all the fields');
   }
 }
+
+
+const uploadThePhoto = (plateno) => {
+  if(choosenFile.value == ''){
+    Loader.close();
+    popupSuccess('Vehicle successfully registered');
+  }else{
+    const formData = new FormData();
+    const file = choosenFile.files[0];
+    formData.append('profile-pic', file, file.name);
+    formData.append('plateno', plateno);
+    const uploadPhoto = new XMLHttpRequest();
+    uploadPhoto.open('POST', '../admin_upload_vehicle_photo.php', true);
+    uploadPhoto.onload = function(){
+      if(uploadPhoto.status == 200){
+        Loader.close();
+        if(this.responseText == 'notapic'){
+          popupInfo("Image is not acceptable, vehicle information is saved with default profile picture");
+        }else if(this.responseText == 'fileexist'){
+          popupInfo("Image already exist, vehicle information is saved with default profile picture");
+        }else if(this.responseText == 'sizelimit'){
+          popupInfo("Image exceed size limit, vehicle information is saved with default profile picture");
+        }else if(this.responseText == 'upload'){
+          popupSuccess("Dispatcher successfully registered");
+          document.getElementById('actual-pic').src = "../vehicle_images/vehicleImage.png";
+        }else if(this.responseText == 'error'){
+          popupError("Something went wrong");
+        }else{
+          popupError("Something went wrong");
+        }
+        console.log(this.responseText);
+      }else{
+        Loader.close();
+        popupError("Failed to upload the photo");
+      }
+    };
+    uploadPhoto.send(formData);
+  }
+}
+
+
 
 function saveVehiclePDF(){
   var element_1 = document.getElementById('vehicle-for-print');
@@ -117,4 +176,29 @@ const makeItCorrect = (value) => {
 
 function exit(){
   window.location.replace('../admin_out.php');
+}
+
+const openFile = () => {
+  document.getElementById('profile-pic').click();
+}
+
+choosenFile.addEventListener("change", function(){
+  previewFile();
+});
+
+const previewFile = () => {
+  const actualPic = document.getElementById('actual-pic');
+  const pic = choosenFile.files[0];
+  if(pic){
+    const picReader = new FileReader();
+    picReader.readAsDataURL(pic);
+    picReader.addEventListener("load", function(){
+      actualPic.src = this.result;
+    });
+  }
+}
+
+function resetImage(){
+  document.getElementById('actual-pic').src = '../vehicle_images/vehicleImage.png';
+  choosenFile.value = '';
 }

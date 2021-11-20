@@ -9,10 +9,10 @@ else{
   header('Location: ./');
 }
 try{
-  $profile_dir = "./dispatcher_profile/";
+  $profile_dir = "./vehicle_images/";
   $profile_pic = $profile_dir . basename($_FILES["profile-pic"]["name"]);
   $filetype = strtolower(pathinfo($profile_pic, PATHINFO_EXTENSION));
-  $file_rename = $profile_dir . $_POST['fname'] . $_POST['mname'] . $_POST['lname'] . $_POST['suffix'] . time() . "." . $filetype;
+  $file_rename = $profile_dir . $_POST['plateno'] . "." . $filetype;
   $uploadok = 0;
   $check = getimagesize($_FILES["profile-pic"]["tmp_name"]);
   if($check !== false){
@@ -35,12 +35,9 @@ try{
   }else{
     if(move_uploaded_file($_FILES["profile-pic"]["tmp_name"], $file_rename)){
       require "./db_connection.php";
-      $save_profile_directory = $connection->prepare("UPDATE dispatchers SET Profile = :profile WHERE FirstName = :fname AND MiddleName = :mname AND LastName = :lname AND Suffix = :suffix");
-      $save_profile_directory->bindParam(":profile", $file_rename);
-      $save_profile_directory->bindParam(":fname", $_POST['fname']);
-      $save_profile_directory->bindParam(":mname", $_POST['mname']);
-      $save_profile_directory->bindParam(":lname", $_POST['lname']);
-      $save_profile_directory->bindParam(":suffix", $_POST['suffix']);
+      $save_profile_directory = $connection->prepare("UPDATE registered_vehicles SET VehicleProfile = :vehicleprofile WHERE PlateNo = :plateno");
+      $save_profile_directory->bindParam(":vehicleprofile", $file_rename);
+      $save_profile_directory->bindParam(":plateno", $_POST['plateno']);
       $save_profile_directory->execute();
       if($save_profile_directory->rowCount() > 0){
         echo $status;

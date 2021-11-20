@@ -13,7 +13,6 @@ if(isset($_POST['data'])){
   $data = $_POST['data'];
 }
 try{
-  require './db_connection.php';
   $plateno = $_POST['data'];
   $queuing_vehicles = json_decode(file_get_contents("./vehicles/queuing_vehicles.json"));
   $proceed = true;
@@ -25,6 +24,7 @@ try{
   }
 
   if($proceed){
+    require './db_connection.php';
     $data = $_POST['data'];
     $vehicle_is_queuing = false;
     $count_one = 0;
@@ -81,12 +81,29 @@ try{
                 echo "error";
               }
               else{
-                $delete_vehicle->execute();
-                $vehicles_file = fopen('./vehicles/vehicles.json', 'w');
-                $vehicles_to_save = json_encode($vehicles);
-                fwrite($vehicles_file, $vehicles_to_save);
-                fclose($vehicles_file);
-                echo "success";
+                $select_profile = $connection->prepare("SELECT VehicleProfile FROM registered_vehicles WHERE PlateNo = :platenumber");
+                $select_profile->bindParam(":platenumber", $data);
+                $select_profile->execute();
+                $profile_dir = $select_profile->fetchColumn();
+                if($profile_dir != ""){
+                  if(!unlink($profile_dir)){
+                    echo "error";
+                  }else{
+                    $delete_vehicle->execute();
+                    $vehicles_file = fopen('./vehicles/vehicles.json', 'w');
+                    $vehicles_to_save = json_encode($vehicles);
+                    fwrite($vehicles_file, $vehicles_to_save);
+                    fclose($vehicles_file);
+                    echo "success";
+                  }
+                }else{
+                  $delete_vehicle->execute();
+                  $vehicles_file = fopen('./vehicles/vehicles.json', 'w');
+                  $vehicles_to_save = json_encode($vehicles);
+                  fwrite($vehicles_file, $vehicles_to_save);
+                  fclose($vehicles_file);
+                  echo "success";
+                }
               }
             }
           }catch(Exception $e){

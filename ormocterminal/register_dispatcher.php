@@ -114,6 +114,124 @@ else{
                           </div>
                         </div>
                         <div class="form-group">
+                          <span data-toggle="dispatcher-tooltip" title="Select dispatcher's address." class="fas fa-info-circle" style="color: #9edbff;"></span>
+                          <label for="contact_number">Address</label>
+                          <select id="address" class="form-control">
+                            <option value="">Barangays</option>
+                            <option value="0">Non-Resident</option>
+                            <option value="Brgy. Airport">Airport</option>
+                            <option value="Brgy. Alegria">Alegria</option>
+                            <option value="Brgy. Alta Vista">Alta Vista</option>
+                            <option value="Brgy. Bagong">Bagong</option>
+                            <option value="Brgy. Bagong Buhay">Bagong Buhay</option>
+                            <option value="Bantigue">Bantigue</option>
+                            <option value="Barangay District 1">Barangay District 1</option>
+                            <option value="Barangay District 10">Barangay District 10 </option>
+                            <option value="Barangay District 11">Barangay District 11 </option>
+                            <option value="Barangay District 12">Barangay District 12 </option>
+                            <option value="Barangay District 13">Barangay District 13 </option>
+                            <option value="Barangay District 14">Barangay District 14 </option>
+                            <option value="Barangay District 15">Barangay District 15 </option>
+                            <option value="Barangay District 16">Barangay District 16 </option>
+                            <option value="Barangay District 17">Barangay District 17 </option>
+                            <option value="Barangay District 18">Barangay District 18 </option>
+                            <option value="Barangay District 19">Barangay District 19 </option>
+                            <option value="Barangay District 2">Barangay District 2 </option>
+                            <option value="Barangay District 20">Barangay District 20 </option>
+                            <option value="Barangay District 21">Barangay District 21 </option>
+                            <option value="Barangay District 22">Barangay District 22 </option>
+                            <option value="Barangay District 23">Barangay District 23 </option>
+                            <option value="Barangay District 24">Barangay District 24 </option>
+                            <option value="Barangay District 25 (Malbasag)">Barangay District 25 (Malbasag) </option>
+                            <option value="Barangay District 26 (Isla Verde)">Barangay District 26 (Isla Verde)</option>
+                            <option value="Barangay District 27">Barangay District 27 </option>
+                            <option value="Barangay District 28">Barangay District 28 </option>
+                            <option value="Barangay District 29 (Nadongholan)">Barangay District 29 (Nadongholan) </option>
+                            <option value="Barangay District 3">Barangay District 3 </option>
+                            <option value="Barangay District 4">Barangay District 4 </option>
+                            <option value="Barangay District 5">Barangay District 5 </option>
+                            <option value="Barangay District 6">Barangay District 6 </option>
+                            <option value="Barangay District 7">Barangay District 7 </option>
+                            <option value="Barangay District 8">Barangay District 8 </option>
+                            <option value="Barangay District 9">Barangay District 9 </option>
+                            <option value="Brgy. Batuan">Batuan</option>
+                            <option value="Brgy. Bayog">Bayog</option>
+                            <option value="Brgy. Biliboy">Biliboy</option>
+                            <option value="Brgy. Cabaon-an">Cabaon-an</option>
+                            <option value="Brgy. Cabingtan">Cabingtan</option>
+                            <option value="Brgy. Cabulihan">Cabulihan</option>
+                            <option value="Brgy. Cagbuhangin">Cagbuhangin</option>
+                            <option value="Brgy. Camp Downes">Camp Downes</option>
+                            <option value="Brgy. Can-adieng">Can-adieng</option>
+                            <option value="Brgy. Can-untog">Can-untog</option>
+                            <option value="Brgy. Catmon">Catmon</option>
+                            <option value="Brgy. Cogon Combado">Cogon Combado</option>
+                            <option value="Brgy. Concepcion">Concepcion</option>
+                            <option value="Brgy. Curva">Curva</option>
+                            <option value="Brgy. Danhug (Lili-on)">Danhug (Lili-on)</option>
+                            <option value="Brgy. Dayhagan">Dayhagan</option>
+                            <option value="Brgy. Dolores">Dolores</option>
+                            <option value="Brgy. Domonar">Domonar</option>
+                            <option value="Brgy. Don Carlos B. Rivilla Sr. (Boroc)">Don Carlos B. Rivilla Sr. (Boroc)</option>
+                            <option value="Brgy. Don Felipe Larrazabal">Don Felipe Larrazabal</option>
+                            <option value="Brgy. Don Potenciano Larrazabal">Don Potenciano Larrazabal</option>
+                            <option value="Brgy. Doña Feliza Z. Mejia">Doña Feliza Z. Mejia</option>
+                            <option value="Brgy. Donghol">Donghol</option>
+                            <option value="Brgy. Esperanza">Esperanza</option>
+                            <option value="Brgy. Gaas">Gaas</option>
+                            <option value="Brgy. Green Valley">Green Valley</option>
+                            <option value="Brgy. Guintigui-an">Guintigui-an</option>
+                            <option value="Brgy. Hibunawon">Hibunawon</option>
+                            <option value="Brgy. Hugpa">Hugpa</option>
+                            <option value="Brgy. Ipil">Ipil</option>
+                            <option value="Brgy. Juaton">Juaton</option>
+                            <option value="Brgy. Kadaohan">Kadaohan</option>
+                            <option value="Brgy. Labrador (Balion)">Labrador (Balion)</option>
+                            <option value="Brgy. Lake Danao">Lake Danao</option>
+                            <option value="Brgy. Lao">Lao</option>
+                            <option value="Brgy. Leondoni">Leondoni</option>
+                            <option value="Brgy. Libertad">Libertad</option>
+                            <option value="Brgy. Liberty">Liberty</option>
+                            <option value="Brgy. Licuma">Licuma</option>
+                            <option value="Brgy. Liloan">Liloan</option>
+                            <option value="Brgy. Linao">Linao</option>
+                            <option value="Brgy. Luna">Luna</option>
+                            <option value="Brgy. Mabato">Mabato</option>
+                            <option value="Brgy. Mabini">Mabini</option>
+                            <option value="Brgy. Macabug">Macabug</option>
+                            <option value="Brgy. Magaswi">Magaswi</option>
+                            <option value="Brgy. Mahayag">Mahayag</option>
+                            <option value="Brgy. Mahayahay">Mahayahay</option>
+                            <option value="Brgy. Manlilinao">Manlilinao</option>
+                            <option value="Brgy. Margen">Margen</option>
+                            <option value="Brgy. Mas-in">Mas-in</option>
+                            <option value="Brgy. Matica-a">Matica-a</option>
+                            <option value="Brgy. Milagro">Milagro</option>
+                            <option value="Brgy. Monterico">Monterico</option>
+                            <option value="Brgy. Nasunogan">Nasunogan</option>
+                            <option value="Brgy. Naungan">Naungan</option>
+                            <option value="Brgy. Nueva Sociedad">Nueva Sociedad</option>
+                            <option value="Brgy. Nueva Vista">Nueva Vista</option>
+                            <option value="Brgy. Patag">Patag</option>
+                            <option value="Brgy. Punta">Punta</option>
+                            <option value="Brgy. Quezon, Jr.">Quezon, Jr.</option>
+                            <option value="Brgy. Rufina M. Tan (Rawis)">Rufina M. Tan (Rawis)</option>
+                            <option value="Brgy. Sabang Bao">Sabang Bao</option>
+                            <option value="Brgy. Salvacion">Salvacion</option>
+                            <option value="Brgy. San Antonio">San Antonio</option>
+                            <option value="Brgy. San Isidro">San Isidro</option>
+                            <option value="Brgy. San Jose">San Jose</option>
+                            <option value="Brgy. San Juan">San Juan</option>
+                            <option value="Brgy. San Pablo (Simangan)">San Pablo (Simangan)</option>
+                            <option value="Brgy. San Vicente">San Vicente</option>
+                            <option value="Brgy. Santo Niño">Santo Niño</option>
+                            <option value="Brgy. Sumangga">Sumangga</option>
+                            <option value="Brgy. Tambulilid">Tambulilid</option>
+                            <option value="Brgy. Tongonan">Tongonan</option>
+                            <option value="Brgy. Valencia">Valencia</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
                           <button class="btn btn-block btn-primary font-weight-bold" id="pin-button" onclick="pinGenerator()">GENERATE PIN</button>
                         </div>
                         <div class="form-group">
@@ -130,13 +248,16 @@ else{
                             <div>
                               <img id="actual-pic" src="./images/adminUserProfile.png">
                               <div class="front-word" onclick="openFile()" title="Upload profile picture">
-                                <span class="fas fa-pencil-alt"></span>
+                                <span class="fas fa-plus"></span>
                               </div>
                               <div class="back-element">
                                 <input id="profile-pic" type="file" accept="image/*">
                               </div>
                             </div>
                           </div>
+                          <button style="margin-top: 5px; border: 0; background-color: white;" class="btn-link" title='Reset image' onclick="resetImage()">
+                            <i class="fas fa-undo"></i>
+                          </button>
                         </div>
                     </div><!-- /.card-body -->
                     <div class="card-footer">

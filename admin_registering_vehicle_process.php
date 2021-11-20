@@ -25,7 +25,9 @@ function infoCrypt($plaintext){
 if((isset($_POST['fname']) && !empty(trim($_POST['fname']))) && (isset($_POST['mname']) && !empty(trim($_POST['mname'])))
   && (isset($_POST['lname']) && !empty(trim($_POST['lname']))) && (isset($_POST['cnum']) && !empty(trim($_POST['cnum'])))
   && (isset($_POST['plateno']) && !empty(trim($_POST['plateno']))) && (isset($_POST['route']) && !empty(trim($_POST['route'])))
-  && (isset($_POST['capacity']) && !empty(trim($_POST['capacity'])))){
+  && (isset($_POST['capacity']) && !empty(trim($_POST['capacity']))) && (isset($_POST['dfname']) && !empty(trim($_POST['dfname']))) && (isset($_POST['dmname']) && !empty(trim($_POST['dmname'])))
+  && (isset($_POST['dlname']) && !empty(trim($_POST['dlname']))) && (isset($_POST['dcnum']) && !empty(trim($_POST['dcnum']))) && (isset($_POST['address']) && trim($_POST['address']) != "")
+  && (isset($_POST['daddress']) && trim($_POST['daddress']) != "")){
 
   $plateno = $_POST['plateno'];
   $route = $_POST['route'];
@@ -48,7 +50,8 @@ if((isset($_POST['fname']) && !empty(trim($_POST['fname']))) && (isset($_POST['m
     }
     $full_capacity = json_encode($vehicle_capacity);
     try{
-      $register_vehicle = $connection->prepare("INSERT INTO registered_vehicles(FirstName, MiddleName, LastName, Suffix, PlateNo, Route, Capacity, Contact) VALUES(:firstname, :middlename, :lastname, :suffix, :plateno, :route, :capacity, :contact)");
+      $register_vehicle = $connection->prepare("INSERT INTO registered_vehicles(FirstName, MiddleName, LastName, Suffix, Address, PlateNo, Route, Capacity, Contact, DFirstName, DMiddleName, DLastName, DSuffix, DContact, DAddress)
+                                                VALUES(:firstname, :middlename, :lastname, :suffix, :address, :plateno, :route, :capacity, :contact, :dfname, :dmname, :dlname, :dsuffix, :dcontact, :daddress)");
       $register_vehicle->bindParam(':firstname', $_POST['fname']);
       $register_vehicle->bindParam(':middlename', $_POST['mname']);
       $register_vehicle->bindParam(':lastname', $_POST['lname']);
@@ -57,9 +60,17 @@ if((isset($_POST['fname']) && !empty(trim($_POST['fname']))) && (isset($_POST['m
       $register_vehicle->bindParam(':route', $route);
       $register_vehicle->bindParam(':capacity', $capacity);
       $register_vehicle->bindParam(':contact', $contact);
+      $register_vehicle->bindParam(':dfname', $_POST['dfname']);
+      $register_vehicle->bindParam(':dmname', $_POST['dmname']);
+      $register_vehicle->bindParam(':dlname', $_POST['dlname']);
+      $register_vehicle->bindParam(':dsuffix', $_POST['dsuffix']);
+      $register_vehicle->bindParam(':dcontact', $_POST['dcnum']);
+      $register_vehicle->bindParam(':daddress', $_POST['daddress']);
+      $register_vehicle->bindParam(':address', $_POST['address']);
       $register_vehicle->execute();
+      $driver = $_POST['dfname'] . ' ' . $_POST['dmname'] . ' ' . $_POST['dlname'] . ' ' . $_POST['dsuffix'];
       $name = $_POST['fname'] . ' ' . $_POST['mname'] . ' ' . $_POST['lname'] . ' ' . $_POST['suffix'];
-      $data = array("vehicle" => $_POST['plateno'], "operator" => $name, "contact_num" => $_POST['cnum'], "route" => $_POST['route'], "capacity" => $capacity, "queuing" => false, "returning" => false);
+      $data = array("vehicle" => $_POST['plateno'], "operator" => $name, "driver" => $driver, "contact_num" => $_POST['cnum'], "route" => $_POST['route'], "capacity" => $capacity, "queuing" => false, "returning" => false);
       $vehicles_json = file_get_contents('./vehicles/vehicles.json');
       $vehicles_data = json_decode($vehicles_json, true);
       array_push($vehicles_data, $data);

@@ -10,7 +10,7 @@ else{
 }
 if((isset($_POST['dis_fname']) && !empty(trim($_POST['dis_fname']))) && (isset($_POST['dis_mname']) && !empty(trim($_POST['dis_mname'])))
    && (isset($_POST['dis_lname']) && !empty(trim($_POST['dis_lname']))) && (isset($_POST['dis_cnum']) && !empty(trim($_POST['dis_cnum'])))
-   && (isset($_POST['dis_pin']) && !empty(trim($_POST['dis_pin'])))) {
+   && (isset($_POST['dis_pin']) && !empty(trim($_POST['dis_pin']))) && (isset($_POST['address']) && trim($_POST['address']) != "")){
      try{
        require './db_connection.php';
        $pin = $_POST['dis_pin'];
@@ -33,7 +33,8 @@ if((isset($_POST['dis_fname']) && !empty(trim($_POST['dis_fname']))) && (isset($
            $lname = $_POST['dis_lname'];
            $suffix = $_POST['dis_suffix'];
            $contact = $_POST['dis_cnum'];
-           $update_dispatcher = $connection->prepare("UPDATE dispatchers SET FirstName = :fname, MiddleName = :mname, LastName = :lname, Suffix = :suffix, PIN = :pin, Contact = :contact WHERE ID = :id");
+           $address = $_POST['address'];
+           $update_dispatcher = $connection->prepare("UPDATE dispatchers SET FirstName = :fname, MiddleName = :mname, LastName = :lname, Suffix = :suffix, PIN = :pin, Contact = :contact, Address = :address WHERE ID = :id");
            $update_dispatcher->bindParam(':fname', $fname);
            $update_dispatcher->bindParam(':mname', $mname);
            $update_dispatcher->bindParam(':lname', $lname);
@@ -41,6 +42,7 @@ if((isset($_POST['dis_fname']) && !empty(trim($_POST['dis_fname']))) && (isset($
            $update_dispatcher->bindParam(':pin', $pin);
            $update_dispatcher->bindParam(':contact', $contact);
            $update_dispatcher->bindParam(':id', $id);
+           $update_dispatcher->bindParam(':address', $address);
            $update_dispatcher->execute();
            if($update_dispatcher->rowCount() > 0){
              echo "success";

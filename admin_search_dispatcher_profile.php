@@ -28,8 +28,9 @@ try{
       $contact = '"' . $dispatcher['Contact'] . '"';
       $profile = '"' . $dispatcher['Profile'] . '"';
       $pin = '"' . $dispatcher['PIN'] . '"';
+      $address = '"' . $dispatcher['Address'] . '"';
       $name = '"' . $dispatcher['FirstName'] . " " . $dispatcher['MiddleName'] . " " . $dispatcher['LastName'] . " " . $dispatcher['Suffix'] . '"';
-      echo "<div class='row container p-3 my-3 border' style='border-radius: 5px'>";
+      echo "<div class='container p-3 border' style='display: flex; border-radius: 5px; margin-bottom: 5px;'>";
       echo "<div class='dispatcher-prof-container'>";
       echo "<div>";
       if($dispatcher['Profile'] == ''){
@@ -44,10 +45,13 @@ try{
       echo "<b>" . $dispatcher['FirstName'] . " " . $dispatcher['MiddleName'] . " " . $dispatcher['LastName'] . " " . $dispatcher['Suffix'] . "</b>";
       echo "</div>";
       echo "<div style='margin-left: 8px; font-size: 13px'>";
+      echo $dispatcher['Address'] . ", Ormoc City";
+      echo "</div>";
+      echo "<div style='margin-left: 8px; font-size: 13px'>";
       echo $dispatcher['Contact'];
       echo "</div>";
       echo "<div class='p-2'>";
-      echo "<span style='margin-right: 5px'><button type='button' data-toggle='modal' data-target='#popupEdit' style='font-size: 10px;' class='btn btn-primary' onclick='editDispatcher(" . $id . "," . $fname . "," . $mname . "," . $lname . "," . $suffix . "," . $contact . "," . $profile . "," . $pin . ")'>Edit</button></span>";
+      echo "<span style='margin-right: 5px'><button type='button' data-toggle='modal' data-target='#popupEdit' style='font-size: 10px;' class='btn btn-primary' onclick='editDispatcher(" . $id . "," . $fname . "," . $mname . "," . $lname . "," . $suffix . "," . $contact . "," . $profile . "," . $pin . "," . $address . ")'>Edit</button></span>";
       echo "<button style='font-size: 10px;' type='button' class='btn btn-danger' onclick='deleteDispatcher(" . $id . "," . $name . ")'>Unregister</button>";
       echo "</div>";
       echo "</div>";

@@ -26,6 +26,7 @@ function popupWarning(message){
   });
 }
 
+const choosenFile = document.getElementById('profile-pic');
 
 function retrieveRegisteredPUV(){
   Loader.open();
@@ -43,7 +44,6 @@ function retrieveRegisteredPUV(){
 }
 
 function searchVehicle(value){
-  Loader.open();
   if(document.getElementById('search-input').value == ''){
     document.getElementById('search-ico').style.display = "inline";
     document.getElementById('loading-ico').style.display = "none";
@@ -52,7 +52,6 @@ function searchVehicle(value){
     const retrievePUV = new XMLHttpRequest();
     retrievePUV.onreadystatechange = function(){
       if(this.readyState == 4 && this.status == 200){
-        Loader.close();
         if(this.responseText != ""){
           document.getElementById('search-ico').style.display = "inline";
           document.getElementById('loading-ico').style.display = "none";
@@ -72,7 +71,7 @@ function searchVehicle(value){
   }
 }
 
-function editData(fname, mname, lname, suffix, capacity, route, plateno, contact){
+function editData(fname, mname, lname, suffix, capacity, route, plateno, contact, dfname, dmname, dlname, dsuffix, dcontact, daddress, address, image){
   document.getElementById('modalTitle').innerHTML = plateno;
   document.getElementById('rt').value = route;
   document.getElementById('cpcty').value = capacity;
@@ -82,6 +81,18 @@ function editData(fname, mname, lname, suffix, capacity, route, plateno, contact
   document.getElementById('suffix').value = suffix;
   document.getElementById('c_num').value = contact.slice(1);
   document.getElementById('save-button').value = plateno;
+  document.getElementById('df_name').value = dfname;
+  document.getElementById('dm_name').value = dmname;
+  document.getElementById('dl_name').value = dlname;
+  document.getElementById('dsuffix').value = dsuffix;
+  document.getElementById('dc_num').value = dcontact.slice(1);
+  document.getElementById('daddress').value = daddress;
+  document.getElementById('address').value = address;
+  if(image == ''){
+    document.getElementById('actual-pic').src = "../vehicle_images/vehicleImage.png";
+  }else{
+    document.getElementById('actual-pic').src = "." + image;
+  }
 }
 
 function deletePUV(plateno){
@@ -128,18 +139,25 @@ const saveEditedData = (value) => {
     let f_name = document.getElementById('f_name').value;
     let m_name = document.getElementById('m_name').value;
     let l_name = document.getElementById('l_name').value;
+    let df_name = document.getElementById('df_name').value;
+    let dm_name = document.getElementById('dm_name').value;
+    let dl_name = document.getElementById('dl_name').value;
     let invalid_str = /\d/;
-    if(invalid_str.test(f_name) || invalid_str.test(m_name) || invalid_str.test(l_name)){
+    if(invalid_str.test(f_name) || invalid_str.test(m_name) || invalid_str.test(l_name) || invalid_str.test(df_name) || invalid_str.test(dm_name) || invalid_str.test(dl_name)){
       Loader.close();
-      popupWarning('An invalid input was detected, please recheck all the fields');
+      popupWarning('Numbers are not allowed in names');
     }else{
       let invalid_char = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
-      if(invalid_char.test(f_name) || invalid_char.test(m_name) || invalid_char.test(l_name)){
+      if(invalid_char.test(f_name) || invalid_char.test(m_name) || invalid_char.test(l_name) || invalid_char.test(df_name) || invalid_char.test(dm_name) || invalid_char.test(dl_name)){
         Loader.close();
-        popupWarning('An invalid input was detected, please recheck all the fields');
+        popupWarning('Special characters are not allowed in names');
       }else{
+        let dsuffix = document.getElementById('dsuffix').value;
         let suffix = document.getElementById('suffix').value;
         let c_num = document.getElementById('c_num').value;
+        let dc_num = document.getElementById('dc_num').value;
+        let address = document.getElementById('address').value;
+        let daddress = document.getElementById('daddress').value;
         let rt = document.getElementById('rt').value;
         let cpcty = document.getElementById('cpcty').value;
         if(cpcty > 50 || cpcty < 0){
@@ -150,34 +168,84 @@ const saveEditedData = (value) => {
           const registerPUV = new XMLHttpRequest();
           registerPUV.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
-              Loader.close();
-              $('#popupEdit').modal('hide');
               if(this.responseText == "notallowed"){
                 popupInfo('Cannot edit a vehicle that is on queue');
               }else if(this.responseText == 'nochanges'){
-                popupWarning('No changes are made');
+                if(choosenFile.value != ''){
+                  uploadThePhoto(value);
+                }else{
+                  Loader.close();
+                  popupWarning('No changes are made');
+                }
+              }else if(this.responseText == "incomplete"){
+                popupWarning('Please fill all the fields');
               }
               else if(this.responseText == "error"){
                 popupError('Something went wrong');
               }
               else if(this.responseText == "success"){
-                popupSuccess("Changes are successfully saved");
-                retrieveRegisteredPUV();
+                uploadThePhoto(value);
               }
               else{
                 popupError('Something went wrong');
               }
               console.log(this.responseText);
+              $('#popupEdit').modal('hide');
             }
           };
           registerPUV.open("POST", "../admin_register_edited_puv.php", true);
           registerPUV.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-          registerPUV.send("fname=" + f_name.trim() + "&mname=" + m_name.trim() + "&lname=" + l_name.trim() + "&suffix=" + suffix + "&cnum=0" + c_num + "&plateno=" + value + "&route=" + rt + "&capacity=" + cpcty);
+          registerPUV.send("fname=" + f_name.trim() + "&mname=" + m_name.trim() + "&lname=" + l_name.trim() + "&suffix=" + suffix
+          + "&cnum=0" + c_num + "&plateno=" + value + "&route=" + rt + "&capacity=" + cpcty + "&dfname=" + df_name.trim() + "&dmname="
+          + dm_name.trim() + "&dlname=" + dl_name.trim() + "&dsuffix=" + dsuffix + "&dcnum=0" + dc_num + "&daddress=" + daddress + "&address=" + address);
         }
       }
     }
   }else{
     popupWarning('Invalid input');
+  }
+}
+
+
+const uploadThePhoto = (plateno) => {
+  if(choosenFile.value == ''){
+    Loader.close();
+    popupSuccess('Changes are successfully saved');
+    retrieveRegisteredPUV();
+  }else{
+    const formData = new FormData();
+    const file = choosenFile.files[0];
+    formData.append('profile-pic', file, file.name);
+    formData.append('plateno', plateno);
+    const uploadPhoto = new XMLHttpRequest();
+    uploadPhoto.open('POST', '../admin_upload_vehicle_edited_photo.php', true);
+    uploadPhoto.onload = function(){
+      if(uploadPhoto.status == 200){
+        Loader.close();
+        if(this.responseText == 'notapic'){
+          popupInfo("Image is not acceptable, vehicle information is saved with default profile picture");
+        }else if(this.responseText == 'fileexist'){
+          popupInfo("Image already exist, vehicle information is saved with default profile picture");
+        }else if(this.responseText == 'sizelimit'){
+          popupInfo("Image exceed size limit, vehicle information is saved with default profile picture");
+        }else if(this.responseText == 'upload'){
+          popupSuccess("Vehicle successfully edited");
+        }else if(this.responseText == 'notallowed'){
+          popupInfo("All is well except the photo");
+        }else if(this.responseText == 'error'){
+          popupError("Something went wrong");
+        }else{
+          popupError("Something went wrong");
+        }
+        console.log(this.responseText);
+        choosenFile.value = "";
+        retrieveRegisteredPUV();
+      }else{
+        Loader.close();
+        popupError("Failed to upload the photo");
+      }
+    };
+    uploadPhoto.send(formData);
   }
 }
 
@@ -203,6 +271,26 @@ const makeItCorrect = (value) => {
 }
 
 retrieveRegisteredPUV();
+
+const openFile = () => {
+  document.getElementById('profile-pic').click();
+}
+
+choosenFile.addEventListener("change", function(){
+  previewFile();
+});
+
+const previewFile = () => {
+  const actualPic = document.getElementById('actual-pic');
+  const pic = choosenFile.files[0];
+  if(pic){
+    const picReader = new FileReader();
+    picReader.readAsDataURL(pic);
+    picReader.addEventListener("load", function(){
+      actualPic.src = this.result;
+    });
+  }
+}
 
 function exit(){
   window.location.replace('../admin_out.php');

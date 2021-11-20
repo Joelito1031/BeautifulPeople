@@ -17,11 +17,15 @@ try{
   $data = $select_file_directory->fetchAll();
   if($data[0]['OnDuty'] == 0){
     if($data[0]['Profile'] != ''){
-      if(unlink($data[0]['Profile'])){
-        $delete_dispatcher = $connection->prepare("DELETE FROM dispatchers WHERE ID = :id");
-        $delete_dispatcher->bindParam(':id', $id);
-        $delete_dispatcher->execute();
-        echo "success";
+      if(file_exists($data[0]['Profile'])){
+        if(unlink($data[0]['Profile'])){
+          $delete_dispatcher = $connection->prepare("DELETE FROM dispatchers WHERE ID = :id");
+          $delete_dispatcher->bindParam(':id', $id);
+          $delete_dispatcher->execute();
+          echo "success";
+        }else{
+          echo "error";
+        }
       }else{
         echo "error";
       }

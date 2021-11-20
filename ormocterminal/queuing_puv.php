@@ -78,6 +78,12 @@ else{
               <div class="col-12 container-fluid subfield-6-1">
                 <div class="card container-fluid card-danger card-outline">
                   <div class="card-body">
+                    <div class="form-inline" style="width: 400px;">
+                      <input id="search-input" class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search vehicle plate number" aria-label="Search" onkeyup="searchDispatcher(this.value)" maxlength="20">
+                      <i id="search-ico" class="fas fa-search" aria-hidden="true"></i>
+                      <i id="loading-ico" class="fas fa-spinner fa-spin" aria-hidden="true" style="display: none;"></i>
+                    </div>
+                    <br>
                     <div id="example2_wrapper" class="subfield-6-1-sub dataTables_wrapper dt-bootstrap4">
                     </div>
                   </div>

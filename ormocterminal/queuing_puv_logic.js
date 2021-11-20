@@ -27,7 +27,18 @@ function popupWarning(message){
 }
 
 function loadQueuingVehicles(){
-  if(document.getElementById('searched-destination').value != ''){
+  if(document.getElementById('search-input').value != ''){
+    let searchedDestination = document.getElementById('searched-destination').value;
+    const queuingVehicles = new XMLHttpRequest();
+    queuingVehicles.onreadystatechange = function(){
+      if(this.readyState == 4 && this.status == 200){
+        document.querySelector('.subfield-6-1-sub').innerHTML = this.responseText;
+      }
+    };
+    queuingVehicles.open("POST", "../admin_queuing_vehicles_list.php", true);
+    queuingVehicles.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    queuingVehicles.send("data=" + searchedDestination);
+  }else if(document.getElementById('searched-destination').value != ''){
     let searchedDestination = document.getElementById('searched-destination').value;
     const queuingVehicles = new XMLHttpRequest();
     queuingVehicles.onreadystatechange = function(){
