@@ -59,7 +59,7 @@ CREATE TABLE `dispatchers` (
   `Suffix` varchar(10) DEFAULT NULL,
   `Address` varchar(100) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,30 +68,7 @@ CREATE TABLE `dispatchers` (
 
 LOCK TABLES `dispatchers` WRITE;
 /*!40000 ALTER TABLE `dispatchers` DISABLE KEYS */;
-INSERT INTO `dispatchers` VALUES ('Joelito',1,'5362','09306319380',1,'./dispatcher_profile/JoelitoQuiapoCaorte1637414435.jpg','Quiapo','Caorte','','Brgy. Bagong Buhay');
 /*!40000 ALTER TABLE `dispatchers` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `example`
---
-
-DROP TABLE IF EXISTS `example`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `example` (
-  `Name` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `example`
---
-
-LOCK TABLES `example` WRITE;
-/*!40000 ALTER TABLE `example` DISABLE KEYS */;
-INSERT INTO `example` VALUES ('Joebie');
-/*!40000 ALTER TABLE `example` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -132,7 +109,7 @@ CREATE TABLE `logs` (
   `Route` varchar(50) NOT NULL,
   `LogDate` date DEFAULT NULL,
   PRIMARY KEY (`LogId`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -141,7 +118,6 @@ CREATE TABLE `logs` (
 
 LOCK TABLES `logs` WRITE;
 /*!40000 ALTER TABLE `logs` DISABLE KEYS */;
-INSERT INTO `logs` VALUES (1,'./logs/19-11-2021_12:09:48_sabangbao_HHI-332.txt','HHI-332','0/11','12:09:48','sabangbao','2021-11-19'),(2,'./logs/19-11-2021_12:09:52_albuera_HVM-101.txt','HVM-101','0/11','12:09:52','albuera','2021-11-19'),(3,'./logs/19-11-2021_12:14:57_puertobello_YUI-232.txt','YUI-232','0/50','12:14:57','puertobello','2021-11-19'),(4,'./logs/19-11-2021_14:39:28_puertobello_ABC-000.txt','ABC-000','0/11','14:39:28','puertobello','2021-11-19'),(5,'./logs/19-11-2021_15:15:31_sabangbao_HHI-332.txt','HHI-332','0/11','15:15:31','sabangbao','2021-11-19'),(6,'./logs/19-11-2021_19:05:18_puertobello_ABC-000.txt','ABC-000','0/11','19:05:18','puertobello','2021-11-19'),(7,'./logs/19-11-2021_19:05:44_puertobello_ABC-000.txt','ABC-000','0/11','19:05:44','puertobello','2021-11-19'),(8,'./logs/19-11-2021_19:05:56_puertobello_ABC-000.txt','ABC-000','0/11','19:05:56','puertobello','2021-11-19'),(9,'./logs/20-11-2021_18:14:39_albuera_HUI-221.txt','HUI-221','0/21','18:14:39','albuera','2021-11-20');
 /*!40000 ALTER TABLE `logs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,7 +204,6 @@ CREATE TABLE `registered_vehicles` (
 
 LOCK TABLES `registered_vehicles` WRITE;
 /*!40000 ALTER TABLE `registered_vehicles` DISABLE KEYS */;
-INSERT INTO `registered_vehicles` VALUES ('HIJ-332','puertobello',21,'Joelito','09306319380','Quiapo','Caorte','','Brgy. Cogon Combado','Joelito','Quiapo','Caorte','','09306319380','Brgy. Bagong Buhay',NULL),('UIO-332','sabangbao',21,'John','09306319380','Carlo','Villas','','Brgy. Bagong Buhay','Joelito','Quiapo','Caorte','','09306319380','Brgy. Bagong Buhay','./vehicle_images/UIO-332.jpeg');
 /*!40000 ALTER TABLE `registered_vehicles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -263,4 +238,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-20 21:55:04
+-- Dump completed on 2021-11-21 10:26:04
