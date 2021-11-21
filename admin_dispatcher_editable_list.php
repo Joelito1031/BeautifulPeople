@@ -46,6 +46,9 @@ try{
       echo "<div style='margin-left: 8px; font-size: 13px'>";
       echo $dispatcher['Contact'];
       echo "</div>";
+      echo "<div style='margin-left: 8px; font-size: 13px'>";
+      echo $dispatcher['PIN'] . " [PIN]";
+      echo "</div>";
       echo "<div class='p-2'>";
       echo "<span style='margin-right: 5px'><button type='button' data-toggle='modal' data-target='#popupEdit' style='font-size: 10px;' class='btn btn-primary' onclick='editDispatcher(" . $id . "," . $fname . "," . $mname . "," . $lname . "," . $suffix . "," . $contact . "," . $profile . "," . $pin . "," . $address . ")'>Edit</button></span>";
       echo "<button style='font-size: 10px;' type='button' class='btn btn-danger' onclick='deleteDispatcher(" . $id . "," . $name . ")'>Unregister</button>";

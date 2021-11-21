@@ -28,7 +28,7 @@ function popupWarning(message){
 
 function loadQueuingVehicles(){
   if(document.getElementById('search-input').value != ''){
-    let searchedDestination = document.getElementById('searched-destination').value;
+    let searchedDestination = document.getElementById('search-input').value;
     const queuingVehicles = new XMLHttpRequest();
     queuingVehicles.onreadystatechange = function(){
       if(this.readyState == 4 && this.status == 200){
@@ -98,4 +98,30 @@ setInterval(function(){
 
 function exit(){
   window.location.replace('../admin_out.php');
+}
+
+function makePlateNoCorrect(value){
+  let length = value.length;
+  let plateNo = value.toUpperCase();
+  let finalValue = "";
+  let invalid_char = /[\s!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
+  let invalid_str = /\d/;
+  for(i = 0; i < length; i++){
+    if(i < 3){
+      if(invalid_str.test(plateNo[i]) || invalid_char.test(plateNo[i])){
+        finalValue = finalValue + "";
+      }else{
+        finalValue = finalValue + plateNo[i];
+      }
+    }else if(i == 3){
+      finalValue = finalValue + "-";
+    }else if(i > 3){
+      if(!invalid_str.test(plateNo[i]) || invalid_char.test(plateNo[i])){
+        finalValue = finalValue + "";
+      }else{
+        finalValue = finalValue + plateNo[i];
+      }
+    }
+  }
+  return finalValue;
 }

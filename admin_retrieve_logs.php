@@ -13,25 +13,29 @@ require './db_connection.php';
 if(isset($_POST['data'])){
   if($_POST['data'] == 'latest'){
     $retrieve_logs = $connection->prepare("SELECT logs.LogId, logs.Directory, logs.Vehicle, logs.Passengers, logs.Route, logs.LogDate, logs.LogTime,
-                                           registered_vehicles.FirstName, registered_vehicles.MiddleName, registered_vehicles.LastName, registered_vehicles.Suffix
-                                           FROM logs INNER JOIN registered_vehicles ON logs.Vehicle = registered_vehicles.PlateNo ORDER BY LogId DESC");
+                                           registered_vehicles.FirstName, registered_vehicles.MiddleName, registered_vehicles.LastName, registered_vehicles.Suffix, registered_vehicles.Contact,
+                                           registered_vehicles.Address, registered_vehicles.DFirstName, registered_vehicles.DMiddleName, registered_vehicles.DLastName, registered_vehicles.DSuffix,
+                                           registered_vehicles.DContact, registered_vehicles.DAddress FROM logs INNER JOIN registered_vehicles ON logs.Vehicle = registered_vehicles.PlateNo ORDER BY LogId DESC");
   }elseif($_POST['data'] == 'oldest'){
     $retrieve_logs = $connection->prepare("SELECT logs.LogId, logs.Directory, logs.Vehicle, logs.Passengers, logs.Route, logs.LogDate, logs.LogTime,
-                                           registered_vehicles.FirstName, registered_vehicles.MiddleName, registered_vehicles.LastName, registered_vehicles.Suffix
-                                           FROM logs INNER JOIN registered_vehicles ON logs.Vehicle = registered_vehicles.PlateNo ORDER BY LogId ASC");
+                                           registered_vehicles.FirstName, registered_vehicles.MiddleName, registered_vehicles.LastName, registered_vehicles.Suffix, registered_vehicles.Contact,
+                                           registered_vehicles.Address, registered_vehicles.DFirstName, registered_vehicles.DMiddleName, registered_vehicles.DLastName, registered_vehicles.DSuffix,
+                                           registered_vehicles.DContact, registered_vehicles.DAddress FROM logs INNER JOIN registered_vehicles ON logs.Vehicle = registered_vehicles.PlateNo ORDER BY LogId ASC");
   }
 }elseif(isset($_POST['startdate']) && isset($_POST['enddate'])){
   $start_date = $_POST['startdate'];
   $end_date = $_POST['enddate'];
   $retrieve_logs = $connection->prepare("SELECT logs.LogId, logs.Directory, logs.Vehicle, logs.Passengers, logs.Route, logs.LogDate, logs.LogTime,
-                                         registered_vehicles.FirstName, registered_vehicles.MiddleName, registered_vehicles.LastName, registered_vehicles.Suffix
-                                         FROM logs INNER JOIN registered_vehicles ON logs.Vehicle = registered_vehicles.PlateNo WHERE logs.LogDate BETWEEN :startdate AND :endate");
+                                         registered_vehicles.FirstName, registered_vehicles.MiddleName, registered_vehicles.LastName, registered_vehicles.Suffix, registered_vehicles.Contact,
+                                         registered_vehicles.Address, registered_vehicles.DFirstName, registered_vehicles.DMiddleName, registered_vehicles.DLastName, registered_vehicles.DSuffix,
+                                         registered_vehicles.DContact, registered_vehicles.DAddress FROM logs INNER JOIN registered_vehicles ON logs.Vehicle = registered_vehicles.PlateNo WHERE logs.LogDate BETWEEN :startdate AND :endate");
   $retrieve_logs->bindParam(":startdate", $start_date);
   $retrieve_logs->bindParam(":endate", $end_date);
 }else{
   $retrieve_logs = $connection->prepare("SELECT logs.LogId, logs.Directory, logs.Vehicle, logs.Passengers, logs.Route, logs.LogDate, logs.LogTime,
-                                         registered_vehicles.FirstName, registered_vehicles.MiddleName, registered_vehicles.LastName, registered_vehicles.Suffix
-                                         FROM logs INNER JOIN registered_vehicles ON logs.Vehicle = registered_vehicles.PlateNo");
+                                         registered_vehicles.FirstName, registered_vehicles.MiddleName, registered_vehicles.LastName, registered_vehicles.Suffix, registered_vehicles.Contact,
+                                         registered_vehicles.Address, registered_vehicles.DFirstName, registered_vehicles.DMiddleName, registered_vehicles.DLastName, registered_vehicles.DSuffix,
+                                         registered_vehicles.DContact, registered_vehicles.DAddress FROM logs INNER JOIN registered_vehicles ON logs.Vehicle = registered_vehicles.PlateNo");
 }
 try{
   $retrieve_logs->execute();
@@ -63,7 +67,7 @@ try{
       echo "<div style='text-align: center'>";
       echo "<img style='width: 100px; height: 100px;' src='./images/logoQrmoc.png'>";
       echo "<div style='font-size: 14px; font-family: Times New Roman; padding: 5px 0 3px 0; font-weight: bold'>";
-      echo "Authentic Log of " . $log['Vehicle'] . " Operated by " . $log['FirstName'] . " " . $log['MiddleName'] . " " . $log['LastName'] . " " . $log['Suffix'] . " going to " . strtoupper($log['Route']) . "</div>";
+      echo "Authentic Log of " . $log['Vehicle'] . " Operated by " . $log['FirstName'] . " " . $log['MiddleName'] . " " . $log['LastName'] . " " . $log['Suffix'] . " going to " . strtoupper($log['Route']) . "droven by" ."</div>";
       echo "<div style='font-size: 14px; font-family: Times New Roman; padding: 2px 0 20px 0; font-weight: bold'>Generated by Q R M O C - Queuing Passenger Assistance System</div>";
       echo "</div>";
       $log_content = json_decode(file_get_contents($log['Directory']));
@@ -108,7 +112,7 @@ try{
       echo "</div>";
     }
   }else{
-    echo "<tr><td colspan='5'>No logs found</td></tr>";
+    echo "<div class='container border' style='text-align: center; padding: 10px;'>No logs found</div>";
   }
 }catch(Exception $e){
   echo "error";

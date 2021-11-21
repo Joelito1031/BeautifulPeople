@@ -52,6 +52,6 @@ try{
     }
   }
 }catch(Exception $e){
-  echo "error";
+  echo $e;
 }
 ?>

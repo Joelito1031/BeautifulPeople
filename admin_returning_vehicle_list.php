@@ -17,6 +17,7 @@ echo "<table class='returning-vehicle-table'>";
 echo "<tr class='rvt'>";
 echo "<th>Vehicle</th>";
 echo "<th>Operator</th>";
+echo "<th>Driver</th>";
 echo "<th>Route</th>";
 echo "<th>Contact #</th>";
 echo "<th>Returning</th>";
@@ -24,7 +25,7 @@ echo "</tr>";
 if(sizeof($vehicles) > 0){
   if($data != ''){
     foreach($vehicles as $vehicle){
-      if($vehicle->route == $data){
+      if($vehicle->route == $data || $vehicle->vehicle == $data){
         echo "<tr>";
         echo "<td>";
         echo $vehicle->vehicle;

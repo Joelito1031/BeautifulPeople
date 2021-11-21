@@ -165,13 +165,24 @@ function saveVehiclePDF(){
 }
 
 const makeItCorrect = (value) => {
-  const input = value.toLowerCase();
-  if(input.charAt(0) == ' '){
-    return '';
-  }else{
-    const finalValue = input.charAt(0).toUpperCase() + input.slice(1);
-    return finalValue;
+  let name = value.trim().toLowerCase();
+  let tempName = '';
+  let repoName = '';
+  let finalName = '';
+  name = name + ' ';
+  nameLength = name.length;
+  for(i = 0; i < nameLength; i++){
+    if(name[i] == ' '){
+      if(tempName != ''){
+        repoName = tempName.charAt(0).toUpperCase() + tempName.slice(1) + ' ';
+        finalName = finalName + repoName;
+        tempName = '';
+      }
+    }else{
+      tempName = tempName + name[i]
+    }
   }
+  return finalName;
 }
 
 function exit(){

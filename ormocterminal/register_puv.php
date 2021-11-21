@@ -104,17 +104,17 @@ else{
                           <div class="form-group">
                             <span data-toggle="puv-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
                             <label for="first_name">First Name</label>
-                            <input type="text" class="form-control" name="fname" id="f_name" placeholder="First name" maxlength="40" onkeyup="this.value = makeItCorrect(this.value)">
+                            <input type="text" class="form-control" name="fname" id="f_name" placeholder="First name" maxlength="40" onfocusout="this.value = makeItCorrect(this.value)">
                           </div>
                           <div class="form-group">
                             <span data-toggle="puv-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
                             <label for="middle_name">Middle Name</label>
-                            <input type="text" class="form-control" name="mname" id="m_name" placeholder="Middle name" maxlength="40" onkeyup="this.value = makeItCorrect(this.value)">
+                            <input type="text" class="form-control" name="mname" id="m_name" placeholder="Middle name" maxlength="40" onfocusout="this.value = makeItCorrect(this.value)">
                           </div>
                           <div class="form-group">
                             <span data-toggle="puv-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
                             <label for="last_name">Last Name</label>
-                            <input type="text" class="form-control" name="lname" id="l_name" placeholder="Last name" maxlength="40" onkeyup="this.value = makeItCorrect(this.value)">
+                            <input type="text" class="form-control" name="lname" id="l_name" placeholder="Last name" maxlength="40" onfocusout="this.value = makeItCorrect(this.value)">
                           </div>
                           <div class="form-group">
                               <span data-toggle="puv-tooltip" title="Choose a suffix, choose None if operator has no suffix." class="fas fa-info-circle" style="color: #9edbff;"></span>
@@ -266,17 +266,17 @@ else{
                           <div class="form-group">
                             <span data-toggle="puv-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
                             <label for="first_name">First Name</label>
-                            <input type="text" class="form-control" name="fname" id="df_name" placeholder="First name" maxlength="40" onkeyup="this.value = makeItCorrect(this.value)">
+                            <input type="text" class="form-control" name="fname" id="df_name" placeholder="First name" maxlength="40" onfocusout="this.value = makeItCorrect(this.value)">
                           </div>
                           <div class="form-group">
                             <span data-toggle="puv-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
                             <label for="middle_name">Middle Name</label>
-                            <input type="text" class="form-control" name="mname" id="dm_name" placeholder="Middle name" maxlength="40" onkeyup="this.value = makeItCorrect(this.value)">
+                            <input type="text" class="form-control" name="mname" id="dm_name" placeholder="Middle name" maxlength="40" onfocusout="this.value = makeItCorrect(this.value)">
                           </div>
                           <div class="form-group">
                             <span data-toggle="puv-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
                             <label for="last_name">Last Name</label>
-                            <input type="text" class="form-control" name="lname" id="dl_name" placeholder="Last name" maxlength="40" onkeyup="this.value = makeItCorrect(this.value)">
+                            <input type="text" class="form-control" name="lname" id="dl_name" placeholder="Last name" maxlength="40" onfocusout="this.value = makeItCorrect(this.value)">
                           </div>
                           <div class="form-group">
                               <span data-toggle="puv-tooltip" title="Choose a suffix, choose None if operator has no suffix." class="fas fa-info-circle" style="color: #9edbff;"></span>

@@ -51,7 +51,7 @@ else{
               <div class="container-fluid">
                 <div class="row mb-2">
                   <div class="col-sm-6">
-                    <h1 class="m-0 sub-text-2">Returning PUVs</h1>
+                    <h4 class="m-0 sub-text-2"><span data-toggle="returning-tooltip" title="The table below lists all the registered PUVs, set PUV to returning mode by pressing the buttons under the Returning column." class="fas fa-question-circle" style="color: #9edbff;"></span>&thinsp;Returning PUVs</h4>
                   </div><!-- /.col -->
                   <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -79,6 +79,11 @@ else{
               <div class="col-12 content-fluid subfield-4-1">
                 <div class="card container-fluid card-danger card-outline">
                   <div class="card-body">
+                    <div class="form-inline" style="width: 400px;">
+                      <input id="search-input" class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Search vehicle plate number" aria-label="Search" maxlength="7" onkeyup="this.value = makePlateNoCorrect(this.value);">
+                      <i id="search-ico" class="fas fa-search" aria-hidden="true"></i>
+                    </div>
+                    <br>
                     <div class="subfield-4-1-sub"></div>
                   </div>
                 </div>
@@ -101,12 +106,17 @@ else{
 
     <!-- Custom JS -->
     <script type="text/javascript" src="html2pdf.bundle.min.js" ></script>
-      <script type="text/javascript" src="./returning_puv_logic.js" ></script>
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script type="text/javascript" src="./returning_puv_logic.js" ></script>
+    <script>
+    $(function () {
+      $('[data-toggle="returning-tooltip"]').tooltip()
+    })
+    </script>
     <script>
       $.widget.bridge('uibutton', $.ui.button)
     </script>

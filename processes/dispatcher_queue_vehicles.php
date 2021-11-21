@@ -29,7 +29,7 @@ try{
         $format="%d-%m-%Y_%H:%M:%S";
         $strf=strftime($format);
         $queuing_list = json_decode(file_get_contents('../vehicles/queuing_vehicles.json'));
-        $queuing_info = array("vehicle" => $vehicle->vehicle, "route" => $vehicle->route, "capacity" => $vehicle->capacity, "passengers" => 0, "time_queue" => $strf);
+        $queuing_info = array("vehicle" => $vehicle->vehicle, "operator" => $vehicle->operator, "driver" => $vehicle->driver, "route" => $vehicle->route, "capacity" => $vehicle->capacity, "passengers" => 0, "time_queue" => $strf);
         array_push($queuing_list, $queuing_info);
         $altered_queuing_list = fopen('../vehicles/queuing_vehicles.json', 'w');
         $altered_vehicle_list = fopen('../vehicles/vehicles.json', 'w');

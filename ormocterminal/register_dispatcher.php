@@ -77,17 +77,17 @@ else{
                         <div class="form-group">
                             <span data-toggle="dispatcher-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
                             <label for="f_name">First name</label>
-                            <input type="text" class="form-control" id="dis_f_name" placeholder="First name" maxlength="40" onkeyup="this.value = makeItCorrect(this.value)">
+                            <input type="text" class="form-control" id="dis_f_name" placeholder="First name" maxlength="40" onfocusout="this.value = makeItCorrect(this.value)">
                         </div>
                         <div class="form-group">
                             <span data-toggle="dispatcher-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
                             <label for="middle_name">Middle name</label>
-                            <input type="text" class="form-control" id="dis_m_name" placeholder="Middle name" maxlength="40" onkeyup="this.value = makeItCorrect(this.value)">
+                            <input type="text" class="form-control" id="dis_m_name" placeholder="Middle name" maxlength="40" onfocusout="this.value = makeItCorrect(this.value)">
                         </div>
                         <div class="form-group">
                             <span data-toggle="dispatcher-tooltip" title="Numbers and special characters are not accepted." class="fas fa-info-circle" style="color: #9edbff;"></span>
                             <label for="last_name">Last name</label>
-                            <input type="text" class="form-control" id="dis_l_name" placeholder="Last name" maxlength="40" onkeyup="this.value = makeItCorrect(this.value)">
+                            <input type="text" class="form-control" id="dis_l_name" placeholder="Last name" maxlength="40" onfocusout="this.value = makeItCorrect(this.value)">
                         </div>
                         <div class="form-group">
                             <span data-toggle="dispatcher-tooltip" title="Choose a suffix, choose None if dispatcher has no suffix." class="fas fa-info-circle" style="color: #9edbff;"></span>

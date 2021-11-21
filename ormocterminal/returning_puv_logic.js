@@ -57,7 +57,18 @@ function popupWarning(message){
 }
 
 function loadReturningVehicles(){
-  if(document.getElementById('searched-returning').value != ''){
+  if(document.getElementById('search-input').value != ''){
+    let searchedReturning = document.getElementById('search-input').value;
+    const returningVehicles = new XMLHttpRequest();
+    returningVehicles.onreadystatechange = function(){
+      if(this.readyState == 4 && this.status == 200){
+        document.querySelector('.subfield-4-1-sub').innerHTML = this.responseText;
+      }
+    };
+    returningVehicles.open("POST", "../admin_returning_vehicle_list.php", true);
+    returningVehicles.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    returningVehicles.send("data=" + searchedReturning);
+  }else if(document.getElementById('searched-returning').value != ''){
     let searchedReturning = document.getElementById('searched-returning').value;
     const returningVehicles = new XMLHttpRequest();
     returningVehicles.onreadystatechange = function(){
@@ -106,4 +117,30 @@ setInterval(function(){
 
 function exit(){
   window.location.replace('../admin_out.php');
+}
+
+function makePlateNoCorrect(value){
+  let length = value.length;
+  let plateNo = value.toUpperCase();
+  let finalValue = "";
+  let invalid_char = /[\s!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
+  let invalid_str = /\d/;
+  for(i = 0; i < length; i++){
+    if(i < 3){
+      if(invalid_str.test(plateNo[i]) || invalid_char.test(plateNo[i])){
+        finalValue = finalValue + "";
+      }else{
+        finalValue = finalValue + plateNo[i];
+      }
+    }else if(i == 3){
+      finalValue = finalValue + "-";
+    }else if(i > 3){
+      if(!invalid_str.test(plateNo[i]) || invalid_char.test(plateNo[i])){
+        finalValue = finalValue + "";
+      }else{
+        finalValue = finalValue + plateNo[i];
+      }
+    }
+  }
+  return finalValue;
 }
