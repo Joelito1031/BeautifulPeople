@@ -20,44 +20,37 @@ if(isset($_SESSION['loggedin'])){
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Ormoc Terminal Admin | Password Reset</title>
+    <title>Q R M O C Terminal Admin | Password Reset</title>
     <link rel="stylesheet" href="./passwordreset_style.css" type="text/css">
+    <link rel="stylesheet" href="./ormocterminal/plugins/fontawesome-free/css/all.min.css">
     <script type="text/javascript" src="./auth_process/passwordreset_js.js" defer></script>
+    <link rel="icon" href="./auth_process/images/logoQrmoc.png">
   </head>
   <body>
     <div class="main-container">
-        <div class="reset-main-container">
-          <div class="reset-sub-container">
-            <div class=reset-container>
-                <div>
-                  <label for="pass_word">Password</label>
-                </div>
-                <div>
-                  <input name="pass" type="password" class="cred" id="pass_word">
-                  <button onclick="showPassReset()"><img src="./images/show.png"></button>
-                </div>
-                <div>
-                  <label for="conf-pass">Confirm Password</label>
-                </div>
-                <div>
-                  <input name="conf" type="password" class="cred" id="conf_pass">
-                  <button onclick="showPassConfReset()"><img src="./images/show.png"></button>
-                </div>
-                <input class="submit-button" value="Change Password" type="button" onclick="changePassword()">
-            </div>
-            <div id="reset-info" class='info'>
-              <div class='info-sub-cont'>
-                <div id='info-message'>
-                </div>
-                <div class="close-btn-cont">
-                  <button class="close-btn" type="button" onclick="closeInfo()">
-                    <img src='./images/xbox.png'>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="reset-main-container">
+        <div class="page">
+          <span>Reset Password</span>
         </div>
+        <div class="password-container">
+          <a href="javascript:;" id="icon"><i class="icon fas fa-eye"></i></a>
+          <input tabindex="1" name="pass" placeholder="password" type="password" class="cred" id="pass_word">
+        </div>
+        <div class="password-container">
+          <a href="javascript:;" id="conf-icon"><i class="icon fas fa-eye"></i></a>
+          <input tabindex="2" name="conf" placeholder="confirm password" type="password" class="cred" id="conf_pass">
+        </div>
+        <div class="validate-holder-cred">
+          <button tabindex="3" class="validate-cred" onclick="changePassword()">Reset</button>
+        </div>
+        <span id="message"></span>
+      </div>
+      <div class='logo-container'>
+        <img src='./auth_process/images/logoQrmoc.png' alt="J3 logo" class="qrmoc">
+        <div>
+          <span>Q R M O C</span>
+        </div>
+      </div>
     </div>
   </body>
 </html>

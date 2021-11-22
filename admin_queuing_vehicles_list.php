@@ -24,10 +24,8 @@ else{
   echo "</tr>";
   if(sizeof($queuing_vehicles) > 0){
     if($data != ''){
-      $seen = false;
       foreach($queuing_vehicles as $vehicle){
         if($vehicle->route == $data || $vehicle->vehicle == $data){
-          $seen = true;
           $puv = '"' . $vehicle->vehicle . '"';
           if($vehicle->passengers == $vehicle->capacity){
             echo "<tr style='background-color: #CD6155; border-top: 1px solid #808B96; color: white'>";
@@ -49,9 +47,6 @@ else{
             echo "</tr>";
           }
         }
-      }
-      if($seen == false){
-
       }
     }
     else{

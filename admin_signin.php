@@ -32,6 +32,7 @@ if(isset($_SESSION['loggedin'])){
           <a href="javascript:;" id="icon"><i class="icon fas fa-eye"></i></a>
           <input name="pass" placeholder="password" type="password" class="cred" id="pass_word">
         </div>
+        <a class="forgot-password" href='./reset'>RESET PASSWORD</a>
         <span id="message"></span>
       </div>
       <div class='logo-container'>

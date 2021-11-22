@@ -2,16 +2,13 @@ const changePassword = () => {
   let f_pass = document.getElementById('pass_word').value;
   let s_pass = document.getElementById('conf_pass').value;
   if(f_pass.trim() == '' || s_pass.trim() == ''){
-    document.getElementById('reset-info').style.display = 'block';
-    document.getElementById('info-message').innerHTML = 'Please fill all the fields';
+    document.getElementById('message').innerHTML = 'Please fill all the fields';
   }
   else if(f_pass != s_pass){
-    document.getElementById('reset-info').style.display = 'block';
-    document.getElementById('info-message').innerHTML = 'Password did not match';
+    document.getElementById('message').innerHTML = 'Password did not match';
   }
   else if((f_pass == s_pass) && (f_pass.length < 8 && s_pass.length < 8)){
-    document.getElementById('reset-info').style.display = 'block';
-    document.getElementById('info-message').innerHTML = 'Password is less than eight characters';
+    document.getElementById('message').innerHTML = 'Password is less than eight characters';
   }
   else{
     changePass = new XMLHttpRequest();
@@ -20,17 +17,13 @@ const changePassword = () => {
         if(this.responseText == 'success'){
           window.location.replace('./signin');
         }else if(this.responseText == 'fail'){
-          document.getElementById('reset-info').style.display = 'block';
-          document.getElementById('info-message').innerHTML = 'Unable to reset password';
+          document.getElementById('message').innerHTML = 'Unable to reset password';
         }else if(this.responseText == 'error'){
-          document.getElementById('reset-info').style.display = 'block';
-          document.getElementById('info-message').innerHTML = 'Something went wrong';
+          document.getElementById('message').innerHTML = 'Something went wrong';
         }else if(this.responseText == 'restricted'){
-          document.getElementById('reset-info').style.display = 'block';
-          document.getElementById('info-message').innerHTML = 'Not that fast!';
+          document.getElementById('message').innerHTML = 'Not that fast!';
         }else{
-          document.getElementById('reset-info').style.display = 'block';
-          document.getElementById('info-message').innerHTML = 'Something went wrong';
+          document.getElementById('message').innerHTML = 'Something went wrong';
         }
       }
     }
@@ -40,26 +33,60 @@ const changePassword = () => {
   }
 }
 
-const closeInfo = () => {
-  document.getElementById('reset-info').style.display = 'none';
+window.addEventListener('keyup', function(e){
+  if(e.keyCode == '13'){
+    changePassword();
+  }
+})
+
+window.addEventListener('mouseup', function(){
+  hidePassSignIn();
+  hideConfPassSignIn();
+});
+
+
+document.getElementById('pass_word').addEventListener('keyup', function(e){
+  if(e.keyCode == '13'){
+    changePassword();
+  }
+  if(document.getElementById('pass_word').value == ''){
+    if(document.getElementById('message').innerHTML != ''){
+      document.getElementById('message').innerHTML = '';
+    }
+  }
+});
+
+document.getElementById('conf_pass').addEventListener('keyup', function(e){
+  if(e.keyCode == '13'){
+    changePassword();
+  }
+  if(document.getElementById('conf_pass').value == ''){
+    if(document.getElementById('message').innerHTML != ''){
+      document.getElementById('message').innerHTML = '';
+    }
+  }
+});
+
+document.getElementById('icon').addEventListener('mousedown', function(){
+  showPassSignIn();
+})
+
+document.getElementById('conf-icon').addEventListener('mousedown', function(){
+  showConfPassSignIn();
+})
+
+function showConfPassSignIn(){
+ document.getElementById('conf_pass').type = 'text';
 }
 
-function showPassReset(){
-  let pass = document.getElementById('pass_word');
-  if(pass.type == 'password'){
-    pass.type = 'text';
-  }
-  else{
-    pass.type = 'password';
-  }
+function hideConfPassSignIn(){
+  document.getElementById('conf_pass').type = 'password';
 }
 
-function showPassConfReset(){
-  let pass_conf = document.getElementById('conf_pass');
-  if(pass_conf.type == 'password'){
-    pass_conf.type = 'text';
-  }
-  else{
-    pass_conf.type = 'password';
-  }
+function showPassSignIn(){
+ document.getElementById('pass_word').type = 'text';
+}
+
+function hidePassSignIn(){
+  document.getElementById('pass_word').type = 'password';
 }

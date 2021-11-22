@@ -19,7 +19,7 @@ input:focus{
   background-repeat: no-repeat;
   position: relative;
   height: 100%;
-  min-height: 600px;
+  min-height: 650px;
 }
 
 .signup-main-container{
@@ -28,8 +28,8 @@ input:focus{
   align-items: center;
   position: absolute;
   left: 50%;
-  top: 30%;
-  transform: translate(-50%, -30%);
+  top: 20%;
+  transform: translate(-50%, -25%);
 }
 
 #u_name{
@@ -41,6 +41,7 @@ input:focus{
   border: 1px solid #7FB3D5;
   padding: 0 10px 0 10px;
   color: #34495E;
+  background: linear-gradient(to left, #24acde -40%, #ffffff 50%);
 }
 
 #pass_word{
@@ -52,6 +53,7 @@ input:focus{
   border: 1px solid #7FB3D5;
   padding: 0 10px 0 10px;
   color: #34495E;
+  background: linear-gradient(to left, #24acde -40%, #ffffff 50%);
 }
 
 #conf_pass{
@@ -63,6 +65,7 @@ input:focus{
   border: 1px solid #7FB3D5;
   padding: 0 10px 0 10px;
   color: #34495E;
+  background: linear-gradient(to left, #24acde -40%, #ffffff 50%);
 }
 
 .admin-prof-container{
@@ -125,14 +128,16 @@ input:focus{
 
 #message{
   font-size: 13px;
-  color: #34495E;
-  height: 20px;
+  color: red;
+  height: 30px;
+  padding: 17px;
 }
 
 #mess{
   font-size: 13px;
-  color: #34495E;
-  height: 20px;
+  color: red;
+  height: 30px;
+  padding: 17px;
 }
 
 .page{
@@ -155,102 +160,13 @@ input:focus{
   color: #34495E;
 }
 
-
-/* .profile-image{
-  width: 130px;
-  height: 130px;
-  margin-bottom: 10px;
-}
-
-#profile-image{
-  width: 130px;
-  height: 130px;
-  border-radius: 50%;
-  border: 2px solid white;
-} */
-
-
-.info-sub-cont{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 23px;
-}
-
-.close-btn-cont{
-  width: 23px;
-  height: 23px;
-}
-
-.close-btn{
-  border: none;
-  padding: 0;
-  background-color: #F9E79F;
-  width: 23px;
-  height: 23px;
-}
-
-.close-btn > img{
-  width: 23px;
-  height: 23px;
-}
-
-.info-sub-cont{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 23px;
-}
-
-.close-btn-cont{
-  width: 23px;
-  height: 23px;
-}
-
-.close-btn{
-  border: none;
-  padding: 0;
-  background-color: #F9E79F;
-  width: 23px;
-  height: 23px;
-}
-
-.close-btn > img{
-  width: 23px;
-  height: 23px;
-}
-
-#signup-info{
-  display: none;
-  border-radius: 4px;
-  width: 100%;
-  padding: 10px 10px 10px 10px;
-  border: 1px solid #ABB2B9;
-  background-color: #F9E79F;
-  font-weight: lighter;
-  position: absolute;
-  top: 110px;
-}
-
-#signup-question-info{
-  display: none;
-  border-radius: 4px;
-  width: 100%;
-  padding: 10px 10px 10px 10px;
-  border: 1px solid #ABB2B9;
-  background-color: #F9E79F;
-  font-weight: lighter;
-  position: absolute;
-  top: -40px;
-}
-
 .questions-main-container{
   display: none;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
   height: 450px;
-  top: 25px;
+  top: 50px;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -274,23 +190,50 @@ input:focus{
 
 
 .holder > div > input{
-  border: none;
   width: 100%;
   height: 38px;
   border-radius: 10px;
   border: 1px solid #7FB3D5;
   padding: 0 10px 0 10px;
   color: #34495E;
+  background: linear-gradient(to left, #24acde -40%, #ffffff 50%);
 }
 
 .holder > div > label{
   color: #34495E;
 }
 
-.answers{
-  padding: 0 10px 0 10px;
+.validate-holder{
+  width: 400px;
+  margin-top: 20px;
+}
+
+.validate-holder-cred{
+  margin-top: 20px;
   width: 100%;
-  height: 32px;
-  border: 1px solid #ABB2B9;
-  border-radius: 4px;
+}
+
+.validate{
+  height: 38px;
+  width: 100%;
+  border: none;
+  border-radius: 5px;
+  background: linear-gradient(to left, #24acde 0%, #ffffff 100%);
+  color: #34495E;
+  box-shadow: 5px 5px 8px #888888;
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
+.validate-cred{
+  width: 250px;
+  height: 38px;
+  margin: 0 10px 10px 10px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(to left, #24acde 0%, #ffffff 100%);
+  color: #34495E;
+  box-shadow: 5px 5px 8px #888888;
+  font-weight: bold;
+  font-size: 1.3em;
 }

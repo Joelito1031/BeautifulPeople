@@ -41,7 +41,7 @@ const signin = () => {
   let uname = document.getElementById('uname').innerHTML;
   let pass = document.getElementById('pass_word').value;
   if(uname.trim() == '' || pass.trim() == ''){
-    document.getElementById('message').innerHTML = 'Please fill all the fields';
+    document.getElementById('message').innerHTML = 'Enter your password';
   }else{
     var signInProcess = new XMLHttpRequest();
     signInProcess.onreadystatechange = function () {

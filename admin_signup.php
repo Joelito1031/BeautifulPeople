@@ -33,20 +33,23 @@ if(isset($_SESSION['loggedin'])){
               <span class="fas fa-plus"></span>
             </div>
             <div class="back-element">
-              <input id="profile-pic" type="file" accept="image/*">
+              <input tabindex="1" id="profile-pic" type="file" accept="image/*">
             </div>
           </div>
         </div>
         <div>
-          <input maxlength="20" placeholder="username" name="uname" type="text" class="cred" id="u_name">
+          <input tabindex="2" maxlength="20" placeholder="username" name="uname" type="text" class="cred" id="u_name">
         </div>
         <div class="password-container">
           <a href="javascript:;" id="icon"><i class="icon fas fa-eye"></i></a>
-          <input name="pass" placeholder="password" type="password" class="cred" id="pass_word">
+          <input tabindex="3" name="pass" placeholder="password" type="password" class="cred" id="pass_word">
         </div>
         <div class="password-container">
           <a href="javascript:;" id="conf-icon"><i class="icon fas fa-eye"></i></a>
-          <input name="conf" placeholder="confirm password" type="password" class="cred" id="conf_pass">
+          <input tabindex="4" name="conf" placeholder="confirm password" type="password" class="cred" id="conf_pass">
+        </div>
+        <div class="validate-holder-cred">
+          <button tabindex="5" class="validate-cred" onclick="next()">Next</button>
         </div>
         <span id="message"></span>
       </div>
@@ -101,6 +104,9 @@ if(isset($_SESSION['loggedin'])){
             <div>
               <input name="q_five" class="answers" type="text" id="q-5">
             </div>
+          </div>
+          <div class="validate-holder">
+            <button class="validate" onclick="signup()">Sign up</button>
           </div>
           <span id="mess"></span>
         </div>
