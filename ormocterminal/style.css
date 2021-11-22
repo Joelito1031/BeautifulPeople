@@ -841,6 +841,7 @@ tr:nth-child(odd){
 }
 
 #moreoptions {
+  display: none;
   position: absolute;
   top: 70%;
   left: 50%;

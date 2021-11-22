@@ -1,3 +1,5 @@
+document.getElementById("five").classList.add("active");
+
 function loadWaitingPassengers(){
   const waitingPassengers = new XMLHttpRequest();
   waitingPassengers.onreadystatechange = function(){

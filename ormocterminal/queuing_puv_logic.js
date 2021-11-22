@@ -1,3 +1,5 @@
+document.getElementById("four").classList.add("active");
+
 function popupInfo(message){
   swal.fire({
     icon: 'info',

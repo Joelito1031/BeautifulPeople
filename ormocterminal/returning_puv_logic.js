@@ -1,3 +1,5 @@
+document.getElementById("six").classList.add("active");
+
 function returningSetError(message){
   var Toast = Swal.mixin({
     toast: true,

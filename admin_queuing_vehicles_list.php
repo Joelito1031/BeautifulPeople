@@ -48,7 +48,6 @@ else{
             echo "<td><button class='fas fa-sign-out-alt' type='button' style='background-color: #F4D03F; width: 30px; height: 20px; padding: 0; border: none; border-radius: 3px; margin-top: 3px;' onclick='unqueueVehicle(" . $puv . ")'></button></td>";
             echo "</tr>";
           }
-          break;
         }
       }
       if($seen == false){

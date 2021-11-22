@@ -14,7 +14,7 @@ if(isset($_POST['data'])){
 }
 try{
   require './db_connection.php';
-  $retrieve_registered_puv = $connection->prepare("SELECT * FROM  registered_vehicles");
+  $retrieve_registered_puv = $connection->prepare("SELECT * FROM  registered_vehicles WHERE Status = 'Active'");
   $retrieve_registered_puv->execute();
   $puvs = $retrieve_registered_puv->fetchAll();
   if($retrieve_registered_puv->rowCount() > 0){
@@ -47,10 +47,18 @@ try{
       echo "<div style='font-size: 13px;'>";
       echo "<span style='font-weight: bold;'>Capacity:&ensp;</span>" . $puv['Capacity'] . "<br>";
       echo "<span style='font-weight: bold;'>Operator:&ensp;</span>" . $puv['FirstName'] . " " . $puv['MiddleName'] . " " . $puv['LastName'] . " " . $puv['Suffix'] . "<br>";
-      echo "<span style='font-weight: bold;'>Operator's address:&ensp;</span>" . $puv['Address'] . ", Ormoc City<br>";
+      if($puv['Address'] != "0"){
+        echo "<span style='font-weight: bold;'>Operator's address:&ensp;</span>" . $puv['Address'] . ", Ormoc City<br>";
+      }else{
+        echo "<span style='font-weight: bold;'>Operator's address:&ensp;</span>Non-Resident<br>";
+      }
       echo "<span style='font-weight: bold;'>Operator's mobile #:&ensp;</span>" . $puv['Contact'] . "<br>";
       echo "<span style='font-weight: bold;'>Driver:&ensp;</span>" . $puv['DFirstName'] . " " . $puv['DMiddleName'] . " " . $puv['DLastName'] . " " . $puv['DSuffix'] . "<br>";
-      echo "<span style='font-weight: bold;'>Driver's address:&ensp;</span>" . $puv['DAddress'] . ", Ormoc City<br>";
+      if($puv['DAddress'] != "0"){
+        echo "<span style='font-weight: bold;'>Driver's address:&ensp;</span>" . $puv['DAddress'] . ", Ormoc City<br>";
+      }else{
+        echo "<span style='font-weight: bold;'>Driver's address:&ensp;</span>Non-Resident<br>";
+      }
       echo "<span style='font-weight: bold;'>Driver's mobile #:&ensp;</span>" . $puv['DContact'] . "<br>";
       echo "</div>";
       echo "</div>";

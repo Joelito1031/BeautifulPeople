@@ -1,3 +1,5 @@
+document.getElementById("eight").classList.add("active");
+
 function popupInfo(message){
   swal.fire({
     icon: 'info',
@@ -134,8 +136,9 @@ function deletePUV(plateno){
 
 const saveEditedData = (value) => {
   let contactNumber = document.getElementById('c_num');
+  let dcontactNumber = document.getElementById('dc_num');
   Loader.open();
-  if(contactNumber.checkValidity()){
+  if(contactNumber.checkValidity() && dcontactNumber.checkValidity()){
     let f_name = document.getElementById('f_name').value;
     let m_name = document.getElementById('m_name').value;
     let l_name = document.getElementById('l_name').value;
@@ -202,6 +205,7 @@ const saveEditedData = (value) => {
       }
     }
   }else{
+    Loader.close();
     popupWarning('Invalid input');
   }
 }

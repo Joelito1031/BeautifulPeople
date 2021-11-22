@@ -49,13 +49,9 @@ else{
               <div class="container-fluid">
                 <div class="row mb-2">
                   <div class="col-sm-6">
-                    <h1 class="m-0 sub-text-2">View Logs</h1>
-                  </div><!-- /.col -->
-                  <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                      <li class="breadcrumb-item"><a href="./dashboard">Home</a></li>
-                      <li class="breadcrumb-item active">Administrator</li>
-                    </ol>
+                    <h4 class="m-0 sub-text-2"><span data-toggle="logs-tooltip" title="Choose [Oldest] to sort logs from oldest to latest,
+                      Choose [Latest] to sort logs from latest to oldest, Choose [Time] to choose specific date, Choose [Alphabet] to sort alphabetically.
+                      Use search field to search PUV." class="fas fa-question-circle" style="color: #9edbff;"></span>&thinsp;View Logs</h4>
                   </div><!-- /.col -->
                 </div><!-- /.row -->
               </div><!-- /.container-fluid -->
@@ -65,8 +61,10 @@ else{
                 <div class="card container-fluid card-danger card-outline">
                   <div class="card-body subfield-7-2">
                     <select id="sort-option" class="form-control" onchange="retrieveLogs()">
+                      <option value="">Select to show data</option>
                       <option value="latest">Latest</option>
                       <option value="oldest">Oldest</option>
+                      <option value="alphabetically">Alphabetically</option>
                       <option value="moreoptions">Time</option>
                     </select>
                       <div id="moreoptions" class="form-control">
@@ -81,8 +79,12 @@ else{
               <div class="col-12 container-fluid subfield-7-1">
                 <div class="card container-fluid card-danger card-outline">
                   <div class="card-body">
+                    <div class="form-inline" style="width: 400px;">
+                      <input id="search-input" class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Press enter to search for plate number" aria-label="Search" maxlength="7" onkeyup="this.value = makePlateNoCorrect(this.value)" onfocus="hideSorter()" onfocusout="showSorter()">
+                      <i id="search-ico" class="fas fa-search" aria-hidden="true"></i>
+                    </div>
+                    <br>
                     <div class="subfield-7-1-sub">
-
                     </div>
                   </div><!-- /.card-body -->
                 </div> <!-- /.card -->
@@ -105,12 +107,17 @@ else{
 
     <!-- Custom JS -->
     <script type="text/javascript" src="html2pdf.bundle.min.js" ></script>
-    <script type="text/javascript" src="./vehicle_logs_logic.js" ></script>
     <!-- jQuery -->
     <script src="plugins/jquery/jquery.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script type="text/javascript" src="./vehicle_logs_logic.js" ></script>
+    <script>
+    $(function () {
+      $('[data-toggle="logs-tooltip"]').tooltip()
+    })
+    </script>
     <script>
       $.widget.bridge('uibutton', $.ui.button)
     </script>

@@ -7,14 +7,14 @@ if(isset($_POST['uname']) && isset($_POST['password']) && isset($_POST['first_an
           require '../db_connection.php';
           try{
             $verify_admin = $connection->prepare("SELECT COUNT(*) FROM admin WHERE Uname = :username AND Password = :password");
-            $default_username = sha1('admin');
+            $default_username = 'admin';
             $default_password = sha1('admin');
             $verify_admin->bindParam(':username', $default_username);
             $verify_admin->bindParam(':password', $default_password);
             $verify_admin->execute();
             $still_admin = $verify_admin->fetchColumn();
             if($still_admin > 0){
-                $username = sha1(trim($_POST['uname']));
+                $username = trim($_POST['uname']);
                 $password = sha1($_POST['password']);
                 $store_credentials = $connection->prepare("UPDATE admin SET Uname = :username, Password = :password WHERE Uname = :uname AND Password = :pass");
                 $store_credentials->bindParam(':username', $username);

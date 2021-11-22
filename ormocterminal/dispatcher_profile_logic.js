@@ -1,3 +1,5 @@
+document.getElementById("seven").classList.add("active");
+
 let pinState = '';
 let profileState = '';
 

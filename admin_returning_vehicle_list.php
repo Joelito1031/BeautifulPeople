@@ -34,6 +34,9 @@ if(sizeof($vehicles) > 0){
         echo $vehicle->operator;
         echo "</td>";
         echo "<td>";
+        echo $vehicle->driver;
+        echo "</td>";
+        echo "<td>";
         echo strtoupper($vehicle->route);
         echo "</td>";
         echo "<td>";
@@ -59,6 +62,9 @@ if(sizeof($vehicles) > 0){
       echo "</td>";
       echo "<td>";
       echo $vehicle->operator;
+      echo "</td>";
+      echo "<td>";
+      echo $vehicle->driver;
       echo "</td>";
       echo "<td>";
       echo strtoupper($vehicle->route);

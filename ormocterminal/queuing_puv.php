@@ -51,12 +51,6 @@ else{
                   <div class="col-sm-6">
                     <h4 class="m-0 sub-text-2"><span data-toggle="queuing-tooltip" title="The table below shows the currently queuing PUV, dequeue PUV using the button under the Dequeue column. Red colored row indicates that PUV is full, Green indicates the opposite." class="fas fa-question-circle" style="color: #9edbff;"></span>&thinsp;Queueing PUVs</h4>
                   </div><!-- /.col -->
-                  <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                      <li class="breadcrumb-item"><a href="./dashboard">Home</a></li>
-                      <li class="breadcrumb-item active">Administrator</li>
-                    </ol>
-                  </div><!-- /.col -->
                 </div><!-- /.row -->
               </div><!-- /.container-fluid -->
             </div>

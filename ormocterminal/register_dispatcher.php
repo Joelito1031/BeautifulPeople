@@ -52,12 +52,6 @@ else{
                   <div class="col-sm-6">
                     <h1 class="m-0 sub-text-2">Add & Change Status</h1>
                   </div><!-- /.col -->
-                  <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                      <li class="breadcrumb-item"><a href="./dashboard">Home</a></li>
-                      <li class="breadcrumb-item active">Administrator</li>
-                    </ol>
-                  </div>
                 </div>
               </div>
             </div>

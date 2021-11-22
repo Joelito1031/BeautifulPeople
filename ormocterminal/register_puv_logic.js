@@ -1,5 +1,7 @@
 var parameter = null;
 
+document.getElementById("three").classList.add("active");
+
 function popupInfo(message){
   swal.fire({
     icon: 'info',
@@ -8,10 +10,19 @@ function popupInfo(message){
 }
 
 function popupSuccess(message){
-  swal.fire({
-    icon: 'success',
-    text: message
+  var Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
   });
+
+  Toast.fire({
+    icon: 'success',
+    title: message,
+    background: '#EAF2F8',
+  })
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function popupError(message){
@@ -87,7 +98,7 @@ function registerVehicle(){
                 document.getElementById('l_name').value = '';
                 document.getElementById('c_num').value = '';
                 document.getElementById('address').value = '';
-                document.getElementById('f_name').value = '';
+                document.getElementById('df_name').value = '';
                 document.getElementById('dm_name').value = '';
                 document.getElementById('dl_name').value = '';
                 document.getElementById('dc_num').value = '';
@@ -120,7 +131,7 @@ function registerVehicle(){
 const uploadThePhoto = (plateno) => {
   if(choosenFile.value == ''){
     Loader.close();
-    popupSuccess('Vehicle successfully registered');
+    popupSuccess('PUV successfully registered');
   }else{
     const formData = new FormData();
     const file = choosenFile.files[0];
@@ -138,7 +149,7 @@ const uploadThePhoto = (plateno) => {
         }else if(this.responseText == 'sizelimit'){
           popupInfo("Image exceed size limit, vehicle information is saved with default profile picture");
         }else if(this.responseText == 'upload'){
-          popupSuccess("Dispatcher successfully registered");
+          popupSuccess("PUV successfully registered");
           document.getElementById('actual-pic').src = "../vehicle_images/vehicleImage.png";
         }else if(this.responseText == 'error'){
           popupError("Something went wrong");
@@ -179,10 +190,10 @@ const makeItCorrect = (value) => {
         tempName = '';
       }
     }else{
-      tempName = tempName + name[i]
+      tempName = tempName + name[i];
     }
   }
-  return finalName;
+  return finalName.trim();
 }
 
 function exit(){

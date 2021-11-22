@@ -53,12 +53,6 @@ else{
                   <div class="col-sm-6">
                     <h4 class="m-0 sub-text-2"><span data-toggle="returning-tooltip" title="The table below lists all the registered PUVs, set PUV to returning mode by pressing the buttons under the Returning column." class="fas fa-question-circle" style="color: #9edbff;"></span>&thinsp;Returning PUVs</h4>
                   </div><!-- /.col -->
-                  <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                      <li class="breadcrumb-item"><a href="./dashboard">Home</a></li>
-                      <li class="breadcrumb-item active">Administrator</li>
-                    </ol>
-                  </div><!-- /.col -->
                 </div><!-- /.row -->
               </div><!-- /.container-fluid -->
             </div>

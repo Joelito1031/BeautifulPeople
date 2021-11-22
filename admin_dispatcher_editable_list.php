@@ -40,9 +40,15 @@ try{
       echo "<div class='p-2' style='color: #5DADE2'>";
       echo "<b>" . $dispatcher['FirstName'] . " " . $dispatcher['MiddleName'] . " " . $dispatcher['LastName'] . " " . $dispatcher['Suffix'] . "</b>";
       echo "</div>";
-      echo "<div style='margin-left: 8px; font-size: 13px'>";
-      echo $dispatcher['Address'] . ", Ormoc City";
-      echo "</div>";
+      if($dispatcher['Address'] != "0"){
+        echo "<div style='margin-left: 8px; font-size: 13px'>";
+        echo $dispatcher['Address'] . ", Ormoc City";
+        echo "</div>";
+      }else{
+        echo "<div style='margin-left: 8px; font-size: 13px'>";
+        echo "Non-Resident";
+        echo "</div>";
+      }
       echo "<div style='margin-left: 8px; font-size: 13px'>";
       echo $dispatcher['Contact'];
       echo "</div>";

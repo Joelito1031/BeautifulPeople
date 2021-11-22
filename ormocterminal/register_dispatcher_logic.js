@@ -1,3 +1,5 @@
+document.getElementById("two").classList.add("active");
+
 function dutyChangeError(message){
   var Toast = Swal.mixin({
     toast: true,
@@ -252,10 +254,10 @@ const makeItCorrect = (value) => {
         tempName = '';
       }
     }else{
-      tempName = tempName + name[i]
+      tempName = tempName + name[i];
     }
   }
-  return finalName;
+  return finalName.trim();
 }
 
 function exit(){

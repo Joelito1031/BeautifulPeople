@@ -41,7 +41,7 @@ try{
           if($queuing_puvs->vehicle == $data){
             $vehicle_is_queuing = true;
             array_splice($queuing_vehicles, $count_two, 1);
-            $delete_vehicle = $connection->prepare("DELETE FROM registered_vehicles WHERE PlateNo = :platenumber");
+            $delete_vehicle = $connection->prepare("UPDATE registered_vehicles SET Status = 'Deleted', VehicleProfile = '' WHERE PlateNo = :platenumber");
             $delete_vehicle->bindParam(":platenumber", $data);
             try{
               if(!unlink("./vehicles/" . $route . "_" . $vehicle_name . ".json")){
@@ -71,7 +71,7 @@ try{
           $count_two += 1;
         }
         if(!$vehicle_is_queuing){
-          $delete_vehicle = $connection->prepare("DELETE FROM registered_vehicles WHERE PlateNo = :platenumber");
+          $delete_vehicle = $connection->prepare("UPDATE registered_vehicles SET Status = 'Deleted', VehicleProfile = '' WHERE PlateNo = :platenumber");
           $delete_vehicle->bindParam(":platenumber", $data);
           try{
             if(!unlink("./vehicles/" . $route . "_" . $vehicle_name . ".json")){
