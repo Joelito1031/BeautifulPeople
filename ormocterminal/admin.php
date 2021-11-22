@@ -108,12 +108,12 @@ else{
                 <div class="small-box bg-danger">
                   <div class="inner">
                     <h3>&ensp;</h3>
-                    <p>Manage Dispatcher</p>
+                    <p>Manage Dispatchers</p>
                   </div>
                   <div class="icon">
                     <i class="ion ion-person-stalker"></i>
                   </div>
-                  <a href="#" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="./dispatcherprofile" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
             </div>

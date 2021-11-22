@@ -26,6 +26,7 @@ CREATE TABLE `admin` (
   `Uname` varchar(100) NOT NULL,
   `Password` varchar(100) NOT NULL,
   `AdminId` int NOT NULL AUTO_INCREMENT,
+  `Profile` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`AdminId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -36,7 +37,7 @@ CREATE TABLE `admin` (
 
 LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
-INSERT INTO `admin` VALUES ('3ccc38e714dcd5011ddcf68c7814d79438d4b6ee','a4e9eda4cd30a7569463c06c9a8af6a7adfaca09',1);
+INSERT INTO `admin` VALUES ('admin','d033e22ae348aeb5660fc2140aec35850c4da997',1,'images/adminUserProfile.png');
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -166,7 +167,7 @@ CREATE TABLE `questions` (
 
 LOCK TABLES `questions` WRITE;
 /*!40000 ALTER TABLE `questions` DISABLE KEYS */;
-INSERT INTO `questions` VALUES (1,'What is your favorite color?','bc74f4f071a5a33f00ab88a6d6385b5e6638b86c'),(2,'What is your mothers maiden name?','030c8062aedaa48ff6a9aec41870ea6996c88cde'),(3,'What elementary school did you attend?','bd4bbaa38c4f6ba5ee5c65a36ba18dd5117ff2aa'),(4,'When you were young, what did you want to be when you grew up?','8d7050ffcf7a2ee29cd7692080e8c9e5baf3d6ff'),(5,'What is the name of the town where you were born?','847142e644a4765c6644661522241e138f7656fc');
+INSERT INTO `questions` VALUES (1,'What is your favorite color?','78988010b890ce6f4d2136481f392787ec6d6106'),(2,'What is your mothers maiden name?','78988010b890ce6f4d2136481f392787ec6d6106'),(3,'What elementary school did you attend?','78988010b890ce6f4d2136481f392787ec6d6106'),(4,'When you were young, what did you want to be when you grew up?','78988010b890ce6f4d2136481f392787ec6d6106'),(5,'What is the name of the town where you were born?','78988010b890ce6f4d2136481f392787ec6d6106');
 /*!40000 ALTER TABLE `questions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,7 +179,6 @@ DROP TABLE IF EXISTS `registered_vehicles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `registered_vehicles` (
-  `PlateNo` varchar(10) NOT NULL,
   `Route` varchar(30) NOT NULL,
   `Capacity` int NOT NULL,
   `FirstName` varchar(100) NOT NULL,
@@ -194,6 +194,8 @@ CREATE TABLE `registered_vehicles` (
   `DContact` varchar(20) NOT NULL,
   `DAddress` varchar(100) NOT NULL,
   `VehicleProfile` varchar(100) DEFAULT NULL,
+  `Status` varchar(20) DEFAULT NULL,
+  `PlateNo` varchar(10) NOT NULL,
   PRIMARY KEY (`PlateNo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -238,4 +240,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-21 10:26:04
+-- Dump completed on 2021-11-22 15:24:21

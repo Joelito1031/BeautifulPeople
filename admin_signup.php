@@ -40,10 +40,12 @@ if(isset($_SESSION['loggedin'])){
         <div>
           <input maxlength="20" placeholder="username" name="uname" type="text" class="cred" id="u_name">
         </div>
-        <div>
+        <div class="password-container">
+          <a href="javascript:;" id="icon"><i class="icon fas fa-eye"></i></a>
           <input name="pass" placeholder="password" type="password" class="cred" id="pass_word">
         </div>
-        <div>
+        <div class="password-container">
+          <a href="javascript:;" id="conf-icon"><i class="icon fas fa-eye"></i></a>
           <input name="conf" placeholder="confirm password" type="password" class="cred" id="conf_pass">
         </div>
         <span id="message"></span>

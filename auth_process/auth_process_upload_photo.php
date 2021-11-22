@@ -1,6 +1,6 @@
 <?php
 try{
-  $profile_dir = "./images/";
+  $profile_dir = "images/";
   $profile_pic = $profile_dir . basename($_FILES["profile-pic"]["name"]);
   $filetype = strtolower(pathinfo($profile_pic, PATHINFO_EXTENSION));
   $file_rename = $profile_dir . $_POST['uname'] . time() . "." . $filetype;
@@ -25,7 +25,7 @@ try{
     echo $status;
   }else{
     if(move_uploaded_file($_FILES["profile-pic"]["tmp_name"], $file_rename)){
-      require "./db_connection.php";
+      require "../db_connection.php";
       $save_profile_directory = $connection->prepare("UPDATE admin SET Profile = :profile WHERE AdminId = '1'");
       $save_profile_directory->bindParam(":profile", $file_rename);
       $save_profile_directory->execute();

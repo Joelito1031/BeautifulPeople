@@ -131,18 +131,21 @@ function uploadPhoto(uname){
         }else if(this.responseText == 'upload'){
           window.location.replace('./signin');
         }else if(this.responseText == 'error'){
+          document.getElementById('message').innerHTML = 'Unable to upload photo, default photo was set. Redirecting...';
           setTimeout(function(){
-            document.getElementById('message').innerHTML = 'Unable to upload photo, default photo was set. Redirecting...';
+            window.location.replace('./signin');
           }, 2000)
         }else{
+          document.getElementById('message').innerHTML = 'Unable to upload photo, default photo was set. Redirecting...';
           setTimeout(function(){
-            document.getElementById('message').innerHTML = 'Unable to upload photo, default photo was set. Redirecting...';
+            window.location.replace('./signin');
           }, 2000)
         }
         console.log(this.responseText);
       }else{
+        document.getElementById('message').innerHTML = 'Unable to upload photo, default photo was set. Redirecting...';
         setTimeout(function(){
-          document.getElementById('message').innerHTML = 'Unable to upload photo, default photo was set. Redirecting...';
+          window.location.replace('./signin');
         }, 2000)
       }
     };
@@ -243,3 +246,38 @@ document.getElementById('q-5').addEventListener('keyup', function(e){
     }
   }
 });
+
+document.getElementById('icon').addEventListener('mousedown', function(){
+  showPassSignIn();
+})
+
+window.addEventListener('keyup', function(e){
+  if(e.keyCode == '13'){
+    next();
+  }
+})
+
+window.addEventListener('mouseup', function(){
+  hidePassSignIn();
+  hideConfPassSignIn();
+});
+
+function showPassSignIn(){
+ document.getElementById('pass_word').type = 'text';
+}
+
+function hidePassSignIn(){
+  document.getElementById('pass_word').type = 'password';
+}
+
+document.getElementById('conf-icon').addEventListener('mousedown', function(){
+  showConfPassSignIn();
+})
+
+function showConfPassSignIn(){
+ document.getElementById('conf_pass').type = 'text';
+}
+
+function hideConfPassSignIn(){
+  document.getElementById('conf_pass').type = 'password';
+}

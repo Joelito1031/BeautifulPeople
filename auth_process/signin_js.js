@@ -25,9 +25,10 @@ function loadAdminImage(){
         document.getElementById('message').innerHTML = "Something is wrong";
       }else{
         let data = JSON.parse(this.responseText);
-        document.getElementById('profile-image').src = data.profile;
+        document.getElementById('profile-image').src = 'auth_process/' + data.profile;
         document.getElementById('uname').innerHTML = data.name;
       }
+      console.log(this.responseText);
     }
   }
   loadImage.open("POST", "./auth_process/auth_process_load_image.php", true);
@@ -70,6 +71,12 @@ const signin = () => {
     signInProcess.send("uname=" + uname + "&pass=" + pass);
   }
 }
+
+window.addEventListener('keyup', function(e){
+  if(e.keyCode == '13'){
+    signin();
+  }
+})
 
 function showPassSignIn(){
  document.getElementById('pass_word').type = 'text';
