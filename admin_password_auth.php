@@ -16,14 +16,14 @@ if(isset($_POST['pass'])){
       $check_password = $connection->prepare("SELECT * FROM admin WHERE Password = :password");
       $check_password->bindParam(":password", $password);
       $check_password->execute();
-      if($check_password->fetchColumn() > 0){
+      if($check_password->rowCount() > 0){
         $_SESSION['authentication'] = true;
         echo "success";
       }else{
         echo "fail";
       }
     }catch(Exception $e){
-      echo "error";
+      echo $e;
     }
   }else{
     echo "error";

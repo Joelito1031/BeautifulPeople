@@ -1042,3 +1042,19 @@ tr:nth-child(odd){
   align-items: center;
   padding: 20px;
 }
+
+.uname{
+  margin-bottom: 20px;
+}
+
+#uname{
+  font-size: 1.5em;
+  color: #34495E;
+}
+
+#message{
+  font-size: 13px;
+  color: #34495E;
+  margin-top: 20px;
+  color: red;
+}

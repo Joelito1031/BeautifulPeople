@@ -1,3 +1,4 @@
+<script type="text/javascript" src="./sidebar_logic.js"></script>
 <div class="wrapper">
 
   <!-- Preloader -->
@@ -54,7 +55,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="auth-modal">Authenticate</h5>
+        <h5 class="modal-title" id="auth-modal">Authenticate to continue</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -64,14 +65,18 @@
           <div class="profile-image">
             <img src="" id="profile-image">
           </div>
+          <div class="uname">
+            <span id="uname"></span>
+          </div>
           <div class="password-container">
             <a href="javascript:;" id="icon"><i class="icon fas fa-eye"></i></a>
             <input name="pass" placeholder="password" type="password" class="cred" id="pass_word">
           </div>
+          <span id="message"></span>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Authenticate</button>
+        <button type="button" class="btn btn-primary" onclick="authenticate()">Authenticate</button>
       </div>
     </div>
   </div>
