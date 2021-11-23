@@ -1040,6 +1040,7 @@ tr:nth-child(odd){
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding: 20px;
 }
 
@@ -1052,9 +1053,41 @@ tr:nth-child(odd){
   color: #34495E;
 }
 
+#edit-uname{
+  font-size: 1.5em;
+  color: #34495E;
+}
+
 #message{
   font-size: 13px;
   color: #34495E;
   margin-top: 20px;
   color: red;
+}
+
+.admin-prof-container{
+  position: relative;
+  margin-bottom: 20px
+}
+
+.admin-prof-container > div > img{
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+#admin_u_name{
+  border: none;
+  width: 250px;
+  height: 38px;
+  margin: 10px;
+  border-radius: 10px;
+  border: 1px solid #7FB3D5;
+  padding: 0 10px 0 10px;
+  color: #34495E;
+}
+
+#admin_u_name:focus{
+  outline: 1px solid #2980B9;
 }

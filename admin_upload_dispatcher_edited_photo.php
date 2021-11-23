@@ -68,6 +68,6 @@ try{
     }
   }
 }catch(Exception $e){
-  echo $e;
+  echo "error";
 }
 ?>

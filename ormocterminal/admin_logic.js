@@ -4,26 +4,6 @@ function exit(){
 
 document.getElementById("one").classList.add("active");
 
-function loadAdminImage(){
-  const loadImage = new XMLHttpRequest();
-  loadImage.onreadystatechange = function(){
-    if(this.readyState == 4 && this.status == 200){
-      if(this.responseText == 'error'){
-        document.getElementById('message').innerHTML = "Something is wrong";
-      }else{
-        let data = JSON.parse(this.responseText);
-        document.getElementById('admin-profile-pic').src = '../auth_process/' + data.profile;
-        document.getElementById('profile-image').src = '../auth_process/' + data.profile;
-        document.getElementById('uname').innerHTML = data.name;
-        document.getElementById('admin-name').innerHTML = data.name;
-      }
-      console.log(this.responseText);
-    }
-  }
-  loadImage.open("POST", "../auth_process/auth_process_load_image.php", true);
-  loadImage.send();
-}
-
 function time(){
   let today = new Date();
   let meridian = today.getHours() >= 12 ? 'PM' : 'AM';
