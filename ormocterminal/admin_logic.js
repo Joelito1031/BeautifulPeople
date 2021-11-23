@@ -13,6 +13,7 @@ function loadAdminImage(){
       }else{
         let data = JSON.parse(this.responseText);
         document.getElementById('admin-profile-pic').src = '../auth_process/' + data.profile;
+        document.getElementById('profile-image').src = '../auth_process/' + data.profile;
         document.getElementById('admin-name').innerHTML = data.name;
       }
       console.log(this.responseText);
@@ -24,10 +25,16 @@ function loadAdminImage(){
 
 function time(){
   let today = new Date();
-  console.log(today.getMonth());
+  let meridian = today.getHours() >= 12 ? 'PM' : 'AM';
+  var timeNow = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds() + " " + meridian;
+  return timeNow;
 }
 
-time();
+
+
+setInterval(function(){
+  document.getElementById('time').innerHTML = time();
+}, 1000);
 
 loadAdminImage();
 
@@ -81,3 +88,29 @@ setInterval(function(){
   loadQueuingPUV();
   loadOnDutyDispatchers();
 }, 2000);
+
+function checkAuthPassword(){
+  const checkAuth = new XMLHttpRequest();
+  checkAuth.onreadystatechange = function(){
+    if(this.readyState == 4 && this.status == 200){
+      document.getElementById('onduty-dispatchers').innerHTML = this.responseText + "<p>On Duty Dispatchers</p>";
+    }
+  }
+  checkAuth.open("POST", "../admin_password_auth.php", true);
+  checkAuth.send();
+}
+
+function checkAuth(){
+  const checkAuth = new XMLHttpRequest();
+  checkAuth.onreadystatechange = function(){
+    if(this.readyState == 4 && this.status == 200){
+      if(this.responseText == 'authorized'){
+        $('#editModal').modal('show')
+      }else if(this.responseText == 'notauthorized'){
+        $('#authentication-modal').modal('show')
+      }
+    }
+  }
+  checkAuth.open("POST", "../admin_check_auth.php", true);
+  checkAuth.send();
+}

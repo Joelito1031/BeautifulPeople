@@ -22,12 +22,19 @@
     <!-- Notifications Dropdown Menu -->
     <li class="nav-item dropdown">
       <a class="nav-link" data-toggle="dropdown" href="#">
-        Settings
         <i class="fas fa-cog"></i>
       </a>
       <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
         <span class="dropdown-item dropdown-header">Settings</span>
         <div class="dropdown-divider"></div>
+        <a href="#" onclick="checkAuth()" class="dropdown-item">
+          <i class="fas fa-edit mr-2"></i> EDIT PROFILE
+          <span class="float-right text-muted text-sm"></span>
+        </a>
+        <a href="#" onclick="checkAuth()" class="dropdown-item">
+          <i class="fas fa-undo mr-2"></i> RESET DEFAULT
+          <span class="float-right text-muted text-sm"></span>
+        </a>
         <a href="#" onclick="exit()" class="dropdown-item">
           <i class="fas fa-sign-out-alt mr-2"></i> LOGOUT
           <span class="float-right text-muted text-sm"></span>
@@ -42,6 +49,58 @@
   </ul>
 </nav>
 <!-- /.navbar -->
+
+<div class="modal fade" id="authentication-modal" tabindex="-1" role="dialog" aria-labelledby="auth-modal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="auth-modal">Authenticate</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-body-sub-container">
+          <div class="profile-image">
+            <img src="" id="profile-image">
+          </div>
+          <div class="password-container">
+            <a href="javascript:;" id="icon"><i class="icon fas fa-eye"></i></a>
+            <input name="pass" placeholder="password" type="password" class="cred" id="pass_word">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Authenticate</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary">Commit changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
 
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">

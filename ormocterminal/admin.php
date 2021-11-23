@@ -113,7 +113,8 @@ else{
               </div>
             </div>
           </div>
-          <div class="time">
+          <div class="time-container">
+            <span id="time"></span>
           </div>
         </section>
         <!-- /.content -->
