@@ -28,7 +28,7 @@ CREATE TABLE `admin` (
   `AdminId` int NOT NULL AUTO_INCREMENT,
   `Profile` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`AdminId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -60,7 +60,7 @@ CREATE TABLE `dispatchers` (
   `Suffix` varchar(10) DEFAULT NULL,
   `Address` varchar(100) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,8 +81,9 @@ DROP TABLE IF EXISTS `loaded_passengers`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `loaded_passengers` (
   `Vehicle` varchar(40) NOT NULL,
-  `Passenger` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `Passenger` varchar(100) NOT NULL,
+  `QR` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -110,7 +111,7 @@ CREATE TABLE `logs` (
   `Route` varchar(50) NOT NULL,
   `LogDate` date DEFAULT NULL,
   PRIMARY KEY (`LogId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -134,7 +135,7 @@ CREATE TABLE `ormoc_commuters` (
   `Name` varchar(150) NOT NULL,
   `Contact` varchar(50) NOT NULL,
   PRIMARY KEY (`QR`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +159,7 @@ CREATE TABLE `questions` (
   `Question` varchar(100) NOT NULL,
   `Answer` varchar(200) NOT NULL,
   PRIMARY KEY (`QuestionId`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -197,7 +198,7 @@ CREATE TABLE `registered_vehicles` (
   `Status` varchar(20) DEFAULT NULL,
   `PlateNo` varchar(10) NOT NULL,
   PRIMARY KEY (`PlateNo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -218,8 +219,9 @@ DROP TABLE IF EXISTS `waiting_passengers`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `waiting_passengers` (
   `Destination` varchar(50) NOT NULL,
-  `Passenger` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `Passenger` varchar(100) NOT NULL,
+  `QR` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -240,4 +242,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-11-22 15:24:21
+-- Dump completed on 2021-11-27 10:05:15
