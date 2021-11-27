@@ -1,11 +1,6 @@
 document.getElementById("nine").classList.add("active");
 
-function hideSorter(){
-  document.getElementById('sort-option').style.display = 'none';
-}
-
 function showSorter(){
-  document.getElementById('sort-option').style.display = 'block';
   document.getElementById('search-input').value = '';
 }
 

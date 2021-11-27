@@ -9,11 +9,11 @@ try{
   $find_passenger->execute();
   $passenger = $find_passenger->fetch();
   if($passenger['Count'] > 0){
-    $passenger_loaded = $connection->prepare("SELECT Vehicle, COUNT(*) as Count FROM loaded_passengers WHERE QR = :qr");
+    $passenger_loaded = $connection->prepare("SELECT Vehicle FROM loaded_passengers WHERE QR = :qr");
     $passenger_loaded->bindParam(":qr", $qr);
     $passenger_loaded->execute();
     $is_loaded = $passenger_loaded->fetch();
-    if($is_loaded['Count'] > 0){
+    if($passenger_loaded->rowCount() > 0){
       echo json_encode($is_loaded['Vehicle']); //passenger is loaded ------------------------------------------------------------------------------------------------
     }else{
       $passenger_waiting = $connection->prepare("SELECT COUNT(*) as Count FROM waiting_passengers WHERE QR = :qr");

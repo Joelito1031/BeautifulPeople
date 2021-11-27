@@ -172,6 +172,7 @@ const saveEditedData = (value) => {
           registerPUV.onreadystatechange = function(){
             if(this.readyState == 4 && this.status == 200){
               if(this.responseText == "notallowed"){
+                Loader.close();
                 popupInfo('Cannot edit a vehicle that is on queue');
               }else if(this.responseText == 'nochanges'){
                 if(choosenFile.value != ''){

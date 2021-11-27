@@ -80,7 +80,7 @@ else{
                 <div class="card container-fluid card-danger card-outline">
                   <div class="card-body">
                     <div class="form-inline" style="width: 400px;">
-                      <input id="search-input" class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Press enter to search for plate number" aria-label="Search" maxlength="7" onkeyup="this.value = makePlateNoCorrect(this.value)" onfocus="hideSorter()" onfocusout="showSorter()">
+                        <input id="search-input" class="form-control form-control-sm mr-3 w-75" type="text" placeholder="Press enter to search for plate number" aria-label="Search" maxlength="7" onkeyup="this.value = makePlateNoCorrect(this.value)" onfocusout="showSorter()">
                       <i id="search-ico" class="fas fa-search" aria-hidden="true"></i>
                     </div>
                     <br>

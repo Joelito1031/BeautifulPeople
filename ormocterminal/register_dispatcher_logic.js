@@ -1,3 +1,5 @@
+var ws = new WebSocket('ws://192.168.2.104:8082');
+
 document.getElementById("two").classList.add("active");
 
 function dutyChangeError(message){

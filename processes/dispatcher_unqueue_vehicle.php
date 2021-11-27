@@ -1,7 +1,7 @@
 <?php
 require './db_connection.php';
-$vehicle_to_unqueue = json_decode(file_get_contents("php://input"));
-$data = $vehicle_to_unqueue->data;
+$vehicle = json_decode(file_get_contents('php://input'));
+$data = $vehicle->data;
 $proceed = true;
 try{
   $delete_passenger_query = $connection->prepare("DELETE FROM loaded_passengers WHERE Vehicle = :vehicle");
@@ -17,7 +17,8 @@ if($proceed){
   $count_3 = 0;
   if(sizeof($queuing_vehicles_list) > 0){
     foreach($queuing_vehicles_list as $vehicle){
-      if($vehicle->vehicle === $data){
+      if($vehicle->vehicle == $data){
+        $queue_time = $vehicle->time_queue;
         array_splice($queuing_vehicles_list, $count_1, 1);
         $vehicles_list = json_decode(file_get_contents('../vehicles/vehicles.json'));
         foreach($vehicles_list as $list_of_vehicles){
@@ -25,8 +26,8 @@ if($proceed){
             $puv_passengers = $list_of_vehicles->route . "_" . $list_of_vehicles->vehicle . ".json";
             $vehicles_list[$count_2]->queuing = false;
             date_default_timezone_set('Asia/Manila');
-            $format="%d-%m-%Y_%H:%M:%S";
-            $strf=strftime($format);
+            $format = "%d-%m-%Y_%H:%M:%S";
+            $strf = strftime($format);
             $route = $list_of_vehicles->route;
             $directory = "../logs/" . $strf . "_" . $route . "_" . $list_of_vehicles->vehicle . ".txt";
             if(!copy("../vehicles/" . $puv_passengers, $directory)){
@@ -34,12 +35,17 @@ if($proceed){
             }
             else{
               try{
+                $puv_passenger_info = json_decode(file_get_contents("../logs/" . $strf . "_" . $route . "_" . $list_of_vehicles->vehicle . ".txt"));
+                array_push($puv_passenger_info, array("queuetime" => $queue_time, "leavetime" => $strf));
+                $altered_puv_passenger_info = fopen("../logs/" . $strf . "_" . $route . "_" . $list_of_vehicles->vehicle . ".txt", "w");
+                fwrite($altered_puv_passenger_info, json_encode($puv_passenger_info));
+                fclose($altered_puv_passenger_info);
                 $passenger_count = 0;
                 $passenger_list_array = json_decode(file_get_contents("../vehicles/" . $puv_passengers));
                 foreach($passenger_list_array as $passenger_name){
-                  if($passenger_name->Name != "" && $passenger_name->Companion != ""){
-                    $passenger_list_array[$count_3]->Name = "";
-                    $passenger_list_array[$count_3]->Companion = "";
+                  if($passenger_name->Name !== ""){
+                    $passenger_name->Name = "";
+                    $passenger_name->Companion = "";
                     $passenger_count += 1;
                   }
                   $count_3 += 1;

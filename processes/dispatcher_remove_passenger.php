@@ -4,17 +4,17 @@ $data = json_decode(file_get_contents("php://input"));
 $qr = $data->data;
 try{
   if($data->status == "loaded"){
-    $get_passenger = $connection->prepare("SELECT Name, COUNT(*) as Count FROM ormoc_commuters WHERE QR = :qr");
+    $get_passenger = $connection->prepare("SELECT Name FROM ormoc_commuters WHERE QR = :qr");
     $get_passenger->bindParam(":qr", $qr);
     $get_passenger->execute();
     $passenger = $get_passenger->fetch();
-    if($passenger['Count'] > 0){
+    if($get_passenger->rowCount() > 0){
       $passenger_name = $passenger['Name'];
-      $passenger_vehicle = $connection->prepare("SELECT Vehicle, COUNT(*) as Count FROM loaded_passengers WHERE QR = :qr");
+      $passenger_vehicle = $connection->prepare("SELECT Vehicle FROM loaded_passengers WHERE QR = :qr");
       $passenger_vehicle->bindParam(":qr", $qr);
       $passenger_vehicle->execute();
       $vehicle = $passenger_vehicle->fetch();
-      if($vehicle['Count'] > 0){
+      if($passenger_vehicle->rowCount() > 0){
         $vehicle_name = $vehicle['Vehicle'];
         $remove_query = $connection->prepare("DELETE FROM loaded_passengers WHERE QR = :qr");
         $remove_query->bindParam(":qr", $qr);

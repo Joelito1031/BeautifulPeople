@@ -10,18 +10,10 @@ function popupInfo(message){
 }
 
 function popupSuccess(message){
-  var Toast = Swal.mixin({
-    toast: true,
-    position: 'top-end',
-    showConfirmButton: false,
-    timer: 3000
-  });
-
-  Toast.fire({
+  swal.fire({
     icon: 'success',
-    title: message,
-    background: '#EAF2F8',
-  })
+    text: message
+  });
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -106,6 +98,8 @@ function registerVehicle(){
                 document.getElementById('plate_no').value = '';
                 document.getElementById('rt').value = '';
                 document.getElementById('cpcty').value = '';
+                document.getElementById('suffix').value = '';
+                document.getElementById('dsuffix').value = '';
               }
               else{
                 popupError('Something went wrong');

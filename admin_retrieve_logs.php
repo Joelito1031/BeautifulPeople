@@ -58,7 +58,7 @@ try{
       echo "<i class='fas fa-file' style='font-size: 35px;'></i>";
       echo "<div style='width: 100px; padding: 5px;' id='" . $log['Route'] . "_" . $log['LogId'] . "'>" . $log['Vehicle'] . "</div>";
       echo "</div>";
-      echo "<div id='" . $log['LogId'] . "_" . $log['LogId'] . "'>" . $log['LogDate'] . "_" . $log['LogTime'] . "</div>";
+      echo "<div" . $log['LogId'] . "_" . $log['LogId'] . "'>Created at: " . $log['LogDate'] . "_" . $log['LogTime'] . "</div>";
       echo "</div>";
       echo "</button>";
       echo "</h5>";
@@ -98,7 +98,7 @@ try{
           }
           echo "</td>";
           echo "<td>";
-          if($info->Companion){
+          if($info->Companion == 'true'){
             echo "<i class='fas fa-check'></i>";
           }else{
             echo "<i class='fas fa-times'></i>";
