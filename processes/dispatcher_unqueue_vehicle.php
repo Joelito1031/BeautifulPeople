@@ -43,16 +43,18 @@ if($proceed){
                 $passenger_count = 0;
                 $passenger_list_array = json_decode(file_get_contents("../vehicles/" . $puv_passengers));
                 foreach($passenger_list_array as $passenger_name){
-                  if($passenger_name->Name !== ""){
+                  if($passenger_name->Name != ""){
                     $passenger_name->Name = "";
                     $passenger_name->Companion = "";
+                    $passenger_name->Number = "";
                     $passenger_count += 1;
                   }
                   $count_3 += 1;
                 }
                 $passengers = $passenger_count . "/" . $count_3;
+                $server_directory = "./logs/" . $strf . "_" . $route . "_" . $list_of_vehicles->vehicle . ".txt";
                 $save_log_directory = $connection->prepare("INSERT INTO logs(Directory, Vehicle, Passengers, Route, LogTime, LogDate) VALUES(:directory, :vehicle, :passengers, :route, now(), now())");
-                $save_log_directory->bindParam(':directory', $directory);
+                $save_log_directory->bindParam(':directory', $server_directory);
                 $save_log_directory->bindParam(':vehicle', $data);
                 $save_log_directory->bindParam(':passengers', $passengers);
                 $save_log_directory->bindParam(':route', $route);

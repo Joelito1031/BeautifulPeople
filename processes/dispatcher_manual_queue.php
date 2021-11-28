@@ -13,7 +13,8 @@ try{
         $vehicle->passengers = $vehicle->passengers + 1;
         $write_the_passenger = json_decode(file_get_contents("../vehicles/" . $vehicle->route . "_" . $vehicle->vehicle . ".json"));
         foreach($write_the_passenger as $passenger_name){
-          if($passenger_name->Name == "" && $passenger_name->Companion == ""){
+          if($passenger_name->Name == "" && $passenger_name->Companion == "" && $passenger_name->Number == ""){
+            $passenger_name->Number = $data->number;
             $passenger_name->Name = $data->name;
             $passenger_name->Companion = $data->companion;
             $load_passenger = $connection->prepare("INSERT INTO loaded_passengers(Vehicle, Passenger, QR) VALUES(:vehicle, :passenger, :qr)");

@@ -44,7 +44,7 @@ if((isset($_POST['fname']) && !empty(trim($_POST['fname']))) && (isset($_POST['m
     $vehicle_info = array("type" => "vehicle", "plateno" => $plateno);
     $vehicle_capacity = array();
     if($row_count['Count'] > 0){
-      if($row_count['Status'] == 'Deleted'){             
+      if($row_count['Status'] == 'Deleted'){
         for($count = 1; $count <= $capacity; $count++){
           array_push($vehicle_capacity, array("Name" => "", "Companion" => ""));
         }
@@ -92,7 +92,7 @@ if((isset($_POST['fname']) && !empty(trim($_POST['fname']))) && (isset($_POST['m
       }
     }else{
       for($count = 1; $count <= $capacity; $count++){
-        array_push($vehicle_capacity, array("Name" => "", "Companion" => ""));
+        array_push($vehicle_capacity, array("Name" => "", "Companion" => "", "Number" => ""));
       }
       $full_capacity = json_encode($vehicle_capacity);
         $register_vehicle = $connection->prepare("INSERT INTO registered_vehicles(FirstName, MiddleName, LastName, Suffix, Address, PlateNo, Route, Capacity, Contact, DFirstName, DMiddleName, DLastName, DSuffix, DContact, DAddress, Status)

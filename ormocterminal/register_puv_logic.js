@@ -10,11 +10,17 @@ function popupInfo(message){
 }
 
 function popupSuccess(message){
-  swal.fire({
-    icon: 'success',
-    text: message
+  var Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
   });
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  Toast.fire({
+    icon: 'success',
+    title: message,
+  })
 }
 
 function popupError(message){
@@ -125,6 +131,7 @@ function registerVehicle(){
 const uploadThePhoto = (plateno) => {
   if(choosenFile.value == ''){
     Loader.close();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     popupSuccess('PUV successfully registered');
   }else{
     const formData = new FormData();
@@ -143,6 +150,7 @@ const uploadThePhoto = (plateno) => {
         }else if(this.responseText == 'sizelimit'){
           popupInfo("Image exceed size limit, vehicle information is saved with default profile picture");
         }else if(this.responseText == 'upload'){
+          window.scrollTo({ top: 0, behavior: 'smooth' });
           popupSuccess("PUV successfully registered");
           document.getElementById('actual-pic').src = "../vehicle_images/vehicleImage.png";
         }else if(this.responseText == 'error'){

@@ -58,7 +58,7 @@ try{
       echo "<i class='fas fa-file' style='font-size: 35px;'></i>";
       echo "<div style='width: 100px; padding: 5px;' id='" . $log['Route'] . "_" . $log['LogId'] . "'>" . $log['Vehicle'] . "</div>";
       echo "</div>";
-      echo "<div" . $log['LogId'] . "_" . $log['LogId'] . "'>Created at: " . $log['LogDate'] . "_" . $log['LogTime'] . "</div>";
+      echo "<div>Created at: <span id=" . $log['LogId'] . "_" . $log['LogId'] . ">" . $log['LogDate'] . "_" . $log['LogTime'] . "</span></div>";
       echo "</div>";
       echo "</button>";
       echo "</h5>";
@@ -78,7 +78,7 @@ try{
       echo "</div>";
       $log_content = json_decode(file_get_contents($log['Directory']));
       echo "<table style='width: 100%'>";
-      echo "<tr><th>No</th><th>Passenger</th><th>Companion</th></tr>";
+      echo "<tr><th>No</th><th>Passenger</th><th>Companion</th><th>Mobile #</th></tr>";
       $count = 0;
       foreach($log_content as $info){
         if(isset($info->queuetime) && isset($info->leavetime)){
@@ -102,6 +102,13 @@ try{
             echo "<i class='fas fa-check'></i>";
           }else{
             echo "<i class='fas fa-times'></i>";
+          }
+          echo "</td>";
+          echo "<td>";
+          if($info->Number == ""){
+            echo "N/A";
+          }else{
+            echo $info->Number;
           }
           echo "</td>";
           echo "</tr>";

@@ -3,12 +3,13 @@ require "./db_connection.php";
 $data = json_decode(file_get_contents("php://input"));
 $qr = $data->data;
 try{
-  $find_passenger = $connection->prepare("SELECT Name, COUNT(*) as Count FROM ormoc_commuters WHERE QR = :qr");
+  $find_passenger = $connection->prepare("SELECT Contact, Name, COUNT(*) as Count FROM ormoc_commuters WHERE QR = :qr");
   $find_passenger->bindParam(":qr", $qr);
   $find_passenger->execute();
   $passenger = $find_passenger->fetch();
   if($passenger['Count'] > 0){
     $passenger_name = $passenger['Name'];
+    $contact_num = $passenger['Contact'];
       $destination = $data->destination;
       $companion = $data->companion;
       $vehicle_available = false;
@@ -37,9 +38,10 @@ try{
             $vehicle_filename = $vehicle->route . "_" . $vehicle->vehicle . ".json";
             $vehicle_manifest = json_decode(file_get_contents("../vehicles/" . $vehicle_filename));
             foreach($vehicle_manifest as $vehicle_passenger){
-              if($vehicle_passenger->Name == "" && $vehicle_passenger->Companion == ""){
+              if($vehicle_passenger->Name == "" && $vehicle_passenger->Companion == "" && $vehicle_passenger->Number == ""){
                 $vehicle_passenger->Name = $passenger_name;
                 $vehicle_passenger->Companion = $companion; //You stopped here -> 1 CORINTHIANS 10:31
+                $vehicle_passenger->Number = $contact_num;
                 break;
               }
             }

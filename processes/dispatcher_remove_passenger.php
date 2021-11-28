@@ -29,6 +29,7 @@ try{
               if($passenger->Name == $passenger_name){
                 $passenger->Name = "";
                 $passenger->Companion = "";
+                $passenger->Number = "";
                 $queuing_vehicles_file = fopen("../vehicles/queuing_vehicles.json", "w");
                 fwrite($queuing_vehicles_file, json_encode($queuing_vehicles));
                 fclose($queuing_vehicles_file);

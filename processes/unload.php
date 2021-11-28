@@ -7,6 +7,7 @@ try{
     if($passenger->Name == $data->passenger){
       $passenger->Name = "";
       $passenger->Companion = "";
+      $passenger->Number = "";
       $queuing_vehicles = json_decode(file_get_contents("../vehicles/queuing_vehicles.json"));
       foreach($queuing_vehicles as $vehicle){
         if($vehicle->vehicle == $data->vehicle){

@@ -51,9 +51,10 @@ if($proceed){
                 $passenger_count = 0;
                 $passenger_list_array = json_decode(file_get_contents("./vehicles/" . $puv_passengers));
                 foreach($passenger_list_array as $passenger_name){
-                  if($passenger_name->Name !== ""){
+                  if($passenger_name->Name != ""){
                     $passenger_name->Name = "";
                     $passenger_name->Companion = "";
+                    $passenger_name->Number = "";
                     $passenger_count += 1;
                   }
                   $count_3 += 1;
