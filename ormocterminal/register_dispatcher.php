@@ -50,7 +50,7 @@ else{
               <div class="container-fluid">
                 <div class="row mb-2">
                   <div class="col-sm-6">
-                    <h1 class="m-0 sub-text-2">Add & Change Status</h1>
+                    <h4 class="m-0 sub-text-2"><span data-toggle="dispatcher-tooltip" title="The table below shows the currently queuing PUV, dequeue PUV using the button under the Dequeue column. Red colored row indicates that PUV is full, Green indicates the opposite." class="fas fa-question-circle" style="color: #9edbff;"></span>&thinsp;Add & Change Status</span></h4>
                   </div><!-- /.col -->
                 </div>
               </div>
@@ -111,7 +111,7 @@ else{
                           <span data-toggle="dispatcher-tooltip" title="Select dispatcher's address." class="fas fa-info-circle" style="color: #9edbff;"></span>
                           <label for="contact_number">Address</label>
                           <select id="address" class="form-control">
-                            <option value="">Barangays</option>
+                            <option value="">Select Address</option>
                             <option value="0">Non-Resident</option>
                             <option value="Brgy. Airport">Airport</option>
                             <option value="Brgy. Alegria">Alegria</option>

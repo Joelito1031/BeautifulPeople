@@ -138,7 +138,7 @@ else{
                             <span data-toggle="puv-tooltip" title="Select operator's address." class="fas fa-info-circle" style="color: #9edbff;"></span>
                             <label for="contact_number">Address</label>
                             <select id="address" class="form-control">
-                              <option value="">Barangays</option>
+                              <option value="">Select Address</option>
                               <option value="0">Non-Resident</option>
                               <option value="Brgy. Airport">Airport</option>
                               <option value="Brgy. Alegria">Alegria</option>
@@ -300,7 +300,7 @@ else{
                             <span data-toggle="puv-tooltip" title="Select driver's address." class="fas fa-info-circle" style="color: #9edbff;"></span>
                             <label for="contact_number">Address</label>
                             <select id="daddress" class="form-control">
-                              <option value="">Barangays</option>
+                              <option value="">Select Address</option>
                               <option value="0">Non-Resident</option>
                               <option value="Brgy. Airport">Airport</option>
                               <option value="Brgy. Alegria">Alegria</option>
