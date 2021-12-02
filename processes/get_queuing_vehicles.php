@@ -6,7 +6,7 @@ $vehicle_queuing = array();
 
 foreach ($queuing_vehicles as $vehicle) {
   if($vehicle->route == $data->data){
-    array_push($vehicle_queuing, array("Vehicle" => $vehicle->vehicle, "Capacity" => $vehicle->capacity));
+    array_push($vehicle_queuing, array("Vehicle" => $vehicle->vehicle, "Passengers" => $vehicle->passengers, "Capacity" => $vehicle->capacity));
   }
 }
 
