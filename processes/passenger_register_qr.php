@@ -9,7 +9,7 @@ if(!empty(trim($data->fullname)) && !empty(trim($data->contact)) && !empty(trim(
     $check_redundancy = $connection->prepare("SELECT * FROM ormoc_commuters WHERE QR = :qr");
     $check_redundancy->bindParam(":qr", $qr);
     $check_redundancy->execute();
-    $passenger = $check_redundancy->fetchColumn();
+    $passenger = $check_redundancy->rowCount();
     if($passenger > 0){
       echo json_encode('registered');
     }else{
