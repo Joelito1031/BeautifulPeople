@@ -95,7 +95,7 @@ else{
       </section>
       <!-- /.content-wrapper -->
       <footer class="main-footer">
-        <strong>Copyright &copy; <a href="#">Qrmoc - Queueing Passenger Assistance App</a>.</strong>
+        <strong>Copyright &copy; <a href="http://119.92.152.243/QRMOC/">Qrmoc - Queueing Passenger Assistance App</a>.</strong>
         All rights reserved.
         <div class="float-right d-none d-sm-inline-block">
           <b>Ormoc City Terminal</b>
